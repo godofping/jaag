@@ -46,7 +46,7 @@
                 <!-- Logo -->
                 <!-- ============================================================== -->
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="home.php">
                         <!-- Logo icon --><b>
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
@@ -82,26 +82,9 @@
                                     </li>
                                     <li>
                                         <div class="message-center">
-                                            <!-- Message -->
-                                            <a href="#">
-                                                <div class="btn btn-danger btn-circle"><i class="fa fa-link"></i></div>
-                                                <div class="mail-contnet">
-                                                    <h5>Luanch Admin</h5> <span class="mail-desc">Just see the my new admin!</span> <span class="time">9:30 AM</span> </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="#">
-                                                <div class="btn btn-success btn-circle"><i class="ti-calendar"></i></div>
-                                                <div class="mail-contnet">
-                                                    <h5>Event today</h5> <span class="mail-desc">Just a reminder that you have event</span> <span class="time">9:10 AM</span> </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="#">
-                                                <div class="btn btn-info btn-circle"><i class="ti-settings"></i></div>
-                                                <div class="mail-contnet">
-                                                    <h5>Settings</h5> <span class="mail-desc">You can customize this template as you want</span> <span class="time">9:08 AM</span> </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="#">
+                                            
+                                            
+                                            <a>
                                                 <div class="btn btn-primary btn-circle"><i class="ti-user"></i></div>
                                                 <div class="mail-contnet">
                                                     <h5>Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span> </div>
@@ -142,8 +125,8 @@
                                         </div>
                                     </li>
                                     <li role="separator" class="divider"></li>
-                                    <li><a href="#"><i class="ti-user"></i> Update Profile</a></li>
-                                    <li><a href="#"><i class="ti-key"></i> Change Password</a></li>
+                                    <li><a href="update-profile.php"><i class="ti-user"></i> Update Profile</a></li>
+                                    <li><a href="change-password.php"><i class="ti-key"></i> Change Password</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="controller.php?from=logout"><i class="fa fa-power-off"></i> Logout</a></li>
                                 </ul>
@@ -163,40 +146,30 @@
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
                 <!-- User profile -->
-                <div class="user-profile">
+                <div class="user-profile" style="background: url(assets/images/background/user-info.jpg) no-repeat;">
                     <!-- User profile image -->
-                    <div class="profile-img"> <img src="assets/images/users/user.jpg" alt="user" /> 
-                             <!-- this is blinking heartbit-->
-                            <div class="notify setpos"> <span class="heartbit"></span> <span class="point"></span> </div>
-                    </div>
+                    <div class="profile-img"> <img src="assets/images/users/user.jpg" alt="user" /> </div>
                     <!-- User profile text-->
-                    <div class="profile-text"> 
-                            <h5>Totoy Brown</h5>
-                            <a href="controller.php?from=logout" class="" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a>
-
-                        <div class="dropdown-menu animated flipInY">
-                        <!-- text--> 
-                        <a href="#" class="dropdown-item"><i class="ti-user"></i> My Profile</a>
-                        <!-- text-->  
-                        <a href="#" class="dropdown-item"><i class="ti-wallet"></i> My Balance</a>
-                        <!-- text-->  
-                        <a href="#" class="dropdown-item"><i class="ti-email"></i> Inbox</a>
-                        <!-- text--> 
-                        <div class="dropdown-divider"></div>
-                        <!-- text-->  
-                        <a href="#" class="dropdown-item"><i class="ti-settings"></i> Account Setting</a>
-                        <!-- text--> 
-                        <div class="dropdown-divider"></div>
-                        <!-- text-->  
-                        <a href="login.html" class="dropdown-item"><i class="fa fa-power-off"></i> Logout</a>
-                        <!-- text-->  
-                        </div>
+                    <div class="profile-text" style="color:white; font-weight: 500;">Totoy Brown
                     </div>
                 </div>
                 <!-- End User profile text-->
-                <?php include("includes/menu.php") ?>
+                <!-- Sidebar navigation-->
+                <?php include("includes/menu.php"); ?>
+                <!-- End Sidebar navigation -->
             </div>
             <!-- End Sidebar scroll-->
+            <!-- Bottom points-->
+            <div class="sidebar-footer">
+                <!-- item-->
+                <a></a>
+                <!-- item-->
+                <a href="controller.php?from=logout" class="link" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a>
+                <!-- item-->
+                <a></a>
+                
+            </div>
+            <!-- End Bottom points-->
         </aside>
         <!-- ============================================================== -->
         <!-- End Left Sidebar - style you can find in sidebar.scss  -->

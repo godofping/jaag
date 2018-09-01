@@ -1,4 +1,4 @@
-<?php
+customer-information.php<?php
 include("includes/connection.php");
 include("includes/header.php");
  ?>
@@ -7,13 +7,13 @@ include("includes/header.php");
             <!-- ============================================================== -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-themecolor">Animation</h3>
+                    <h3 class="text-themecolor">Cancellations</h3>
                 </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                        <li class="breadcrumb-item">pages</li>
-                        <li class="breadcrumb-item active">Animation</li>
+                        <li class="breadcrumb-item">Reports</li>
+                        <li class="breadcrumb-item active">Cancellations</li>
                     </ol>
                 </div>
 
