@@ -38,11 +38,11 @@
 
                         <li> <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-settings"></i><span class="hide-menu">Reports</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="#">List of Booking Schedules</a></li>
-                                <li><a href="#">List of Customer Information</a></li>
-                                <li><a href="#">List of Unattended Customer</a></li>
-                                <li><a href="#">List of Cancellation</a></li>
-                                <li><a href="#">List of Payment Transaction</a></li>
+                                <li><a href="#">Booking Schedules</a></li>
+                                <li><a href="#">Customer Information</a></li>
+                                <li><a href="#">Unattended Customer</a></li>
+                                <li><a href="#">Cancellation</a></li>
+                                <li><a href="#">Payment Transaction</a></li>
                                 <li><a href="#">Statistical Report</a></li>
                             </ul>
                         </li>
