@@ -37,6 +37,12 @@
     <!-- Style switcher -->
     <!-- ============================================================== -->
     <script src="assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+
+    <script src="assets/plugins/raphael/raphael-min.js"></script>
+    <script src="assets/plugins/morrisjs/morris.min.js"></script>
+    <!-- sparkline chart -->
+    <script src="assets/plugins/sparkline/jquery.sparkline.min.js"></script>
+    <script src="js/dashboard4.js"></script>
 </body>
 
 </html>
