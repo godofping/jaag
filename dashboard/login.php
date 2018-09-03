@@ -1,5 +1,5 @@
 <?php include("includes/connection.php");
-if (isset($_SESSION['profileId'])) {
+if (isset($_SESSION['accountType']) and ($_SESSION['accountType'] == 'Administrator' or $_SESSION['accountType'] == 'Employee')) {
     header("Location: home.php");
 }
 
@@ -133,7 +133,7 @@ if (isset($_SESSION['profileId'])) {
         <?php if ($_SESSION['do'] == 'login-first'): ?>
             $.toast({
             heading: 'Message',
-            text: 'Oppss! Please login first for you to access the dashboard.',
+            text: 'Oppss! Please login first using your authorized account for you to access.',
             position: 'top-right',
             loaderBg:'#ff6849',
             icon: 'warning',

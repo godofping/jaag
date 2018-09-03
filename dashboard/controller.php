@@ -7,7 +7,7 @@ if (isset($_POST['from']) and $_POST['from'] == 'login') {
 		$res = mysqli_fetch_assoc($qry);
 		$_SESSION['accountType'] = 'Administrator';
 		$_SESSION['profileId'] = $res['profileId'];
-		$_SESSION['do'] = 'login-success';
+		$_SESSION['do'] = '';
 		header("Location: home.php");
 	}
 	else

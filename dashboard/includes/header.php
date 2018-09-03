@@ -1,7 +1,6 @@
 <?php
-    if (!isset($_SESSION['profileId'])) {
-        $_SESSION['do'] = 'login-first';
-        header("Location: login.php");
+    if (!isset($_SESSION['accountType']) or ($_SESSION['accountType'] != 'Administrator' or $_SESSION['accountType'] == 'Employee')) {
+        header("Location: controller.php?from=login-first");
     }
 ?>
 
