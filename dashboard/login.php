@@ -49,7 +49,7 @@ if (isset($_SESSION['accountType']) and ($_SESSION['accountType'] == 'Administra
             <div class="login-box card">
                 <div class="card-body">
                     <form class="form-horizontal form-material" id="loginform" method="POST" action="controller.php">
-                        <h2 class="box-title m-b-20 text-center"><img src="assets/images/logo-light-text.png" class="img img-responsive"></h2>
+                        <h2 class="box-title m-b-20 text-center"><img src="assets/images/logo-no-number.png" class="img img-responsive"></h2>
                         <h3 class="box-title m-b-20">Sign In</h3>
                         <div class="form-group ">
                             <div class="col-xs-12">
