@@ -100,11 +100,13 @@ CREATE TABLE `destination_table` (
   PRIMARY KEY (`destinationId`),
   KEY `FK_destination_table` (`placeId`),
   KEY `FK_destination_table2` (`packageId`),
-  CONSTRAINT `FK_destination_table` FOREIGN KEY (`placeId`) REFERENCES `place_table` (`placeId`),
-  CONSTRAINT `FK_destination_table2` FOREIGN KEY (`packageId`) REFERENCES `package_table` (`packageId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  CONSTRAINT `FK_destination_table` FOREIGN KEY (`placeId`) REFERENCES `place_table` (`placeId`) ON DELETE SET NULL,
+  CONSTRAINT `FK_destination_table2` FOREIGN KEY (`packageId`) REFERENCES `package_table` (`packageId`) ON DELETE SET NULL
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 /*Data for the table `destination_table` */
+
+insert  into `destination_table`(`destinationId`,`placeId`,`packageId`) values (2,2,1),(10,2,2),(11,3,2);
 
 /*Table structure for table `driver_table` */
 
@@ -191,9 +193,11 @@ CREATE TABLE `package_table` (
   KEY `FK_package_table123` (`statusId`),
   CONSTRAINT `FK_package_table1` FOREIGN KEY (`priceId`) REFERENCES `price_table` (`priceId`),
   CONSTRAINT `FK_package_table123` FOREIGN KEY (`statusId`) REFERENCES `status_table` (`statusId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `package_table` */
+
+insert  into `package_table`(`packageId`,`packageName`,`packageDetails`,`pax`,`inclusion`,`exclusion`,`statusId`,`priceId`) values (1,'Surigao Tour','Details....',14,'TRANSPORTATIONS','MEALS',1,2),(2,'Suriago and Siargao Tour1','THIS IS ARE THE PACKAGES',20,'TRANSPORTATIONS','MEALS',1,3);
 
 /*Table structure for table `payment_transaction_table` */
 
@@ -254,9 +258,11 @@ CREATE TABLE `price_table` (
   `priceId` int(6) NOT NULL AUTO_INCREMENT,
   `price` double DEFAULT NULL,
   PRIMARY KEY (`priceId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `price_table` */
+
+insert  into `price_table`(`priceId`,`price`) values (1,999),(2,999),(3,2999);
 
 /*Table structure for table `profile_table` */
 
@@ -313,11 +319,11 @@ CREATE TABLE `status_table` (
   `statusDescription` varchar(60) DEFAULT NULL,
   `statusOfWhat` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`statusId`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 /*Data for the table `status_table` */
 
-insert  into `status_table`(`statusId`,`statusDescription`,`statusOfWhat`) values (1,'Available','van_rental;'),(2,'Not Available','van_rental;'),(3,'On Travel','van_rental;');
+insert  into `status_table`(`statusId`,`statusDescription`,`statusOfWhat`) values (1,'Available','van_rental;package_table;'),(2,'Not Available','van_rental;package_table;'),(3,'On Travel','van_rental;package_table;'),(5,'Cancelled','package_table'),(6,'Fully Booked','package_table');
 
 /*Table structure for table `travel_and_tour_table` */
 
@@ -353,6 +359,22 @@ CREATE TABLE `van_table` (
 /*Data for the table `van_table` */
 
 insert  into `van_table`(`vanId`,`vanMake`,`vanModel`,`vanPlateNumber`,`statusId`) values (1,'Toyota','Hi-ace Commuter','TYM-1234',1),(4,'Nissan','NV350','UDW-892',1),(5,'Toyota','Hi-ace Grandia','ACD-5681',1);
+
+/*Table structure for table `destination_view` */
+
+DROP TABLE IF EXISTS `destination_view`;
+
+/*!50001 DROP VIEW IF EXISTS `destination_view` */;
+/*!50001 DROP TABLE IF EXISTS `destination_view` */;
+
+/*!50001 CREATE TABLE  `destination_view`(
+ `destinationId` int(6) ,
+ `placeId` int(6) ,
+ `packageId` int(6) ,
+ `placeName` varchar(60) ,
+ `latitude` varchar(60) ,
+ `longitude` varchar(60) 
+)*/;
 
 /*Table structure for table `driver_view` */
 
@@ -446,6 +468,13 @@ DROP TABLE IF EXISTS `van_view`;
  `statusDescription` varchar(60) ,
  `statusOfWhat` varchar(60) 
 )*/;
+
+/*View structure for view destination_view */
+
+/*!50001 DROP TABLE IF EXISTS `destination_view` */;
+/*!50001 DROP VIEW IF EXISTS `destination_view` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `destination_view` AS select `destination_table`.`destinationId` AS `destinationId`,`destination_table`.`placeId` AS `placeId`,`destination_table`.`packageId` AS `packageId`,`place_table`.`placeName` AS `placeName`,`place_table`.`latitude` AS `latitude`,`place_table`.`longitude` AS `longitude` from (`destination_table` join `place_table` on((`destination_table`.`placeId` = `place_table`.`placeId`))) */;
 
 /*View structure for view driver_view */
 

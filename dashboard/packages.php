@@ -40,6 +40,7 @@ include("includes/header.php");
                                     <th>ID</th>
                                     <th>Package Name</th>
                                     <th>Package Details</th>
+                                    <th>Destinations</th>
                                     <th>Pax</th>
                                     <th>Inclusions</th>
                                     <th>Exclusions</th>
@@ -56,10 +57,18 @@ include("includes/header.php");
                                     <td><?php echo $res['packageId']; ?></td>
                                     <td><?php echo $res['packageName']; ?></td>
                                     <td><?php echo $res['packageDetails']; ?></td>
+                                    <td>
+                                        Destination(s): <?php $qry2 = mysqli_query($connection, "select * from destination_view where packageId = '" . $res['packageId'] . "'");
+                                        while ($res2 = mysqli_fetch_assoc($qry2)) {
+                                             echo $res2['placeName'] . "<br>";
+                                         } ?>
+
+                                    </td>
                                     <td><?php echo $res['pax']; ?></td>
                                     <td><?php echo $res['inclusion']; ?></td>
                                     <td><?php echo $res['exclusion']; ?></td>
-                                    <td>images</td>
+                                    <td><?php echo $res['price']; ?></td>
+                                    <td><a href="view-package-images.php?packageId=<?php echo $res['packageId'] ?>"><button type="button" class="btn btn-block btn-outline-primary">Manage</button></a></td>
                                     <td><?php echo $res['statusDescription']; ?>
                                         <br><button type="button" class="btn btn-block btn-outline-info" data-toggle="modal" data-target="#updateStatusModal<?php echo $res['packageId']; ?>">Update</button>
                                     </td>
@@ -99,28 +108,50 @@ include("includes/header.php");
                             <div class="form-group">
                                 <input type="text" class="form-control" id="packageName" name="packageName" required="">
                             </div>
-                            </div>
+                        </div>
 
-                        <div class="col-md-12">
+                         <div class="col-md-12">
                             <label>Package Details</label>
+                            <textarea class="form-control" rows="3" name="packageDetails" id="packageDetails" required=""></textarea>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label>Destinations</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="packageDetails" name="packageDetails" required="">
-                            </div>
+                                <select class="select2 m-b-10 select2-multiple form-control" style="width: 100%;" multiple name="places[]" data-placeholder="Choose" required="">
+                                        <?php $qry1 = mysqli_query($connection, "select * from place_view");
+                                        while ($res1 = mysqli_fetch_assoc($qry1)) { ?>
+                                            <option value="<?php echo $res1['placeId'] ?>"><?php echo $res1['placeName']; ?></option>
+                                        <?php } ?>                     
+                                </select>
+                            </div>            
                         </div>
 
                         <div class="col-md-12">
                             <label>Pax</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="vanPlateNumber" name="vanPlateNumber" required="">
+                                <input type="text" class="form-control" id="pax" name="pax" required="">
                             </div>
                         </div>
 
+                        <div class="col-md-6">
+                            <label>Inclusions</label>
+                            <textarea class="form-control" rows="3" name="inclusion" id="inclusion" required=""></textarea>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label>Exclusions</label>
+                            <textarea class="form-control" rows="3" name="exclusion" id="exclusion" required=""></textarea>
+                        </div>
+
                         <div class="col-md-12">
-                            <label>Pax</label>
+                            <label>Price</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="vanPlateNumber" name="vanPlateNumber" required="">
+                                <input type="number" min="0" step="any" class="form-control" id="price" name="price" required="">
                             </div>
                         </div>
+
+
                     </div>
 
 
@@ -162,26 +193,58 @@ while ($res = mysqli_fetch_assoc($qry)) { ?>
                             <div class="form-group">
                                 <input type="text" class="form-control" id="packageName" name="packageName" required="" value="<?php echo $res['packageName'] ?>">
                             </div>
-                            </div>
+                        </div>
+
+                         <div class="col-md-12">
+                            <label>Package Details</label>
+                            <textarea class="form-control" rows="3" name="packageDetails" id="packageDetails" required=""><?php echo $res['packageDetails'] ?></textarea>
+                        </div>
 
                         <div class="col-md-12">
-                            <label>Package Details</label>
+                            <label>Destinations</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="vanPackage Details" name="vanPackage Details" required="" value="<?php echo $res['vanPackage Details'] ?>">
-                            </div>
+                                <select class="select2 m-b-10 select2-multiple form-control" style="width: 100%;" multiple name="places[]" data-placeholder="Choose" required="">
+                                        <?php $qry1 = mysqli_query($connection, "select * from place_view");
+                                        while ($res1 = mysqli_fetch_assoc($qry1)) { ?>
+                                            <option value="<?php echo $res1['placeId'] ?>" <?php $qry4 = mysqli_query($connection, "select * from destination_view where packageId = '" . $res['packageId'] . "' and placeId = '" . $res1['placeId'] . "'"); if (mysqli_num_rows($qry4) > 0): ?>
+                                                selected
+                                            <?php endif ?>><?php echo $res1['placeName']; ?></option>
+                                        <?php } ?>                     
+                                </select>
+                            </div>            
                         </div>
 
                         <div class="col-md-12">
                             <label>Pax</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="vanPlateNumber" name="vanPlateNumber" required="" value="<?php echo $res['vanPlateNumber'] ?>">
+                                <input type="text" class="form-control" id="pax" name="pax" required="" value="<?php echo $res['pax'] ?>">
                             </div>
                         </div>
+
+                        <div class="col-md-6">
+                            <label>Inclusions</label>
+                            <textarea class="form-control" rows="3" name="inclusion" id="inclusion" required=""><?php echo  $res['inclusion']; ?></textarea>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label>Exclusions</label>
+                            <textarea class="form-control" rows="3" name="exclusion" id="exclusion" required=""><?php echo $res['exclusion']; ?></textarea>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label>Price</label>
+                            <div class="form-group">
+                                <input type="number" min="0" step="any" class="form-control" id="price" name="price" required="" value="<?php echo $res['price'] ?>">
+                            </div>
+                        </div>
+
+
                     </div>
 
                 <!-- other hidden inputs -->
-                <input type="text" name="from" value="update-van" hidden="">
+                <input type="text" name="from" value="update-package" hidden="">
                 <input type="text" name="packageId" value="<?php echo $res['packageId'] ?>"  hidden="">
+                <input type="text" name="priceId" value="<?php echo $res['priceId'] ?>"  hidden="">
 
             </div>
             <div class="modal-footer">
@@ -210,8 +273,9 @@ while ($res = mysqli_fetch_assoc($qry)) { ?>
                     <h2>Are you sure to delete?</h2>
 
                 <!-- other hidden inputs -->
-                <input type="text" name="from" value="delete-van" hidden="">
+                <input type="text" name="from" value="delete-package" hidden="">
                 <input type="text" name="packageId" value="<?php echo $res['packageId'] ?>" hidden="">
+                <input type="text" name="priceId" value="<?php echo $res['priceId'] ?>" hidden="">
 
             </div>
             <div class="modal-footer">
@@ -242,7 +306,7 @@ while ($res = mysqli_fetch_assoc($qry)) { ?>
                             <div class="form-group">
                                 <select class="form-control custom-select" id="statusId" name="statusId">
                                         <option value="<?php echo $res['statusId'] ?>" selected disabled><?php echo $res['statusDescription']; ?></option>
-                                    <?php $qry1 = mysqli_query($connection,"select * from status_table where statusOfWhat like '%van_rental%'");
+                                    <?php $qry1 = mysqli_query($connection,"select * from status_table where statusOfWhat like '%package_table%'");
                                     while ($res1 = mysqli_fetch_assoc($qry1)) { ?>
                                          <option value="<?php echo $res1['statusId'] ?>"><?php echo $res1['statusDescription'] ?></option>
                                     <?php } ?>
@@ -254,7 +318,7 @@ while ($res = mysqli_fetch_assoc($qry)) { ?>
                     </div>
 
                 <!-- other hidden inputs -->
-                <input type="text" name="from" value="update-status-van" hidden="">
+                <input type="text" name="from" value="update-status-package" hidden="">
                 <input type="text" name="packageId" value="<?php echo $res['packageId'] ?>"  hidden="">
 
             </div>

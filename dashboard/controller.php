@@ -134,5 +134,102 @@ if (isset($_POST['from']) and $_POST['from'] == 'update-status-van') {
 	header("Location: vans.php");
 }
 
+if (isset($_POST['from']) and $_POST['from'] == 'add-package') {
+
+	mysqli_query($connection,"insert into price_table (price) values ('" . $_POST['price'] . "')");
+	$priceId = mysqli_insert_id($connection);
+
+	mysqli_query($connection, "insert into package_table (packageName, pax, packageDetails, priceId, inclusion, exclusion,statusId) values ('" . $_POST['packageName'] . "', '" . $_POST['pax'] . "', '" . $_POST['packageDetails'] . "', '" . $priceId . "', '" . $_POST['inclusion'] . "', '" . $_POST['exclusion'] . "',  '1')");
+	$packageId = mysqli_insert_id($connection);
+
+	foreach ($_POST['places'] as $placeId)
+	{	
+		mysqli_query($connection, "insert into destination_table (packageId, placeId) values ('" . $packageId . "', '" . $placeId . "')");
+	  
+	}
+
+
+	$_SESSION['do'] = 'added';
+	header("Location: packages.php");
+}
+
+if (isset($_POST['from']) and $_POST['from'] == 'update-package') {
+	mysqli_query($connection, "update price_table set price = '" . $_POST['price'] . "' where priceId = '" . $_POST['priceId'] . "'");
+
+	mysqli_query($connection, "update package_table set packageName = '" . $_POST['packageName'] . "', pax = '" . $_POST['pax'] . "', packageDetails = '" . $_POST['packageDetails'] . "', inclusion = '" . $_POST['inclusion'] . "', exclusion = '" . $_POST['exclusion'] . "' where packageId = '" . $_POST['packageId'] . "'");
+
+	mysqli_query($connection, "delete from destination_table where packageId = '" . $_POST['packageId'] . "'");
+
+	foreach ($_POST['places'] as $placeId)
+	{	
+		mysqli_query($connection, "insert into destination_table (packageId, placeId) values ('" . $_POST['packageId'] . "', '" . $placeId . "')");
+	  
+	}
+
+	$_SESSION['do'] = 'updated';
+	header("Location: packages.php");
+}
+
+if (isset($_POST['from']) and $_POST['from'] == 'delete-package') {
+	mysqli_query($connection, "delete from destination_table where packageId = '" . $_POST['packageId'] . "'");
+	mysqli_query($connection, "delete from package_table where packageId = '" . $_POST['packageId'] . "'");
+	mysqli_query($connection, "delete from price_table where priceId = '" . $_POST['priceId'] . "'");
+	$_SESSION['do'] = 'deleted';
+	header("Location: packages.php");
+}
+
+if (isset($_POST['from']) and $_POST['from'] == 'update-status-package') {
+	mysqli_query($connection, "update package_table set statusId ='" . $_POST['statusId'] . "' where packageId = '" . $_POST['packageId'] . "'");
+
+	$_SESSION['do'] = 'updated';
+	header("Location: packages.php");
+}
+
+
+
+if (isset($_POST['from']) and $_POST['from'] == 'add-package-image') {
+
+
+	$target_dir = "package_media/";
+	$target_file = $target_dir . md5(date("Y-m-d H:i:s")) .basename($_FILES["mediaLocation"]["name"]);
+	$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+    move_uploaded_file($_FILES["mediaLocation"]["tmp_name"], $target_file);
+
+
+
+	mysqli_query($connection, "insert into package_media_table (mediaLocation, packageId) values ('" . $target_file . "', '" . $_POST['packageId'] . "')");
+
+
+	$_SESSION['do'] = 'added';
+	header("Location: list-of-package-images.php?packageId=".$_POST['packageId']."&packageName=".$_POST['packageName']."");
+
+}
+
+if (isset($_POST['from']) and $_POST['from'] == 'update-package-image') {
+
+
+	$target_dir = "package_media/";
+	$target_file = $target_dir . md5(date("Y-m-d H:i:s")) .basename($_FILES["mediaLocation"]["name"]);
+	$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+    move_uploaded_file($_FILES["mediaLocation"]["tmp_name"], $target_file);
+
+	mysqli_query($connection, "update package_media_table set mediaLocation = '" . $target_file . "' where packageMediaId = '" . $_POST['packageMediaId'] . "'");
+	
+
+	$_SESSION['do'] = 'updated';
+	header("Location: list-of-package-images.php?packageId=".$_POST['packageId']."&packageName=".$_POST['packageName']."");
+
+}
+
+if (isset($_POST['from']) and $_POST['from'] == 'delete-package-image') {
+
+	mysqli_query($connection, "delete from package_media_table where packageMediaId = '" . $_POST['packageMediaId'] . "'");
+
+	$_SESSION['do'] = 'deleted';
+	header("Location: list-of-package-images.php?packageId=".$_POST['packageId']."&packageName=".$_POST['packageName']."");
+
+}
 
  ?>
+
+
