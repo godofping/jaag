@@ -41,4 +41,49 @@ if (isset($_GET['from']) and $_GET['from'] == 'login-first') {
 	$_SESSION['do'] = 'login-first';
 	header("Location: login.php");
 }
+
+
+if (isset($_POST['from']) and $_POST['from'] == 'add-driver') {
+	mysqli_query($connection,"insert into driver_table (driverFirstName, driverMiddleName, driverLastName, driverAddress, driverContactNumber) values ('" . $_POST['driverFirstName'] . "', '" . $_POST['driverMiddleName'] . "', '" . $_POST['driverLastName'] . "', '" . $_POST['driverAddress'] . "', '" . $_POST['driverContactNumber'] . "')");
+
+	$_SESSION['do'] = 'added';
+	header("Location: drivers.php");
+}
+
+if (isset($_POST['from']) and $_POST['from'] == 'update-driver') {
+	mysqli_query($connection, "update driver_table set driverFirstName = '" . $_POST['driverFirstName'] . "', driverMiddleName = '" . $_POST['driverMiddleName'] . "', driverLastName = '" . $_POST['driverLastName'] . "', driverAddress = '" . $_POST['driverAddress'] . "', driverContactNumber = '" . $_POST['driverContactNumber'] . "' where driverId = '" . $_POST['driverId'] . "'");
+
+	$_SESSION['do'] = 'updated';
+	header("Location: drivers.php");
+}
+
+if (isset($_POST['from']) and $_POST['from'] == 'delete-driver') {
+	mysqli_query($connection, "delete from driver_table where driverId = '" . $_POST['driverId'] . "'");
+
+	$_SESSION['do'] = 'deleted';
+	header("Location: drivers.php");
+}
+
+if (isset($_POST['from']) and $_POST['from'] == 'add-place') {
+	mysqli_query($connection, "insert into place_table (placeName, latitude, longitude) values ('" . $_POST['placeName'] . "', '" . $_POST['latitude'] . "', '" . $_POST['longitude'] . "')");
+
+	$_SESSION['do'] = 'added';
+	header("Location: places.php");
+}
+
+if (isset($_POST['from']) and $_POST['from'] == 'update-place') {
+	mysqli_query($connection, "update place_table set placeName = '" . $_POST['placeName'] . "',latitude = '" . $_POST['latitude'] . "', longitude = '" . $_POST['longitude'] . "' where placeId = '" . $_POST['placeId'] . "'");
+
+	$_SESSION['do'] = 'updated';
+	header("Location: places.php");
+}
+
+if (isset($_POST['from']) and $_POST['from'] == 'delete-place') {
+	mysqli_query($connection, "delete from place_table where placeId = '" . $_POST['placeId'] . "'");
+
+	$_SESSION['do'] = 'deleted';
+	header("Location: places.php");
+}
+
+
  ?>
