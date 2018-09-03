@@ -158,6 +158,17 @@
             stack: 6
           });
         <?php endif ?>
+        <?php if ($_SESSION['do'] == 'update-password-failed'): ?>
+            $.toast({
+            heading: 'Message',
+            text: 'Change Password Failed! Please try again!',
+            position: 'top-right',
+            loaderBg:'#ff6849',
+            icon: 'warning',
+            hideAfter: 5000, 
+            stack: 6
+          });
+        <?php endif ?>
     </script>
 
 

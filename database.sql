@@ -46,7 +46,7 @@ CREATE TABLE `address_table` (
 
 /*Data for the table `address_table` */
 
-insert  into `address_table`(`addressId`,`province`,`city`,`barangay`,`street`,`buildingNumber`) values (1,'Sultan Kudarat','Tacurong City','Poblacion','Lapu-lapu','65');
+insert  into `address_table`(`addressId`,`province`,`city`,`barangay`,`street`,`buildingNumber`) values (1,'Jose','Jose','Poblacion','Lapu-lapu','65');
 
 /*Table structure for table `booking_table` */
 
@@ -116,9 +116,11 @@ CREATE TABLE `driver_table` (
   `driverAddress` varchar(200) DEFAULT NULL,
   `driverContactNumber` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`driverId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `driver_table` */
+
+insert  into `driver_table`(`driverId`,`driverFirstName`,`driverMiddleName`,`driverLastName`,`driverAddress`,`driverContactNumber`) values (1,'Jun','Alberto','Castador','Barangay Calean, Tacurong City, Sultan Kudarat','09168574525');
 
 /*Table structure for table `media_table` */
 
@@ -220,9 +222,11 @@ CREATE TABLE `place_table` (
   `latitude` varchar(60) DEFAULT NULL,
   `longitude` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`placeId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `place_table` */
+
+insert  into `place_table`(`placeId`,`placeName`,`latitude`,`longitude`) values (1,'Davao City','7.18958','125.450342'),(2,'Surigao City','9.757262','125.513613'),(3,'Siargao City','9.848018','126.047856');
 
 /*Table structure for table `posting_table` */
 
@@ -275,7 +279,7 @@ CREATE TABLE `profile_table` (
 
 /*Data for the table `profile_table` */
 
-insert  into `profile_table`(`profileId`,`firstName`,`middleName`,`lastName`,`contactNumber`,`addressId`,`accountTypeId`,`userName`,`passWord`) values (2,'Jose','Malinao','Aguacity','09754214199',1,1,'admin','21232f297a57a5a743894a0e4a801fc3');
+insert  into `profile_table`(`profileId`,`firstName`,`middleName`,`lastName`,`contactNumber`,`addressId`,`accountTypeId`,`userName`,`passWord`) values (2,'Jose','Malinao','Aguacito','09754214199',1,1,'admin','21232f297a57a5a743894a0e4a801fc3');
 
 /*Table structure for table `rental_table` */
 
@@ -360,6 +364,20 @@ DROP TABLE IF EXISTS `driver_view`;
  `driverContactNumber` varchar(60) 
 )*/;
 
+/*Table structure for table `place_view` */
+
+DROP TABLE IF EXISTS `place_view`;
+
+/*!50001 DROP VIEW IF EXISTS `place_view` */;
+/*!50001 DROP TABLE IF EXISTS `place_view` */;
+
+/*!50001 CREATE TABLE  `place_view`(
+ `placeId` int(6) ,
+ `placeName` varchar(60) ,
+ `latitude` varchar(60) ,
+ `longitude` varchar(60) 
+)*/;
+
 /*Table structure for table `profile_view` */
 
 DROP TABLE IF EXISTS `profile_view`;
@@ -375,9 +393,14 @@ DROP TABLE IF EXISTS `profile_view`;
  `contactNumber` varchar(60) ,
  `addressId` int(6) ,
  `accountTypeId` int(6) ,
- `accountType` varchar(60) ,
  `userName` varchar(60) ,
- `passWord` varchar(60) 
+ `passWord` varchar(60) ,
+ `province` varchar(60) ,
+ `city` varchar(60) ,
+ `barangay` varchar(60) ,
+ `street` varchar(60) ,
+ `buildingNumber` varchar(60) ,
+ `accountType` varchar(60) 
 )*/;
 
 /*View structure for view driver_view */
@@ -387,12 +410,19 @@ DROP TABLE IF EXISTS `profile_view`;
 
 /*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `driver_view` AS select `driver_table`.`driverId` AS `driverId`,`driver_table`.`driverFirstName` AS `driverFirstName`,`driver_table`.`driverMiddleName` AS `driverMiddleName`,`driver_table`.`driverLastName` AS `driverLastName`,`driver_table`.`driverAddress` AS `driverAddress`,`driver_table`.`driverContactNumber` AS `driverContactNumber` from `driver_table` */;
 
+/*View structure for view place_view */
+
+/*!50001 DROP TABLE IF EXISTS `place_view` */;
+/*!50001 DROP VIEW IF EXISTS `place_view` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `place_view` AS select `place_table`.`placeId` AS `placeId`,`place_table`.`placeName` AS `placeName`,`place_table`.`latitude` AS `latitude`,`place_table`.`longitude` AS `longitude` from `place_table` */;
+
 /*View structure for view profile_view */
 
 /*!50001 DROP TABLE IF EXISTS `profile_view` */;
 /*!50001 DROP VIEW IF EXISTS `profile_view` */;
 
-/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `profile_view` AS select `profile_table`.`profileId` AS `profileId`,`profile_table`.`firstName` AS `firstName`,`profile_table`.`middleName` AS `middleName`,`profile_table`.`lastName` AS `lastName`,`profile_table`.`contactNumber` AS `contactNumber`,`profile_table`.`addressId` AS `addressId`,`profile_table`.`accountTypeId` AS `accountTypeId`,`account_type_table`.`accountType` AS `accountType`,`profile_table`.`userName` AS `userName`,`profile_table`.`passWord` AS `passWord` from (`profile_table` join `account_type_table` on((`profile_table`.`accountTypeId` = `account_type_table`.`accountTypeId`))) */;
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `profile_view` AS select `profile_table`.`profileId` AS `profileId`,`profile_table`.`firstName` AS `firstName`,`profile_table`.`middleName` AS `middleName`,`profile_table`.`lastName` AS `lastName`,`profile_table`.`contactNumber` AS `contactNumber`,`profile_table`.`addressId` AS `addressId`,`profile_table`.`accountTypeId` AS `accountTypeId`,`profile_table`.`userName` AS `userName`,`profile_table`.`passWord` AS `passWord`,`address_table`.`province` AS `province`,`address_table`.`city` AS `city`,`address_table`.`barangay` AS `barangay`,`address_table`.`street` AS `street`,`address_table`.`buildingNumber` AS `buildingNumber`,`account_type_table`.`accountType` AS `accountType` from ((`profile_table` join `address_table` on((`profile_table`.`addressId` = `address_table`.`addressId`))) join `account_type_table` on((`profile_table`.`accountTypeId` = `account_type_table`.`accountTypeId`))) */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

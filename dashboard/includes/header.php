@@ -134,7 +134,7 @@
                                             <div class="u-img"><img src="assets/images/users/user.jpg" alt="user"></div>
                                             <div class="u-text">
                                                 <h4>Totoy Brown</h4>
-                                                <p class="text-muted">Administrator</p><a href="pages-profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
+                                                <p class="text-muted">Administrator</p><a href="view-profile.php" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
                                         </div>
                                     </li>
                                     <li role="separator" class="divider"></li>
