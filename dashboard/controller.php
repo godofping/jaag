@@ -7,7 +7,7 @@ if (isset($_POST['from']) and $_POST['from'] == 'login') {
 		$res = mysqli_fetch_assoc($qry);
 		$_SESSION['accountType'] = 'Administrator';
 		$_SESSION['profileId'] = $res['profileId'];
-		$_SESSION['do'] = '';
+		$_SESSION['do'] = 'login-success';
 		header("Location: home.php");
 	}
 	else
@@ -104,6 +104,34 @@ if (isset($_POST['from']) and $_POST['from'] == 'change-password') {
 		$_SESSION['do'] = 'update-password-failed';
 	}
 	header("Location: change-password.php");
+}
+
+if (isset($_POST['from']) and $_POST['from'] == 'add-van') {
+	mysqli_query($connection, "insert van_table (vanMake, vanModel, vanPlateNumber, statusId) values ('" . $_POST['vanMake'] . "', '" . $_POST['vanModel'] . "', '" . $_POST['vanPlateNumber'] . "', '1')");
+
+	$_SESSION['do'] = 'added';
+	header("Location: vans.php");
+}
+
+if (isset($_POST['from']) and $_POST['from'] == 'update-van') {
+	mysqli_query($connection, "update van_table set vanMake = '" . $_POST['vanMake'] . "', vanModel = '" . $_POST['vanModel'] . "', vanPlateNumber = '" . $_POST['vanPlateNumber'] . "' where vanId = '" . $_POST['vanId'] . "'");
+
+	$_SESSION['do'] = 'updated';
+	header("Location: vans.php");
+}
+
+if (isset($_POST['from']) and $_POST['from'] == 'delete-van') {
+	mysqli_query($connection, "delete from van_table where vanId = '" . $_POST['vanId'] . "'");
+
+	$_SESSION['do'] = 'deleted';
+	header("Location: vans.php");
+}
+
+if (isset($_POST['from']) and $_POST['from'] == 'update-status-van') {
+	mysqli_query($connection, "update van_table set statusId ='" . $_POST['statusId'] . "' where vanId = '" . $_POST['vanId'] . "'");
+
+	$_SESSION['do'] = 'updated';
+	header("Location: vans.php");
 }
 
 

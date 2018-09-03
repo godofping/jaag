@@ -311,9 +311,11 @@ CREATE TABLE `status_table` (
   `statusDescription` varchar(60) DEFAULT NULL,
   `statusOfWhat` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`statusId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `status_table` */
+
+insert  into `status_table`(`statusId`,`statusDescription`,`statusOfWhat`) values (1,'Available','van_rental;'),(2,'Not Available','van_rental;'),(3,'On Travel','van_rental;');
 
 /*Table structure for table `travel_and_tour_table` */
 
@@ -344,9 +346,11 @@ CREATE TABLE `van_table` (
   PRIMARY KEY (`vanId`),
   KEY `FK_van_table123` (`statusId`),
   CONSTRAINT `FK_van_table123` FOREIGN KEY (`statusId`) REFERENCES `status_table` (`statusId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 /*Data for the table `van_table` */
+
+insert  into `van_table`(`vanId`,`vanMake`,`vanModel`,`vanPlateNumber`,`statusId`) values (1,'Toyota','Hi-ace Commuter','TYM-1234',1),(4,'Nissan','NV350','UDW-892',1),(5,'Toyota','Hi-ace Grandia','ACD-5681',1);
 
 /*Table structure for table `driver_view` */
 
@@ -403,6 +407,23 @@ DROP TABLE IF EXISTS `profile_view`;
  `accountType` varchar(60) 
 )*/;
 
+/*Table structure for table `van_view` */
+
+DROP TABLE IF EXISTS `van_view`;
+
+/*!50001 DROP VIEW IF EXISTS `van_view` */;
+/*!50001 DROP TABLE IF EXISTS `van_view` */;
+
+/*!50001 CREATE TABLE  `van_view`(
+ `vanId` int(6) ,
+ `vanMake` varchar(60) ,
+ `vanModel` varchar(60) ,
+ `vanPlateNumber` varchar(60) ,
+ `statusId` int(6) ,
+ `statusDescription` varchar(60) ,
+ `statusOfWhat` varchar(60) 
+)*/;
+
 /*View structure for view driver_view */
 
 /*!50001 DROP TABLE IF EXISTS `driver_view` */;
@@ -423,6 +444,13 @@ DROP TABLE IF EXISTS `profile_view`;
 /*!50001 DROP VIEW IF EXISTS `profile_view` */;
 
 /*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `profile_view` AS select `profile_table`.`profileId` AS `profileId`,`profile_table`.`firstName` AS `firstName`,`profile_table`.`middleName` AS `middleName`,`profile_table`.`lastName` AS `lastName`,`profile_table`.`contactNumber` AS `contactNumber`,`profile_table`.`addressId` AS `addressId`,`profile_table`.`accountTypeId` AS `accountTypeId`,`profile_table`.`userName` AS `userName`,`profile_table`.`passWord` AS `passWord`,`address_table`.`province` AS `province`,`address_table`.`city` AS `city`,`address_table`.`barangay` AS `barangay`,`address_table`.`street` AS `street`,`address_table`.`buildingNumber` AS `buildingNumber`,`account_type_table`.`accountType` AS `accountType` from ((`profile_table` join `address_table` on((`profile_table`.`addressId` = `address_table`.`addressId`))) join `account_type_table` on((`profile_table`.`accountTypeId` = `account_type_table`.`accountTypeId`))) */;
+
+/*View structure for view van_view */
+
+/*!50001 DROP TABLE IF EXISTS `van_view` */;
+/*!50001 DROP VIEW IF EXISTS `van_view` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `van_view` AS select `van_table`.`vanId` AS `vanId`,`van_table`.`vanMake` AS `vanMake`,`van_table`.`vanModel` AS `vanModel`,`van_table`.`vanPlateNumber` AS `vanPlateNumber`,`van_table`.`statusId` AS `statusId`,`status_table`.`statusDescription` AS `statusDescription`,`status_table`.`statusOfWhat` AS `statusOfWhat` from (`van_table` join `status_table` on((`van_table`.`statusId` = `status_table`.`statusId`))) */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
