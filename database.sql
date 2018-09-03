@@ -42,9 +42,11 @@ CREATE TABLE `address_table` (
   `street` varchar(60) DEFAULT NULL,
   `buildingNumber` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`addressId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `address_table` */
+
+insert  into `address_table`(`addressId`,`province`,`city`,`barangay`,`street`,`buildingNumber`) values (1,'Sultan Kudarat','Tacurong City','Poblacion','Lapu-lapu','65');
 
 /*Table structure for table `booking_table` */
 
@@ -182,7 +184,9 @@ CREATE TABLE `package_table` (
   `priceId` int(6) DEFAULT NULL,
   PRIMARY KEY (`packageId`),
   KEY `FK_package_table1` (`priceId`),
-  CONSTRAINT `FK_package_table1` FOREIGN KEY (`priceId`) REFERENCES `price_table` (`priceId`)
+  KEY `FK_package_table123` (`statusId`),
+  CONSTRAINT `FK_package_table1` FOREIGN KEY (`priceId`) REFERENCES `price_table` (`priceId`),
+  CONSTRAINT `FK_package_table123` FOREIGN KEY (`statusId`) REFERENCES `status_table` (`statusId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `package_table` */
@@ -267,9 +271,11 @@ CREATE TABLE `profile_table` (
   KEY `FK_profile_table1` (`addressId`),
   CONSTRAINT `FK_profile_table` FOREIGN KEY (`accountTypeId`) REFERENCES `account_type_table` (`accountTypeId`),
   CONSTRAINT `FK_profile_table1` FOREIGN KEY (`addressId`) REFERENCES `address_table` (`addressId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `profile_table` */
+
+insert  into `profile_table`(`profileId`,`firstName`,`middleName`,`lastName`,`contactNumber`,`addressId`,`accountTypeId`,`userName`,`passWord`) values (2,'Jose','Malinao','Aguacity','09754214199',1,1,'admin','21232f297a57a5a743894a0e4a801fc3');
 
 /*Table structure for table `rental_table` */
 
@@ -331,10 +337,62 @@ CREATE TABLE `van_table` (
   `vanModel` varchar(60) DEFAULT NULL,
   `vanPlateNumber` varchar(60) DEFAULT NULL,
   `statusId` int(6) DEFAULT NULL,
-  PRIMARY KEY (`vanId`)
+  PRIMARY KEY (`vanId`),
+  KEY `FK_van_table123` (`statusId`),
+  CONSTRAINT `FK_van_table123` FOREIGN KEY (`statusId`) REFERENCES `status_table` (`statusId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `van_table` */
+
+/*Table structure for table `driver_view` */
+
+DROP TABLE IF EXISTS `driver_view`;
+
+/*!50001 DROP VIEW IF EXISTS `driver_view` */;
+/*!50001 DROP TABLE IF EXISTS `driver_view` */;
+
+/*!50001 CREATE TABLE  `driver_view`(
+ `driverId` int(6) ,
+ `driverFirstName` varchar(60) ,
+ `driverMiddleName` varchar(60) ,
+ `driverLastName` varchar(60) ,
+ `driverAddress` varchar(200) ,
+ `driverContactNumber` varchar(60) 
+)*/;
+
+/*Table structure for table `profile_view` */
+
+DROP TABLE IF EXISTS `profile_view`;
+
+/*!50001 DROP VIEW IF EXISTS `profile_view` */;
+/*!50001 DROP TABLE IF EXISTS `profile_view` */;
+
+/*!50001 CREATE TABLE  `profile_view`(
+ `profileId` int(6) ,
+ `firstName` varchar(60) ,
+ `middleName` varchar(60) ,
+ `lastName` varchar(60) ,
+ `contactNumber` varchar(60) ,
+ `addressId` int(6) ,
+ `accountTypeId` int(6) ,
+ `accountType` varchar(60) ,
+ `userName` varchar(60) ,
+ `passWord` varchar(60) 
+)*/;
+
+/*View structure for view driver_view */
+
+/*!50001 DROP TABLE IF EXISTS `driver_view` */;
+/*!50001 DROP VIEW IF EXISTS `driver_view` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `driver_view` AS select `driver_table`.`driverId` AS `driverId`,`driver_table`.`driverFirstName` AS `driverFirstName`,`driver_table`.`driverMiddleName` AS `driverMiddleName`,`driver_table`.`driverLastName` AS `driverLastName`,`driver_table`.`driverAddress` AS `driverAddress`,`driver_table`.`driverContactNumber` AS `driverContactNumber` from `driver_table` */;
+
+/*View structure for view profile_view */
+
+/*!50001 DROP TABLE IF EXISTS `profile_view` */;
+/*!50001 DROP VIEW IF EXISTS `profile_view` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `profile_view` AS select `profile_table`.`profileId` AS `profileId`,`profile_table`.`firstName` AS `firstName`,`profile_table`.`middleName` AS `middleName`,`profile_table`.`lastName` AS `lastName`,`profile_table`.`contactNumber` AS `contactNumber`,`profile_table`.`addressId` AS `addressId`,`profile_table`.`accountTypeId` AS `accountTypeId`,`account_type_table`.`accountType` AS `accountType`,`profile_table`.`userName` AS `userName`,`profile_table`.`passWord` AS `passWord` from (`profile_table` join `account_type_table` on((`profile_table`.`accountTypeId` = `account_type_table`.`accountTypeId`))) */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

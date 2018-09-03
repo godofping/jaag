@@ -2,20 +2,22 @@
 include("includes/connection.php");
 
 if (isset($_POST['from']) and $_POST['from'] == 'login') {
-	$qry = mysqli_query($connection, "select * from admin_view where userName = '" . $_POST['userName'] . "' and passWord = '" . md5($_POST['passWord']) . "'");
+	$qry = mysqli_query($connection, "select * from profile_view where userName = '" . $_POST['userName'] . "' and passWord = '" . md5($_POST['passWord']) . "' and accountType = 'Administrator'");
 	if (mysqli_num_rows($qry) > 0) {
 		$res = mysqli_fetch_assoc($qry);
-		$_SESSION['accountType'] = 'admin';
-		$_SESSION['accountId'] = $res['accountId'];
+		$_SESSION['accountType'] = 'Administrator';
+		$_SESSION['profileId'] = $res['profileId'];
+		$_SESSION['do'] = 'login-success';
 		header("Location: home.php");
 	}
 	else
 	{
-		$qry = mysqli_query($connection, "select * from employee_view where userName = '" . $_POST['userName'] . "' and passWord = '" . md5($_POST['passWord']) . "'");
+		$qry = mysqli_query($connection, "select * from profile_view where userName = '" . $_POST['userName'] . "' and passWord = '" . md5($_POST['passWord']) . "' and accountType = 'Employee'");
 		if (mysqli_num_rows($qry) > 0) {
 			$res = mysqli_fetch_assoc($qry);
-			$_SESSION['accountType'] = 'employee';
-			$_SESSION['accountId'] = $res['accountId'];
+			$_SESSION['accountType'] = 'Employee';
+			$_SESSION['profileId'] = $res['profileId'];
+			$_SESSION['do'] = 'login-success';
 			header("Location: home.php");
 		}
 		else

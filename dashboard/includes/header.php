@@ -1,3 +1,10 @@
+<?php
+    if (!isset($_SESSION['profileId'])) {
+        $_SESSION['do'] = 'login-first';
+        header("Location: login.php");
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,11 +24,13 @@
     <link href="css/style.css" rel="stylesheet">
     <!-- You can change the theme colors from here -->
     <link href="css/colors/default-dark.css" id="theme" rel="stylesheet">
+    <!-- toast CSS -->
+    <link href="assets/plugins/toast-master/css/jquery.toast.css" rel="stylesheet">
 
 
     <!-- Morries chart CSS -->
     <link href="assets/plugins/morrisjs/morris.css" rel="stylesheet">
-    
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>

@@ -1,3 +1,9 @@
+<?php include("includes/connection.php");
+if (isset($_SESSION['profileId'])) {
+    header("Location: home.php");
+}
+
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,6 +19,8 @@
     <title>Jaag | Travel and Tours and Van Rental</title>
     <!-- Bootstrap Core CSS -->
     <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- toast CSS -->
+    <link href="assets/plugins/toast-master/css/jquery.toast.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="css/style.css" rel="stylesheet">
     <!-- You can change the theme colors from here -->
@@ -45,11 +53,11 @@
                         <h3 class="box-title m-b-20">Sign In</h3>
                         <div class="form-group ">
                             <div class="col-xs-12">
-                                <input class="form-control" type="text" required="" placeholder="Username"> </div>
+                                <input class="form-control" type="text" name="userName" required="" placeholder="Username"> </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-12">
-                                <input class="form-control" type="password" required="" placeholder="Password"> </div>
+                                <input class="form-control" type="password" name="passWord" required="" placeholder="Password"> </div>
                         </div>
 
                         <div class="form-group text-center m-t-20">
@@ -57,12 +65,15 @@
                                 <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Log In</button>
                             </div>
                         </div>
+                        <input type="text" name="from" value="login" hidden="">
 
                     </form>
                     
                 </div>
             </div>
         </div>
+
+
     </section>
     <!-- ============================================================== -->
     <!-- End Wrapper -->
@@ -85,10 +96,61 @@
     <script src="assets/plugins/sparkline/jquery.sparkline.min.js"></script>
     <!--Custom JavaScript -->
     <script src="js/custom.min.js"></script>
+    <script src="assets/plugins/toast-master/js/jquery.toast.js"></script>
+    <script src="js/toastr.js"></script>
+
     <!-- ============================================================== -->
     <!-- Style switcher -->
     <!-- ============================================================== -->
     <script src="assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+
+    <?php if (isset($_SESSION['do'])): ?>
+
+    <script>
+
+        <?php if ($_SESSION['do'] == 'failed'): ?>
+            $.toast({
+            heading: 'Message',
+            text: 'Login Failed! Please login again.',
+            position: 'top-right',
+            loaderBg:'#ff6849',
+            icon: 'error',
+            hideAfter: 5000, 
+            stack: 6
+          });
+        <?php endif ?>
+        <?php if ($_SESSION['do'] == 'logout'): ?>
+            $.toast({
+            heading: 'Message',
+            text: 'Successfully Logout!',
+            position: 'top-right',
+            loaderBg:'#ff6849',
+            icon: 'success',
+            hideAfter: 5000, 
+            stack: 6
+          });
+        <?php endif ?>
+        <?php if ($_SESSION['do'] == 'login-first'): ?>
+            $.toast({
+            heading: 'Message',
+            text: 'Oppss! Please login first for you to access the dashboard.',
+            position: 'top-right',
+            loaderBg:'#ff6849',
+            icon: 'warning',
+            hideAfter: 5000, 
+            stack: 6
+          });
+        <?php endif ?>
+    </script>
+
+
+
+    <?php endif;
+        if (isset($_SESSION['do'])) {
+            unset($_SESSION['do']);
+        }
+     ?>
+
 </body>
 
 </html>
