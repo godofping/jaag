@@ -45,11 +45,11 @@ if (isset($_SESSION['accountType']) and ($_SESSION['accountType'] == 'Administra
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
     <section id="wrapper">
-        <div class="login-register" style="background-image:url(assets/images/background/login-register.jpg);">
+        <div class="login-register" style="background-image:url(assets/images/background/teddy-kelley-70401-unsplash.jpg);">
             <div class="login-box card">
                 <div class="card-body">
                     <form class="form-horizontal form-material" id="loginform" method="POST" action="controller.php">
-                        <h2 class="box-title m-b-20 text-center">Jaag Travel and Tours and Van Rental Dashboard</h2>
+                        <h2 class="box-title m-b-20 text-center"><img src="assets/images/logo-light-text.png" class="img img-responsive"></h2>
                         <h3 class="box-title m-b-20">Sign In</h3>
                         <div class="form-group ">
                             <div class="col-xs-12">

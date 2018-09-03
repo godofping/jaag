@@ -65,7 +65,9 @@ CREATE TABLE `booking_table` (
   KEY `FK_booking_table` (`statusId`),
   KEY `FK_booking_table2` (`travelAndTourId`),
   KEY `FK_booking_table23` (`rentId`),
+  KEY `FK_booking_table123` (`profileId`),
   CONSTRAINT `FK_booking_table` FOREIGN KEY (`statusId`) REFERENCES `status_table` (`statusId`),
+  CONSTRAINT `FK_booking_table123` FOREIGN KEY (`profileId`) REFERENCES `profile_table` (`profileId`),
   CONSTRAINT `FK_booking_table2` FOREIGN KEY (`travelAndTourId`) REFERENCES `travel_and_tour_table` (`travelAndTourId`),
   CONSTRAINT `FK_booking_table23` FOREIGN KEY (`rentId`) REFERENCES `rental_table` (`rentId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -311,7 +313,7 @@ CREATE TABLE `status_table` (
   `statusDescription` varchar(60) DEFAULT NULL,
   `statusOfWhat` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`statusId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `status_table` */
 
@@ -366,6 +368,27 @@ DROP TABLE IF EXISTS `driver_view`;
  `driverLastName` varchar(60) ,
  `driverAddress` varchar(200) ,
  `driverContactNumber` varchar(60) 
+)*/;
+
+/*Table structure for table `package_view` */
+
+DROP TABLE IF EXISTS `package_view`;
+
+/*!50001 DROP VIEW IF EXISTS `package_view` */;
+/*!50001 DROP TABLE IF EXISTS `package_view` */;
+
+/*!50001 CREATE TABLE  `package_view`(
+ `packageId` int(6) ,
+ `packageName` varchar(60) ,
+ `packageDetails` text ,
+ `pax` int(6) ,
+ `inclusion` text ,
+ `exclusion` text ,
+ `statusId` int(6) ,
+ `priceId` int(6) ,
+ `price` double ,
+ `statusDescription` varchar(60) ,
+ `statusOfWhat` varchar(60) 
 )*/;
 
 /*Table structure for table `place_view` */
@@ -430,6 +453,13 @@ DROP TABLE IF EXISTS `van_view`;
 /*!50001 DROP VIEW IF EXISTS `driver_view` */;
 
 /*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `driver_view` AS select `driver_table`.`driverId` AS `driverId`,`driver_table`.`driverFirstName` AS `driverFirstName`,`driver_table`.`driverMiddleName` AS `driverMiddleName`,`driver_table`.`driverLastName` AS `driverLastName`,`driver_table`.`driverAddress` AS `driverAddress`,`driver_table`.`driverContactNumber` AS `driverContactNumber` from `driver_table` */;
+
+/*View structure for view package_view */
+
+/*!50001 DROP TABLE IF EXISTS `package_view` */;
+/*!50001 DROP VIEW IF EXISTS `package_view` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `package_view` AS select `package_table`.`packageId` AS `packageId`,`package_table`.`packageName` AS `packageName`,`package_table`.`packageDetails` AS `packageDetails`,`package_table`.`pax` AS `pax`,`package_table`.`inclusion` AS `inclusion`,`package_table`.`exclusion` AS `exclusion`,`package_table`.`statusId` AS `statusId`,`package_table`.`priceId` AS `priceId`,`price_table`.`price` AS `price`,`status_table`.`statusDescription` AS `statusDescription`,`status_table`.`statusOfWhat` AS `statusOfWhat` from ((`package_table` join `price_table` on((`package_table`.`priceId` = `price_table`.`priceId`))) join `status_table` on((`package_table`.`statusId` = `status_table`.`statusId`))) */;
 
 /*View structure for view place_view */
 
