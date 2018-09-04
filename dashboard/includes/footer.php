@@ -69,8 +69,13 @@
     <script type="text/javascript" src="assets/plugins/multiselect/js/jquery.multi-select.js"></script>
     <script src="assets/plugins/Magnific-Popup-master/dist/jquery.magnific-popup.min.js"></script>
     <script src="assets/plugins/Magnific-Popup-master/dist/jquery.magnific-popup-init.js"></script>
-
     <script src="assets/plugins/dropify/dist/js/dropify.min.js"></script>
+    <script src="assets/plugins/calendar/jquery-ui.min.js"></script>
+    <script src="assets/plugins/moment/moment.js"></script>
+    <script src='assets/plugins/calendar/dist/fullcalendar.min.js'></script>
+
+
+
     <script>
     $(document).ready(function() {
         // Basic

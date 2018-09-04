@@ -36,18 +36,9 @@
     <!-- Popup CSS -->
     <link href="assets/plugins/Magnific-Popup-master/dist/magnific-popup.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/plugins/dropify/dist/css/dropify.min.css">
-
-    
-
-
-
-
-
-
-
-
-    <!-- Morries chart CSS -->
     <link href="assets/plugins/morrisjs/morris.css" rel="stylesheet">
+    <link href="assets/plugins/calendar/dist/fullcalendar.css" rel="stylesheet" />
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -55,7 +46,7 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
-<link href="css/style.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
     <link href="css/colors/default-dark.css" id="theme" rel="stylesheet">
     
 </head>
