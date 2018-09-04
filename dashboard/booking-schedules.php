@@ -31,21 +31,8 @@
                     <div class="card">
                         <div class="">
                             <div class="row">
-                                <div class="col-md-3">
-                                    <div class="card-body">
-                                    <!--     <h4 class="card-title m-t-10">Add Schedules</h4> -->
-                                        <div class="row">
-                                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                                <div id="calendar-events" class="">
 
-                                                </div>
-          
-                                                <button class="btn btn-success m-t-20 waves-effect text-left" data-toggle="modal" data-target="#addModal">Add</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-9">
+                                <div class="col-md-12">
                                     <div class="card-body b-l calender-sidebar">
                                         <div id="calendar"></div>
                                     </div>
