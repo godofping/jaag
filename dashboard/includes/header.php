@@ -20,9 +20,9 @@
     <!-- Bootstrap Core CSS -->
     <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="css/style.css" rel="stylesheet">
+    
     <!-- You can change the theme colors from here -->
-    <link href="css/colors/default-dark.css" id="theme" rel="stylesheet">
+    
     <!-- toast CSS -->
     <link href="assets/plugins/toast-master/css/jquery.toast.css" rel="stylesheet">
 
@@ -33,6 +33,16 @@
     <link href="assets/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.css" rel="stylesheet" />
     <link href="assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css" rel="stylesheet" />
     <link href="assets/plugins/multiselect/css/multi-select.css" rel="stylesheet" type="text/css" />
+    <!-- Popup CSS -->
+    <link href="assets/plugins/Magnific-Popup-master/dist/magnific-popup.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/plugins/dropify/dist/css/dropify.min.css">
+
+    
+
+
+
+
+
 
 
 
@@ -45,6 +55,9 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
+<link href="css/style.css" rel="stylesheet">
+    <link href="css/colors/default-dark.css" id="theme" rel="stylesheet">
+    
 </head>
 
 <body class="fix-header card-no-border">

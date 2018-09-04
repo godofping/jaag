@@ -143,9 +143,11 @@ CREATE TABLE `media_table` (
   CONSTRAINT `FK_media_table` FOREIGN KEY (`packageId`) REFERENCES `package_table` (`packageId`),
   CONSTRAINT `FK_media_table1` FOREIGN KEY (`paymentTransactionId`) REFERENCES `payment_transaction_table` (`paymentTransactionId`),
   CONSTRAINT `FK_media_table3` FOREIGN KEY (`postingId`) REFERENCES `posting_table` (`postingId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
 /*Data for the table `media_table` */
+
+insert  into `media_table`(`mediaId`,`mediaLocation`,`postingId`,`packageId`,`paymentTransactionId`) values (13,'media/386b81e31014a480f5abbd1089bf9037Enchanted-River-11.jpg',NULL,1,NULL),(14,'media/701b6c51d4017ef032663d897a9e8a62Riv.jpg',NULL,1,NULL),(15,'media/c6e70a1aa3d236578cce76a1cd13e8a7siargao-surigao-province.jpg',NULL,1,NULL),(16,'media/b03b8ae8b280f584dff61c824b945deeSurigao-del-Sur-Bogac-Spring.png',NULL,1,NULL);
 
 /*Table structure for table `mode_of_payment_table` */
 
@@ -392,6 +394,20 @@ DROP TABLE IF EXISTS `driver_view`;
  `driverContactNumber` varchar(60) 
 )*/;
 
+/*Table structure for table `package_media_view` */
+
+DROP TABLE IF EXISTS `package_media_view`;
+
+/*!50001 DROP VIEW IF EXISTS `package_media_view` */;
+/*!50001 DROP TABLE IF EXISTS `package_media_view` */;
+
+/*!50001 CREATE TABLE  `package_media_view`(
+ `mediaId` int(6) ,
+ `mediaLocation` text ,
+ `packageId` int(6) ,
+ `packageName` varchar(60) 
+)*/;
+
 /*Table structure for table `package_view` */
 
 DROP TABLE IF EXISTS `package_view`;
@@ -482,6 +498,13 @@ DROP TABLE IF EXISTS `van_view`;
 /*!50001 DROP VIEW IF EXISTS `driver_view` */;
 
 /*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `driver_view` AS select `driver_table`.`driverId` AS `driverId`,`driver_table`.`driverFirstName` AS `driverFirstName`,`driver_table`.`driverMiddleName` AS `driverMiddleName`,`driver_table`.`driverLastName` AS `driverLastName`,`driver_table`.`driverAddress` AS `driverAddress`,`driver_table`.`driverContactNumber` AS `driverContactNumber` from `driver_table` */;
+
+/*View structure for view package_media_view */
+
+/*!50001 DROP TABLE IF EXISTS `package_media_view` */;
+/*!50001 DROP VIEW IF EXISTS `package_media_view` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `package_media_view` AS select `media_table`.`mediaId` AS `mediaId`,`media_table`.`mediaLocation` AS `mediaLocation`,`media_table`.`packageId` AS `packageId`,`package_table`.`packageName` AS `packageName` from (`media_table` join `package_table` on((`media_table`.`packageId` = `package_table`.`packageId`))) */;
 
 /*View structure for view package_view */
 

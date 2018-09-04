@@ -11,9 +11,9 @@ include("includes/header.php");
     </div>
     <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+            <li class="breadcrumb-item"><a href="home.php">Home</a></li>
             <li class="breadcrumb-item">Services</li>
-            <li class="breadcrumb-item active">Vans</li>
+            <li class="breadcrumb-item active"><a href="vans.php">Vans</a></li>
         </ol>
     </div>
 
@@ -54,7 +54,7 @@ include("includes/header.php");
                                     <td><?php echo $res['vanModel']; ?></td>
                                     <td><?php echo $res['vanPlateNumber']; ?></td>
                                     <td><?php echo $res['statusDescription']; ?>
-                                        <br><button type="button" class="btn btn-block btn-outline-info" data-toggle="modal" data-target="#updateStatusModal<?php echo $res['vanId']; ?>">Update</button>
+                                        <br><button type="button" class="btn btn-block btn-outline-info" data-toggle="modal" data-target="#updateStatusModal<?php echo $res['vanId']; ?>">Change</button>
                                     </td>
                                     <td>
                                         <button type="button" class="btn btn-block btn-outline-warning" data-toggle="modal" data-target="#updateModal<?php echo $res['vanId']; ?>">Update</button>
@@ -216,7 +216,7 @@ while ($res = mysqli_fetch_assoc($qry)) { ?>
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myLargeModalLabel">Update</h4>
+                <h4 class="modal-title" id="myLargeModalLabel">Change</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">

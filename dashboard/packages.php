@@ -11,9 +11,9 @@ include("includes/header.php");
     </div>
     <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+            <li class="breadcrumb-item"><a href="home.php">Home</a></li>
             <li class="breadcrumb-item">Services</li>
-            <li class="breadcrumb-item active">Packages</li>
+            <li class="breadcrumb-item active"><a href="packages.php">Packages</a></li>
         </ol>
     </div>
 
@@ -70,7 +70,7 @@ include("includes/header.php");
                                     <td><?php echo $res['price']; ?></td>
                                     <td><a href="view-package-images.php?packageId=<?php echo $res['packageId'] ?>"><button type="button" class="btn btn-block btn-outline-primary">Manage</button></a></td>
                                     <td><?php echo $res['statusDescription']; ?>
-                                        <br><button type="button" class="btn btn-block btn-outline-info" data-toggle="modal" data-target="#updateStatusModal<?php echo $res['packageId']; ?>">Update</button>
+                                        <br><button type="button" class="btn btn-block btn-outline-info" data-toggle="modal" data-target="#updateStatusModal<?php echo $res['packageId']; ?>">Change</button>
                                     </td>
                                     <td>
                                         <button type="button" class="btn btn-block btn-outline-warning" data-toggle="modal" data-target="#updateModal<?php echo $res['packageId']; ?>">Update</button>
@@ -294,7 +294,7 @@ while ($res = mysqli_fetch_assoc($qry)) { ?>
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myLargeModalLabel">Update</h4>
+                <h4 class="modal-title" id="myLargeModalLabel">Change</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
