@@ -206,15 +206,15 @@
 
         var defaultEvents =  [{
                 title: 'Surigao Tour!',
-                start: new Date($.now() + 86400000),
+                start: '2018-09-4',
+                end: '2018-09-5',
                 className: 'bg-info'
             }];
 
         var $this = this;
         $this.$calendarObj = $this.$calendar.fullCalendar({
-            slotDuration: '00:15:00', /* If we want to split day time each 15minutes */
-            minTime: '08:00:00',
-            maxTime: '19:00:00',  
+ 
+    
             defaultView: 'month',  
             handleWindowResize: true,   
              
