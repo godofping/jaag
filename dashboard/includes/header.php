@@ -133,7 +133,9 @@
                     <!-- ============================================================== -->
                     <ul class="navbar-nav my-lg-0">
                        
-                        
+                        <?php $qry10 = mysqli_query($connection, "select * from profile_view where profileId = '" . $_SESSION['profileId'] . "'"); 
+                            $res10 = mysqli_fetch_assoc($qry10);
+                        ?>
                         
                         <!-- ============================================================== -->
                         <!-- Profile -->
@@ -146,8 +148,8 @@
                                         <div class="dw-user-box">
                                             <div class="u-img"><img src="assets/images/users/user.jpg" alt="user"></div>
                                             <div class="u-text">
-                                                <h4>Totoy Brown</h4>
-                                                <p class="text-muted">Administrator</p><a href="view-profile.php" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
+                                                <h4><?php echo $res10['firstName'] . " " . $res10['middleName'] . " " . $res10['lastName']; ?></h4>
+                                                <p class="text-muted"><?php echo $res10['accountType']; ?></p><a href="view-profile.php" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
                                         </div>
                                     </li>
                                     <li role="separator" class="divider"></li>
@@ -176,7 +178,8 @@
                     <!-- User profile image -->
                     <div class="profile-img"> <img src="assets/images/users/user.jpg" alt="user" /> </div>
                     <!-- User profile text-->
-                    <div class="profile-text" style="color:white; font-weight: 500;">Totoy Brown
+                    <div class="profile-text" style="color:white; font-weight: 500;"><?php echo $res10['firstName'] . " " . $res10['middleName'] . " " . $res10['lastName']; ?></h4>
+                                                <p class="text-muted"><?php echo $res10['accountType']; ?>
                     </div>
                 </div>
                 <!-- End User profile text-->
