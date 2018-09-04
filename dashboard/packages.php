@@ -70,7 +70,7 @@ include("includes/header.php");
                                     <td><?php echo $res['price']; ?></td>
                                     <td><a href="view-package-images.php?packageId=<?php echo $res['packageId'] ?>"><button type="button" class="btn btn-block btn-outline-primary">Manage</button></a></td>
                                     <td><?php echo $res['statusDescription']; ?>
-                                        <br><button type="button" class="btn btn-block btn-outline-info" data-toggle="modal" data-target="#updateStatusModal<?php echo $res['packageId']; ?>">Change</button>
+                                        <!-- <br><button type="button" class="btn btn-block btn-outline-info" data-toggle="modal" data-target="#updateStatusModal<?php echo $res['packageId']; ?>">Change</button> -->
                                     </td>
                                     <td>
                                         <button type="button" class="btn btn-block btn-outline-warning" data-toggle="modal" data-target="#updateModal<?php echo $res['packageId']; ?>">Update</button>
