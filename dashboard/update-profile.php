@@ -82,14 +82,14 @@ include("includes/header.php");
                         <div class="col-md-4">
                             <label>City</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="city" name="city" required="" value="<?php echo $res['firstName'] ?>">
+                                <input type="text" class="form-control" id="city" name="city" required="" value="<?php echo $res['city'] ?>">
                             </div>
                             </div>
 
                         <div class="col-md-4">
                             <label>Province</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="province" name="province" required="" value="<?php echo $res['firstName'] ?>">
+                                <input type="text" class="form-control" id="province" name="province" required="" value="<?php echo $res['province'] ?>">
                             </div>
                         </div>
 
