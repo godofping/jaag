@@ -46,7 +46,7 @@ CREATE TABLE `address_table` (
 
 /*Data for the table `address_table` */
 
-insert  into `address_table`(`addressId`,`province`,`city`,`barangay`,`street`,`buildingNumber`) values (1,'Jose','Jose','Poblacion','Lapu-lapu','65');
+insert  into `address_table`(`addressId`,`province`,`city`,`barangay`,`street`,`buildingNumber`) values (1,'Region 12: SULTAN KUDARAT','CITY OF TACURONG','Poblacion','Malvar Street','65');
 
 /*Table structure for table `booking_table` */
 
@@ -58,9 +58,8 @@ CREATE TABLE `booking_table` (
   `travelAndTourId` int(6) DEFAULT NULL,
   `statusId` int(6) DEFAULT NULL,
   `paymentTransactionId` int(6) DEFAULT NULL,
-  `departure` date DEFAULT NULL,
-  `return` date DEFAULT NULL,
   `rentId` int(6) DEFAULT NULL,
+  `dateBooked` date DEFAULT NULL,
   PRIMARY KEY (`bookingId`),
   KEY `FK_booking_table` (`statusId`),
   KEY `FK_booking_table2` (`travelAndTourId`),
@@ -102,7 +101,7 @@ CREATE TABLE `destination_table` (
   KEY `FK_destination_table2` (`packageId`),
   CONSTRAINT `FK_destination_table` FOREIGN KEY (`placeId`) REFERENCES `place_table` (`placeId`) ON DELETE SET NULL,
   CONSTRAINT `FK_destination_table2` FOREIGN KEY (`packageId`) REFERENCES `package_table` (`packageId`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 /*Data for the table `destination_table` */
 
@@ -120,7 +119,7 @@ CREATE TABLE `driver_table` (
   `driverAddress` varchar(200) DEFAULT NULL,
   `driverContactNumber` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`driverId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `driver_table` */
 
@@ -195,7 +194,7 @@ CREATE TABLE `package_table` (
   KEY `FK_package_table123` (`statusId`),
   CONSTRAINT `FK_package_table1` FOREIGN KEY (`priceId`) REFERENCES `price_table` (`priceId`),
   CONSTRAINT `FK_package_table123` FOREIGN KEY (`statusId`) REFERENCES `status_table` (`statusId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `package_table` */
 
@@ -230,7 +229,7 @@ CREATE TABLE `place_table` (
   `latitude` varchar(60) DEFAULT NULL,
   `longitude` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`placeId`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `place_table` */
 
@@ -260,7 +259,7 @@ CREATE TABLE `price_table` (
   `priceId` int(6) NOT NULL AUTO_INCREMENT,
   `price` double DEFAULT NULL,
   PRIMARY KEY (`priceId`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `price_table` */
 
@@ -301,6 +300,8 @@ CREATE TABLE `rental_table` (
   `dateRented` date DEFAULT NULL,
   `priceId` int(6) DEFAULT NULL,
   `driverId` int(6) DEFAULT NULL,
+  `rentalStartingDate` date DEFAULT NULL,
+  `rentalEndingDate` date DEFAULT NULL,
   PRIMARY KEY (`rentId`),
   KEY `FK_rental_table` (`priceId`),
   KEY `FK_rental_table1` (`vanId`),
@@ -335,7 +336,8 @@ CREATE TABLE `travel_and_tour_table` (
   `travelAndTourId` int(6) NOT NULL AUTO_INCREMENT,
   `packageId` int(6) DEFAULT NULL,
   `numberOfPax` int(6) DEFAULT NULL,
-  `dateBooked` date DEFAULT NULL,
+  `departureDate` date DEFAULT NULL,
+  `returnDate` date DEFAULT NULL,
   PRIMARY KEY (`travelAndTourId`),
   KEY `FK_travel_and_tour_table` (`packageId`),
   CONSTRAINT `FK_travel_and_tour_table` FOREIGN KEY (`packageId`) REFERENCES `package_table` (`packageId`)
