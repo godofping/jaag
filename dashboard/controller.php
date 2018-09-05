@@ -88,7 +88,7 @@ if (isset($_POST['from']) and $_POST['from'] == 'delete-place') {
 if (isset($_POST['from']) and $_POST['from'] == 'update-profile') {
 	mysqli_query($connection, "update profile_table set firstName = '" . $_POST['firstName'] . "', middleName = '" . $_POST['middleName'] . "', lastName = '" . $_POST['lastName'] . "', contactNumber = '" . $_POST['contactNumber'] . "' where profileId = '" . $_POST['profileId'] . "'");
 
-	mysqli_query($connection, "update address_table set buildingNumber = '" . $_POST['buildingNumber'] . "', street = '" . $_POST['street'] . "', barangay = '" . $_POST['barangay'] . "', city = '" . $_POST['city'] . "', province = '" . $_POST['province'] . "' where addressId = '" . $_POST['addressId'] . "'");
+	mysqli_query($connection, "update address_table set buildingNumber = '" . $_POST['buildingNumber'] . "', street = '" . $_POST['street'] . "', barangay = '" . $_POST['barangay'] . "', city = '" . $_POST['city1'] . "', province = '" . $_POST['province1'] . "' where addressId = '" . $_POST['addressId'] . "'");
 
 	$_SESSION['do'] = 'updated';
 	header("Location: update-profile.php");
