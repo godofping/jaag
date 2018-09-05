@@ -105,7 +105,7 @@ CREATE TABLE `destination_table` (
 
 /*Data for the table `destination_table` */
 
-insert  into `destination_table`(`destinationId`,`placeId`,`packageId`) values (2,2,1),(10,2,2),(11,3,2);
+insert  into `destination_table`(`destinationId`,`placeId`,`packageId`) values (2,2,1);
 
 /*Table structure for table `driver_table` */
 
@@ -198,7 +198,7 @@ CREATE TABLE `package_table` (
 
 /*Data for the table `package_table` */
 
-insert  into `package_table`(`packageId`,`packageName`,`packageDetails`,`pax`,`inclusion`,`exclusion`,`statusId`,`priceId`) values (1,'Surigao Tour','Details....',14,'TRANSPORTATIONS','MEALS',1,2),(2,'Suriago and Siargao Tour1','THIS IS ARE THE PACKAGES',20,'TRANSPORTATIONS','MEALS',1,3);
+insert  into `package_table`(`packageId`,`packageName`,`packageDetails`,`pax`,`inclusion`,`exclusion`,`statusId`,`priceId`) values (1,'Surigao Tour','Details....',14,'TRANSPORTATIONS','MEALS',1,2);
 
 /*Table structure for table `payment_transaction_table` */
 
@@ -229,11 +229,11 @@ CREATE TABLE `place_table` (
   `latitude` varchar(60) DEFAULT NULL,
   `longitude` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`placeId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
 /*Data for the table `place_table` */
 
-insert  into `place_table`(`placeId`,`placeName`,`latitude`,`longitude`) values (1,'Davao City','7.18958','125.450342'),(2,'Surigao City','9.757262','125.513613'),(3,'Siargao City','9.848018','126.047856');
+insert  into `place_table`(`placeId`,`placeName`,`latitude`,`longitude`) values (1,'Davao City','7.18958','125.450342'),(2,'Surigao City','9.757262','125.513613'),(3,'Siargao City','9.848018','126.047856'),(4,'Talicud Island','6.929346','125.702456'),(5,'Sitio Maupot','7.106885','125.147730'),(6,'Lake Agco','7.017518','125.223099'),(7,'Buda','7.519009','125.237682'),(8,'Britania','8.700732','126.207376'),(9,'Alameda','8.733700','126.202191'),(10,'Asik asik','7.561677','124.535513'),(11,'Bohol','9.657822','123.850521'),(12,'Camiguin Island','9.175038','124.729034'),(13,'Dapitan','8.625101','123.392629'),(14,'Dakak','8.695429','123.393344'),(15,'Gloria Fantasy Tour','8.647023','123.417672'),(16,'Dinagat','10.121927','125.587540'),(17,'Garden of Tour','14.562977','120.989999'),(18,'Up-side Down Museum','14.554531','120.987396'),(19,'New Israel','6.920208','125.189145'),(20,'Lake Sebu','6.243647','124.552497'),(21,'Sohoton','9.600213','125.916649'),(22,'Talikud','6.929611','125.702675');
 
 /*Table structure for table `posting_table` */
 
@@ -263,7 +263,7 @@ CREATE TABLE `price_table` (
 
 /*Data for the table `price_table` */
 
-insert  into `price_table`(`priceId`,`price`) values (1,999),(2,999),(3,2999);
+insert  into `price_table`(`priceId`,`price`) values (1,999),(2,999);
 
 /*Table structure for table `profile_table` */
 

@@ -41,6 +41,7 @@ include("includes/header.php");
                                     <th>Place Name</th>
                                     <th>Latitude</th>
                                     <th>Longitude</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
