@@ -48,7 +48,7 @@ include("includes/header.php");
 								<p><?php echo $res['packageDetails']; ?></p>
 							<p>Departure: <?php echo date("l, jS \of F Y",strtotime($res['departureDate'])); ?> <br>
 							Return: <?php echo date("l, jS \of F Y",strtotime($res['returnDate'])); ?></p>
-							<p>Remaining Slots: 12 of 14</p>
+							<p>Remaining Slots: 12 of <?php echo $res['maxPax']; ?></p>
 								<span class="price">From <strong>₱<?php echo $res['price']; ?></strong> per person</span>
 							</div>
 					

@@ -2,7 +2,7 @@
 include("dashboard/includes/connection.php");
 include("includes/header.php");
 
-$qry = mysqli_query($connection, "select * from package_view where packageId = '" . $_GET['packageId'] . "'");
+$qry = mysqli_query($connection, "select * from travel_and_tour_view where packageId = '" . $_GET['packageId'] . "'");
 $res = mysqli_fetch_assoc($qry);
  ?>
 	
@@ -43,8 +43,8 @@ $res = mysqli_fetch_assoc($qry);
 
 							<p><?php echo $res['packageDetails']; ?></p>
 
-							<h4>Pax: <?php echo $res['pax']; ?></h4>
-							<h5> Remaining slots 0</h5>
+							<h4>Available Slots: 12 of <?php echo $res['maxPax']; ?></h4>
+							
 					
 							<div id="instagram-feed" class="clearfix"></div>
 							<hr>
@@ -92,9 +92,8 @@ $res = mysqli_fetch_assoc($qry);
 								<i class="icon_profile"></i>
 							</div>
 
-							<a href="cart-1.html" class="btn_1 full-width purchase">Book</a>
+							<a href="cart-1.html" class="btn_1 full-width purchase">Reserve Now</a>
 
-							<div class="text-center"><small>No money charged in this step</small></div>
 						</div>
 
 					</aside>
@@ -117,8 +116,8 @@ $res = mysqli_fetch_assoc($qry);
       var map;
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: <?php echo $res2['latitude']; ?>, lng: <?php echo $res2['longtitude']; ?>},
-          zoom: 10
+          center: {lat: <?php echo $res2['latitude']; ?>, lng: <?php echo $res2['longitude']; ?>},
+          zoom: 15
         });
       }
     </script>
