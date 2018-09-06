@@ -60,6 +60,7 @@ CREATE TABLE `booking_table` (
   `paymentTransactionId` int(6) DEFAULT NULL,
   `rentId` int(6) DEFAULT NULL,
   `dateBooked` date DEFAULT NULL,
+  `numberOfPaxBooked` int(6) DEFAULT NULL,
   PRIMARY KEY (`bookingId`),
   KEY `FK_booking_table` (`statusId`),
   KEY `FK_booking_table2` (`travelAndTourId`),
@@ -101,11 +102,11 @@ CREATE TABLE `destination_table` (
   KEY `FK_destination_table2` (`packageId`),
   CONSTRAINT `FK_destination_table` FOREIGN KEY (`placeId`) REFERENCES `place_table` (`placeId`) ON DELETE SET NULL,
   CONSTRAINT `FK_destination_table2` FOREIGN KEY (`packageId`) REFERENCES `package_table` (`packageId`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 /*Data for the table `destination_table` */
 
-insert  into `destination_table`(`destinationId`,`placeId`,`packageId`) values (2,2,1);
+insert  into `destination_table`(`destinationId`,`placeId`,`packageId`) values (2,2,1),(3,7,2),(4,12,3),(5,20,4),(6,16,5),(7,21,6);
 
 /*Table structure for table `driver_table` */
 
@@ -142,11 +143,11 @@ CREATE TABLE `media_table` (
   CONSTRAINT `FK_media_table` FOREIGN KEY (`packageId`) REFERENCES `package_table` (`packageId`),
   CONSTRAINT `FK_media_table1` FOREIGN KEY (`paymentTransactionId`) REFERENCES `payment_transaction_table` (`paymentTransactionId`),
   CONSTRAINT `FK_media_table3` FOREIGN KEY (`postingId`) REFERENCES `posting_table` (`postingId`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
 
 /*Data for the table `media_table` */
 
-insert  into `media_table`(`mediaId`,`mediaLocation`,`postingId`,`packageId`,`paymentTransactionId`) values (13,'media/386b81e31014a480f5abbd1089bf9037Enchanted-River-11.jpg',NULL,1,NULL),(14,'media/701b6c51d4017ef032663d897a9e8a62Riv.jpg',NULL,1,NULL),(15,'media/c6e70a1aa3d236578cce76a1cd13e8a7siargao-surigao-province.jpg',NULL,1,NULL),(16,'media/b03b8ae8b280f584dff61c824b945deeSurigao-del-Sur-Bogac-Spring.png',NULL,1,NULL);
+insert  into `media_table`(`mediaId`,`mediaLocation`,`postingId`,`packageId`,`paymentTransactionId`) values (13,'media/386b81e31014a480f5abbd1089bf9037Enchanted-River-11.jpg',NULL,1,NULL),(14,'media/701b6c51d4017ef032663d897a9e8a62Riv.jpg',NULL,1,NULL),(15,'media/c6e70a1aa3d236578cce76a1cd13e8a7siargao-surigao-province.jpg',NULL,1,NULL),(16,'media/b03b8ae8b280f584dff61c824b945deeSurigao-del-Sur-Bogac-Spring.png',NULL,1,NULL),(17,'media/56235fc53b155738b0c5d0c74586eaf34.jpg',NULL,2,NULL),(18,'media/c238cf07380d960ae2947a7d47084f4c1200px-View_on_the_half_way_to_Kayangan_Lake_-_panoramio.jpg',NULL,2,NULL),(19,'media/6e119d089cbe9ce20d03be211e0b65a5beautiful-view-mountain-ranges-philippines-islands-mountain-views-100246883.jpg',NULL,2,NULL),(20,'media/811b17ea6018bca792208b6d4fd76f6abudahernel3.jpg',NULL,2,NULL),(21,'media/d42a6f5aec09508c4da0a9d97db7af74Hills View Mountain Villa Davao Room Rates (4).jpg',NULL,2,NULL),(22,'media/e2f7d6c45e52e80292c6b389feddf643HillsView03.gif',NULL,2,NULL),(23,'media/66d8e8eec57ea38f704158e87962a77emaxresdefault (1).jpg',NULL,2,NULL),(24,'media/1c4ae11ed4985ce67c1f881cf36768d6maxresdefault.jpg',NULL,2,NULL),(25,'media/45aae00794e4e00a752185308f06c6baoverview-3.jpg',NULL,2,NULL),(26,'media/881f50f9f1480f61d6f8e1d62f6a10edcamiguin.jpg',NULL,3,NULL),(27,'media/9944625c38dd9564cee4f4d4758a6598download (2).jpg',NULL,3,NULL),(28,'media/01c8d67a383a7f13c37e494a2ef700eemantigue-island-camiguin-travelanyway.jpg',NULL,3,NULL),(29,'media/aa422dcdca51b1b8a4be3bb3a5b23dfc5410599211_1a0492737b_b.jpg',NULL,6,NULL),(30,'media/cdf126124bcc287d773a748530c3fa2adownload.jpg',NULL,6,NULL),(31,'media/c921c468f478c7b74a8b6b1eb531b195entrance-to-sohoton-cove-inside-view.jpg',NULL,6,NULL),(32,'media/7cf357ccce1e943f00ea7083502b70eeimages.jpg',NULL,6,NULL),(33,'media/19f1839da3dcb0664a72d9581329a27csohoton-cave-opening.jpg',NULL,6,NULL),(34,'media/885c5df2035b79416ed05d74e32f891458963_1.jpg',NULL,5,NULL),(35,'media/88b4668706946f83d81005975288421fBarangan-Magsaysay-Dinagat-Islands.jpg',NULL,5,NULL),(36,'media/c7a9fef3e9912e8121b614ff77eab601Basilisa-Beach-Dinagat-Islands.jpg',NULL,5,NULL),(37,'media/1e648ce8b40c56f9d735feaca67c8c20IMG_8011982432648.jpeg',NULL,5,NULL),(38,'media/fbcb11a71758588a4a5104ca4348fc65Isla-Aga-Dinagat-Islands.jpg',NULL,5,NULL),(39,'media/e6878b58199b13e284eec10f1dbed005Sohoton-National-Park-Bucas-Grande-Surigao-del-Norte.jpg',NULL,5,NULL),(40,'media/0b378294054d4eec0ff20c3d1a31e5e1download.jpg',NULL,4,NULL),(41,'media/064c7e7b2733935a2173113b4ed286a7Footpath to Hikong Alo  Seven Falls Lake Sebu.jpg',NULL,4,NULL),(42,'media/144c126e13645866c09ce3c4067a0987images.jpg',NULL,4,NULL);
 
 /*Table structure for table `mode_of_payment_table` */
 
@@ -184,7 +185,6 @@ CREATE TABLE `package_table` (
   `packageId` int(6) NOT NULL AUTO_INCREMENT,
   `packageName` varchar(60) DEFAULT NULL,
   `packageDetails` text,
-  `pax` int(6) DEFAULT NULL,
   `inclusion` text,
   `exclusion` text,
   `statusId` int(6) DEFAULT NULL,
@@ -194,11 +194,11 @@ CREATE TABLE `package_table` (
   KEY `FK_package_table123` (`statusId`),
   CONSTRAINT `FK_package_table1` FOREIGN KEY (`priceId`) REFERENCES `price_table` (`priceId`),
   CONSTRAINT `FK_package_table123` FOREIGN KEY (`statusId`) REFERENCES `status_table` (`statusId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 /*Data for the table `package_table` */
 
-insert  into `package_table`(`packageId`,`packageName`,`packageDetails`,`pax`,`inclusion`,`exclusion`,`statusId`,`priceId`) values (1,'Surigao Tour','Details....',14,'TRANSPORTATIONS','MEALS',1,2);
+insert  into `package_table`(`packageId`,`packageName`,`packageDetails`,`inclusion`,`exclusion`,`statusId`,`priceId`) values (1,'Surigao Tour','Details....','TRANSPORTATIONS','MEALS',1,2),(2,'Buda Tour','Bla bla bla...','TRANSPORATIONS','MEALS',1,3),(3,'Camiguin Island Tour','Bla bla bla bla','TRANSPORTATION','MEALS',1,4),(4,'Lake Sebu Tour','none','TRANSPORTATION','MEALS, TICKETS',1,7),(5,'Dinagat Tour','...','TRANSPORATIONS','MEALS',1,8),(6,'Sohoton Tour','....','TRANSPORATIONS','MEALS',1,9);
 
 /*Table structure for table `payment_transaction_table` */
 
@@ -259,11 +259,11 @@ CREATE TABLE `price_table` (
   `priceId` int(6) NOT NULL AUTO_INCREMENT,
   `price` double DEFAULT NULL,
   PRIMARY KEY (`priceId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 /*Data for the table `price_table` */
 
-insert  into `price_table`(`priceId`,`price`) values (1,999),(2,999);
+insert  into `price_table`(`priceId`,`price`) values (1,999),(2,999),(3,799),(4,1299),(5,999),(6,1234),(7,1399),(8,1899),(9,2999);
 
 /*Table structure for table `profile_table` */
 
@@ -309,9 +309,11 @@ CREATE TABLE `rental_table` (
   CONSTRAINT `FK_rental_table` FOREIGN KEY (`priceId`) REFERENCES `price_table` (`priceId`),
   CONSTRAINT `FK_rental_table1` FOREIGN KEY (`vanId`) REFERENCES `van_table` (`vanId`),
   CONSTRAINT `FK_rental_table2` FOREIGN KEY (`driverId`) REFERENCES `driver_table` (`driverId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `rental_table` */
+
+insert  into `rental_table`(`rentId`,`vanId`,`dateRented`,`priceId`,`driverId`,`rentalStartingDate`,`rentalEndingDate`) values (2,1,'0000-00-00',6,NULL,'2018-09-19','2018-09-22');
 
 /*Table structure for table `status_table` */
 
@@ -335,15 +337,17 @@ DROP TABLE IF EXISTS `travel_and_tour_table`;
 CREATE TABLE `travel_and_tour_table` (
   `travelAndTourId` int(6) NOT NULL AUTO_INCREMENT,
   `packageId` int(6) DEFAULT NULL,
-  `numberOfPax` int(6) DEFAULT NULL,
   `departureDate` date DEFAULT NULL,
   `returnDate` date DEFAULT NULL,
+  `maxPax` int(6) DEFAULT NULL,
   PRIMARY KEY (`travelAndTourId`),
   KEY `FK_travel_and_tour_table` (`packageId`),
   CONSTRAINT `FK_travel_and_tour_table` FOREIGN KEY (`packageId`) REFERENCES `package_table` (`packageId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 /*Data for the table `travel_and_tour_table` */
+
+insert  into `travel_and_tour_table`(`travelAndTourId`,`packageId`,`departureDate`,`returnDate`,`maxPax`) values (1,3,'2018-09-18','2018-09-21',14),(2,2,'2018-09-23','2018-09-24',14),(3,1,'2018-09-27','2018-09-28',14),(4,4,'2019-09-06','2019-09-09',14),(5,5,'2018-10-17','2018-10-20',14),(6,6,'2018-09-17','2018-09-19',15),(7,6,'2018-09-28','2018-09-30',14);
 
 /*Table structure for table `van_table` */
 
@@ -421,7 +425,6 @@ DROP TABLE IF EXISTS `package_view`;
  `packageId` int(6) ,
  `packageName` varchar(60) ,
  `packageDetails` text ,
- `pax` int(6) ,
  `inclusion` text ,
  `exclusion` text ,
  `statusId` int(6) ,
@@ -470,6 +473,30 @@ DROP TABLE IF EXISTS `profile_view`;
  `accountType` varchar(60) 
 )*/;
 
+/*Table structure for table `travel_and_tour_view` */
+
+DROP TABLE IF EXISTS `travel_and_tour_view`;
+
+/*!50001 DROP VIEW IF EXISTS `travel_and_tour_view` */;
+/*!50001 DROP TABLE IF EXISTS `travel_and_tour_view` */;
+
+/*!50001 CREATE TABLE  `travel_and_tour_view`(
+ `travelAndTourId` int(6) ,
+ `packageId` int(6) ,
+ `departureDate` date ,
+ `returnDate` date ,
+ `maxPax` int(6) ,
+ `packageName` varchar(60) ,
+ `packageDetails` text ,
+ `inclusion` text ,
+ `exclusion` text ,
+ `statusId` int(6) ,
+ `priceId` int(6) ,
+ `price` double ,
+ `statusDescription` varchar(60) ,
+ `statusOfWhat` varchar(60) 
+)*/;
+
 /*Table structure for table `van_view` */
 
 DROP TABLE IF EXISTS `van_view`;
@@ -513,7 +540,7 @@ DROP TABLE IF EXISTS `van_view`;
 /*!50001 DROP TABLE IF EXISTS `package_view` */;
 /*!50001 DROP VIEW IF EXISTS `package_view` */;
 
-/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `package_view` AS select `package_table`.`packageId` AS `packageId`,`package_table`.`packageName` AS `packageName`,`package_table`.`packageDetails` AS `packageDetails`,`package_table`.`pax` AS `pax`,`package_table`.`inclusion` AS `inclusion`,`package_table`.`exclusion` AS `exclusion`,`package_table`.`statusId` AS `statusId`,`package_table`.`priceId` AS `priceId`,`price_table`.`price` AS `price`,`status_table`.`statusDescription` AS `statusDescription`,`status_table`.`statusOfWhat` AS `statusOfWhat` from ((`package_table` join `price_table` on((`package_table`.`priceId` = `price_table`.`priceId`))) join `status_table` on((`package_table`.`statusId` = `status_table`.`statusId`))) */;
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `package_view` AS select `package_table`.`packageId` AS `packageId`,`package_table`.`packageName` AS `packageName`,`package_table`.`packageDetails` AS `packageDetails`,`package_table`.`inclusion` AS `inclusion`,`package_table`.`exclusion` AS `exclusion`,`package_table`.`statusId` AS `statusId`,`package_table`.`priceId` AS `priceId`,`price_table`.`price` AS `price`,`status_table`.`statusDescription` AS `statusDescription`,`status_table`.`statusOfWhat` AS `statusOfWhat` from ((`package_table` join `price_table` on((`package_table`.`priceId` = `price_table`.`priceId`))) join `status_table` on((`package_table`.`statusId` = `status_table`.`statusId`))) */;
 
 /*View structure for view place_view */
 
@@ -528,6 +555,13 @@ DROP TABLE IF EXISTS `van_view`;
 /*!50001 DROP VIEW IF EXISTS `profile_view` */;
 
 /*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `profile_view` AS select `profile_table`.`profileId` AS `profileId`,`profile_table`.`firstName` AS `firstName`,`profile_table`.`middleName` AS `middleName`,`profile_table`.`lastName` AS `lastName`,`profile_table`.`contactNumber` AS `contactNumber`,`profile_table`.`addressId` AS `addressId`,`profile_table`.`accountTypeId` AS `accountTypeId`,`profile_table`.`userName` AS `userName`,`profile_table`.`passWord` AS `passWord`,`address_table`.`province` AS `province`,`address_table`.`city` AS `city`,`address_table`.`barangay` AS `barangay`,`address_table`.`street` AS `street`,`address_table`.`buildingNumber` AS `buildingNumber`,`account_type_table`.`accountType` AS `accountType` from ((`profile_table` join `address_table` on((`profile_table`.`addressId` = `address_table`.`addressId`))) join `account_type_table` on((`profile_table`.`accountTypeId` = `account_type_table`.`accountTypeId`))) */;
+
+/*View structure for view travel_and_tour_view */
+
+/*!50001 DROP TABLE IF EXISTS `travel_and_tour_view` */;
+/*!50001 DROP VIEW IF EXISTS `travel_and_tour_view` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `travel_and_tour_view` AS select `travel_and_tour_table`.`travelAndTourId` AS `travelAndTourId`,`travel_and_tour_table`.`packageId` AS `packageId`,`travel_and_tour_table`.`departureDate` AS `departureDate`,`travel_and_tour_table`.`returnDate` AS `returnDate`,`travel_and_tour_table`.`maxPax` AS `maxPax`,`package_table`.`packageName` AS `packageName`,`package_table`.`packageDetails` AS `packageDetails`,`package_table`.`inclusion` AS `inclusion`,`package_table`.`exclusion` AS `exclusion`,`package_table`.`statusId` AS `statusId`,`package_table`.`priceId` AS `priceId`,`price_table`.`price` AS `price`,`status_table`.`statusDescription` AS `statusDescription`,`status_table`.`statusOfWhat` AS `statusOfWhat` from (((`travel_and_tour_table` join `package_table` on((`travel_and_tour_table`.`packageId` = `package_table`.`packageId`))) join `status_table` on((`package_table`.`statusId` = `status_table`.`statusId`))) join `price_table` on((`package_table`.`priceId` = `price_table`.`priceId`))) */;
 
 /*View structure for view van_view */
 

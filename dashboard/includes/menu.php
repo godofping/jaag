@@ -10,9 +10,10 @@
 
                         <li> <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-calendar-clock"></i><span class="hide-menu">Bookings</span></a>
                             <ul aria-expanded="false" class="collapse">
+                                <li><a href="add-booking.php">Add Booking</a></li>
                                 <li><a href="travel-and-tour.php">Travel and Tour</a></li>
                                 <li><a href="van-rentals.php">Van Rentals</a></li>
-                                <li><a href="add-booking.php">Add Booking</a></li>
+                                
                             </ul>
                         </li>
 

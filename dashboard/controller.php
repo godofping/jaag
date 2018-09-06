@@ -139,7 +139,7 @@ if (isset($_POST['from']) and $_POST['from'] == 'add-package') {
 	mysqli_query($connection,"insert into price_table (price) values ('" . $_POST['price'] . "')");
 	$priceId = mysqli_insert_id($connection);
 
-	mysqli_query($connection, "insert into package_table (packageName, pax, packageDetails, priceId, inclusion, exclusion,statusId) values ('" . $_POST['packageName'] . "', '" . $_POST['pax'] . "', '" . $_POST['packageDetails'] . "', '" . $priceId . "', '" . $_POST['inclusion'] . "', '" . $_POST['exclusion'] . "',  '1')");
+	mysqli_query($connection, "insert into package_table (packageName, packageDetails, priceId, inclusion, exclusion,statusId) values ('" . $_POST['packageName'] . "', '" . $_POST['packageDetails'] . "', '" . $priceId . "', '" . $_POST['inclusion'] . "', '" . $_POST['exclusion'] . "',  '1')");
 	$packageId = mysqli_insert_id($connection);
 
 	foreach ($_POST['places'] as $placeId)
@@ -156,7 +156,7 @@ if (isset($_POST['from']) and $_POST['from'] == 'add-package') {
 if (isset($_POST['from']) and $_POST['from'] == 'update-package') {
 	mysqli_query($connection, "update price_table set price = '" . $_POST['price'] . "' where priceId = '" . $_POST['priceId'] . "'");
 
-	mysqli_query($connection, "update package_table set packageName = '" . $_POST['packageName'] . "', pax = '" . $_POST['pax'] . "', packageDetails = '" . $_POST['packageDetails'] . "', inclusion = '" . $_POST['inclusion'] . "', exclusion = '" . $_POST['exclusion'] . "' where packageId = '" . $_POST['packageId'] . "'");
+	mysqli_query($connection, "update package_table set packageName = '" . $_POST['packageName'] . "', packageDetails = '" . $_POST['packageDetails'] . "', inclusion = '" . $_POST['inclusion'] . "', exclusion = '" . $_POST['exclusion'] . "' where packageId = '" . $_POST['packageId'] . "'");
 
 	mysqli_query($connection, "delete from destination_table where packageId = '" . $_POST['packageId'] . "'");
 
@@ -229,5 +229,27 @@ if (isset($_POST['from']) and $_POST['from'] == 'delete-package-image') {
 	header("Location: view-package-images.php?packageId=".$_POST['packageId']."");
 
 }
+
+if (isset($_POST['from']) and $_POST['from'] == 'add-booking-travel') {
+
+	mysqli_query($connection, "insert into travel_and_tour_table (packageId, departureDate, returnDate, maxPax) values ('" . $_POST['packageId'] . "', '" . $_POST['departureDate'] . "', '" . $_POST['returnDate'] . "', '" . $_POST['maxPax'] . "')");
+
+		$_SESSION['do'] = 'added';
+		header("Location: add-booking.php");
+
+}
+
+
+if (isset($_POST['from']) and $_POST['from'] == 'add-booking-rental') {
+
+	mysqli_query($connection, "insert into price_table (price) values ('" . $_POST['price'] . "')");
+	$priceId = mysqli_insert_id($connection);
+
+	mysqli_query($connection, "insert into rental_table (vanId, priceId, rentalStartingDate, rentalEndingDate) values ('" . $_POST['vanId'] . "', '" . $priceId . "', '" . $_POST['rentalStartingDate'] . "', '" . $_POST['rentalEndingDate'] . "')");
+
+		$_SESSION['do'] = 'added';
+		header("Location: add-booking.php");
+}
+
 
 ?>

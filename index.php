@@ -8,13 +8,14 @@ include("includes/header.php");
 			<div id="hero_video">
 				<div class="wrapper">
 				<div class="container">
+					<img class="img img-responsive" src="img/logo-blue.png" height="200px">
 					<h3>JAAG TRAVEL AND TOUR</h3>
 					<p>travel while you can</p>
 				
 				</div>
 			</div>
 			</div>
-			<img src="img/video_fix.png" alt="" class="header-video--media" data-video-src="video/intro.mp4" data-teaser-source="video/intro" data-provider="" data-video-width="1920" data-video-height="960">
+			<img src="img/video_fix.png" alt="" class="header-video--media" data-video-src="video/intro.mp4" data-teaser-source="video/intro" data-provider="" data-video-width="1980" data-video-height="1080">
 		</section>
 		<!-- /header-video -->
 
@@ -27,7 +28,7 @@ include("includes/header.php");
 			</div>
 			<div id="reccomended" class="owl-carousel owl-theme">
 				<?php
-				$qry = mysqli_query($connection, "select * from package_view where packageStatus = 'open'");
+				$qry = mysqli_query($connection, "select * from travel_and_tour_view LIMIT 6");
 				while ($res = mysqli_fetch_assoc($qry)) { 
 
 					$qry1 = mysqli_query($connection, "select * from package_media_view where packageId = '" . $res['packageId'] . "' LIMIT 1");
@@ -39,17 +40,17 @@ include("includes/header.php");
 						<figure>
 					
 							<a href="tour-details.php?packageId=<?php echo $res['packageId'] ?>"><img src="<?php echo "dashboard/". $res1['mediaLocation'];?>" class="img-fluid" alt="" width="800" height="533"><div class="read_more"><span>Read more</span></div></a>
-							<small><?php echo $res['packageStatus']; ?></small>
+							<!-- <small><?php echo $res['packageId']; ?></small> -->
 						</figure>
 						<div class="wrapper">
 							<h3><a href="tour-details.php?packageId=<?php echo $res['packageId'] ?>"><?php echo $res['packageName']; ?></a></h3>
 							<p><?php echo $res['packageDetails']; ?></p>
-							<span class="price">From <strong>₱<?php echo $res['price']; ?></strong> /per person</span>
+							<p>Departure: <?php echo date("l, jS \of F Y",strtotime($res['departureDate'])); ?> <br>
+							Return: <?php echo date("l, jS \of F Y",strtotime($res['returnDate'])); ?></p>
+
+							<span class="price">From <strong>₱<?php echo $res['price']; ?></strong> per person</span>
 						</div>
-						<ul>
-							<li><i class="icon_clock_alt"></i><?php echo $res['datePosted']; ?></li>
-							<li><div class="score"><span>Package ID<em><!-- 350 Reviews --></em></span><strong><?php echo $res['packageId']; ?></strong></div></li>
-						</ul>
+				
 					</div>
 				</div>
 				<!-- /item -->

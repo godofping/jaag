@@ -41,7 +41,6 @@ include("includes/header.php");
                                     <th>Package Name</th>
                                     <th>Package Details</th>
                                     <th>Destinations</th>
-                                    <th>Pax</th>
                                     <th>Inclusions</th>
                                     <th>Exclusions</th>
                                     <th>Price</th>
@@ -64,7 +63,6 @@ include("includes/header.php");
                                          } ?>
 
                                     </td>
-                                    <td><?php echo $res['pax']; ?></td>
                                     <td><?php echo $res['inclusion']; ?></td>
                                     <td><?php echo $res['exclusion']; ?></td>
                                     <td><?php echo $res['price']; ?></td>
@@ -127,12 +125,6 @@ include("includes/header.php");
                             </div>            
                         </div>
 
-                        <div class="col-md-12">
-                            <label>Pax</label>
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="pax" name="pax" required="">
-                            </div>
-                        </div>
 
                         <div class="col-md-6">
                             <label>Inclusions</label>
@@ -214,12 +206,6 @@ while ($res = mysqli_fetch_assoc($qry)) { ?>
                             </div>            
                         </div>
 
-                        <div class="col-md-12">
-                            <label>Pax</label>
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="pax" name="pax" required="" value="<?php echo $res['pax'] ?>">
-                            </div>
-                        </div>
 
                         <div class="col-md-6">
                             <label>Inclusions</label>
