@@ -39,7 +39,7 @@ $res = mysqli_fetch_assoc($qry);
 				<div class="row">
 					<div class="col-lg-8">
 						<section id="description">
-							<h2>Description</h2>
+							<h2>Package Details</h2>
 
 							<p><?php echo $res['packageDetails']; ?></p>
 
@@ -86,14 +86,24 @@ $res = mysqli_fetch_assoc($qry);
 								<span>‎₱<?php echo $res['price']; ?> <small>per person</small></span>
 								<div class="score"></div>
 							</div>
-
+							<form method="POST" action="controller.php">
 							<div class="form-group">
-								<input class="form-control" type="number" name="pax" placeholder="Number of Pax">
+								<input class="form-control" type="number" name="pax" placeholder="Number of Pax" required="">
 								<i class="icon_profile"></i>
 							</div>
 
-							<a href="cart-1.html" class="btn_1 full-width purchase">Reserve Now</a>
+							<input type="from" name="from" value="add-booking" hidden="">
+							<input type="from" name="travelAndTourId" value="<?php echo $res['travelAndTourId'] ?>" hidden="">
 
+							<?php if (!isset($_SESSION['profileId'])): ?>
+								<a href="#sign-in-dialog" id="sign-in" class="login" title="Sign In"><button  class="btn_1 full-width purchase">Reserve Now</button></a>
+							<?php endif ?>
+
+							<?php if (isset($_SESSION['profileId'])): ?>
+								<button  class="btn_1 full-width purchase">Reserve Now</button>
+							<?php endif ?>
+
+							</form>
 						</div>
 
 					</aside>

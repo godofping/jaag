@@ -82,6 +82,15 @@ if (isset($_POST['from']) and $_POST['from'] == 'update-password') {
 	header("Location: change-password.php");
 }
 
+if (isset($_POST['from']) and $_POST['from'] == 'add-booking') {
+
+	mysqli_query($connection,"insert into booking_table (profileId, travelAndTourId, statusId, dateBooked, numberOfPaxBooked) values ('" . $_SESSION['profileId'] . "', '" . $_POST['travelAndTourId'] . "', '7', '" . date('Y-m-d') . "', '" . $_POST['pax'] . "')");
+	$bookingId = mysqli_insert_id($connection);
+
+	$_SESSION['do'] = 'added';
+	header("Location: booking-reciept.php?bookingId=". $bookingId . "");
+}
+
 
 
 ?>

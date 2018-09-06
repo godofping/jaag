@@ -70,9 +70,11 @@ CREATE TABLE `booking_table` (
   CONSTRAINT `FK_booking_table123` FOREIGN KEY (`profileId`) REFERENCES `profile_table` (`profileId`),
   CONSTRAINT `FK_booking_table2` FOREIGN KEY (`travelAndTourId`) REFERENCES `travel_and_tour_table` (`travelAndTourId`),
   CONSTRAINT `FK_booking_table23` FOREIGN KEY (`rentId`) REFERENCES `rental_table` (`rentId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 /*Data for the table `booking_table` */
+
+insert  into `booking_table`(`bookingId`,`profileId`,`travelAndTourId`,`statusId`,`paymentTransactionId`,`rentId`,`dateBooked`,`numberOfPaxBooked`) values (6,3,1,7,NULL,NULL,'2018-09-07',2);
 
 /*Table structure for table `comment_table` */
 
@@ -306,11 +308,11 @@ CREATE TABLE `status_table` (
   `statusDescription` varchar(60) DEFAULT NULL,
   `statusOfWhat` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`statusId`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 /*Data for the table `status_table` */
 
-insert  into `status_table`(`statusId`,`statusDescription`,`statusOfWhat`) values (1,'Available','van_rental;package_table;'),(2,'Not Available','van_rental;package_table;'),(3,'On Travel','van_rental;package_table;'),(5,'Cancelled','package_table'),(6,'Fully Booked','package_table');
+insert  into `status_table`(`statusId`,`statusDescription`,`statusOfWhat`) values (1,'Available','van_rental;package_table;'),(2,'Not Available','van_rental;package_table;'),(3,'On Travel','van_rental;package_table;'),(5,'Cancelled','package_table'),(6,'Fully Booked','package_table'),(7,'Pending Payment For Reservation','booking_table'),(8,'Pending Payment For Full Payment','booking_table'),(9,'Fully Paid','booking_table');
 
 /*Table structure for table `travel_and_tour_table` */
 
@@ -349,6 +351,29 @@ CREATE TABLE `van_table` (
 /*Data for the table `van_table` */
 
 insert  into `van_table`(`vanId`,`vanMake`,`vanModel`,`vanPlateNumber`,`statusId`) values (1,'Toyota','Hi-ace Commuter','TYM-1234',1),(4,'Nissan','NV350','UDW-892',1),(5,'Toyota','Hi-ace Grandia','ACD-5681',1);
+
+/*Table structure for table `booking_view` */
+
+DROP TABLE IF EXISTS `booking_view`;
+
+/*!50001 DROP VIEW IF EXISTS `booking_view` */;
+/*!50001 DROP TABLE IF EXISTS `booking_view` */;
+
+/*!50001 CREATE TABLE  `booking_view`(
+ `bookingId` int(6) ,
+ `profileId` int(6) ,
+ `travelAndTourId` int(6) ,
+ `statusId` int(6) ,
+ `paymentTransactionId` int(6) ,
+ `dateBooked` date ,
+ `numberOfPaxBooked` int(6) ,
+ `packageId` int(6) ,
+ `packageName` varchar(60) ,
+ `priceId` int(6) ,
+ `price` double ,
+ `statusOfWhat` varchar(60) ,
+ `statusDescription` varchar(60) 
+)*/;
 
 /*Table structure for table `destination_view` */
 
@@ -479,6 +504,13 @@ DROP TABLE IF EXISTS `van_view`;
  `statusDescription` varchar(60) ,
  `statusOfWhat` varchar(60) 
 )*/;
+
+/*View structure for view booking_view */
+
+/*!50001 DROP TABLE IF EXISTS `booking_view` */;
+/*!50001 DROP VIEW IF EXISTS `booking_view` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `booking_view` AS select `booking_table`.`bookingId` AS `bookingId`,`booking_table`.`profileId` AS `profileId`,`booking_table`.`travelAndTourId` AS `travelAndTourId`,`booking_table`.`statusId` AS `statusId`,`booking_table`.`paymentTransactionId` AS `paymentTransactionId`,`booking_table`.`dateBooked` AS `dateBooked`,`booking_table`.`numberOfPaxBooked` AS `numberOfPaxBooked`,`travel_and_tour_table`.`packageId` AS `packageId`,`package_table`.`packageName` AS `packageName`,`package_table`.`priceId` AS `priceId`,`price_table`.`price` AS `price`,`status_table`.`statusOfWhat` AS `statusOfWhat`,`status_table`.`statusDescription` AS `statusDescription` from ((((`booking_table` join `travel_and_tour_table` on((`booking_table`.`travelAndTourId` = `travel_and_tour_table`.`travelAndTourId`))) join `status_table` on((`booking_table`.`statusId` = `status_table`.`statusId`))) join `package_table` on((`travel_and_tour_table`.`packageId` = `package_table`.`packageId`))) join `price_table` on((`package_table`.`priceId` = `price_table`.`priceId`))) */;
 
 /*View structure for view destination_view */
 
