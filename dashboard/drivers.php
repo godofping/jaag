@@ -38,27 +38,23 @@ include("includes/header.php");
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>First Name</th>
-                                    <th>Middle Name</th>
-                                    <th>Last Name</th>
+                                    <th>Name</th>
                                     <th>Address</th>
                                     <th>Contact Number</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php $qry = mysqli_query($connection,"select * from driver_view");
+                            <?php $qry = mysqli_query($connection,"select * from profile_view where accountTypeId = 5");
                                     while ($res = mysqli_fetch_assoc($qry)) { ?>
                                 <tr>
-                                    <td><?php echo $res['driverId']; ?></td>
-                                    <td><?php echo $res['driverFirstName']; ?></td>
-                                    <td><?php echo $res['driverMiddleName']; ?></td>
-                                    <td><?php echo $res['driverLastName']; ?></td>
-                                    <td><?php echo $res['driverAddress']; ?></td>
-                                    <td><?php echo $res['driverContactNumber']; ?></td>
+                                    <td><?php echo $res['profileId']; ?></td>
+                                    <td><?php echo $res['firstName'] . " " . $res['middleName'] . " " . $res['lastName']; ?></td>
+                                    <td><?php echo $res['buildingNumber'] . " " . $res['street'] . " " . $res['barangay'] . " " . $res['city'] . " " . $res['province']; ?></td>
+                                    <td><?php echo $res['contactNumber']; ?></td>
                                     <td>
-                                        <button type="button" class="btn btn-block btn-outline-warning" data-toggle="modal" data-target="#updateModal<?php echo $res['driverId']; ?>">Update</button>
-                                        <button type="button" class="btn btn-block btn-outline-danger" data-toggle="modal" data-target="#deleteModal<?php echo $res['driverId']; ?>">Delete</button>
+                                        <button type="button" class="btn btn-block btn-outline-warning" data-toggle="modal" data-target="#updateModal<?php echo $res['profileId']; ?>">Update</button>
+                                        <button type="button" class="btn btn-block btn-outline-danger" data-toggle="modal" data-target="#deleteModal<?php echo $res['profileId']; ?>">Delete</button>
                                     </td>
                                 </tr>
                             <?php } ?>
@@ -90,50 +86,94 @@ include("includes/header.php");
                         <div class="col-md-4">
                             <label>First Name</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="driverFirstName" name="driverFirstName" required="">
+                                <input type="text" class="form-control" id="firstName" name="firstName">
                             </div>
                             </div>
 
                         <div class="col-md-4">
                             <label>Middle Name</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="driverMiddleName" name="driverMiddleName" required="">
+                                <input type="text" class="form-control" id="middleName" name="middleName" required="">
                             </div>
                         </div>
 
                         <div class="col-md-4">
                             <label>Last Name</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="driverLastName" name="driverLastName" required="">
+                                <input type="text" class="form-control" id="lastName" name="lastName" required="">
                             </div>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-12">
-                            <label>Address</label>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="driverAddress" name="driverAddress" required="">
-                                </div>
+
+                        <div class="col-md-4">
+                            <label>Province</label>
+                            <div class="form-group">
+                                <select class="form-control" name="province" id="province" required="" onchange="populateCity()">
+                             
+                                </select>
+                            </div>
+
                         </div>
+
+                        <div class="col-md-4">
+                            <label>City</label>
+                            <div class="form-group">
+                                <select class="form-control" name="city" id="city" required="" onchange="populateBarangay()">
+                            
+                                </select>
+                            </div>
+                            </div>
                     </div>
+
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <label>Barangay</label>
+                            <div class="form-group">
+                                <select class="form-control" name="barangay" id="barangay" required="">
+                                  <option selected="" value="<?php echo $res['barangay'] ?>" disabled>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <label>Street</label>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="street" name="street">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label>Building Number</label>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="street_number" name="buildingNumber">
+                            </div>
+                        </div>
+
+                    </div>
+
 
                     <div class="row">
                         <div class="col-md-12">
                             <label>Contact Number</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="driverContactNumber" name="driverContactNumber" required="">
+                                <input type="text" class="form-control" id="contactNumber" name="contactNumber" required="">
                             </div>
                         </div>
                     </div>
 
                 <!-- other hidden inputs -->
                 <input type="text" name="from" value="add-driver" hidden="">
+                <input type="text" name="province1" id="province1" hidden="">
+                <input type="text" name="city1" id="city1" hidden="">
+
 
 
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-success waves-effect text-left">Submit</button>
+                <button class="btn btn-success waves-effect text-left" onclick="pushData()">Submit</button>
                 <button type="button" class="btn btn-danger waves-effect text-left" data-dismiss="modal">Close</button>
             </div>
             </form>
@@ -145,10 +185,10 @@ include("includes/header.php");
 <!-- /.modal -->
 
 <?php 
-$qry = mysqli_query($connection, "select * from driver_view");
+$qry = mysqli_query($connection, "select * from profile_view where accountTypeId = 5");
 while ($res = mysqli_fetch_assoc($qry)) { ?>             
 <!-- modal content -->
-<div class="modal fade" id="updateModal<?php echo $res['driverId'] ?>" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+<div class="modal fade" id="updateModal<?php echo $res['profileId'] ?>" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -162,46 +202,87 @@ while ($res = mysqli_fetch_assoc($qry)) { ?>
                         <div class="col-md-4">
                             <label>First Name</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="driverFirstName" name="driverFirstName" required="" value="<?php echo $res['driverFirstName'] ?>">
+                                <input type="text" class="form-control" id="firstName" name="firstName" required="" value="<?php echo $res['firstName'] ?>">
                             </div>
                             </div>
 
                         <div class="col-md-4">
                             <label>Middle Name</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="driverMiddleName" name="driverMiddleName" required="" value="<?php echo $res['driverMiddleName'] ?>">
+                                <input type="text" class="form-control" id="middleName" name="middleName" required="" value="<?php echo $res['middleName'] ?>">
                             </div>
                         </div>
 
                         <div class="col-md-4">
                             <label>Last Name</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="driverLastName" name="driverLastName" required="" value="<?php echo $res['driverLastName'] ?>">
+                                <input type="text" class="form-control" id="lastName" name="lastName" required="" value="<?php echo $res['lastName'] ?>">
                             </div>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-12">
-                            <label>Address</label>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="driverAddress" name="driverAddress" required="" value="<?php echo $res['driverAddress'] ?>">
-                                </div>
+
+                        <div class="col-md-4">
+                            <label>Province</label>
+                            <div class="form-group">
+                                <select class="form-control" name="province" id="province" required="" onchange="populateCity()">
+                                  <option selected="" value="<?php echo $res['province'] ?>" disabled><?php echo $res['province'] ?></option>
+                                </select>
+                            </div>
+
                         </div>
+
+                        <div class="col-md-4">
+                            <label>City</label>
+                            <div class="form-group">
+                                <select class="form-control" name="city" id="city" required="" onchange="populateBarangay()">
+                                  <option selected="" value="<?php echo $res['city'] ?>" disabled><?php echo $res['city'] ?></option>
+                                </select>
+                            </div>
+                            </div>
                     </div>
+
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <label>Barangay</label>
+                            <div class="form-group">
+                                <select class="form-control" name="barangay" id="barangay" required="">
+                                  <option selected="" value="<?php echo $res['barangay'] ?>" disabled><?php echo $res['barangay'] ?></option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <label>Street</label>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="street" name="street" value="<?php echo $res['street'] ?>">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label>Building Number</label>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="street_number" name="buildingNumber" value="<?php echo $res['buildingNumber'] ?>">
+                            </div>
+                        </div>
+
+                    </div>
+
 
                     <div class="row">
                         <div class="col-md-12">
                             <label>Contact Number</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="driverContactNumber" name="driverContactNumber" required="" value="<?php echo $res['driverContactNumber'] ?>">
+                                <input type="text" class="form-control" id="contactNumber" name="contactNumber" required="" value="<?php echo $res['contactNumber'] ?>">
                             </div>
                         </div>
                     </div>
 
                 <!-- other hidden inputs -->
                 <input type="text" name="from" value="update-driver" hidden="">
-                <input type="text" name="driverId" value="<?php echo $res['driverId'] ?>"  hidden="">
+                <input type="text" name="profileId" value="<?php echo $res['profileId'] ?>"  hidden="">
 
             </div>
             <div class="modal-footer">
@@ -217,7 +298,7 @@ while ($res = mysqli_fetch_assoc($qry)) { ?>
 <!-- /.modal -->
 
 <!-- modal content -->
-<div class="modal fade" id="deleteModal<?php echo $res['driverId'] ?>" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+<div class="modal fade" id="deleteModal<?php echo $res['profileId'] ?>" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -231,7 +312,7 @@ while ($res = mysqli_fetch_assoc($qry)) { ?>
 
                 <!-- other hidden inputs -->
                 <input type="text" name="from" value="delete-driver" hidden="">
-                <input type="text" name="driverId" value="<?php echo $res['driverId'] ?>" hidden="">
+                <input type="text" name="profileId" value="<?php echo $res['profileId'] ?>" hidden="">
 
             </div>
             <div class="modal-footer">
@@ -248,3 +329,143 @@ while ($res = mysqli_fetch_assoc($qry)) { ?>
 <?php } ?>
 
 <?php include("includes/footer.php") ?>
+
+<script type="text/javascript">
+
+function pushData()
+{
+    document.getElementById("province1").value = $("#province option:selected").text();
+    document.getElementById("city1").value = $("#city option:selected").text();
+
+    var form = document.getElementById("form");
+
+    document.getElementById("submitButton").addEventListener("click", function () {
+    form.submit();
+    });
+}
+
+var $select = $('[name=province]');
+
+  $.getJSON('JSON/refprovince.json', function(data){
+    $select.html('');
+
+    $select.append('<option value="<?php echo $res['province'] ?>" selected disabled><?php echo $res['province'] ?></option>');
+
+    for (var i = 0; i < data['PROVINCES'].length; i++) {
+      $select.append('<option value="'+ data['PROVINCES'][i]['provCode'] + '">' + "Region " + data['PROVINCES'][i]['regCode'] + ": " + data['PROVINCES'][i]['provDesc'] + '</option>');
+    }
+
+  });
+
+
+
+function populateCity() {
+
+  var $selectCity = $('[name=city]');
+
+  $.getJSON('JSON/refcitymun.json', function(data){
+    $selectCity.html('');
+    for (var i = 0; i < data['CITIES'].length; i++) {
+     if (data['CITIES'][i]['provCode'] == $("#province option:selected").val()) {
+       $selectCity.append('<option value="'+ data['CITIES'][i]['citymunCode'] + '">' + data['CITIES'][i]['citymunDesc'] + '</option>');
+     }
+
+
+    }
+
+  });
+}
+
+function populateBarangay() {
+
+  var $selectBarangay = $('[name=barangay]');
+
+  $.getJSON('JSON/refbrgy.json', function(data){
+    $selectBarangay.html('');
+
+    for (var i = 0; i < data['BARANGAYS'].length; i++) {
+
+     if (data['BARANGAYS'][i]['citymunCode'] == $("#city option:selected").val()) {
+       $selectBarangay.append('<option value="'+ data['BARANGAYS'][i]['brgyDesc'] + '">' + data['BARANGAYS'][i]['brgyDesc'] + '</option>');
+     }
+
+
+    }
+
+  });
+}
+
+
+
+</script>
+
+
+
+<script type="text/javascript">
+
+function pushData()
+{
+    document.getElementById("province1").value = $("#province option:selected").text();
+    document.getElementById("city1").value = $("#city option:selected").text();
+
+    var form = document.getElementById("form");
+
+    document.getElementById("submitButton").addEventListener("click", function () {
+    form.submit();
+    });
+}
+
+var $select = $('[name=province]');
+
+  $.getJSON('JSON/refprovince.json', function(data){
+    $select.html('');
+
+    $select.append('<option value="<?php echo $res['province'] ?>" selected disabled><?php echo $res['province'] ?></option>');
+
+    for (var i = 0; i < data['PROVINCES'].length; i++) {
+      $select.append('<option value="'+ data['PROVINCES'][i]['provCode'] + '">' + "Region " + data['PROVINCES'][i]['regCode'] + ": " + data['PROVINCES'][i]['provDesc'] + '</option>');
+    }
+
+  });
+
+
+
+function populateCity() {
+
+  var $selectCity = $('[name=city]');
+
+  $.getJSON('JSON/refcitymun.json', function(data){
+    $selectCity.html('');
+    for (var i = 0; i < data['CITIES'].length; i++) {
+     if (data['CITIES'][i]['provCode'] == $("#province option:selected").val()) {
+       $selectCity.append('<option value="'+ data['CITIES'][i]['citymunCode'] + '">' + data['CITIES'][i]['citymunDesc'] + '</option>');
+     }
+
+
+    }
+
+  });
+}
+
+function populateBarangay() {
+
+  var $selectBarangay = $('[name=barangay]');
+
+  $.getJSON('JSON/refbrgy.json', function(data){
+    $selectBarangay.html('');
+
+    for (var i = 0; i < data['BARANGAYS'].length; i++) {
+
+     if (data['BARANGAYS'][i]['citymunCode'] == $("#city option:selected").val()) {
+       $selectBarangay.append('<option value="'+ data['BARANGAYS'][i]['brgyDesc'] + '">' + data['BARANGAYS'][i]['brgyDesc'] + '</option>');
+     }
+
+
+    }
+
+  });
+}
+
+
+
+</script>

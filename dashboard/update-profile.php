@@ -70,7 +70,7 @@ include("includes/header.php");
                         <div class="col-md-4">
                             <label>City</label>
                             <div class="form-group">
-                                <select class="form-control" name="city" id="city" required="" onchange="populateBarangay();">
+                                <select class="form-control" name="city" id="city" required="" onchange="populateBarangay()">
                                   <option selected="" value="<?php echo $res['city'] ?>" disabled><?php echo $res['city'] ?></option>
                                 </select>
                             </div>
@@ -98,7 +98,7 @@ include("includes/header.php");
                         <div class="col-md-4">
                             <label>Building Number</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="street_number" name="buildingNumber" required="" value="<?php echo $res['buildingNumber'] ?>">
+                                <input type="text" class="form-control" id="street_number" name="buildingNumber" value="<?php echo $res['buildingNumber'] ?>">
                             </div>
                         </div>
 

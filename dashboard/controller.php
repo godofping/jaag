@@ -44,7 +44,12 @@ if (isset($_GET['from']) and $_GET['from'] == 'login-first') {
 
 
 if (isset($_POST['from']) and $_POST['from'] == 'add-driver') {
-	mysqli_query($connection,"insert into driver_table (driverFirstName, driverMiddleName, driverLastName, driverAddress, driverContactNumber) values ('" . $_POST['driverFirstName'] . "', '" . $_POST['driverMiddleName'] . "', '" . $_POST['driverLastName'] . "', '" . $_POST['driverAddress'] . "', '" . $_POST['driverContactNumber'] . "')");
+
+
+	mysqli_query($connection, "insert into address_table (buildingNumber, street, barangay, city, province) values ('" . $_POST['buildingNumber'] . "', '" . $_POST['street'] . "', '" . $_POST['barangay'] . "', '" . $_POST['city1'] . "', '" . $_POST['province1'] . "')");
+	$addressId = mysqli_insert_id($connection);
+
+	mysqli_query($connection, "insert into profile_table (firstName, middleName, lastName, contactNumber, addressId, accountTypeId) values ('" . $_POST['firstName'] . "', '" . $_POST['middleName'] . "', '" . $_POST['lastName'] . "', '" . $_POST['contactNumber'] . "', '" . $addressId . "', 5)");
 
 	$_SESSION['do'] = 'added';
 	header("Location: drivers.php");
@@ -58,7 +63,7 @@ if (isset($_POST['from']) and $_POST['from'] == 'update-driver') {
 }
 
 if (isset($_POST['from']) and $_POST['from'] == 'delete-driver') {
-	mysqli_query($connection, "delete from driver_table where driverId = '" . $_POST['driverId'] . "'");
+	mysqli_query($connection, "delete from profile_table where profileId = '" . $_POST['profileId'] . "'");
 
 	$_SESSION['do'] = 'deleted';
 	header("Location: drivers.php");
