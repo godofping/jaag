@@ -24,11 +24,11 @@ CREATE TABLE `account_type_table` (
   `accountTypeId` int(6) NOT NULL AUTO_INCREMENT,
   `accountType` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`accountTypeId`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 /*Data for the table `account_type_table` */
 
-insert  into `account_type_table`(`accountTypeId`,`accountType`) values (1,'Administrator'),(2,'Employee'),(3,'Walk-in Customer'),(4,'Online Customer');
+insert  into `account_type_table`(`accountTypeId`,`accountType`) values (1,'Administrator'),(2,'Employee'),(3,'Walk-in Customer'),(4,'Online Customer'),(5,'Driver');
 
 /*Table structure for table `address_table` */
 
@@ -107,24 +107,6 @@ CREATE TABLE `destination_table` (
 /*Data for the table `destination_table` */
 
 insert  into `destination_table`(`destinationId`,`placeId`,`packageId`) values (2,2,1),(3,7,2),(4,12,3),(5,20,4),(6,16,5),(7,21,6);
-
-/*Table structure for table `driver_table` */
-
-DROP TABLE IF EXISTS `driver_table`;
-
-CREATE TABLE `driver_table` (
-  `driverId` int(6) NOT NULL AUTO_INCREMENT,
-  `driverFirstName` varchar(60) DEFAULT NULL,
-  `driverMiddleName` varchar(60) DEFAULT NULL,
-  `driverLastName` varchar(60) DEFAULT NULL,
-  `driverAddress` varchar(200) DEFAULT NULL,
-  `driverContactNumber` varchar(60) DEFAULT NULL,
-  PRIMARY KEY (`driverId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
-/*Data for the table `driver_table` */
-
-insert  into `driver_table`(`driverId`,`driverFirstName`,`driverMiddleName`,`driverLastName`,`driverAddress`,`driverContactNumber`) values (1,'Jun','Alberto','Castador','Barangay Calean, Tacurong City, Sultan Kudarat','09168574525');
 
 /*Table structure for table `media_table` */
 
@@ -299,21 +281,21 @@ CREATE TABLE `rental_table` (
   `vanId` int(6) DEFAULT NULL,
   `dateRented` date DEFAULT NULL,
   `priceId` int(6) DEFAULT NULL,
-  `driverId` int(6) DEFAULT NULL,
   `rentalStartingDate` date DEFAULT NULL,
   `rentalEndingDate` date DEFAULT NULL,
+  `profileId` int(6) DEFAULT NULL,
   PRIMARY KEY (`rentId`),
   KEY `FK_rental_table` (`priceId`),
   KEY `FK_rental_table1` (`vanId`),
-  KEY `FK_rental_table2` (`driverId`),
+  KEY `FK_rental_table3` (`profileId`),
   CONSTRAINT `FK_rental_table` FOREIGN KEY (`priceId`) REFERENCES `price_table` (`priceId`),
   CONSTRAINT `FK_rental_table1` FOREIGN KEY (`vanId`) REFERENCES `van_table` (`vanId`),
-  CONSTRAINT `FK_rental_table2` FOREIGN KEY (`driverId`) REFERENCES `driver_table` (`driverId`)
+  CONSTRAINT `FK_rental_table3` FOREIGN KEY (`profileId`) REFERENCES `profile_table` (`profileId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `rental_table` */
 
-insert  into `rental_table`(`rentId`,`vanId`,`dateRented`,`priceId`,`driverId`,`rentalStartingDate`,`rentalEndingDate`) values (2,1,'0000-00-00',6,NULL,'2018-09-19','2018-09-22');
+insert  into `rental_table`(`rentId`,`vanId`,`dateRented`,`priceId`,`rentalStartingDate`,`rentalEndingDate`,`profileId`) values (2,1,'0000-00-00',6,'2018-09-19','2018-09-22',NULL);
 
 /*Table structure for table `status_table` */
 
@@ -382,22 +364,6 @@ DROP TABLE IF EXISTS `destination_view`;
  `placeName` varchar(60) ,
  `latitude` varchar(60) ,
  `longitude` varchar(60) 
-)*/;
-
-/*Table structure for table `driver_view` */
-
-DROP TABLE IF EXISTS `driver_view`;
-
-/*!50001 DROP VIEW IF EXISTS `driver_view` */;
-/*!50001 DROP TABLE IF EXISTS `driver_view` */;
-
-/*!50001 CREATE TABLE  `driver_view`(
- `driverId` int(6) ,
- `driverFirstName` varchar(60) ,
- `driverMiddleName` varchar(60) ,
- `driverLastName` varchar(60) ,
- `driverAddress` varchar(200) ,
- `driverContactNumber` varchar(60) 
 )*/;
 
 /*Table structure for table `package_media_view` */
@@ -520,13 +486,6 @@ DROP TABLE IF EXISTS `van_view`;
 /*!50001 DROP VIEW IF EXISTS `destination_view` */;
 
 /*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `destination_view` AS select `destination_table`.`destinationId` AS `destinationId`,`destination_table`.`placeId` AS `placeId`,`destination_table`.`packageId` AS `packageId`,`place_table`.`placeName` AS `placeName`,`place_table`.`latitude` AS `latitude`,`place_table`.`longitude` AS `longitude` from (`destination_table` join `place_table` on((`destination_table`.`placeId` = `place_table`.`placeId`))) */;
-
-/*View structure for view driver_view */
-
-/*!50001 DROP TABLE IF EXISTS `driver_view` */;
-/*!50001 DROP VIEW IF EXISTS `driver_view` */;
-
-/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `driver_view` AS select `driver_table`.`driverId` AS `driverId`,`driver_table`.`driverFirstName` AS `driverFirstName`,`driver_table`.`driverMiddleName` AS `driverMiddleName`,`driver_table`.`driverLastName` AS `driverLastName`,`driver_table`.`driverAddress` AS `driverAddress`,`driver_table`.`driverContactNumber` AS `driverContactNumber` from `driver_table` */;
 
 /*View structure for view package_media_view */
 
