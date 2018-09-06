@@ -9,15 +9,14 @@
 		</div>
 		<ul id="top_menu">
 		
-			<?php if (!isset($_SESSION['customerId'])): ?>
+			<?php if (!isset($_SESSION['profileId'])): ?>
 				<li><a href="#sign-in-dialog" id="sign-in" class="login" title="Sign In">Sign In</a></li>
 			<?php endif ?>
 
-			<?php if (isset($_SESSION['customerId'])): ?>
+			<?php if (isset($_SESSION['profileId'])): ?>
 				<li><a href="#sign-in-dialog" id="sign-in" class="login" title="Log Out">Log Out</a></li>
 			<?php endif ?>
-			
-			
+		
 		</ul>
 		<!-- /top_menu -->
 		<a href="#menu" class="btn_mobile">
@@ -38,17 +37,18 @@
 				<li><span><a href="van-rentals.php">Announcements</a></span></li>
 				<li><span><a href="van-rentals.php">Reviews</a></span></li>
 				<li><span><a href="van-rentals.php">About</a></span></li>
-				<?php if (isset($_SESSION['customerId'])): ?>
+				<?php if (isset($_SESSION['profileId'])): ?>
 					<li><span><a href="#0">My Account</a></span>
 					<ul>
 						<li><a href="my-bookings.php">My Bookings</a></li>
-						<li><a href="my-van-rentals.php">My Van Rentals</a></li>
-						<li><a href="my-profile.php">My Profile</a></li>
+						<li><a href="view-profile.php">View Profile</a></li>
+						<li><a href="update-profile.php">Update Profile</a></li>
+						<li><a href="change-password.php">Change Password</a></li>
 					</ul>
 				</li>
 				<?php endif ?>
 
-				<?php if (!isset($_SESSION['customerId'])): ?>
+				<?php if (!isset($_SESSION['profileId'])): ?>
 					<li><span><a href="register.php">Create Account</a></span></li>
 				<?php endif ?>
 

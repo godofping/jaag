@@ -16,9 +16,9 @@ include("dashboard/includes/connection.php");
     <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="img/apple-touch-icon-114x114-precomposed.png">
     <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="img/apple-touch-icon-144x144-precomposed.png">
 
-    <link rel="stylesheet" href="dashboard/global/vendor/toastr/toastr.css">
-    <link rel="stylesheet" href="dashboard/assets/examples/css/advanced/toastr.css">
-  	<link rel="stylesheet" href="dashboard/global/fonts/material-design/material-design.min.css">
+   <link rel="stylesheet" href="assets/toastr/toastr.css">
+    <link rel="stylesheet" href="assets/toastr.css">
+  	 <link rel="stylesheet" href="assets/material-design/material-design.min.css">
 
     <!-- BASE CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -54,12 +54,12 @@ include("dashboard/includes/connection.php");
 				<div class="form-group">
 					<label>Username</label>
 					<input type="text" class="form-control" name="userName" id="userName" required="">
-					<i class="icon_pencil"></i>
+	
 				</div>
 				<div class="form-group">
 					<label>Password</label>
 					<input type="password" class="form-control" name="passWord" id="passWord" required="">
-					<i class="icon_lock_alt"></i>
+		
 				</div>
 				<div class="clearfix add_bottom_30">
 					<div class="checkboxes float-left">
@@ -82,8 +82,8 @@ include("dashboard/includes/connection.php");
     <script src="js/main.js"></script>
 	<script src="assets/validate.js"></script>	
 
-	<script src="dashboard/global/vendor/toastr/toastr.js"></script>
-	<script src="dashboard/global/js/Plugin/toastr.js"></script>
+	<script src="assets/toastr/toastr.js"></script>
+	<script src="assets/toastr/toastr.js"></script>
 
 	<?php 
 	if (isset($_SESSION['do'])): ?>

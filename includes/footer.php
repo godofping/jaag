@@ -15,7 +15,7 @@
 					<h5>Useful links</h5>
 					<ul class="links">
 						<li><a href="about.php">About</a></li>
-						<?php if (!isset($_SESSION['customerId'])): ?>
+						<?php if (!isset($_SESSION['profileId'])): ?>
 							<li><a href="login.php">Login</a></li>
 							<li><a href="register.php">Register</a></li>
 						<?php endif ?>
@@ -56,7 +56,7 @@
 	</div>
 	<!-- page -->
 	
-	<?php if (!isset($_SESSION['customerId'])): ?>
+	<?php if (!isset($_SESSION['profileId'])): ?>
 		<!-- Sign In Popup -->
 	<div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">
 		<div class="small-dialog-header">
@@ -69,12 +69,12 @@
 					<div class="form-group">
 						<label>UserName</label>
 						<input type="text" class="form-control" name="userName" id="userName" required="">
-						<i class="icon_mail_alt"></i>
+		
 					</div>
 					<div class="form-group">
 						<label>Password</label>
 						<input type="password" class="form-control" name="passWord" id="passWord" required="">
-						<i class="icon_lock_alt"></i>
+				
 					</div>
 
 					<div class="text-center"><input type="submit" value="Log In" class="btn_1 full-width"></div>
@@ -90,7 +90,7 @@
 		<!-- /Sign In Popup -->
 	<?php endif ?>
 
-	<?php if (isset($_SESSION['customerId'])): ?>
+	<?php if (isset($_SESSION['profileId'])): ?>
 		<!-- Sign In Popup -->
 	<div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">
 		<div class="small-dialog-header">
@@ -155,9 +155,15 @@
                 toastr["error"]("Login Failed! Wrong account.", "Error");
             <?php endif ?>
 
-            <?php if ($_SESSION['do'] == 'Success'): ?>
+            <?php if ($_SESSION['do'] == 'login-success'): ?>
             toastr["success"]("Login Success!", "Message");
             <?php endif ?>
+
+            <?php if ($_SESSION['do'] == 'registration-success'): ?>
+            toastr["success"]("Registration Success!", "Message");
+            <?php endif ?>
+
+            
         </script>
 
 

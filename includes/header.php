@@ -1,3 +1,10 @@
+<?php 
+    if (isset($_SESSION['profileId']) and $_SESSION['accountType'] != 'Online Customer'){
+        header("Location: controller.php?from=notvalid");
+    }
+    
+ ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,7 +33,7 @@
 
 	<link rel="stylesheet" href="js/toastr/toastr.css">
 
-  	<link rel="stylesheet" href="css/material-design.min.css">
+  	<link rel="stylesheet" href="assets/material-design/material-design.min.css">
 	
 
 

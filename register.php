@@ -16,9 +16,9 @@ include("dashboard/includes/connection.php");
     <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="img/apple-touch-icon-114x114-precomposed.png">
     <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="img/apple-touch-icon-144x144-precomposed.png">
 
-    <link rel="stylesheet" href="dashboard/global/vendor/toastr/toastr.css">
-    <link rel="stylesheet" href="dashboard/assets/examples/css/advanced/toastr.css">
-  	 <link rel="stylesheet" href="dashboard/global/fonts/material-design/material-design.min.css">
+    <link rel="stylesheet" href="assets/toastr/toastr.css">
+    <link rel="stylesheet" href="assets/toastr.css">
+  	 <link rel="stylesheet" href="assets/material-design/material-design.min.css">
 
     <!-- BASE CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -51,64 +51,67 @@ include("dashboard/includes/connection.php");
 				<div class="form-group">
 					<label>First Name</label>
 					<input class="form-control" type="text" name="firstName" id="firstName" required="">
-					<i class="ti-arrow-up"></i>
+				
 				</div>
 				<div class="form-group">
 					<label>Middle Name</label>
 					<input class="form-control" type="text" name="middleName" id="middleName" required="">
-					<i class="ti-arrow-right"></i>
+			
 				</div>
 				<div class="form-group">
 					<label>Last Name</label>
 					<input class="form-control" type="text" name="lastName" id="lastName" required="">
-					<i class="ti-arrow-left"></i>
+				
 				</div>
 				<div class="form-group">
 					<label>Contact Number</label>
 					<input class="form-control" type="text" name="contactNumber" id="contactNumber" required="">
-					<i class="ti-arrow-down"></i>
+				
+				</div>
+				<div class="form-group">
+					<label>Province</label>
+					<select class="form-control" name="province" id="province" required="" onchange="populateCity()"></select>
+				
+				</div>
+				<div class="form-group">
+					<label>City</label>
+					<select class="form-control" name="city" id="city" required="" onchange="populateBarangay()"></select>
+				
+				</div>
+				<div class="form-group">
+					<label>Barangay</label>
+					<select class="form-control" name="barangay" id="barangay"></select>
+			
 				</div>
 				<div class="form-group">
 					<label>Building Number</label>
 					<input class="form-control" type="text" name="buildingNumber" id="buildingNumber">
-					<i class="ti-arrows-vertical"></i>
+				
 				</div>
 				<div class="form-group">
 					<label>Street</label>
 					<input class="form-control" type="text" name="street" id="street">
-					<i class="ti-arrows-horizontal"></i>
+			
 				</div>
-				<div class="form-group">
-					<label>Barangay</label>
-					<input class="form-control" type="text" name="barangay" id="barangay">
-					<i class="ti-angle-up"></i>
-				</div>
-				<div class="form-group">
-					<label>City</label>
-					<input class="form-control" type="text" name="city" id="city" required="">
-					<i class="ti-angle-right"></i>
-				</div>
-				<div class="form-group">
-					<label>Province</label>
-					<input class="form-control" type="text" name="province" id="province" required="">
-					<i class="ti-angle-left"></i>
-				</div>
+				
 				<div class="form-group">
 					<label>Username</label>
 					<input class="form-control" type="text" name="userName" id="userName" required="">
-					<i class="ti-angle-down"></i>
+				
 				</div>
 				<div class="form-group">
 					<label>Password</label>
 					<input class="form-control" type="password" name="passWord" id="passWord" required="">
-					<i class="ti-key"></i>
+				
 				</div>
 
 				
 				<div id="pass-info" class="clearfix"></div>
-				<button type="submit" class="btn_1 rounded full-width add_top_30">Register Now!</button>
+				<button  class="btn_1 rounded full-width add_top_30"  onclick="pushData()">Register Now!</button>
 				<div class="text-center add_top_10">Already have an acccount? <strong><a href="login.php">Sign In</a></strong></div>
 				<input type="text" name="from" value="register" hidden="">
+				<input type="text" name="province1" id="province1" hidden="">
+                <input type="text" name="city1" id="city1" hidden="">
 			</form>
 			<div class="copy">© 2018 Panagea</div>
 		</aside>
@@ -124,8 +127,9 @@ include("dashboard/includes/connection.php");
 	<!-- SPECIFIC SCRIPTS -->
 	<script src="js/pw_strenght.js"></script>
 
-	<script src="dashboard/global/vendor/toastr/toastr.js"></script>
-	<script src="dashboard/global/js/Plugin/toastr.js"></script>
+	<script src="assets/toastr/toastr.js"></script>
+	<script src="assets/toastr/toastr.js"></script>
+
 
 
 	
@@ -133,20 +137,11 @@ include("dashboard/includes/connection.php");
 	if (isset($_SESSION['do'])): ?>
 
         <script>
-            <?php if ($_SESSION['do'] == 'added'): ?>
-            toastr["success"]("Successfully added!", "Message");
-            <?php endif ?>
-            <?php if ($_SESSION['do'] == 'updated'): ?>
-                toastr["success"]("Successfully updated!", "Message");
-            <?php endif ?>
-            <?php if ($_SESSION['do'] == 'deleted'): ?>
-                toastr["success"]("Successfully deleted!", "Message");
-            <?php endif ?>
+
             <?php if ($_SESSION['do'] == 'updated-password-failed'): ?>
                 toastr["error"]("Update password failed! Please try again.", "Error");
             <?php endif ?>
             <?php if ($_SESSION['do'] == 'username-taken'): ?>
-
                 toastr["error"]("Username is already taken! Please try another one.", "Error");
             <?php endif ?>
         </script>
@@ -162,6 +157,75 @@ include("dashboard/includes/connection.php");
             unset($_SESSION['do']);
         }
         ?>
+
+        <script type="text/javascript">
+
+function pushData()
+{
+    document.getElementById("province1").value = $("#province option:selected").text();
+    document.getElementById("city1").value = $("#city option:selected").text();
+
+    var form = document.getElementById("form");
+
+    document.getElementById("submitButton").addEventListener("click", function () {
+    form.submit();
+    });
+}
+
+var $select = $('#province');
+
+  $.getJSON('dashboard/JSON/refprovince.json', function(data){
+    $select.html('');
+
+  
+
+    for (var i = 0; i < data['PROVINCES'].length; i++) {
+      $select.append('<option value="'+ data['PROVINCES'][i]['provCode'] + '">' + "Region " + data['PROVINCES'][i]['regCode'] + ": " + data['PROVINCES'][i]['provDesc'] + '</option>');
+    }
+
+  });
+
+
+
+function populateCity() {
+
+  var $selectCity = $('#city');
+
+  $.getJSON('dashboard/JSON/refcitymun.json', function(data){
+    $selectCity.html('');
+    for (var i = 0; i < data['CITIES'].length; i++) {
+     if (data['CITIES'][i]['provCode'] == $("#province option:selected").val()) {
+       $selectCity.append('<option value="'+ data['CITIES'][i]['citymunCode'] + '">' + data['CITIES'][i]['citymunDesc'] + '</option>');
+     }
+
+
+    }
+
+  });
+}
+
+function populateBarangay() {
+
+  var $selectBarangay = $('#barangay');
+
+  $.getJSON('dashboard/JSON/refbrgy.json', function(data){
+    $selectBarangay.html('');
+
+    for (var i = 0; i < data['BARANGAYS'].length; i++) {
+
+     if (data['BARANGAYS'][i]['citymunCode'] == $("#city option:selected").val()) {
+       $selectBarangay.append('<option value="'+ data['BARANGAYS'][i]['brgyDesc'] + '">' + data['BARANGAYS'][i]['brgyDesc'] + '</option>');
+     }
+
+
+    }
+
+  });
+}
+
+
+
+</script>
 
 	
   
