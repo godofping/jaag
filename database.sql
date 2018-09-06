@@ -139,12 +139,13 @@ DROP TABLE IF EXISTS `mode_of_payment_table`;
 
 CREATE TABLE `mode_of_payment_table` (
   `modeOfPaymentId` int(6) NOT NULL AUTO_INCREMENT,
-  `nameOfRemittance` varchar(60) DEFAULT NULL,
-  PRIMARY KEY (`modeOfPaymentId`),
-  CONSTRAINT `FK_mode_of_payment_table` FOREIGN KEY (`modeOfPaymentId`) REFERENCES `payment_transaction_table` (`paymentTransactionId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `modeOfPayment` varchar(60) DEFAULT NULL,
+  PRIMARY KEY (`modeOfPaymentId`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 /*Data for the table `mode_of_payment_table` */
+
+insert  into `mode_of_payment_table`(`modeOfPaymentId`,`modeOfPayment`) values (4,'Down Payment'),(5,'Full Payment');
 
 /*Table structure for table `notification_table` */
 
@@ -198,7 +199,9 @@ CREATE TABLE `payment_transaction_table` (
   `statusId` int(6) DEFAULT NULL,
   PRIMARY KEY (`paymentTransactionId`),
   KEY `FK_payment_transaction_table` (`statusId`),
-  CONSTRAINT `FK_payment_transaction_table` FOREIGN KEY (`statusId`) REFERENCES `status_table` (`statusId`)
+  KEY `FK_payment_transaction_table1231` (`modeOfPaymentId`),
+  CONSTRAINT `FK_payment_transaction_table` FOREIGN KEY (`statusId`) REFERENCES `status_table` (`statusId`),
+  CONSTRAINT `FK_payment_transaction_table1231` FOREIGN KEY (`modeOfPaymentId`) REFERENCES `mode_of_payment_table` (`modeOfPaymentId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `payment_transaction_table` */
@@ -312,7 +315,7 @@ CREATE TABLE `status_table` (
 
 /*Data for the table `status_table` */
 
-insert  into `status_table`(`statusId`,`statusDescription`,`statusOfWhat`) values (1,'Available','van_rental;package_table;'),(2,'Not Available','van_rental;package_table;'),(3,'On Travel','van_rental;package_table;'),(5,'Cancelled','package_table'),(6,'Fully Booked','package_table'),(7,'Pending Payment For Reservation','booking_table'),(8,'Pending Payment For Full Payment','booking_table'),(9,'Fully Paid','booking_table');
+insert  into `status_table`(`statusId`,`statusDescription`,`statusOfWhat`) values (1,'Available','van_rental;package_table;'),(2,'Not Available','van_rental;package_table;'),(3,'On Travel','van_rental;package_table;'),(5,'Cancelled','package_table'),(6,'Fully Booked','package_table'),(7,'Pending Payment For Down Payment','booking_table'),(8,'Pending Payment For Full Payment','booking_table'),(9,'Fully Paid','booking_table');
 
 /*Table structure for table `travel_and_tour_table` */
 

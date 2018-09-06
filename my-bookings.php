@@ -61,10 +61,12 @@ include("includes/header.php"); ?>
 									<?php echo $res['statusDescription']; ?>
 								</td>
 								<td class="options" style="width:5%; text-align:center;">
-									<a href="#"><i class="icon-trash"></i></a>
-									<a href="#"><i class="icon-money"></i></a>
+									<a href="">Cancel</a>
+									<a href="send-payment.php?bookingId=<?php echo $res['bookingId'] ?>">Send Payment</a>
 								</td>
 							</tr>
+
+
 
 							<?php } ?>						
 						</tbody>
@@ -73,6 +75,8 @@ include("includes/header.php"); ?>
 				</div>
 				</div>
 				<!-- /col -->
+
+
 				
 				
 			</div>
