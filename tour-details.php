@@ -83,8 +83,8 @@ $res = mysqli_fetch_assoc($qry);
 					<aside class="col-lg-4" id="sidebar">
 						<div class="box_detail booking">
 							<div class="price">
-								<span>‎₱<?php echo $res['price']; ?> <small>person</small></span>
-								<div class="score"><span>Package ID</span><strong><?php echo $res['packageId']; ?></strong></div>
+								<span>‎₱<?php echo $res['price']; ?> <small>per person</small></span>
+								<div class="score"></div>
 							</div>
 
 							<div class="form-group">
