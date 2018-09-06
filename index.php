@@ -43,14 +43,15 @@ include("includes/header.php");
 							<!-- <small><?php echo $res['packageId']; ?></small> -->
 						</figure>
 						<div class="wrapper">
-							<h3><a href="tour-details.php?packageId=<?php echo $res['packageId'] ?>"><?php echo $res['packageName']; ?></a></h3>
-							<p><?php echo $res['packageDetails']; ?></p>
+							
+								<h3><a href="tour-details.php?packageId=<?php echo $res['packageId']; ?>"><?php echo $res['packageName']; ?></a></h3>
+								<p><?php echo $res['packageDetails']; ?></p>
 							<p>Departure: <?php echo date("l, jS \of F Y",strtotime($res['departureDate'])); ?> <br>
 							Return: <?php echo date("l, jS \of F Y",strtotime($res['returnDate'])); ?></p>
-
-							<span class="price">From <strong>₱<?php echo $res['price']; ?></strong> per person</span>
-						</div>
-				
+							<p>Remaining Slots: 12 of 14</p>
+								<span class="price">From <strong>₱<?php echo $res['price']; ?></strong> per person</span>
+							</div>
+					
 					</div>
 				</div>
 				<!-- /item -->
