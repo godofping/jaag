@@ -18,8 +18,19 @@ include("includes/header.php"); ?>
 	</div>
 	<!--/hero_in-->
 
-	<?php $qry = mysqli_query($connection, "select * from booking_view where bookingId = '" . $_GET['bookingId'] . "'");
-	$res = mysqli_fetch_assoc($qry); ?>
+	<?php $qry = mysqli_query($connection, "select * from booking_table where bookingId = '" . $_GET['bookingId'] . "'");
+	$res = mysqli_fetch_assoc($qry); 
+
+	if (is_null($res['rentId'])) {
+		$qry = mysqli_query($connection, "select * from booking_travel_and_tour_view where bookingId = '" . $_GET['bookingId'] . "'");
+	$res = mysqli_fetch_assoc($qry); 
+	}
+
+	
+
+
+
+	?>
 
 	<div class="bg_color_1">
 		<div class="container margin_60_35">
@@ -82,6 +93,7 @@ include("includes/header.php"); ?>
 
 							<button  class="btn_1 rounded  float-center" type="submit">Submit</button>
 							<input type="text" name="from" value="send-payment" hidden="">
+							<input type="text" name="bookingId" value="<?php echo $_GET['bookingId'] ?>" hidden="">
 
 						</form>
 					

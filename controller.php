@@ -94,7 +94,7 @@ if (isset($_POST['from']) and $_POST['from'] == 'add-booking') {
 if (isset($_POST['from']) and $_POST['from'] == 'send-payment') {
 
 
-	mysqli_query($connection, "insert into payment_transaction_table (modeOfPaymentId, amount, datePaid, transactionNumber, nameOfSender, statusId) values ('" . $_POST['modeOfPaymentId'] . "', '" . $_POST['amount'] . "', '" . date('Y-m-d') . "', '" . $_POST['transactionNumber'] . "', '" . $_POST['nameOfSender'] . "', '11')");
+	mysqli_query($connection, "insert into payment_transaction_table (bookingId,modeOfPaymentId, amount, datePaid, transactionNumber, nameOfSender, statusId) values ('" . $_POST['bookingId'] . "','" . $_POST['modeOfPaymentId'] . "', '" . $_POST['amount'] . "', '" . date('Y-m-d') . "', '" . $_POST['transactionNumber'] . "', '" . $_POST['nameOfSender'] . "', '11')");
 
 	$paymentTransactionId = mysqli_insert_id($connection);
 

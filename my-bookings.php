@@ -45,20 +45,30 @@ include("includes/header.php"); ?>
 						</thead>
 						<tbody>
 
-							<?php $qry = mysqli_query($connection, "select * from booking_view where profileId = '" . $_SESSION['profileId'] . "'");
-							while ($res = mysqli_fetch_assoc($qry)) { ?>
+							<?php $qry = mysqli_query($connection, "select * from booking_table where profileId = '" . $_SESSION['profileId'] . "'");
+							while ($res = mysqli_fetch_assoc($qry)) { 
+
+								if (is_null($res['rentId'])) {
+									$qry1 = mysqli_query($connection, "select * from booking_travel_and_tour_view where bookingId = '" . $res['bookingId'] . "'");
+									$res1 = mysqli_fetch_assoc($qry1); 
+									}
+
+								?>
+
+
+
 								<tr>
 								<td>
-									<?php echo $res['bookingId']; ?>
+									<?php echo $res1['bookingId']; ?>
 								</td>
 								<td>
-									<?php echo $res['packageName']; ?>
+									<?php echo $res1['packageName']; ?>
 								</td>
 								<td>
-									<strong>₱<?php echo $res['price'] * $res['numberOfPaxBooked']; ?></strong>
+									<strong>₱<?php echo $res1['price'] * $res1['numberOfPaxBooked']; ?></strong>
 								</td>
 								<td>
-									<?php echo $res['statusDescription']; ?>
+									<?php echo $res1['statusDescription']; ?>
 								</td>
 								<td class="options" style="width:5%; text-align:center;">
 									<a href="">Cancel</a>

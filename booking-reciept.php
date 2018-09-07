@@ -25,7 +25,7 @@ include("includes/header.php"); ?>
 						<p>Name:Angela Mae Dagohoy</p>
 						<p>BDO Account Number: 001820479151</p>
 				
-						<h3>After the payment please send the proof of billing in this <a href="">link</a>.</h3>
+						<h3>After the payment please send the proof of billing in this <a href="send-payment.php?bookingId=<?php echo $res['bookingId'] ?>">link</a>.</h3>
 
 					</div>
 
