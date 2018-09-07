@@ -34,7 +34,7 @@
 					<li><a href="tour-packages.php">Tour Packages</a></li>
 					<li><a href="van-rentals.php">Van Rentals</a></li>
 				</ul></li>
-				<li><span><a href="van-rentals.php">Announcements</a></span></li>
+				<li><span><a href="announcements.php">Announcements</a></span></li>
 				<li><span><a href="van-rentals.php">Reviews</a></span></li>
 				<li><span><a href="van-rentals.php">About</a></span></li>
 				<?php if (isset($_SESSION['profileId'])): ?>

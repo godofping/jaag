@@ -96,69 +96,6 @@ include("includes/header.php");
 			</section>
 			<!-- /section -->
 			
-			<section>
-				<div class="main_title_3">
-					<span><em></em></span>
-					<h2>Popular Restaurants</h2>
-					<p>Cum doctus civibus efficiantur in imperdiet deterruisset.</p>
-				</div>
-				<div class="row">
-					<div class="col-xl-3 col-lg-6 col-md-6">
-						<a href="restaurant-detail.html" class="grid_item">
-							<figure>
-								<div class="score"><strong>8.5</strong></div>
-								<img src="img/restaurant_1.jpg" class="img-fluid" alt="">
-								<div class="info">
-									<h3>Da Alfredo</h3>
-								</div>
-							</figure>
-						</a>
-					</div>
-					<!-- /grid_item -->
-					<div class="col-xl-3 col-lg-6 col-md-6">
-						<a href="restaurant-detail.html" class="grid_item">
-							<figure>
-								<div class="score"><strong>7.9</strong></div>
-								<img src="img/restaurant_2.jpg" class="img-fluid" alt="">
-								<div class="info">
-									<h3>Slow Food</h3>
-								</div>
-							</figure>
-						</a>
-					</div>
-					<!-- /grid_item -->
-					<div class="col-xl-3 col-lg-6 col-md-6">
-						<a href="restaurant-detail.html" class="grid_item">
-							<figure>
-								<div class="score"><strong>7.5</strong></div>
-								<img src="img/restaurant_3.jpg" class="img-fluid" alt="">
-								<div class="info">
-									<h3>Bella Napoli</h3>
-								</div>
-							</figure>
-						</a>
-					</div>
-					<!-- /grid_item -->
-					<div class="col-xl-3 col-lg-6 col-md-6">
-						<a href="restaurant-detail.html" class="grid_item">
-							<figure>
-								<div class="score"><strong>9.0</strong></div>
-								<img src="img/restaurant_4.jpg" class="img-fluid" alt="">
-								<div class="info">
-									<h3>Marcus</h3>
-								</div>
-							</figure>
-						</a>
-					</div>
-					<!-- /grid_item -->
-				</div>
-				<!-- /row -->
-				<a href="restaurants-grid-isotope.html"><strong>View all (157) <i class="arrow_carrot-right"></i></strong></a>
-			</section>
-			<!-- /section -->
-		</div>
-		<!-- /container -->
-		
 
 
 		<div class="bg_color_1">
@@ -169,65 +106,28 @@ include("includes/header.php");
 					<p>get updated</p>
 				</div>
 				<div class="row">
+
+					<?php $qry = mysqli_query($connection, "select * from posting_view");while ($res = mysqli_fetch_assoc($qry)) {  ?>
 					<div class="col-lg-6">
 						<a class="box_news" href="#0">
-							<figure><img src="img/news_home_1.jpg" alt="">
-								<figcaption><strong>28</strong>Dec</figcaption>
+							<?php $qry1 = mysqli_query($connection, "select * from posting_media_view where postingId = '" . $res['postingId'] . "'"); $res1 = mysqli_fetch_assoc($qry1); ?>
+
+							<figure><img src="dashboard/<?php echo $res1['mediaLocation'] ?>" alt="">
+								
 							</figure>
 							<ul>
-								<li>Mark Twain</li>
-								<li>20.11.2017</li>
+								<li><?php echo  $res['firstName'] . " " . $res['middleName'] . " " . $res['lastName'] . " (" . $res['accountType'] . ")"; ?></li>
+								<li><?php echo date("l, jS \of F Y",strtotime($res['datePosted'])); ?></li>
 							</ul>
-							<h4>Pri oportere scribentur eu</h4>
-							<p>Cu eum alia elit, usu in eius appareat, deleniti sapientem honestatis eos ex. In ius esse ullum vidisse....</p>
+							
+							<p><?php echo $res['postingDescription']; ?></p>
 						</a>
 					</div>
-					<!-- /box_news -->
-					<div class="col-lg-6">
-						<a class="box_news" href="#0">
-							<figure><img src="img/news_home_2.jpg" alt="">
-								<figcaption><strong>28</strong>Dec</figcaption>
-							</figure>
-							<ul>
-								<li>Jhon Doe</li>
-								<li>20.11.2017</li>
-							</ul>
-							<h4>Duo eius postea suscipit ad</h4>
-							<p>Cu eum alia elit, usu in eius appareat, deleniti sapientem honestatis eos ex. In ius esse ullum vidisse....</p>
-						</a>
-					</div>
-					<!-- /box_news -->
-					<div class="col-lg-6">
-						<a class="box_news" href="#0">
-							<figure><img src="img/news_home_3.jpg" alt="">
-								<figcaption><strong>28</strong>Dec</figcaption>
-							</figure>
-							<ul>
-								<li>Luca Robinson</li>
-								<li>20.11.2017</li>
-							</ul>
-							<h4>Elitr mandamus cu has</h4>
-							<p>Cu eum alia elit, usu in eius appareat, deleniti sapientem honestatis eos ex. In ius esse ullum vidisse....</p>
-						</a>
-					</div>
-					<!-- /box_news -->
-					<div class="col-lg-6">
-						<a class="box_news" href="#0">
-							<figure><img src="img/news_home_4.jpg" alt="">
-								<figcaption><strong>28</strong>Dec</figcaption>
-							</figure>
-							<ul>
-								<li>Paula Rodrigez</li>
-								<li>20.11.2017</li>
-							</ul>
-							<h4>Id est adhuc ignota delenit</h4>
-							<p>Cu eum alia elit, usu in eius appareat, deleniti sapientem honestatis eos ex. In ius esse ullum vidisse....</p>
-						</a>
-					</div>
-					<!-- /box_news -->
+					<?php } ?>
+					
 				</div>
 				<!-- /row -->
-				<p class="btn_home_align"><a href="blog.html" class="btn_1 rounded">View all announcements</a></p>
+				<p class="btn_home_align"><a href="announcements.php" class="btn_1 rounded">View all announcements</a></p>
 			</div>
 			<!-- /container -->
 		</div>

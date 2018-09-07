@@ -257,4 +257,66 @@ if (isset($_POST['from']) and $_POST['from'] == 'add-booking-rental') {
 }
 
 
+
+
+if (isset($_POST['from']) and $_POST['from'] == 'add-announcement') {
+
+	mysqli_query($connection,"insert into posting_table (postingDescription, datePosted, profileId) values ('" . $_POST['postingDescription'] . "', '" . date('Y-m-d') . "', '" . $_SESSION['profileId'] . "')");
+
+	$postingId = mysqli_insert_id($connection);
+
+
+	$target_dir = "media/";
+	$target_file = $target_dir . md5(date("Y-m-d H:i:s")) .basename($_FILES["mediaLocation"]["name"]);
+	$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+    move_uploaded_file($_FILES["mediaLocation"]["tmp_name"], $target_file);
+
+
+
+	mysqli_query($connection, "insert into media_table (mediaLocation, postingId) values ('" . $target_file . "', '" . $postingId . "')");
+
+	$_SESSION['do'] = 'added';
+	header("Location: home.php");
+
+
+}
+
+if (isset($_POST['from']) and $_POST['from'] == 'update-announcement') {
+
+	mysqli_query($connection, "update posting_table set postingDescription = '" . $_POST['postingDescription'] . "' where postingId = '" . $_POST['postingId'] . "'");
+
+
+	$target_dir = "media/";
+	$target_file = $target_dir . md5(date("Y-m-d H:i:s")) .basename($_FILES["mediaLocation"]["name"]);
+	$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+    move_uploaded_file($_FILES["mediaLocation"]["tmp_name"], $target_file);
+
+
+    if ($target_file != 'media/') {
+    	
+		mysqli_query($connection, "update media_table set mediaLocation = '" . $target_file . "' where postingId = '" . $_POST['postingId'] . "' ");
+
+    }
+
+
+	$_SESSION['do'] = 'updated';
+	header("Location: home.php");
+
+
+}
+
+
+if (isset($_POST['from']) and $_POST['from'] == 'delete-announcement') {
+
+	mysqli_query($connection, "delete from posting_table where postingId = '" . $_POST['postingId'] . "'");
+	mysqli_query($connection, "delete from media_table where mediaId = '" . $_POST['mediaId'] . "'");
+
+	$_SESSION['do'] = 'deleted';
+	header("Location: home.php");
+
+
+}
+
+
+
 ?>
