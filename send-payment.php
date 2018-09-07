@@ -32,11 +32,11 @@ include("includes/header.php"); ?>
 							<div class="row">
 								<div class="col-md-4">
 									<div class="form-group">
-										<label>Payment</label>
+										<label>Payment for</label>
 										<select class="form-control" name="modeOfPaymentId" id="modeOfPaymentId" required="">
 											<?php $qry = mysqli_query($connection, "select * from mode_of_payment_table");
 											while ($res = mysqli_fetch_assoc($qry)) { ?>
-												<option value="modeOfPaymentId"><?php echo $res['modeOfPayment']; ?></option>
+												<option value="<?php echo $res['modeOfPaymentId'] ?>"><?php echo $res['modeOfPayment']; ?></option>
 											<?php } ?>
 										</select>
 									</div>

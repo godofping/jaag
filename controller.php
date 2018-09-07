@@ -91,6 +91,28 @@ if (isset($_POST['from']) and $_POST['from'] == 'add-booking') {
 	header("Location: booking-reciept.php?bookingId=". $bookingId . "");
 }
 
+if (isset($_POST['from']) and $_POST['from'] == 'send-payment') {
+
+
+	mysqli_query($connection, "insert into payment_transaction_table (modeOfPaymentId, amount, datePaid, transactionNumber, nameOfSender, statusId) values ('" . $_POST['modeOfPaymentId'] . "', '" . $_POST['amount'] . "', '" . date('Y-m-d') . "', '" . $_POST['transactionNumber'] . "', '" . $_POST['nameOfSender'] . "', '11')");
+
+	$paymentTransactionId = mysqli_insert_id($connection);
+
+	$target_dir = "dashboard/media/";
+	$target_file = $target_dir . md5(date("Y-m-d H:i:s")) .basename($_FILES["mediaLocation"]["name"]);
+	$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+    move_uploaded_file($_FILES["mediaLocation"]["tmp_name"], $target_file);
+
+
+
+	mysqli_query($connection, "insert into media_table (mediaLocation, paymentTransactionId) values ('" . $target_file . "', '" . $paymentTransactionId . "')");
+
+
+	$_SESSION['do'] = 'added';
+	header("Location: my-bookings.php");
+}
+
+
 
 
 ?>

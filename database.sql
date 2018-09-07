@@ -127,11 +127,11 @@ CREATE TABLE `media_table` (
   CONSTRAINT `FK_media_table` FOREIGN KEY (`packageId`) REFERENCES `package_table` (`packageId`),
   CONSTRAINT `FK_media_table1` FOREIGN KEY (`paymentTransactionId`) REFERENCES `payment_transaction_table` (`paymentTransactionId`),
   CONSTRAINT `FK_media_table3` FOREIGN KEY (`postingId`) REFERENCES `posting_table` (`postingId`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=latin1;
 
 /*Data for the table `media_table` */
 
-insert  into `media_table`(`mediaId`,`mediaLocation`,`postingId`,`packageId`,`paymentTransactionId`) values (13,'media/386b81e31014a480f5abbd1089bf9037Enchanted-River-11.jpg',NULL,1,NULL),(14,'media/701b6c51d4017ef032663d897a9e8a62Riv.jpg',NULL,1,NULL),(15,'media/c6e70a1aa3d236578cce76a1cd13e8a7siargao-surigao-province.jpg',NULL,1,NULL),(16,'media/b03b8ae8b280f584dff61c824b945deeSurigao-del-Sur-Bogac-Spring.png',NULL,1,NULL),(17,'media/56235fc53b155738b0c5d0c74586eaf34.jpg',NULL,2,NULL),(18,'media/c238cf07380d960ae2947a7d47084f4c1200px-View_on_the_half_way_to_Kayangan_Lake_-_panoramio.jpg',NULL,2,NULL),(19,'media/6e119d089cbe9ce20d03be211e0b65a5beautiful-view-mountain-ranges-philippines-islands-mountain-views-100246883.jpg',NULL,2,NULL),(20,'media/811b17ea6018bca792208b6d4fd76f6abudahernel3.jpg',NULL,2,NULL),(21,'media/d42a6f5aec09508c4da0a9d97db7af74Hills View Mountain Villa Davao Room Rates (4).jpg',NULL,2,NULL),(22,'media/e2f7d6c45e52e80292c6b389feddf643HillsView03.gif',NULL,2,NULL),(23,'media/66d8e8eec57ea38f704158e87962a77emaxresdefault (1).jpg',NULL,2,NULL),(24,'media/1c4ae11ed4985ce67c1f881cf36768d6maxresdefault.jpg',NULL,2,NULL),(25,'media/45aae00794e4e00a752185308f06c6baoverview-3.jpg',NULL,2,NULL),(26,'media/881f50f9f1480f61d6f8e1d62f6a10edcamiguin.jpg',NULL,3,NULL),(27,'media/9944625c38dd9564cee4f4d4758a6598download (2).jpg',NULL,3,NULL),(28,'media/01c8d67a383a7f13c37e494a2ef700eemantigue-island-camiguin-travelanyway.jpg',NULL,3,NULL),(29,'media/aa422dcdca51b1b8a4be3bb3a5b23dfc5410599211_1a0492737b_b.jpg',NULL,6,NULL),(30,'media/cdf126124bcc287d773a748530c3fa2adownload.jpg',NULL,6,NULL),(31,'media/c921c468f478c7b74a8b6b1eb531b195entrance-to-sohoton-cove-inside-view.jpg',NULL,6,NULL),(32,'media/7cf357ccce1e943f00ea7083502b70eeimages.jpg',NULL,6,NULL),(33,'media/19f1839da3dcb0664a72d9581329a27csohoton-cave-opening.jpg',NULL,6,NULL),(34,'media/885c5df2035b79416ed05d74e32f891458963_1.jpg',NULL,5,NULL),(35,'media/88b4668706946f83d81005975288421fBarangan-Magsaysay-Dinagat-Islands.jpg',NULL,5,NULL),(36,'media/c7a9fef3e9912e8121b614ff77eab601Basilisa-Beach-Dinagat-Islands.jpg',NULL,5,NULL),(37,'media/1e648ce8b40c56f9d735feaca67c8c20IMG_8011982432648.jpeg',NULL,5,NULL),(38,'media/fbcb11a71758588a4a5104ca4348fc65Isla-Aga-Dinagat-Islands.jpg',NULL,5,NULL),(39,'media/e6878b58199b13e284eec10f1dbed005Sohoton-National-Park-Bucas-Grande-Surigao-del-Norte.jpg',NULL,5,NULL),(40,'media/0b378294054d4eec0ff20c3d1a31e5e1download.jpg',NULL,4,NULL),(41,'media/064c7e7b2733935a2173113b4ed286a7Footpath to Hikong Alo  Seven Falls Lake Sebu.jpg',NULL,4,NULL),(42,'media/144c126e13645866c09ce3c4067a0987images.jpg',NULL,4,NULL);
+insert  into `media_table`(`mediaId`,`mediaLocation`,`postingId`,`packageId`,`paymentTransactionId`) values (13,'media/386b81e31014a480f5abbd1089bf9037Enchanted-River-11.jpg',NULL,1,NULL),(14,'media/701b6c51d4017ef032663d897a9e8a62Riv.jpg',NULL,1,NULL),(15,'media/c6e70a1aa3d236578cce76a1cd13e8a7siargao-surigao-province.jpg',NULL,1,NULL),(16,'media/b03b8ae8b280f584dff61c824b945deeSurigao-del-Sur-Bogac-Spring.png',NULL,1,NULL),(17,'media/56235fc53b155738b0c5d0c74586eaf34.jpg',NULL,2,NULL),(18,'media/c238cf07380d960ae2947a7d47084f4c1200px-View_on_the_half_way_to_Kayangan_Lake_-_panoramio.jpg',NULL,2,NULL),(19,'media/6e119d089cbe9ce20d03be211e0b65a5beautiful-view-mountain-ranges-philippines-islands-mountain-views-100246883.jpg',NULL,2,NULL),(20,'media/811b17ea6018bca792208b6d4fd76f6abudahernel3.jpg',NULL,2,NULL),(21,'media/d42a6f5aec09508c4da0a9d97db7af74Hills View Mountain Villa Davao Room Rates (4).jpg',NULL,2,NULL),(22,'media/e2f7d6c45e52e80292c6b389feddf643HillsView03.gif',NULL,2,NULL),(23,'media/66d8e8eec57ea38f704158e87962a77emaxresdefault (1).jpg',NULL,2,NULL),(24,'media/1c4ae11ed4985ce67c1f881cf36768d6maxresdefault.jpg',NULL,2,NULL),(25,'media/45aae00794e4e00a752185308f06c6baoverview-3.jpg',NULL,2,NULL),(26,'media/881f50f9f1480f61d6f8e1d62f6a10edcamiguin.jpg',NULL,3,NULL),(27,'media/9944625c38dd9564cee4f4d4758a6598download (2).jpg',NULL,3,NULL),(28,'media/01c8d67a383a7f13c37e494a2ef700eemantigue-island-camiguin-travelanyway.jpg',NULL,3,NULL),(29,'media/aa422dcdca51b1b8a4be3bb3a5b23dfc5410599211_1a0492737b_b.jpg',NULL,6,NULL),(30,'media/cdf126124bcc287d773a748530c3fa2adownload.jpg',NULL,6,NULL),(31,'media/c921c468f478c7b74a8b6b1eb531b195entrance-to-sohoton-cove-inside-view.jpg',NULL,6,NULL),(32,'media/7cf357ccce1e943f00ea7083502b70eeimages.jpg',NULL,6,NULL),(33,'media/19f1839da3dcb0664a72d9581329a27csohoton-cave-opening.jpg',NULL,6,NULL),(34,'media/885c5df2035b79416ed05d74e32f891458963_1.jpg',NULL,5,NULL),(35,'media/88b4668706946f83d81005975288421fBarangan-Magsaysay-Dinagat-Islands.jpg',NULL,5,NULL),(36,'media/c7a9fef3e9912e8121b614ff77eab601Basilisa-Beach-Dinagat-Islands.jpg',NULL,5,NULL),(37,'media/1e648ce8b40c56f9d735feaca67c8c20IMG_8011982432648.jpeg',NULL,5,NULL),(38,'media/fbcb11a71758588a4a5104ca4348fc65Isla-Aga-Dinagat-Islands.jpg',NULL,5,NULL),(39,'media/e6878b58199b13e284eec10f1dbed005Sohoton-National-Park-Bucas-Grande-Surigao-del-Norte.jpg',NULL,5,NULL),(40,'media/0b378294054d4eec0ff20c3d1a31e5e1download.jpg',NULL,4,NULL),(41,'media/064c7e7b2733935a2173113b4ed286a7Footpath to Hikong Alo  Seven Falls Lake Sebu.jpg',NULL,4,NULL),(42,'media/144c126e13645866c09ce3c4067a0987images.jpg',NULL,4,NULL),(44,'dashboard/media/acd342fa73e151b455966006490092ffdownload (1).jpg',NULL,NULL,8);
 
 /*Table structure for table `mode_of_payment_table` */
 
@@ -199,12 +199,14 @@ CREATE TABLE `payment_transaction_table` (
   `statusId` int(6) DEFAULT NULL,
   PRIMARY KEY (`paymentTransactionId`),
   KEY `FK_payment_transaction_table` (`statusId`),
-  KEY `FK_payment_transaction_table1231` (`modeOfPaymentId`),
+  KEY `FK_payment_transaction_table123344` (`modeOfPaymentId`),
   CONSTRAINT `FK_payment_transaction_table` FOREIGN KEY (`statusId`) REFERENCES `status_table` (`statusId`),
-  CONSTRAINT `FK_payment_transaction_table1231` FOREIGN KEY (`modeOfPaymentId`) REFERENCES `mode_of_payment_table` (`modeOfPaymentId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  CONSTRAINT `FK_payment_transaction_table123344` FOREIGN KEY (`modeOfPaymentId`) REFERENCES `mode_of_payment_table` (`modeOfPaymentId`) ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 /*Data for the table `payment_transaction_table` */
+
+insert  into `payment_transaction_table`(`paymentTransactionId`,`modeOfPaymentId`,`amount`,`datePaid`,`transactionNumber`,`nameOfSender`,`statusId`) values (8,4,600,'2018-09-07','ASD5-56A5-SD65','April Sundae',11);
 
 /*Table structure for table `place_table` */
 
@@ -311,11 +313,11 @@ CREATE TABLE `status_table` (
   `statusDescription` varchar(60) DEFAULT NULL,
   `statusOfWhat` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`statusId`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 /*Data for the table `status_table` */
 
-insert  into `status_table`(`statusId`,`statusDescription`,`statusOfWhat`) values (1,'Available','van_rental;package_table;'),(2,'Not Available','van_rental;package_table;'),(3,'On Travel','van_rental;package_table;'),(5,'Cancelled','package_table'),(6,'Fully Booked','package_table'),(7,'Pending Payment For Down Payment','booking_table'),(8,'Pending Payment For Full Payment','booking_table'),(9,'Fully Paid','booking_table');
+insert  into `status_table`(`statusId`,`statusDescription`,`statusOfWhat`) values (1,'Available','van_rental;package_table;'),(2,'Not Available','van_rental;package_table;'),(3,'On Travel','van_rental;package_table;'),(5,'Cancelled','package_table'),(6,'Fully Booked','package_table'),(7,'Pending Payment For Down Payment','booking_table'),(8,'Pending Payment For Full Payment','booking_table'),(9,'Fully Paid','booking_table'),(10,'Payment Confirmed','payment_transaction_table'),(11,'Payment Pending','payment_transaction_table');
 
 /*Table structure for table `travel_and_tour_table` */
 
