@@ -113,6 +113,15 @@ if (isset($_POST['from']) and $_POST['from'] == 'send-payment') {
 }
 
 
+if (isset($_POST['from']) and $_POST['from'] == 'add-comment') {
+	mysqli_query($connection, "insert into comment_table (commentInfo, profileId) values ('" . $_POST['commentInfo'] . "', '" . $_SESSION['profileId'] . "')");
+
+
+	$_SESSION['do'] = 'added';
+	header("Location: reviews.php");
+
+}
+
 
 
 ?>

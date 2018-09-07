@@ -8,7 +8,7 @@ include("includes/header.php");
 		<div class="wrapper">
 			<div class="wrapper">
 				<div class="container">
-					<h1 class="fadeInUp"><span></span>My Bookings</h1>
+					<h1 class="fadeInUp"><span></span>Announcements</h1>
 				</div>
 				
 					

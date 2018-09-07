@@ -317,6 +317,17 @@ if (isset($_POST['from']) and $_POST['from'] == 'delete-announcement') {
 
 }
 
+if (isset($_POST['from']) and $_POST['from'] == 'delete-comment') {
+
+	mysqli_query($connection, "delete from comment_table where commentId = '" . $_POST['commentId'] . "'");
+
+
+	$_SESSION['do'] = 'deleted';
+	header("Location: home.php");
+
+
+}
+
 
 
 ?>

@@ -164,6 +164,49 @@ include("includes/header.php");
     </div>
     <!-- Column -->
 </div>
+
+<div class="col-lg-6">
+    <!-- Column -->
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Reviews</h4>
+         
+        </div>
+
+
+
+        <?php $qry = mysqli_query($connection, "SELECT * from comment_view"); 
+        while ($res = mysqli_fetch_assoc($qry)) { ?>
+            <div class="comment-widgets m-b-20">
+            <!-- Comment Row -->
+
+                    
+                    <div class="comment-text w-100">
+                          <span class="action-icons">
+                            
+                                <span data-toggle="modal" data-target="#deleteModal<?php echo $res['commentId'] ?>"><i class="mdi mdi-delete"></i></span>
+                                               
+                                                </span>
+                        <hr>
+                        <h5><?php echo  $res['firstName'] . " " . $res['middleName'] . " " . $res['lastName'] . " (" . $res['accountType'] . ")"; ?></h5>
+                        
+                   
+                     
+                            <p class="m-b-5 m-t-10"><?php echo $res['commentInfo']; ?></p>
+                            <hr>
+                    </div>
+            
+
+            </div>
+
+        <?php } ?>
+
+
+
+
+    </div>
+    <!-- Column -->
+</div>
 </div>
 
 
@@ -312,6 +355,44 @@ include("includes/header.php");
     <!-- /.modal-dialog -->
 </div>
 <!-- /.modal --> 
+
+<?php } ?>
+
+<?php $qry = mysqli_query($connection, "SELECT * from comment_view"); 
+        while ($res = mysqli_fetch_assoc($qry)) { ?>
+
+            <!-- modal content -->
+<div class="modal fade" id="deleteModal<?php echo $res['commentId'] ?>" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myLargeModalLabel">Delete</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="controller.php">
+                    
+                    <h2>Are you sure to delete?</h2>
+
+                <!-- other hidden inputs -->
+                <input type="text" name="from" value="delete-comment" hidden="">
+                <input type="text" name="commentId" value="<?php echo $res['commentId']; ?>" hidden="">
+
+               
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success waves-effect text-left">Yes</button>
+                <button type="button" class="btn btn-danger waves-effect text-left" data-dismiss="modal">No</button>
+            </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal --> 
+
 
 <?php } ?>
 
