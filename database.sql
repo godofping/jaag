@@ -265,21 +265,6 @@ CREATE TABLE `profile_table` (
 
 insert  into `profile_table`(`profileId`,`firstName`,`middleName`,`lastName`,`contactNumber`,`addressId`,`accountTypeId`,`userName`,`passWord`) values (2,'Jose','Malinao','Aguacito','09754214199',1,1,'admin','21232f297a57a5a743894a0e4a801fc3'),(3,'Jennifer','Ranga','Madula','09168575225',2,4,'customer','91ec1f9324753048c0096d036a694f86'),(4,'Mariella','Gumela','Vettan','09368545152',3,4,'customer1','91ec1f9324753048c0096d036a694f86'),(7,'Jobert','Ramirez','Guillermo','09168574963',6,5,NULL,NULL),(8,'Jonald','Lazado','Mendoza','09654747474',7,5,NULL,NULL);
 
-/*Table structure for table `status_table` */
-
-DROP TABLE IF EXISTS `status_table`;
-
-CREATE TABLE `status_table` (
-  `statusId` int(6) NOT NULL AUTO_INCREMENT,
-  `statusDescription` varchar(60) DEFAULT NULL,
-  `statusOfWhat` varchar(60) DEFAULT NULL,
-  PRIMARY KEY (`statusId`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
-
-/*Data for the table `status_table` */
-
-insert  into `status_table`(`statusId`,`statusDescription`,`statusOfWhat`) values (1,'Available','van_rental;package_table;'),(2,'Not Available','van_rental;package_table;'),(3,'On Travel','van_rental;package_table;'),(5,'Cancelled','package_table'),(6,'Fully Booked','package_table'),(7,'Pending Payment For Down Payment','booking_table'),(8,'Pending Payment For Full Payment','booking_table'),(9,'Fully Paid','booking_table'),(10,'Payment Confirmed','payment_transaction_table'),(11,'Payment Pending','payment_transaction_table');
-
 /*Table structure for table `travel_and_tour_table` */
 
 DROP TABLE IF EXISTS `travel_and_tour_table`;
