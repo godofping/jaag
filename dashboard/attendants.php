@@ -13,7 +13,7 @@ include("includes/header.php");
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="home.php">Home</a></li>
             <li class="breadcrumb-item">Settings</li>
-            <li class="breadcrumb-item active"><a href="drivers.php">Drivers</a></li>
+            <li class="breadcrumb-item active"><a href="applicants.php">Drivers</a></li>
         </ol>
     </div>
 
@@ -41,19 +41,21 @@ include("includes/header.php");
                                     <th>Name</th>
                                     <th>Address</th>
                                     <th>Contact Number</th>
+                                    <th>Username</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php $qry = mysqli_query($connection,"select * from profile_view where accountTypeId = 5");
+                            <?php $qry = mysqli_query($connection,"select * from profile_view where accountTypeId = 5 and isDeleted = 0");
                                     while ($res = mysqli_fetch_assoc($qry)) { ?>
                                 <tr>
                                     <td><?php echo $res['profileId']; ?></td>
                                     <td><?php echo $res['firstName'] . " " . $res['middleName'] . " " . $res['lastName']; ?></td>
                                     <td><?php echo $res['buildingNumber'] . " " . $res['street'] . " " . $res['barangay'] . " " . $res['city'] . " " . $res['province']; ?></td>
                                     <td><?php echo $res['contactNumber']; ?></td>
+                                    <td><?php echo $res['userName']; ?></td>
                                     <td>
-                                        <button type="button" class="btn btn-block btn-outline-warning" data-toggle="modal" data-target="#updateModal<?php echo $res['profileId']; ?>">Update</button>
+                                       
                                         <button type="button" class="btn btn-block btn-outline-danger" data-toggle="modal" data-target="#deleteModal<?php echo $res['profileId']; ?>">Delete</button>
                                     </td>
                                 </tr>
@@ -156,7 +158,7 @@ include("includes/header.php");
 
 
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-4">
                             <label>Contact Number</label>
                             <div class="form-group">
                                 <input type="text" class="form-control" id="contactNumber" name="contactNumber" required="">
@@ -165,7 +167,7 @@ include("includes/header.php");
                     </div>
 
                 <!-- other hidden inputs -->
-                <input type="text" name="from" value="add-driver" hidden="">
+                <input type="text" name="from" value="add-attendant" hidden="">
                 <input type="text" name="province1" id="province1" hidden="">
                 <input type="text" name="city1" id="city1" hidden="">
 
@@ -185,7 +187,7 @@ include("includes/header.php");
 <!-- /.modal -->
 
 <?php 
-$qry = mysqli_query($connection, "select * from profile_view where accountTypeId = 5");
+$qry = mysqli_query($connection, "select * from profile_view where accountTypeId = 5 and isDeleted = 0");
 while ($res = mysqli_fetch_assoc($qry)) { ?>             
 <!-- modal content -->
 <div class="modal fade" id="updateModal<?php echo $res['profileId'] ?>" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
@@ -272,7 +274,7 @@ while ($res = mysqli_fetch_assoc($qry)) { ?>
 
 
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-4">
                             <label>Contact Number</label>
                             <div class="form-group">
                                 <input type="text" class="form-control" id="contactNumber" name="contactNumber" required="" value="<?php echo $res['contactNumber'] ?>">
@@ -311,7 +313,7 @@ while ($res = mysqli_fetch_assoc($qry)) { ?>
                     <h2>Are you sure to delete?</h2>
 
                 <!-- other hidden inputs -->
-                <input type="text" name="from" value="delete-driver" hidden="">
+                <input type="text" name="from" value="delete-attendant" hidden="">
                 <input type="text" name="profileId" value="<?php echo $res['profileId'] ?>" hidden="">
 
             </div>

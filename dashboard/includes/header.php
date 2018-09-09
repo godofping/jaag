@@ -1,5 +1,5 @@
 <?php
-    if (!isset($_SESSION['accountType']) or ($_SESSION['accountType'] != 'Administrator' or $_SESSION['accountType'] == 'Employee')) {
+    if (!isset($_SESSION['accountType']) or ($_SESSION['accountType'] != 'Administrator' and $_SESSION['accountType'] != 'Attendant') or $_SESSION['accountType'] == 'Online Customer') {
         header("Location: controller.php?from=login-first");
     }
 ?>

@@ -36,18 +36,7 @@ include("includes/header.php");
                 <br>
                 <button class="btn btn-success m-t-20 waves-effect text-left" data-toggle="modal" data-target="#addModal">Add Van Rental</button> -->
 
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                        <label>Add booking for</label>
-                        <select class="form-control" id="select" onchange="displayForm()">
-                            <option value="Please Select" selected="" disabled="">Please Select</option>
-                            <option value="Travel and Tour">Travel and Tour</option>
-                            <option value="Van Rental">Van Rental</option>
-                        </select>
-                    </div>
-                    </div>
-                </div>
+            
 
                 <div id="travelAndtourForm">
                     <div class="row">
@@ -77,22 +66,12 @@ include("includes/header.php");
                                 </div>
                             </div>
 
+ 
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label>Departure Date</label>
+                                    <label>Departure and Return Date</label>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="mdate" name="departureDate" required="">
-
-
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label>Return Date</label>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="mdate1" name="returnDate" required="">
-
-
+                                        <input class="form-control input-daterange-datepicker" type="text" name="daterange" value="01/01/2015 - 01/31/2015" />
                                     </div>
                                 </div>
                             </div>
@@ -111,64 +90,6 @@ include("includes/header.php");
                     </div>
                 </div> <!-- end tour -->
 
-                <div id="vanRentalForm">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <form method="POST" action="controller.php">
-                
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Van</label>
-                                    <div class="form-group">
-                                        <select class="form-control" name="vanId" id="vanId" required="">
-                                            <?php $qry = mysqli_query($connection, "select * from van_table");
-                                            while ($res = mysqli_fetch_assoc($qry)) { ?>
-                                                <option value="<?php echo $res['vanId'] ?>"><?php echo $res['vanMake'] . " " . $res['vanModel'] . " (PN: " . $res['vanPlateNumber'] . ")"; ?></option>
-                                            <?php } ?>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label>Price</label>
-                                    <div class="form-group">
-                                        <input type="number" class="form-control" step="any" name="price" id="price" required="">
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Rent Starting Date</label>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="mdate2" name="rentalStartingDate" required="">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label>Rent Ending Date</label>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="mdate3" name="rentalEndingDate" required="">
-
-
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- other hidden inputs -->
-                            <input type="text" name="from" value="add-booking-rental" hidden="">
-                        
-
-                            <div class="row  float-right">
-                                <div class="col-md-12">
-                                    <button type="submit" class="btn btn-success">Submit</button>
-                                </div>
-                            </div>
-                        </form>
-                        </div>
-                    </div>
-                </div> <!-- end tour -->
 
 
                 </div>
@@ -185,22 +106,3 @@ include("includes/header.php");
 
 <?php include("includes/footer.php") ?>
 
-<script type="text/javascript">
-
-    document.getElementById("travelAndtourForm").style.display = 'none';
-    document.getElementById("vanRentalForm").style.display = 'none';
-
-    function displayForm() {
-
-    var select = document.getElementById("select").value;
-    
-    if (select == 'Travel and Tour') {
-        document.getElementById("travelAndtourForm").style.display = 'block';
-        document.getElementById("vanRentalForm").style.display = 'none';
-    }else if(select = 'Van Rental'){
-        document.getElementById("travelAndtourForm").style.display = 'none';
-        document.getElementById("vanRentalForm").style.display = 'block';
-    }
-
-    }
-</script>

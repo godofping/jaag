@@ -41,6 +41,7 @@ include("includes/header.php");
                                     <th>Name</th>
                                     <th>Address</th>
                                     <th>Contact Number</th>
+                                    <th>Username</th>
                                   
                                 </tr>
                             </thead>
@@ -52,6 +53,7 @@ include("includes/header.php");
                                     <td><?php echo $res['firstName'] . " " . $res['middleName'] . " " . $res['lastName']; ?></td>
                                     <td><?php echo $res['buildingNumber'] . " " . $res['street'] . " " . $res['barangay'] . " " . $res['city'] . " " . $res['province']; ?></td>
                                     <td><?php echo $res['contactNumber']; ?></td>
+                                    <td><?php echo $res['userName']; ?></td>
                            
                                 </tr>
                             <?php } ?>

@@ -1,5 +1,5 @@
 <?php include("includes/connection.php");
-if (isset($_SESSION['accountType']) and ($_SESSION['accountType'] == 'Administrator' or $_SESSION['accountType'] == 'Employee')) {
+if (isset($_SESSION['accountType']) and ($_SESSION['accountType'] == 'Administrator' or $_SESSION['accountType'] == 'Attendant')) {
     header("Location: home.php");
 }
 

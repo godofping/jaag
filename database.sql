@@ -28,7 +28,7 @@ CREATE TABLE `account_type_table` (
 
 /*Data for the table `account_type_table` */
 
-insert  into `account_type_table`(`accountTypeId`,`accountType`) values (1,'Administrator'),(2,'Employee'),(3,'Walk-in Customer'),(4,'Online Customer'),(5,'Driver');
+insert  into `account_type_table`(`accountTypeId`,`accountType`) values (1,'Administrator'),(3,'Walk-in Customer'),(4,'Online Customer'),(5,'Attendant');
 
 /*Table structure for table `address_table` */
 
@@ -42,11 +42,11 @@ CREATE TABLE `address_table` (
   `street` varchar(60) DEFAULT NULL,
   `buildingNumber` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`addressId`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 /*Data for the table `address_table` */
 
-insert  into `address_table`(`addressId`,`province`,`city`,`barangay`,`street`,`buildingNumber`) values (1,'Region 12: SULTAN KUDARAT','CITY OF TACURONG','Poblacion','Malvar Street','65'),(2,'Region 12: SOUTH COTABATO','BANGA','Reyes (Pob.)','Lapu- lapu Street','44'),(3,'Region 14: KALINGA','PASIL','Dalupa','Di Makita Street','99'),(4,'1298','129804','Ar-arusip','asd','22'),(5,'','','New Panay','Barangay Road','65'),(6,'Region 12: SULTAN KUDARAT','ESPERANZA','Poblacion','Barangay Road','65'),(7,'Region 12: SULTAN KUDARAT','ISULAN (Capital)','Kalawag I (Pob.)','National Road','56');
+insert  into `address_table`(`addressId`,`province`,`city`,`barangay`,`street`,`buildingNumber`) values (1,'Region 12: SULTAN KUDARAT','CITY OF TACURONG','Poblacion','Malvar Street','65'),(2,'Region 12: SOUTH COTABATO','BANGA','Reyes (Pob.)','Lapu- lapu Street','44'),(3,'Region 14: KALINGA','PASIL','Dalupa','Di Makita Street','99'),(4,'1298','129804','Ar-arusip','asd','22'),(5,'','','New Panay','Barangay Road','65'),(6,'Region 12: SULTAN KUDARAT','ESPERANZA','Poblacion','Barangay Road','65'),(7,'Region 12: SULTAN KUDARAT','ISULAN (Capital)','Kalawag I (Pob.)','National Road','56'),(8,'Region 12: SULTAN KUDARAT','CITY OF TACURONG','New Isabela','Barangay Road',''),(9,'Region 12: SULTAN KUDARAT','CITY OF TACURONG','New Isabela','Barangay Road',''),(10,'Region 12: SULTAN KUDARAT','CITY OF TACURONG','New Isabela','Barangay Road',''),(11,'Region 12: SULTAN KUDARAT','CITY OF TACURONG','New Isabela','Barangay Road',''),(12,'Region 12: SULTAN KUDARAT','CITY OF TACURONG','New Isabela','Barangay Road','');
 
 /*Table structure for table `booking_table` */
 
@@ -102,11 +102,11 @@ CREATE TABLE `destination_table` (
   KEY `FK_destination_table2` (`packageId`),
   CONSTRAINT `FK_destination_table` FOREIGN KEY (`placeId`) REFERENCES `place_table` (`placeId`) ON DELETE SET NULL,
   CONSTRAINT `FK_destination_table2` FOREIGN KEY (`packageId`) REFERENCES `package_table` (`packageId`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
 /*Data for the table `destination_table` */
 
-insert  into `destination_table`(`destinationId`,`placeId`,`packageId`) values (2,2,1),(3,7,2),(4,12,3),(5,20,4),(6,16,5),(7,21,6);
+insert  into `destination_table`(`destinationId`,`placeId`,`packageId`) values (8,21,6),(9,16,5),(10,20,4),(11,12,3),(12,7,2),(13,2,1);
 
 /*Table structure for table `media_table` */
 
@@ -173,11 +173,11 @@ CREATE TABLE `package_table` (
   `price` double DEFAULT NULL,
   PRIMARY KEY (`packageId`),
   KEY `FK_package_table1` (`price`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 /*Data for the table `package_table` */
 
-insert  into `package_table`(`packageId`,`packageName`,`packageDetails`,`inclusion`,`exclusion`,`price`) values (1,'Surigao Tour','Details....','TRANSPORTATIONS','MEALS',2),(2,'Buda Tour','Bla bla bla...','TRANSPORATIONS','MEALS',3),(3,'Camiguin Island Tour','Bla bla bla bla','TRANSPORTATION','MEALS',4),(4,'Lake Sebu Tour','none','TRANSPORTATION','MEALS, TICKETS',7),(5,'Dinagat Tour','...','TRANSPORATIONS','MEALS',8),(6,'Sohoton Tour','....','TRANSPORATIONS','MEALS',9);
+insert  into `package_table`(`packageId`,`packageName`,`packageDetails`,`inclusion`,`exclusion`,`price`) values (1,'Surigao Tour','Details....','TRANSPORTATIONS','MEALS',799),(2,'Buda Tour','Bla bla bla...','TRANSPORATIONS','MEALS',699),(3,'Camiguin Island Tour','Bla bla bla bla','TRANSPORTATION','MEALS',1499),(4,'Lake Sebu Tour','none','TRANSPORTATION','MEALS, TICKETS',1399),(5,'Dinagat Tour','...','TRANSPORATIONS','MEALS',999),(6,'Sohoton Tour','....','TRANSPORATIONS','MEALS',1999);
 
 /*Table structure for table `payment_transaction_table` */
 
@@ -254,16 +254,17 @@ CREATE TABLE `profile_table` (
   `accountTypeId` int(6) DEFAULT NULL,
   `userName` varchar(60) DEFAULT NULL,
   `passWord` varchar(60) DEFAULT NULL,
+  `isDeleted` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`profileId`),
   KEY `FK_profile_table` (`accountTypeId`),
   KEY `FK_profile_table1` (`addressId`),
   CONSTRAINT `FK_profile_table` FOREIGN KEY (`accountTypeId`) REFERENCES `account_type_table` (`accountTypeId`),
   CONSTRAINT `FK_profile_table1` FOREIGN KEY (`addressId`) REFERENCES `address_table` (`addressId`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 /*Data for the table `profile_table` */
 
-insert  into `profile_table`(`profileId`,`firstName`,`middleName`,`lastName`,`contactNumber`,`addressId`,`accountTypeId`,`userName`,`passWord`) values (2,'Jose','Malinao','Aguacito','09754214199',1,1,'admin','21232f297a57a5a743894a0e4a801fc3'),(3,'Jennifer','Ranga','Madula','09168575225',2,4,'customer','91ec1f9324753048c0096d036a694f86'),(4,'Mariella','Gumela','Vettan','09368545152',3,4,'customer1','91ec1f9324753048c0096d036a694f86'),(7,'Jobert','Ramirez','Guillermo','09168574963',6,5,NULL,NULL),(8,'Jonald','Lazado','Mendoza','09654747474',7,5,NULL,NULL);
+insert  into `profile_table`(`profileId`,`firstName`,`middleName`,`lastName`,`contactNumber`,`addressId`,`accountTypeId`,`userName`,`passWord`,`isDeleted`) values (2,'Jose','Malinao','Aguacito','09754214199',1,1,'admin','21232f297a57a5a743894a0e4a801fc3',0),(3,'Jennifer','Ranga','Madula','09168575225',2,4,'customer','91ec1f9324753048c0096d036a694f86',0),(4,'Mariella','Gumela','Vettan','09368545152',3,4,'customer1','91ec1f9324753048c0096d036a694f86',0),(13,'Daniel','Benson','DeVera','09754363944',12,5,'daniel2620','8bd39eae38511daad6152e84545e504d',0);
 
 /*Table structure for table `travel_and_tour_table` */
 
@@ -278,11 +279,11 @@ CREATE TABLE `travel_and_tour_table` (
   PRIMARY KEY (`travelAndTourId`),
   KEY `FK_travel_and_tour_table` (`packageId`),
   CONSTRAINT `FK_travel_and_tour_table` FOREIGN KEY (`packageId`) REFERENCES `package_table` (`packageId`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 /*Data for the table `travel_and_tour_table` */
 
-insert  into `travel_and_tour_table`(`travelAndTourId`,`packageId`,`departureDate`,`returnDate`,`maxPax`) values (1,3,'2018-09-18','2018-09-21',14),(2,2,'2018-09-23','2018-09-24',14),(3,1,'2018-09-27','2018-09-28',14),(4,4,'2019-09-06','2019-09-09',14),(5,5,'2018-10-17','2018-10-20',14),(6,6,'2018-09-17','2018-09-19',15),(7,6,'2018-09-28','2018-09-30',14);
+insert  into `travel_and_tour_table`(`travelAndTourId`,`packageId`,`departureDate`,`returnDate`,`maxPax`) values (1,3,'2018-09-18','2018-09-21',14),(2,2,'2018-09-23','2018-09-24',14),(3,1,'2018-09-27','2018-09-28',14),(4,4,'2019-09-06','2019-09-09',14),(5,5,'2018-10-17','2018-10-20',14);
 
 /*Table structure for table `comment_view` */
 
@@ -332,6 +333,22 @@ DROP TABLE IF EXISTS `package_media_view`;
  `mediaLocation` text ,
  `packageId` int(6) ,
  `packageName` varchar(60) 
+)*/;
+
+/*Table structure for table `package_view` */
+
+DROP TABLE IF EXISTS `package_view`;
+
+/*!50001 DROP VIEW IF EXISTS `package_view` */;
+/*!50001 DROP TABLE IF EXISTS `package_view` */;
+
+/*!50001 CREATE TABLE  `package_view`(
+ `packageId` int(6) ,
+ `packageName` varchar(60) ,
+ `packageDetails` text ,
+ `inclusion` text ,
+ `exclusion` text ,
+ `price` double 
 )*/;
 
 /*Table structure for table `place_view` */
@@ -397,12 +414,33 @@ DROP TABLE IF EXISTS `profile_view`;
  `accountTypeId` int(6) ,
  `userName` varchar(60) ,
  `passWord` varchar(60) ,
+ `isDeleted` tinyint(1) ,
  `province` varchar(60) ,
  `city` varchar(60) ,
  `barangay` varchar(60) ,
  `street` varchar(60) ,
  `buildingNumber` varchar(60) ,
  `accountType` varchar(60) 
+)*/;
+
+/*Table structure for table `travel_and_tour_view` */
+
+DROP TABLE IF EXISTS `travel_and_tour_view`;
+
+/*!50001 DROP VIEW IF EXISTS `travel_and_tour_view` */;
+/*!50001 DROP TABLE IF EXISTS `travel_and_tour_view` */;
+
+/*!50001 CREATE TABLE  `travel_and_tour_view`(
+ `travelAndTourId` int(6) ,
+ `packageId` int(6) ,
+ `departureDate` date ,
+ `returnDate` date ,
+ `maxPax` int(6) ,
+ `packageName` varchar(60) ,
+ `packageDetails` text ,
+ `inclusion` text ,
+ `exclusion` text ,
+ `price` double 
 )*/;
 
 /*View structure for view comment_view */
@@ -425,6 +463,13 @@ DROP TABLE IF EXISTS `profile_view`;
 /*!50001 DROP VIEW IF EXISTS `package_media_view` */;
 
 /*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `package_media_view` AS select `media_table`.`mediaId` AS `mediaId`,`media_table`.`mediaLocation` AS `mediaLocation`,`media_table`.`packageId` AS `packageId`,`package_table`.`packageName` AS `packageName` from (`media_table` join `package_table` on((`media_table`.`packageId` = `package_table`.`packageId`))) */;
+
+/*View structure for view package_view */
+
+/*!50001 DROP TABLE IF EXISTS `package_view` */;
+/*!50001 DROP VIEW IF EXISTS `package_view` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `package_view` AS select `package_table`.`packageId` AS `packageId`,`package_table`.`packageName` AS `packageName`,`package_table`.`packageDetails` AS `packageDetails`,`package_table`.`inclusion` AS `inclusion`,`package_table`.`exclusion` AS `exclusion`,`package_table`.`price` AS `price` from `package_table` */;
 
 /*View structure for view place_view */
 
@@ -452,7 +497,14 @@ DROP TABLE IF EXISTS `profile_view`;
 /*!50001 DROP TABLE IF EXISTS `profile_view` */;
 /*!50001 DROP VIEW IF EXISTS `profile_view` */;
 
-/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `profile_view` AS select `profile_table`.`profileId` AS `profileId`,`profile_table`.`firstName` AS `firstName`,`profile_table`.`middleName` AS `middleName`,`profile_table`.`lastName` AS `lastName`,`profile_table`.`contactNumber` AS `contactNumber`,`profile_table`.`addressId` AS `addressId`,`profile_table`.`accountTypeId` AS `accountTypeId`,`profile_table`.`userName` AS `userName`,`profile_table`.`passWord` AS `passWord`,`address_table`.`province` AS `province`,`address_table`.`city` AS `city`,`address_table`.`barangay` AS `barangay`,`address_table`.`street` AS `street`,`address_table`.`buildingNumber` AS `buildingNumber`,`account_type_table`.`accountType` AS `accountType` from ((`profile_table` join `address_table` on((`profile_table`.`addressId` = `address_table`.`addressId`))) join `account_type_table` on((`profile_table`.`accountTypeId` = `account_type_table`.`accountTypeId`))) */;
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `profile_view` AS select `profile_table`.`profileId` AS `profileId`,`profile_table`.`firstName` AS `firstName`,`profile_table`.`middleName` AS `middleName`,`profile_table`.`lastName` AS `lastName`,`profile_table`.`contactNumber` AS `contactNumber`,`profile_table`.`addressId` AS `addressId`,`profile_table`.`accountTypeId` AS `accountTypeId`,`profile_table`.`userName` AS `userName`,`profile_table`.`passWord` AS `passWord`,`profile_table`.`isDeleted` AS `isDeleted`,`address_table`.`province` AS `province`,`address_table`.`city` AS `city`,`address_table`.`barangay` AS `barangay`,`address_table`.`street` AS `street`,`address_table`.`buildingNumber` AS `buildingNumber`,`account_type_table`.`accountType` AS `accountType` from ((`profile_table` join `address_table` on((`profile_table`.`addressId` = `address_table`.`addressId`))) join `account_type_table` on((`profile_table`.`accountTypeId` = `account_type_table`.`accountTypeId`))) */;
+
+/*View structure for view travel_and_tour_view */
+
+/*!50001 DROP TABLE IF EXISTS `travel_and_tour_view` */;
+/*!50001 DROP VIEW IF EXISTS `travel_and_tour_view` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `travel_and_tour_view` AS select `travel_and_tour_table`.`travelAndTourId` AS `travelAndTourId`,`travel_and_tour_table`.`packageId` AS `packageId`,`travel_and_tour_table`.`departureDate` AS `departureDate`,`travel_and_tour_table`.`returnDate` AS `returnDate`,`travel_and_tour_table`.`maxPax` AS `maxPax`,`package_table`.`packageName` AS `packageName`,`package_table`.`packageDetails` AS `packageDetails`,`package_table`.`inclusion` AS `inclusion`,`package_table`.`exclusion` AS `exclusion`,`package_table`.`price` AS `price` from (`travel_and_tour_table` join `package_table` on((`travel_and_tour_table`.`packageId` = `package_table`.`packageId`))) */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

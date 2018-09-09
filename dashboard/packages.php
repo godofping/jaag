@@ -45,7 +45,7 @@ include("includes/header.php");
                                     <th>Exclusions</th>
                                     <th>Price</th>
                                     <th>Images</th>
-                                    <th>Status</th>
+                                  
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -65,11 +65,9 @@ include("includes/header.php");
                                     </td>
                                     <td><?php echo $res['inclusion']; ?></td>
                                     <td><?php echo $res['exclusion']; ?></td>
-                                    <td><?php echo $res['price']; ?></td>
+                                    <td>‎₱<?php echo number_format($res['price'], 2); ?></td>
                                     <td><a href="view-package-images.php?packageId=<?php echo $res['packageId'] ?>"><button type="button" class="btn btn-block btn-outline-primary">Manage</button></a></td>
-                                    <td><?php echo $res['statusDescription']; ?>
-                                        <!-- <br><button type="button" class="btn btn-block btn-outline-info" data-toggle="modal" data-target="#updateStatusModal<?php echo $res['packageId']; ?>">Change</button> -->
-                                    </td>
+                         
                                     <td>
                                         <button type="button" class="btn btn-block btn-outline-warning" data-toggle="modal" data-target="#updateModal<?php echo $res['packageId']; ?>">Update</button>
                                         <button type="button" class="btn btn-block btn-outline-danger" data-toggle="modal" data-target="#deleteModal<?php echo $res['packageId']; ?>">Delete</button>
@@ -230,7 +228,7 @@ while ($res = mysqli_fetch_assoc($qry)) { ?>
                 <!-- other hidden inputs -->
                 <input type="text" name="from" value="update-package" hidden="">
                 <input type="text" name="packageId" value="<?php echo $res['packageId'] ?>"  hidden="">
-                <input type="text" name="priceId" value="<?php echo $res['priceId'] ?>"  hidden="">
+              
 
             </div>
             <div class="modal-footer">
@@ -261,7 +259,7 @@ while ($res = mysqli_fetch_assoc($qry)) { ?>
                 <!-- other hidden inputs -->
                 <input type="text" name="from" value="delete-package" hidden="">
                 <input type="text" name="packageId" value="<?php echo $res['packageId'] ?>" hidden="">
-                <input type="text" name="priceId" value="<?php echo $res['priceId'] ?>" hidden="">
+         
 
             </div>
             <div class="modal-footer">

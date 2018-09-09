@@ -2,7 +2,7 @@
 include("includes/connection.php");
 
 if (isset($_POST['from']) and $_POST['from'] == 'login') {
-	$qry = mysqli_query($connection, "select * from profile_view where userName = '" . $_POST['userName'] . "' and passWord = '" . md5($_POST['passWord']) . "' and accountType = 'Administrator'");
+	$qry = mysqli_query($connection, "select * from profile_view where userName = '" . $_POST['userName'] . "' and passWord = '" . md5($_POST['passWord']) . "' and accountType = 'Administrator' and isDeleted = '0'");
 	if (mysqli_num_rows($qry) > 0) {
 		$res = mysqli_fetch_assoc($qry);
 		$_SESSION['accountType'] = 'Administrator';
@@ -12,10 +12,10 @@ if (isset($_POST['from']) and $_POST['from'] == 'login') {
 	}
 	else
 	{
-		$qry = mysqli_query($connection, "select * from profile_view where userName = '" . $_POST['userName'] . "' and passWord = '" . md5($_POST['passWord']) . "' and accountType = 'Employee'");
+		$qry = mysqli_query($connection, "select * from profile_view where userName = '" . $_POST['userName'] . "' and passWord = '" . md5($_POST['passWord']) . "' and accountType = 'Attendant' and isDeleted = '0'");
 		if (mysqli_num_rows($qry) > 0) {
 			$res = mysqli_fetch_assoc($qry);
-			$_SESSION['accountType'] = 'Employee';
+			$_SESSION['accountType'] = 'Attendant';
 			$_SESSION['profileId'] = $res['profileId'];
 			$_SESSION['do'] = 'login-success';
 			header("Location: home.php");
@@ -43,30 +43,31 @@ if (isset($_GET['from']) and $_GET['from'] == 'login-first') {
 }
 
 
-if (isset($_POST['from']) and $_POST['from'] == 'add-driver') {
-
+if (isset($_POST['from']) and $_POST['from'] == 'add-attendant') {
+	$fourCharacters = substr(md5($_POST['firstName']), 0, 4);
+	$userName = strtolower($_POST['firstName'] . $fourCharacters);
 
 	mysqli_query($connection, "insert into address_table (buildingNumber, street, barangay, city, province) values ('" . $_POST['buildingNumber'] . "', '" . $_POST['street'] . "', '" . $_POST['barangay'] . "', '" . $_POST['city1'] . "', '" . $_POST['province1'] . "')");
 	$addressId = mysqli_insert_id($connection);
 
-	mysqli_query($connection, "insert into profile_table (firstName, middleName, lastName, contactNumber, addressId, accountTypeId) values ('" . $_POST['firstName'] . "', '" . $_POST['middleName'] . "', '" . $_POST['lastName'] . "', '" . $_POST['contactNumber'] . "', '" . $addressId . "', 5)");
+	mysqli_query($connection, "insert into profile_table (firstName, middleName, lastName, contactNumber, addressId, accountTypeId, userName, passWord) values ('" . $_POST['firstName'] . "', '" . $_POST['middleName'] . "', '" . $_POST['lastName'] . "', '" . $_POST['contactNumber'] . "', '" . $addressId . "', 5, '" . $userName . "', '" . md5($fourCharacters) . "')");
 
 	$_SESSION['do'] = 'added';
-	header("Location: drivers.php");
+	header("Location: attendants.php");
 }
 
 if (isset($_POST['from']) and $_POST['from'] == 'update-driver') {
 	mysqli_query($connection, "update driver_table set driverFirstName = '" . $_POST['driverFirstName'] . "', driverMiddleName = '" . $_POST['driverMiddleName'] . "', driverLastName = '" . $_POST['driverLastName'] . "', driverAddress = '" . $_POST['driverAddress'] . "', driverContactNumber = '" . $_POST['driverContactNumber'] . "' where driverId = '" . $_POST['driverId'] . "'");
 
 	$_SESSION['do'] = 'updated';
-	header("Location: drivers.php");
+	header("Location: attendants.php");
 }
 
-if (isset($_POST['from']) and $_POST['from'] == 'delete-driver') {
-	mysqli_query($connection, "delete from profile_table where profileId = '" . $_POST['profileId'] . "'");
+if (isset($_POST['from']) and $_POST['from'] == 'delete-attendant') {
+	mysqli_query($connection, "update profile_table set isDeleted = 1 where profileId = '" . $_POST['profileId'] . "'");
 
 	$_SESSION['do'] = 'deleted';
-	header("Location: drivers.php");
+	header("Location: attendants.php");
 }
 
 if (isset($_POST['from']) and $_POST['from'] == 'add-place') {
@@ -111,40 +112,14 @@ if (isset($_POST['from']) and $_POST['from'] == 'change-password') {
 	header("Location: change-password.php");
 }
 
-if (isset($_POST['from']) and $_POST['from'] == 'add-van') {
-	mysqli_query($connection, "insert van_table (vanMake, vanModel, vanPlateNumber, statusId) values ('" . $_POST['vanMake'] . "', '" . $_POST['vanModel'] . "', '" . $_POST['vanPlateNumber'] . "', '1')");
 
-	$_SESSION['do'] = 'added';
-	header("Location: vans.php");
-}
 
-if (isset($_POST['from']) and $_POST['from'] == 'update-van') {
-	mysqli_query($connection, "update van_table set vanMake = '" . $_POST['vanMake'] . "', vanModel = '" . $_POST['vanModel'] . "', vanPlateNumber = '" . $_POST['vanPlateNumber'] . "' where vanId = '" . $_POST['vanId'] . "'");
-
-	$_SESSION['do'] = 'updated';
-	header("Location: vans.php");
-}
-
-if (isset($_POST['from']) and $_POST['from'] == 'delete-van') {
-	mysqli_query($connection, "delete from van_table where vanId = '" . $_POST['vanId'] . "'");
-
-	$_SESSION['do'] = 'deleted';
-	header("Location: vans.php");
-}
-
-if (isset($_POST['from']) and $_POST['from'] == 'update-status-van') {
-	mysqli_query($connection, "update van_table set statusId ='" . $_POST['statusId'] . "' where vanId = '" . $_POST['vanId'] . "'");
-
-	$_SESSION['do'] = 'updated';
-	header("Location: vans.php");
-}
 
 if (isset($_POST['from']) and $_POST['from'] == 'add-package') {
 
-	mysqli_query($connection,"insert into price_table (price) values ('" . $_POST['price'] . "')");
-	$priceId = mysqli_insert_id($connection);
 
-	mysqli_query($connection, "insert into package_table (packageName, packageDetails, priceId, inclusion, exclusion,statusId) values ('" . $_POST['packageName'] . "', '" . $_POST['packageDetails'] . "', '" . $priceId . "', '" . $_POST['inclusion'] . "', '" . $_POST['exclusion'] . "',  '1')");
+
+	mysqli_query($connection, "insert into package_table (packageName, packageDetails, price, inclusion, exclusion) values ('" . $_POST['packageName'] . "', '" . $_POST['packageDetails'] . "', '" . $_POST['price'] . "', '" . $_POST['inclusion'] . "', '" . $_POST['exclusion'] . "')");
 	$packageId = mysqli_insert_id($connection);
 
 	foreach ($_POST['places'] as $placeId)
@@ -159,9 +134,9 @@ if (isset($_POST['from']) and $_POST['from'] == 'add-package') {
 }
 
 if (isset($_POST['from']) and $_POST['from'] == 'update-package') {
-	mysqli_query($connection, "update price_table set price = '" . $_POST['price'] . "' where priceId = '" . $_POST['priceId'] . "'");
 
-	mysqli_query($connection, "update package_table set packageName = '" . $_POST['packageName'] . "', packageDetails = '" . $_POST['packageDetails'] . "', inclusion = '" . $_POST['inclusion'] . "', exclusion = '" . $_POST['exclusion'] . "' where packageId = '" . $_POST['packageId'] . "'");
+
+	mysqli_query($connection, "update package_table set packageName = '" . $_POST['packageName'] . "', packageDetails = '" . $_POST['packageDetails'] . "', inclusion = '" . $_POST['inclusion'] . "', exclusion = '" . $_POST['exclusion'] . "', price= '" . $_POST['price'] . "' where packageId = '" . $_POST['packageId'] . "'");
 
 	mysqli_query($connection, "delete from destination_table where packageId = '" . $_POST['packageId'] . "'");
 
@@ -178,17 +153,12 @@ if (isset($_POST['from']) and $_POST['from'] == 'update-package') {
 if (isset($_POST['from']) and $_POST['from'] == 'delete-package') {
 	mysqli_query($connection, "delete from destination_table where packageId = '" . $_POST['packageId'] . "'");
 	mysqli_query($connection, "delete from package_table where packageId = '" . $_POST['packageId'] . "'");
-	mysqli_query($connection, "delete from price_table where priceId = '" . $_POST['priceId'] . "'");
+
 	$_SESSION['do'] = 'deleted';
 	header("Location: packages.php");
 }
 
-if (isset($_POST['from']) and $_POST['from'] == 'update-status-package') {
-	mysqli_query($connection, "update package_table set statusId ='" . $_POST['statusId'] . "' where packageId = '" . $_POST['packageId'] . "'");
 
-	$_SESSION['do'] = 'updated';
-	header("Location: packages.php");
-}
 
 
 
@@ -237,7 +207,10 @@ if (isset($_POST['from']) and $_POST['from'] == 'delete-package-image') {
 
 if (isset($_POST['from']) and $_POST['from'] == 'add-booking-travel') {
 
-	mysqli_query($connection, "insert into travel_and_tour_table (packageId, departureDate, returnDate, maxPax) values ('" . $_POST['packageId'] . "', '" . $_POST['departureDate'] . "', '" . $_POST['returnDate'] . "', '" . $_POST['maxPax'] . "')");
+	$date = explode(" - ", $_POST['daterange']);
+
+
+	mysqli_query($connection, "insert into travel_and_tour_table (packageId, departureDate, returnDate, maxPax) values ('" . $_POST['packageId'] . "', '" . date("Y-m-d", strtotime($date[0])) . "', '" . date("Y-m-d", strtotime($date[1])) . "', '" . $_POST['maxPax'] . "')");
 
 		$_SESSION['do'] = 'added';
 		header("Location: add-booking.php");
@@ -245,16 +218,7 @@ if (isset($_POST['from']) and $_POST['from'] == 'add-booking-travel') {
 }
 
 
-if (isset($_POST['from']) and $_POST['from'] == 'add-booking-rental') {
 
-	mysqli_query($connection, "insert into price_table (price) values ('" . $_POST['price'] . "')");
-	$priceId = mysqli_insert_id($connection);
-
-	mysqli_query($connection, "insert into rental_table (vanId, priceId, rentalStartingDate, rentalEndingDate) values ('" . $_POST['vanId'] . "', '" . $priceId . "', '" . $_POST['rentalStartingDate'] . "', '" . $_POST['rentalEndingDate'] . "')");
-
-		$_SESSION['do'] = 'added';
-		header("Location: add-booking.php");
-}
 
 
 

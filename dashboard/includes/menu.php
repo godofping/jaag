@@ -12,15 +12,14 @@
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="add-booking.php">Add Booking</a></li>
                                 <li><a href="travel-and-tour.php">Travel and Tour</a></li>
-                                <li><a href="van-rentals.php">Van Rentals</a></li>
-                                
+                            
                             </ul>
                         </li>
 
                         <li><a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-washing-machine"></i><span class="hide-menu">Services</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="packages.php">Packages</a></li>
-                                <li><a href="vans.php">Vans</a></li>
+                              
                             </ul>
                         </li>
 
@@ -50,7 +49,7 @@
 
                         <li> <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-settings"></i><span class="hide-menu">Settings</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="drivers.php">Drivers</a></li>
+                                <li><a href="attendants.php">Attendants</a></li>
                                 <li><a href="places.php">Places</a></li>
                                 <li><a href="back-up-and-restore.php">Back-up and Restore</a></li>
                             </ul>

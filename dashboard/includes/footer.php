@@ -143,7 +143,9 @@
     $('.input-daterange-datepicker').daterangepicker({
         buttonClasses: ['btn', 'btn-sm'],
         applyClass: 'btn-danger',
-        cancelClass: 'btn-inverse'
+        cancelClass: 'btn-inverse',
+        minDate : new Date(),
+        format: 'YYYY/MM/DD'
     });
     $('.input-daterange-timepicker').daterangepicker({
         timePicker: true,
