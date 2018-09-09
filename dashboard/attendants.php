@@ -7,13 +7,13 @@ include("includes/header.php");
 <!-- ============================================================== -->
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h3 class="text-themecolor">Drivers</h3>
+        <h3 class="text-themecolor">Attendants</h3>
     </div>
     <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="home.php">Home</a></li>
             <li class="breadcrumb-item">Settings</li>
-            <li class="breadcrumb-item active"><a href="applicants.php">Drivers</a></li>
+            <li class="breadcrumb-item active"><a href="applicants.php">Attendants</a></li>
         </ol>
     </div>
 
