@@ -7,17 +7,7 @@
 				<img src="img/logo_sticky.png" width="150" height="36" data-retina="true" alt="" class="logo_sticky">
 			</a>
 		</div>
-		<ul id="top_menu">
-		
-			<?php if (!isset($_SESSION['profileId'])): ?>
-				<li><a href="#sign-in-dialog" id="sign-in" class="login" title="Sign In">Sign In</a></li>
-			<?php endif ?>
 
-			<?php if (isset($_SESSION['profileId'])): ?>
-				<li><a href="#sign-in-dialog" id="sign-in" class="login" title="Log Out">Log Out</a></li>
-			<?php endif ?>
-		
-		</ul>
 		<!-- /top_menu -->
 		<a href="#menu" class="btn_mobile">
 			<div class="hamburger hamburger--spin" id="hamburger">
@@ -50,6 +40,14 @@
 
 				<?php if (!isset($_SESSION['profileId'])): ?>
 					<li><span><a href="register.php">Create Account</a></span></li>
+				<?php endif ?>
+
+				<?php if (!isset($_SESSION['profileId'])): ?>
+				<li><span><a href="#sign-in-dialog" id="sign-in" class="login" title="Sign In">Sign In</a></span></li>
+				<?php endif ?>
+
+				<?php if (isset($_SESSION['profileId'])): ?>
+					<li><span><a href="#sign-in-dialog" id="sign-in" class="login" title="Log Out">Log Out</a></span></li>
 				<?php endif ?>
 
 			</ul>

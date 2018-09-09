@@ -31,8 +31,26 @@
         <div class="card">
             <div class="">
                 <div class="row">
+                    <div class="col-md-3">
+                        <div class="card-body">
+                            <h4 class="card-title m-t-10">Legend</h4>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div id="calendar-events" class="">
+                                        <div  data-class="bg-info"><i class="fa fa-circle text-info"></i> My Event One</div>
+                                        <div  data-class="bg-success"><i class="fa fa-circle text-success"></i> My Event Two</div>
+                                        <div  data-class="bg-danger"><i class="fa fa-circle text-danger"></i> My Event Three</div>
+                                        <div data-class="bg-warning"><i class="fa fa-circle text-warning"></i> My Event Four</div>
+                                    </div>
+                          
+                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                    <div class="col-md-12">
+
+                    <div class="col-md-9">
                         <div class="card-body b-l calender-sidebar">
                             <div id="calendar"></div>
                         </div>
@@ -168,15 +186,9 @@
                 title: 'Surigao Tour!',
                 start: '2018-09-4',
                 end: '2018-09-5',
-                className: 'bg-info'
+                className: 'bg-success'
             },
-            {
-                packageId: '3',
-                title: 'Siargao Tour!',
-                start: '2018-09-12',
-                end: '2018-09-15',
-                className: 'bg-info'
-            }
+            
             ];
 
         var $this = this;
