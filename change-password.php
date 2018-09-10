@@ -16,7 +16,7 @@
 				<ul>
 					<li><a href="index.php">Home</a>
 					</li>
-					<li><a>My Accounts</a></li>
+					<li><a>My Account</a></li>
 					<li>Change Password</li>
 				</ul>
 			</div>

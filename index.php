@@ -180,22 +180,16 @@ $res1 = mysqli_fetch_assoc($qry1);
                     <div class="tour_container">
                         <div class="ribbon_3 popular"><span>New</span></div>
                         <div class="img_container">
-                            <a href="single_tour.html">
+                            <a href="tour-details.php?packageId=<?php echo $res['packageId'] ?>">
                                 <img src="dashboard/<?php echo $res1['mediaLocation'] ?>" class="img-responsive" alt="image">
                                 <div class="short_info">
-                                    <span class="price"><sup>‎₱</sup>39</span>
+                                    <span class="price"><sup>‎₱</sup><?php echo number_format($res['price'], 2); ?></span>
                                 </div>
                             </a>
                         </div>
                         <div class="tour_title">
-                            <h3><strong>Arc Triomphe</strong> tour</h3>
-                            <div class="rating">
-                                <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><small>(75)</small>
-                            </div>
-                            <!-- end rating -->
-                            <div class="wishlist">
-                                <a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
-                            </div>
+                            <a href="tour-details.php?packageId=<?php echo $res['packageId'] ?>"><h3><strong><?php echo $res['packageName']; ?></strong></h3></a>
+                  
                             <!-- End wish list-->
                         </div>
                     </div>
