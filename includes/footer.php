@@ -70,6 +70,15 @@
     <script type="text/javascript" src="rev-slider-files/js/extensions/revolution.extension.parallax.min.js"></script>
     <script type="text/javascript" src="rev-slider-files/js/extensions/revolution.extension.slideanims.min.js"></script>
     <script type="text/javascript" src="rev-slider-files/js/extensions/revolution.extension.video.min.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+    <script type="text/javascript">
+        $('input[name="dates"]').daterangepicker({
+            minDate : new Date()
+        });
+    </script>
     <script type="text/javascript">
         var tpj = jQuery;
 
