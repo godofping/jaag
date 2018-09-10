@@ -34,7 +34,7 @@
                             <li><a href="https://www.facebook.com/jaagtravelandtour23/"><i class="icon-facebook"></i></a></li>
               
                         </ul>
-                        <p>© Citytours 2015</p>
+                        <p>© JAAG <?php echo date('Y'); ?></p>
                     </div>
                 </div>
             </div><!-- End row -->
