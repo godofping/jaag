@@ -17,10 +17,10 @@
                             <li class="submenu">
                                 <a href="javascript:void(0);" class="show-submenu">My Accounts <i class="icon-down-open-mini"></i></a>
                                 <ul>
-                                    <li><a href="all_restaurants_list.html">My Bookings</a></li>
-                                    <li><a href="all_restaurants_list.html">View Profile</a></li>
-                                    <li><a href="all_restaurants_list.html">Update Profile</a></li>
-                                    <li><a href="all_restaurants_list.html">Change Password</a></li>
+                                    <li><a href="my-bookings.php">My Bookings</a></li>
+                                    <li><a href="view-profile.php">View Profile</a></li>
+                                    <li><a href="update-profile.php">Update Profile</a></li>
+                                    <li><a href="change-password.php">Change Password</a></li>
         
                                 </ul>
                             </li>

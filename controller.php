@@ -15,10 +15,34 @@ if (isset($_POST['from']) and $_POST['from'] == 'register') {
 
 		$_SESSION['profileId'] = $profileId;
 		$_SESSION['do'] = 'registration-success';
+		$_SESSION['accountType'] = 'Online Customer';
+
+
+		unset($_SESSION['firstName']);
+		unset($_SESSION['middleName']);
+		unset($_SESSION['lastName']);
+		unset($_SESSION['province']);
+		unset($_SESSION['city']);
+		unset($_SESSION['barangay']);
+		unset($_SESSION['street']);
+		unset($_SESSION['buildingNumber']);
+		unset($_SESSION['contactNumber']);
+
 		header("Location: index.php");
 	}
 	else
 	{
+
+		$_SESSION['firstName'] = $_POST['firstName'];
+		$_SESSION['middleName'] = $_POST['middleName'];
+		$_SESSION['lastName'] = $_POST['lastName'];
+		$_SESSION['province'] = $_POST['province1'];
+		$_SESSION['city'] = $_POST['city1'];
+		$_SESSION['barangay'] = $_POST['barangay'];
+		$_SESSION['street'] = $_POST['street'];
+		$_SESSION['buildingNumber'] = $_POST['buildingNumber'];
+		$_SESSION['contactNumber'] = $_POST['contactNumber'];
+
 		$_SESSION['do'] = 'username-taken';
 		header("Location: register.php");
 	}
@@ -72,7 +96,7 @@ if (isset($_POST['from']) and $_POST['from'] == 'update-profile') {
 if (isset($_POST['from']) and $_POST['from'] == 'update-password') {
 
 	if ($_POST['passWord'] == md5($_POST['oldPassword']) and $_POST['newPassword'] == $_POST['confirmNewPassword']) {
-		mysqli_query($connection, "update profile_table set passWord = '" . md5($_POST['newPassword']) . "' where profileId = '" . $_POST['profileId'] . "' ");
+		mysqli_query($connection, "update profile_table set passWord = '" . md5($_POST['newPassword']) . "' where profileId = '" . $_SESSION['profileId'] . "' ");
 		$_SESSION['do'] = 'updated';
 	}
 	else

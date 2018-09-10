@@ -37,6 +37,9 @@
     <link rel="stylesheet" href="assets/toastr/toastr.css">
 
     <link rel="stylesheet" href="assets/material-design/material-design.min.css">
+
+    <link href="css/admin.css" rel="stylesheet">
+    <link href="css/jquery.switch.css" rel="stylesheet">
     
 
 

@@ -73,6 +73,16 @@
 
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<!-- Specific scripts -->
+    <script src="js/tabs.js"></script>
+    <script>
+        new CBPFWTabs(document.getElementById('tabs'));
+    </script>
+    <script>
+        $('.wishlist_close_admin').on('click', function (c) {
+            $(this).parent().parent().parent().fadeOut('slow', function (c) {});
+        });
+    </script>
 
 <script src="assets/toastr/toastr.js"></script>
 
@@ -84,7 +94,7 @@
 
         <script>
             <?php if ($_SESSION['do'] == 'added'): ?>
-            toastr["success"]("Successfully added!", "Message");
+                toastr["success"]("Successfully added!", "Message");
             <?php endif ?>
             <?php if ($_SESSION['do'] == 'updated'): ?>
                 toastr["success"]("Successfully updated!", "Message");
@@ -96,22 +106,22 @@
                 toastr["error"]("Update password failed! Please try again.", "Error");
             <?php endif ?>
             <?php if ($_SESSION['do'] == 'login-failed'): ?>
-
                 toastr["error"]("Login Failed! Wrong account.", "Error");
             <?php endif ?>
-
             <?php if ($_SESSION['do'] == 'login-success'): ?>
-            toastr["success"]("Login Success!", "Message");
+                toastr["success"]("Login Success!", "Message");
             <?php endif ?>
-
             <?php if ($_SESSION['do'] == 'registration-success'): ?>
-            toastr["success"]("Registration Success!", "Message");
+                toastr["success"]("Registration Success!", "Message");
             <?php endif ?>
             <?php if ($_SESSION['do'] == 'logout'): ?>
-            toastr["success"]("Successfully logout!", "Message");
+                toastr["success"]("Successfully logout!", "Message");
+            <?php endif ?>
+            <?php if ($_SESSION['do'] == 'username-taken'): ?>
+                toastr["error"]("Username is already taken!", "Message");
             <?php endif ?>
 
- 
+
 
           
         </script>
