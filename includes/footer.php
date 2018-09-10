@@ -230,7 +230,22 @@
         }); /*ready*/
     </script>
     
-    <!-- <script src="js/notify_func.js"></script> -->
+    <!-- Cat nav mobile -->
+    <script src="js/cat_nav_mobile.js"></script>
+    <script>
+        $('#cat_nav').mobileMenu();
+    </script>
+    <!-- Check and radio inputs -->
+    <script src="js/icheck.js"></script>
+    <script>
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-grey',
+            radioClass: 'iradio_square-grey'
+        });
+    </script>
+    <!-- Map -->
+    <script src="http://maps.googleapis.com/maps/api/js"></script>
+    
 
 </body>
 

@@ -137,7 +137,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label>Select Date</label>
+                        <label>View Packages within this date</label>
                         <input class="form-control input-daterange-datepicker" type="text" name="dates" />
                     </div>
 

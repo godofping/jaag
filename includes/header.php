@@ -40,6 +40,11 @@
 
     <link href="css/admin.css" rel="stylesheet">
     <link href="css/jquery.switch.css" rel="stylesheet">
+
+    <!-- Range slider -->
+    <link href="css/ion.rangeSlider.css" rel="stylesheet">
+    <link href="css/ion.rangeSlider.skinFlat.css" rel="stylesheet">
+
     
 
 
@@ -156,7 +161,7 @@
         <div id="top_line">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-6 col-sm-6 col-xs-6"><i class="icon-phone"></i><strong>09168574996</strong></div>
+                    <div class="col-md-6 col-sm-6 col-xs-6"><i class="icon-phone"></i><strong>+639972609952</strong></div>
                     
                     <div class="col-md-6 col-sm-6 col-xs-6">
                         <ul id="top_links">
