@@ -74,6 +74,60 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
+<script src="assets/toastr/toastr.js"></script>
+
+
+
+
+    <?php 
+    if (isset($_SESSION['do'])): ?>
+
+        <script>
+            <?php if ($_SESSION['do'] == 'added'): ?>
+            toastr["success"]("Successfully added!", "Message");
+            <?php endif ?>
+            <?php if ($_SESSION['do'] == 'updated'): ?>
+                toastr["success"]("Successfully updated!", "Message");
+            <?php endif ?>
+            <?php if ($_SESSION['do'] == 'deleted'): ?>
+                toastr["success"]("Successfully deleted!", "Message");
+            <?php endif ?>
+            <?php if ($_SESSION['do'] == 'updated-password-failed'): ?>
+                toastr["error"]("Update password failed! Please try again.", "Error");
+            <?php endif ?>
+            <?php if ($_SESSION['do'] == 'login-failed'): ?>
+
+                toastr["error"]("Login Failed! Wrong account.", "Error");
+            <?php endif ?>
+
+            <?php if ($_SESSION['do'] == 'login-success'): ?>
+            toastr["success"]("Login Success!", "Message");
+            <?php endif ?>
+
+            <?php if ($_SESSION['do'] == 'registration-success'): ?>
+            toastr["success"]("Registration Success!", "Message");
+            <?php endif ?>
+            <?php if ($_SESSION['do'] == 'logout'): ?>
+            toastr["success"]("Successfully logout!", "Message");
+            <?php endif ?>
+
+ 
+
+          
+        </script>
+
+
+
+    <?php endif ?>
+
+
+
+        <?php
+        if (isset($_SESSION['do'])) {
+            unset($_SESSION['do']);
+        }
+        ?>
+
     <script type="text/javascript">
         $('input[name="dates"]').daterangepicker({
             minDate : new Date()

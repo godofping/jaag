@@ -34,7 +34,12 @@
     <link rel="stylesheet" type="text/css" href="rev-slider-files/fonts/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" type="text/css" href="rev-slider-files/css/settings.css">
 
+    <link rel="stylesheet" href="assets/toastr/toastr.css">
+
+    <link rel="stylesheet" href="assets/material-design/material-design.min.css">
     
+
+
 
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     
@@ -152,24 +157,40 @@
                     
                     <div class="col-md-6 col-sm-6 col-xs-6">
                         <ul id="top_links">
-                            <li>
+                        <?php if (!isset($_SESSION['profileId'])): ?>
+                                  <li>
                                 <div class="dropdown dropdown-access">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="access_link">Sign in</a>
                                     <div class="dropdown-menu">
-                                  
-                                 
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" id="inputUsernameEmail" placeholder="Email">
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="password" class="form-control" id="inputPassword" placeholder="Password">
-                                        </div>
-                                       
-                                        <input type="submit" name="Sign_in" value="Sign in" id="Sign_in" class="button_drop">
-                                        <input type="submit" name="Sign_up" value="Sign up" id="Sign_up" class="button_drop outline">
+                                         <form method="POST" action="controller.php">
+                                        <h4>Login</h4>
+                                        
+                                            <div class="form-group">
+                                            <input type="text" class="form-control" name="userName" id="userName" placeholder="Username">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="password" class="form-control" name="passWord" id="passWord" placeholder="Password" required="">
+                                            </div>
+
+                                            <input type="text" name="from" value="login" hidden="" required="">
+                                           
+                                            <input type="submit" name="Sign_in" value="Sign in" id="Sign_in" class="button_drop">
+                                        
+                                        <a href="register.php" class="button_drop outline">Sign up</a>
                                     </div>
+                                    </form>
                                 </div><!-- End Dropdown access -->
                             </li>
+                        <?php endif ?>
+
+                        <?php if (isset($_SESSION['profileId'])): ?>
+                                  <li>
+                                <div class="dropdown dropdown-access">
+                                    <a href="controller.php?from=logout"  id="access_link">Logout</a>
+                            
+                                </div><!-- End Dropdown access -->
+                            </li>
+                        <?php endif ?>  
                       
                          
                         </ul>

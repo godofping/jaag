@@ -11,9 +11,9 @@
                             <li class="submenu"><a href="javascript:void(0);">Tour Packages</a></li>
                             <li class="submenu"><a href="javascript:void(0);">Announcements</a></li>
                             <li class="submenu"><a href="javascript:void(0);">Feedbacks</a></li>
-                    
-                            
-                            <?php if (isset($_SESSION['profileId'])): ?>
+                            <li class="submenu"><a href="javascript:void(0);">About</a></li>
+                            <li class="submenu"><a href="javascript:void(0);">Contact Us</a></li>
+                             <?php if (isset($_SESSION['profileId'])): ?>
                             <li class="submenu">
                                 <a href="javascript:void(0);" class="show-submenu">My Accounts <i class="icon-down-open-mini"></i></a>
                                 <ul>
@@ -25,8 +25,6 @@
                                 </ul>
                             </li>
                             <?php endif ?>
-                            <li class="submenu"><a href="javascript:void(0);">About</a></li>
-                            <li class="submenu"><a href="javascript:void(0);">Contact Us</a></li>
 
 
                        

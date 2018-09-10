@@ -27,7 +27,7 @@ if (isset($_POST['from']) and $_POST['from'] == 'register') {
 
 }
 
-if (isset($_POST['from']) and $_POST['from'] == 'logout') {
+if (isset($_GET['from']) and $_GET['from'] == 'logout') {
 	session_destroy();
 	session_start();
 	$_SESSION['do'] = 'logout';
