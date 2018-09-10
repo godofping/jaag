@@ -1,185 +1,164 @@
-	<footer>
-		<div class="container margin_60_35">
-			<div class="row">
-				<div class="col-lg-5 col-md-12 p-r-5">
-					<p><img src="img/logo_2x.png" width="150" height="36" data-retina="true" alt=""></p>
-					<p>JAAG Travel and Tour and Van Rentals offers the cheapest tour packages and van rentals in the town!</p>
-					<div class="follow_us">
-						<ul>
-							<li>Follow us</li>
-							<li><a href="https://www.facebook.com/jaagtravelandtour23/"><i class="ti-facebook"></i></a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 ml-lg-auto">
-					<h5>Useful links</h5>
-					<ul class="links">
-						<li><a href="about.php">About</a></li>
-						<?php if (!isset($_SESSION['profileId'])): ?>
-							<li><a href="login.php">Login</a></li>
-							<li><a href="register.php">Register</a></li>
-						<?php endif ?>
-						<li><a href="announcement.php">Announcements</a></li>
-						<li><a href="reviews.php">Reviews</a></li>
-			
-					</ul>
-				</div>
-				<div class="col-lg-3 col-md-6">
-					<h5>Contact with Us</h5>
-					<ul class="contacts">
-						<li><a href="tel://639972609952"><i class="ti-mobile"></i> + 63 997 260 9952</a></li>
-						<li><a href="mailto:info@jaag.com"><i class="ti-email"></i> info@jaag.com</a></li>
-					</ul>
-					
-				</div>
-			</div>
-			<!--/row-->
-			<hr>
-			<div class="row">
-				<div class="col-lg-6">
-					<ul id="footer-selector">
-						
-						
-					</ul>
-				</div>
-				<div class="col-lg-6">
-					<ul id="additional_links">
-						<li><a href="#0">Terms and conditions</a></li>
-						<li><a href="#0">Privacy</a></li>
-						<li><span>© 2018 JAAG</span></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</footer>
-	<!--/footer-->
-	</div>
-	<!-- page -->
-	
-	<?php if (!isset($_SESSION['profileId'])): ?>
-		<!-- Sign In Popup -->
-	<div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">
-		<div class="small-dialog-header">
-			<h3>Sign In</h3>
-		</div>
-			<form method="POST" action="controller.php">
-				<div class="sign-in-wrapper">
+ <footer class="revealed">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-sm-3">
+                    <h3>Need help?</h3>
+                    <a href="tel://004542344599" id="phone">+09168574996</a>
+                    <a href="mailto:help@jaag.com" id="email_footer">help@jaag.com</a>
+                </div>
+                <div class="col-md-3 col-sm-3">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="#">About us</a></li>
+                      
+                        <li><a href="#">Login</a></li>
+                        <li><a href="#">Register</a></li>
+                     
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-3">
+                    <h3>Discover</h3>
+                    <ul>
+                        <li><a href="#">Feedbacks</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Announcements</a></li>
+                       
+                    </ul>
+                </div>
+          
+            </div><!-- End row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="social_footer">
+                        <ul>
+                            <li><a href="https://www.facebook.com/jaagtravelandtour23/"><i class="icon-facebook"></i></a></li>
+              
+                        </ul>
+                        <p>© Citytours 2015</p>
+                    </div>
+                </div>
+            </div><!-- End row -->
+        </div><!-- End container -->
+    </footer><!-- End footer -->
 
-				
-					<div class="form-group">
-						<label>UserName</label>
-						<input type="text" class="form-control" name="userName" id="userName" required="">
-		
-					</div>
-					<div class="form-group">
-						<label>Password</label>
-						<input type="password" class="form-control" name="passWord" id="passWord" required="">
-				
-					</div>
+<div id="toTop"></div><!-- Back to top button -->
+    
+    <!-- Search Menu -->
+    <div class="search-overlay-menu">
+        <span class="search-overlay-close"><i class="icon_set_1_icon-77"></i></span>
+        <form role="search" id="searchform" method="get">
+            <input value="" name="q" type="search" placeholder="Search..." />
+            <button type="submit"><i class="icon_set_1_icon-78"></i>
+            </button>
+        </form>
+    </div><!-- End Search Menu -->
 
-					<div class="text-center"><input type="submit" value="Log In" class="btn_1 full-width"></div>
-					<div class="text-center">
-						Don’t have an account? <a href="register.php">Sign up</a>
-					</div>
-					
-				</div>
-				<input type="text" name="from" value="login" hidden="">
-			</form>
-			<!--form -->
-		</div>
-		<!-- /Sign In Popup -->
-	<?php endif ?>
-
-	<?php if (isset($_SESSION['profileId'])): ?>
-		<!-- Sign In Popup -->
-	<div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">
-		<div class="small-dialog-header">
-			<h3>Log Out</h3>
-		</div>
-			<form method="POST" action="controller.php">
-				<div class="sign-in-wrapper">
-
-					<h4>Are you sure to Log Out?</h4>
-
-					<div class="text-center"><input type="submit" value="Yes, Log Out" class="btn_1 full-width"></div>
-					
-					
-				</div>
-				<input type="text" name="from" value="logout" hidden="">
-			</form>
-			<!--form -->
-		</div>
-		<!-- /Sign In Popup -->
-	<?php endif ?>
-	
-	<div id="toTop"></div><!-- Back to top button -->
-	
-	<!-- COMMON SCRIPTS -->
+    <!-- Common scripts -->
     <script src="js/jquery-2.2.4.min.js"></script>
-    <script src="js/common_scripts.js"></script>
-    <script src="js/main.js"></script>
-	<script src="assets/validate.js"></script>
-	
-	<!-- SPECIFIC SCRIPTS -->
-	<script src="js/video_header.js"></script>
-	<script>
-		HeaderVideo.init({
-			container: $('.header-video'),
-			header: $('.header-video--media'),
-			videoTrigger: $("#video-trigger"),
-			autoPlayVideo: true
-		});
-	</script>
+    <script src="js/common_scripts_min.js"></script>
+    <script src="js/functions.js"></script>
 
-	<script src="js/toastr/toastr.js"></script>
-	<script src="js/toastr.js"></script>
+    <!-- SLIDER REVOLUTION SCRIPTS  -->
+    <script type="text/javascript" src="rev-slider-files/js/jquery.themepunch.tools.min.js"></script>
+    <script type="text/javascript" src="rev-slider-files/js/jquery.themepunch.revolution.min.js"></script>
+    <script type="text/javascript" src="rev-slider-files/js/extensions/revolution.extension.actions.min.js"></script>
+    <script type="text/javascript" src="rev-slider-files/js/extensions/revolution.extension.carousel.min.js"></script>
+    <script type="text/javascript" src="rev-slider-files/js/extensions/revolution.extension.kenburn.min.js"></script>
+    <script type="text/javascript" src="rev-slider-files/js/extensions/revolution.extension.layeranimation.min.js"></script>
+    <script type="text/javascript" src="rev-slider-files/js/extensions/revolution.extension.migration.min.js"></script>
+    <script type="text/javascript" src="rev-slider-files/js/extensions/revolution.extension.navigation.min.js"></script>
+    <script type="text/javascript" src="rev-slider-files/js/extensions/revolution.extension.parallax.min.js"></script>
+    <script type="text/javascript" src="rev-slider-files/js/extensions/revolution.extension.slideanims.min.js"></script>
+    <script type="text/javascript" src="rev-slider-files/js/extensions/revolution.extension.video.min.js"></script>
+    <script type="text/javascript">
+        var tpj = jQuery;
 
-	<?php 
-	if (isset($_SESSION['do'])): ?>
+        var revapi54;
+        tpj(document).ready(function () {
+            if (tpj("#rev_slider_54_1").revolution == undefined) {
+                revslider_showDoubleJqueryError("#rev_slider_54_1");
+            } else {
+                revapi54 = tpj("#rev_slider_54_1").show().revolution({
+                    sliderType: "standard",
+                    jsFileLocation: "rev-slider-files/js/",
+                    sliderLayout: "fullwidth",
+                    dottedOverlay: "none",
+                    delay: 9000,
+                    navigation: {
+                            keyboardNavigation:"off",
+                            keyboard_direction: "horizontal",
+                            mouseScrollNavigation:"off",
+                             mouseScrollReverse:"default",
+                            onHoverStop:"off",
+                            touch:{
+                                touchenabled:"on",
+                                touchOnDesktop:"off",
+                                swipe_threshold: 75,
+                                swipe_min_touches: 50,
+                                swipe_direction: "horizontal",
+                                drag_block_vertical: false
+                            }
+                            ,
+                            arrows: {
+                                style:"uranus",
+                                enable:true,
+                                hide_onmobile:true,
+                                hide_under:778,
+                                hide_onleave:true,
+                                hide_delay:200,
+                                hide_delay_mobile:1200,
+                                tmp:'',
+                                left: {
+                                    h_align:"left",
+                                    v_align:"center",
+                                    h_offset:20,
+                                    v_offset:0
+                                },
+                                right: {
+                                    h_align:"right",
+                                    v_align:"center",
+                                    h_offset:20,
+                                    v_offset:0
+                                }
+                            }
+                        },
+                    responsiveLevels: [1240, 1024, 778, 480],
+                    visibilityLevels: [1240, 1024, 778, 480],
+                    gridwidth: [1240, 1024, 778, 480],
+                    gridheight: [700, 550, 860, 480],
+                    lazyType: "none",
+                    parallax: {
+                        type: "mouse",
+                        origo: "slidercenter",
+                        speed: 2000,
+                        levels: [2, 3, 4, 5, 6, 7, 12, 16, 10, 50, 47, 48, 49, 50, 51, 55],
+                        disable_onmobile: "on"
+                    },
+                    shadow: 0,
+                    spinner: "off",
+                    stopLoop: "on",
+                    stopAfterLoops: 0,
+                    stopAtSlide: 1,
+                    shuffle: "off",
+                    autoHeight: "off",
+                    disableProgressBar: "on",
+                    hideThumbsOnMobile: "off",
+                    hideSliderAtLimit: 0,
+                    hideCaptionAtLimit: 0,
+                    hideAllCaptionAtLilmit: 0,
+                    debugMode: false,
+                    fallbacks: {
+                        simplifyAll: "off",
+                        nextSlideOnWindowFocus: "off",
+                        disableFocusListener: false,
+                    }
+                });
+            }
+        }); /*ready*/
+    </script>
+    
+    <!-- <script src="js/notify_func.js"></script> -->
 
-        <script>
-            <?php if ($_SESSION['do'] == 'added'): ?>
-            toastr["success"]("Successfully added!", "Message");
-            <?php endif ?>
-            <?php if ($_SESSION['do'] == 'updated'): ?>
-                toastr["success"]("Successfully updated!", "Message");
-            <?php endif ?>
-            <?php if ($_SESSION['do'] == 'deleted'): ?>
-                toastr["success"]("Successfully deleted!", "Message");
-            <?php endif ?>
-            <?php if ($_SESSION['do'] == 'updated-password-failed'): ?>
-                toastr["error"]("Update password failed! Please try again.", "Error");
-            <?php endif ?>
-            <?php if ($_SESSION['do'] == 'login-failed'): ?>
-
-                toastr["error"]("Login Failed! Wrong account.", "Error");
-            <?php endif ?>
-
-            <?php if ($_SESSION['do'] == 'login-success'): ?>
-            toastr["success"]("Login Success!", "Message");
-            <?php endif ?>
-
-            <?php if ($_SESSION['do'] == 'registration-success'): ?>
-            toastr["success"]("Registration Success!", "Message");
-            <?php endif ?>
-
-            
-        </script>
-
-
-
-    <?php endif ?>
-
-
-
- 		<?php
-        if (isset($_SESSION['do'])) {
-            unset($_SESSION['do']);
-        }
-        ?>
-
-        
-	
-	
 </body>
+
 </html>
