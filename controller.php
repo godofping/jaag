@@ -90,7 +90,7 @@ if (isset($_POST['from']) and $_POST['from'] == 'update-profile') {
 	mysqli_query($connection, "update profile_table set firstName = '" . $_POST['firstName'] . "', middleName = '" . $_POST['middleName'] . "', lastName = '" . $_POST['lastName'] . "', contactNumber = '" . $_POST['contactNumber'] . "' where profileId = '" . $_POST['profileId'] . "'");
 
 	$_SESSION['do'] = 'updated';
-	header("Location: update-profile.php");
+	header("Location: profile.php");
 }
 
 if (isset($_POST['from']) and $_POST['from'] == 'update-password') {

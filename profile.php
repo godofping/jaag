@@ -71,88 +71,103 @@
 						<!-- End row -->
 
 						<div class="divider"></div>
-
+						<form method="POST" action="controller.php">
 						<div class="row">
 							<div class="col-md-12">
 								<h4>Edit profile</h4>
 							</div>
-							<div class="col-md-6 col-sm-6">
+							<div class="col-md-4">
 								<div class="form-group">
 									<label>First name</label>
-									<input class="form-control" name="first_name" id="first_name" type="text">
+									<input class="form-control" name="firstName" type="text" value="<?php echo $res['firstName'] ?>" required>
 								</div>
 							</div>
-							<div class="col-md-6 col-sm-6">
+
+							<div class="col-md-4">
+								<div class="form-group">
+									<label>Middle name</label>
+									<input class="form-control" name="middleName" type="text" value="<?php echo $res['middleName'] ?>" required>
+								</div>
+							</div>
+
+							<div class="col-md-4">
 								<div class="form-group">
 									<label>Last name</label>
-									<input class="form-control" name="last_name" id="last_name" type="text">
+									<input class="form-control" name="lastName" type="text" value="<?php echo $res['lastName'] ?>" required>
+								</div>
+							</div>
+
+						</div>
+						<!-- End row -->
+
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label>Contact number</label>
+									<input class="form-control" name="contactNumber" type="text" value="<?php echo $res['contactNumber'] ?>" required>
 								</div>
 							</div>
 						</div>
 						<!-- End row -->
 
-						<div class="row">
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Phone number</label>
-									<input class="form-control" name="email_2" id="email_2" type="text">
-								</div>
-							</div>
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Date of birth <small>(dd/mm/yyyy)</small>
-									</label>
-									<input class="form-control" name="email" id="email" type="text">
-								</div>
-							</div>
-						</div>
-						<!-- End row -->
 
 						<hr>
 						<div class="row">
 							<div class="col-md-12">
 								<h4>Edit address</h4>
 							</div>
-							<div class="col-md-6 col-sm-6">
+							<div class="col-md-4">
 								<div class="form-group">
-									<label>Street address</label>
-									<input class="form-control" name="first_name" id="first_name" type="text">
+									<label>Province</label>
+									<select class="form-control" name="province" id="province" required="" onchange="populateCity()"></select>
 								</div>
 							</div>
-							<div class="col-md-6 col-sm-6">
+							<div class="col-md-4">
 								<div class="form-group">
-									<label>City/Town</label>
-									<input class="form-control" name="last_name" id="last_name" type="text">
-								</div>
-							</div>
-						</div>
-						<!-- End row -->
-
-						<div class="row">
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Zip code</label>
-									<input class="form-control" name="email" id="email" type="text">
-								</div>
-							</div>
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Country</label>
-									<select id="country" class="form-control" name="country">
-										<option value="">Select...</option>
+									<label>City</label>
+									<select class="form-control" name="city" id="city" required="" onchange="populateBarangay()">
+										<option><?php echo $res['city']; ?></option>
 									</select>
 								</div>
 							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+								<label>Barangay</label>
+								<select class="form-control" name="barangay" id="barangay">
+									<option><?php echo $res['barangay']; ?></option>
+								</select>
+							</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label>Street</label>
+									<input class="form-control" name="street" type="text" value="<?php echo $res['street'] ?>" >
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label>Building number</label>
+									<input class="form-control" name="buildingNumber" type="text" value="<?php echo $res['buildingNumber'] ?>" >
+								</div>
+							</div>
 						</div>
 						<!-- End row -->
 
-	
+						<input type="text" name="from" value="update-profile" hidden="">
+				<input type="text" name="profileId" value="<?php echo $res['profileId'] ?>" hidden="">
+				<input type="text" name="addressId" value="<?php echo $res['addressId'] ?>" hidden="">
+
+				<input type="text" name="province1" id="province1" hidden="">
+                <input type="text" name="city1" id="city1" hidden="">
 
 							<hr>
-							<button type="submit" class="btn_1 green">Update Profile</button>
+							<button  class="btn_1 green" onclick="pushData()">Update Profile</button>
 					</section>
 					<!-- End section 4 -->
-
+				</form>
 					</div>
 					<!-- End content -->
 				</div>
@@ -162,4 +177,77 @@
 	</main>
 	<!-- End main -->
 <?php include("includes/footer.php"); ?>
+
+<script type="text/javascript">
+
+function pushData()
+{
+    document.getElementById("province1").value = $("#province option:selected").text();
+    document.getElementById("city1").value = $("#city option:selected").text();
+
+    var form = document.getElementById("form");
+
+    document.getElementById("submitButton").addEventListener("click", function () {
+    form.submit();
+    });
+}
+
+var $select = $('#province');
+
+  $.getJSON('dashboard/JSON/refprovince.json', function(data){
+    $select.html('');
+
+  	$select.append('<option><?php echo $res['province']; ?></option>');
+
+    for (var i = 0; i < data['PROVINCES'].length; i++) {
+      $select.append('<option value="'+ data['PROVINCES'][i]['provCode'] + '">' + "Region " + data['PROVINCES'][i]['regCode'] + ": " + data['PROVINCES'][i]['provDesc'] + '</option>');
+    }
+
+
+  });
+
+
+
+function populateCity() {
+
+  var $selectCity = $('#city');
+
+  $.getJSON('dashboard/JSON/refcitymun.json', function(data){
+    $selectCity.html('');
+
+    for (var i = 0; i < data['CITIES'].length; i++) {
+     if (data['CITIES'][i]['provCode'] == $("#province option:selected").val()) {
+       $selectCity.append('<option value="'+ data['CITIES'][i]['citymunCode'] + '">' + data['CITIES'][i]['citymunDesc'] + '</option>');
+     }
+    }
+
+
+
+  });
+}
+
+function populateBarangay() {
+
+  var $selectBarangay = $('#barangay');
+
+  $.getJSON('dashboard/JSON/refbrgy.json', function(data){
+    $selectBarangay.html('');
+
+    $select.append('<option><?php echo $res['barangay']; ?></option>');
+
+    for (var i = 0; i < data['BARANGAYS'].length; i++) {
+
+     if (data['BARANGAYS'][i]['citymunCode'] == $("#city option:selected").val()) {
+       $selectBarangay.append('<option value="'+ data['BARANGAYS'][i]['brgyDesc'] + '">' + data['BARANGAYS'][i]['brgyDesc'] + '</option>');
+     }
+
+
+    }
+
+  });
+}
+
+
+
+</script>
 
