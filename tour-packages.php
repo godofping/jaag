@@ -53,7 +53,7 @@
                     <button type="submit" class="btn_1 green">Search now</button>
                     <br>
                     <br>
-                    <a href="tour-packages.php"><button class="btn_1 red">View All Packages</button></a>
+                    <a href="tour-packages.php"><span class="btn_1 red">View All Packages</span></a>
                     </form>
                
              
@@ -144,7 +144,7 @@
 				<!--End strip -->
 			<?php } ?>
 			<?php if ($counter == 0): ?>
-				<h2>No Packages available from <?php echo $_GET['from']; ?> to <?php echo $_GET['to']; ?>.</h2>
+				<h3>No Packages available from <?php echo $_GET['from']; ?> to <?php echo $_GET['to']; ?>.</h3>
 				<?php endif ?>
 
 
