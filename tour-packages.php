@@ -147,12 +147,6 @@
 				<h3>No Packages available from <?php echo $_GET['from']; ?> to <?php echo $_GET['to']; ?>.</h3>
 				<?php endif ?>
 
-
-    
-
-
-				
-
 				<hr>
 
 			</div>

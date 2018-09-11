@@ -40,6 +40,7 @@
 									<thead>
 										<tr>
 											<th>Booking ID</th>
+											<th>Package Name</th>
 											<th>Travel Dates</th>
 											<th>Slots Booked</th>
 											<th>Status</th>
