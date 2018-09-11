@@ -99,245 +99,35 @@ $res1 = mysqli_fetch_assoc($qry1);
 								<table class="table table-striped">
 									<thead>
 										<tr>
-											<th colspan="2">
-												1st March to 31st October
-											</th>
+											<th>Travel ID</th>
+											<th>Schedules</th>
+											<th>Slots Booked</th>
+											<th>Status</th>
+											<th>Action</th>
+										
 										</tr>
 									</thead>
 									<tbody>
+										<?php $qry3 = mysqli_query($connection, "select * from travel_and_tour_view where packageId = '" . $_GET['packageId'] . "'");
+										while ($res3 = mysqli_fetch_assoc($qry3)) { ?>
 										<tr>
-											<td>
-												Monday
-											</td>
-											<td>
-												10.00 - 17.30
-											</td>
+											<td><?php echo $res3['travelAndTourId']; ?></td>
+											<td><?php echo $res3['departureDate']; ?> - <?php echo $res3['returnDate']; ?></td>
+										
+											<td>0/<?php echo $res3['maxPax']; ?></td>
+											<td><?php echo $res3['travelAndTourStatus']; ?></td>
+											<td><button class="btn btn-info">Book</button></td>
 										</tr>
-										<tr>
-											<td>
-												Tuesday
-											</td>
-											<td>
-												09.00 - 17.30
-											</td>
-										</tr>
-										<tr>
-											<td>
-												Wednesday
-											</td>
-											<td>
-												09.00 - 17.30
-											</td>
-										</tr>
-										<tr>
-											<td>
-												Thursday
-											</td>
-											<td>
-												<span class="label label-danger">Closed</span>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												Friday
-											</td>
-											<td>
-												09.00 - 17.30
-											</td>
-										</tr>
-										<tr>
-											<td>
-												Saturday
-											</td>
-											<td>
-												09.00 - 17.30
-											</td>
-										</tr>
-										<tr>
-											<td>
-												Sunday
-											</td>
-											<td>
-												10.00 - 17.30
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<strong><em>Last Admission</em></strong>
-											</td>
-											<td>
-												<strong>17.00</strong>
-											</td>
-										</tr>
+										<?php } ?>
 									</tbody>
 								</table>
 							</div>
-							<div class=" table-responsive">
-								<table class="table table-striped">
-									<thead>
-										<tr>
-											<th colspan="2">
-												1st November to 28th February
-											</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>
-												Monday
-											</td>
-											<td>
-												10.00 - 17.30
-											</td>
-										</tr>
-										<tr>
-											<td>
-												Tuesday
-											</td>
-											<td>
-												09.00 - 17.30
-											</td>
-										</tr>
-										<tr>
-											<td>
-												Wednesday
-											</td>
-											<td>
-												09.00 - 17.30
-											</td>
-										</tr>
-										<tr>
-											<td>
-												Thursday
-											</td>
-											<td>
-												<span class="label label-danger">Closed</span>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												Friday
-											</td>
-											<td>
-												09.00 - 17.30
-											</td>
-										</tr>
-										<tr>
-											<td>
-												Saturday
-											</td>
-											<td>
-												09.00 - 17.30
-											</td>
-										</tr>
-										<tr>
-											<td>
-												Sunday
-											</td>
-											<td>
-												10.00 - 17.30
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<strong><em>Last Admission</em></strong>
-											</td>
-											<td>
-												<strong>17.00</strong>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
+						
 						</div>
 					</div>
 
 					<hr>
 
-					<div class="row">
-						<div class="col-md-3">
-							<h3>Reviews </h3>
-							<a href="#" class="btn_1 add_bottom_30" data-toggle="modal" data-target="#myReview">Leave a review</a>
-						</div>
-						<div class="col-md-9">
-							<div id="general_rating">11 Reviews
-								<div class="rating">
-									<i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><i class="icon-smile"></i>
-								</div>
-							</div>
-							<!-- End general_rating -->
-							<div class="row" id="rating_summary">
-								<div class="col-md-6">
-									<ul>
-										<li>Position
-											<div class="rating">
-												<i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><i class="icon-smile"></i>
-											</div>
-										</li>
-										<li>Tourist guide
-											<div class="rating">
-												<i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i>
-											</div>
-										</li>
-									</ul>
-								</div>
-								<div class="col-md-6">
-									<ul>
-										<li>Price
-											<div class="rating">
-												<i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><i class="icon-smile"></i>
-											</div>
-										</li>
-										<li>Quality
-											<div class="rating">
-												<i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i>
-											</div>
-										</li>
-									</ul>
-								</div>
-							</div>
-							<!-- End row -->
-							<hr>
-							<div class="review_strip_single">
-								<img src="img/avatar1.jpg" alt="Image" class="img-circle">
-								<small> - 10 March 2015 -</small>
-								<h4>Jhon Doe</h4>
-								<p>
-									"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum consequat ut sed sem. Duis quis tempor nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus."
-								</p>
-								<div class="rating">
-									<i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><i class="icon-smile"></i>
-								</div>
-							</div>
-							<!-- End review strip -->
-
-							<div class="review_strip_single">
-								<img src="img/avatar3.jpg" alt="Image" class="img-circle">
-								<small> - 10 March 2015 -</small>
-								<h4>Jhon Doe</h4>
-								<p>
-									"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum consequat ut sed sem. Duis quis tempor nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus."
-								</p>
-								<div class="rating">
-									<i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><i class="icon-smile"></i>
-								</div>
-							</div>
-							<!-- End review strip -->
-
-							<div class="review_strip_single last">
-								<img src="img/avatar2.jpg" alt="Image" class="img-circle">
-								<small> - 10 March 2015 -</small>
-								<h4>Jhon Doe</h4>
-								<p>
-									"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum consequat ut sed sem. Duis quis tempor nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus."
-								</p>
-								<div class="rating">
-									<i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><i class="icon-smile"></i>
-								</div>
-							</div>
-							<!-- End review strip -->
-						</div>
-					</div>
 				</div>
 				<!--End  single_tour_desc-->
 

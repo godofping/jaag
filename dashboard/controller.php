@@ -210,7 +210,7 @@ if (isset($_POST['from']) and $_POST['from'] == 'add-booking-travel') {
 	$date = explode(" - ", $_POST['daterange']);
 
 
-	mysqli_query($connection, "insert into travel_and_tour_table (packageId, departureDate, returnDate, maxPax) values ('" . $_POST['packageId'] . "', '" . date("Y-m-d", strtotime($date[0])) . "', '" . date("Y-m-d", strtotime($date[1])) . "', '" . $_POST['maxPax'] . "')");
+	mysqli_query($connection, "insert into travel_and_tour_table (packageId, departureDate, returnDate, maxPax, travelAndTourStatus) values ('" . $_POST['packageId'] . "', '" . date("Y-m-d", strtotime($date[0])) . "', '" . date("Y-m-d", strtotime($date[1])) . "', '" . $_POST['maxPax'] . "', 'Available')");
 
 		$_SESSION['do'] = 'added';
 		header("Location: add-booking.php");
