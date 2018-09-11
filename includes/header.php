@@ -44,7 +44,11 @@
     <!-- Range slider -->
     <link href="css/ion.rangeSlider.css" rel="stylesheet">
     <link href="css/ion.rangeSlider.skinFlat.css" rel="stylesheet">
+    <!-- CSS -->
+    <link href="css/blog.css" rel="stylesheet">
 
+
+    <link href="css/timeline.css" rel="stylesheet">
     
 
 

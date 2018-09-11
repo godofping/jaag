@@ -9,8 +9,8 @@
 
                             <li class="submenu"><a href="index.php">Home</a></li>
                             <li class="submenu"><a href="tour-packages.php">Tour Packages</a></li>
-                            <li class="submenu"><a href="javascript:void(0);">Announcements</a></li>
-                            <li class="submenu"><a href="javascript:void(0);">Feedbacks</a></li>
+                            <li class="submenu"><a href="announcements.php">Announcements</a></li>
+                            <li class="submenu"><a href="feedbacks.php">Feedbacks</a></li>
                             <li class="submenu"><a href="javascript:void(0);">About</a></li>
                             <li class="submenu"><a href="javascript:void(0);">Contact Us</a></li>
                              <?php if (isset($_SESSION['profileId'])): ?>
