@@ -74,8 +74,8 @@
     <script type="text/javascript" src="rev-slider-files/js/extensions/revolution.extension.video.min.js"></script>
     <link href="css/timeline.css" rel="stylesheet">
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<script type="text/javascript" src="js/moment.min.js"></script>
+<script type="text/javascript" src="js/daterangepicker.min.js"></script>
 <!-- Specific scripts -->
     <script src="js/tabs.js"></script>
     <script>

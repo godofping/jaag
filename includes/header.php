@@ -53,7 +53,7 @@
 
 
 
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<link rel="stylesheet" type="text/css" href="css/daterangepicker.css" />
     
     <!-- REVOLUTION LAYERS STYLES -->
     <style>

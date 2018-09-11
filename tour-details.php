@@ -205,7 +205,7 @@ $res1 = mysqli_fetch_assoc($qry1);
 
 
 			var mapOptions = {
-				zoom: 8,
+				zoom: 10,
 				center: new google.maps.LatLng(<?php echo $lat; ?>, <?php echo $long; ?>),
 				mapTypeId: google.maps.MapTypeId.ROADMAP,
 
