@@ -146,6 +146,22 @@ if (isset($_POST['from']) and $_POST['from'] == 'add-comment') {
 
 }
 
+if (isset($_POST['from']) and $_POST['from'] == 'search-package') {
+	
+	$dates = explode(' - ', $_POST['dates']);
+	$date1 = $dates[0];
+	$date2 = $dates[1];
+
+	$date1 = date('Y-m-d', strtotime($date1));
+	$date2 = date('Y-m-d', strtotime($date2));
+
+	
+	header("Location: tour-packages.php?from=".$date1."&to=".$date2."");
+
+
+}
+
+
 
 
 ?>

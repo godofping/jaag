@@ -42,17 +42,52 @@
 
 				<!--End filters col-->
 				<div class="box_style_2">
+				
+                    <form method="POST" action="controller.php">
+                    <div class="form-group">
+                        <label>View Packages within this date</label>
+                        <input class="form-control input-daterange-datepicker" type="text" name="dates" />
+                    </div>
+                    <input type="text" name="from" value="search-package" hidden="">
+                    <br>
+                    <button type="submit" class="btn_1 green">Search now</button>
+                    <br>
+                    <br>
+                    <a href="tour-packages.php"><button class="btn_1 red">View All Packages</button></a>
+                    </form>
+               
+             
+				</div>
+
+				<div class="box_style_2">
 					<i class="icon_set_1_icon-57"></i>
 					<h4>Need <span>Help?</span></h4>
-					<a href="tel://+639972609952" class="phone">+639972609952</a>
+					<a href="tel://+639972609952" class="phone">+63 997 260 9952</a>
 					<small>Monday to Friday 9.00am - 7.30pm</small>
 				</div>
+
+
 			</aside>
 			<!--End aside -->
 			<div class="col-lg-9 col-md-9">
 
-			<?php $qry = mysqli_query($connection, "select * from package_view");
-			while ($res = mysqli_fetch_assoc($qry)) { ?>
+			<?php
+			$counter = 0;
+			if (isset($_GET['from']) and isset($_GET['to'])) {
+			 	$qry = mysqli_query($connection, "SELECT * FROM travel_and_tour_view WHERE departureDate >= '" . $_GET['from'] . "' AND returnDate <= '" . $_GET['to'] .  "'
+");
+			 }
+			 else
+			 {
+			 	$qry = mysqli_query($connection, "select * from package_view");
+			 }
+
+			
+
+
+			while ($res = mysqli_fetch_assoc($qry)) {
+				$counter++;
+			 ?>
 
 				<div class="strip_all_tour_list wow fadeIn" data-wow-delay="0.1s">
 					<div class="row">
@@ -108,7 +143,16 @@
 				</div>
 				<!--End strip -->
 			<?php } ?>
-		
+			<?php if ($counter == 0): ?>
+				<h2>No Packages available from <?php echo $_GET['from']; ?> to <?php echo $_GET['to']; ?>.</h2>
+				<?php endif ?>
+
+
+    
+
+
+				
+
 				<hr>
 
 			</div>

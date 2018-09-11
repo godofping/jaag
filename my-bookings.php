@@ -33,42 +33,36 @@
 					</ul>
 				</nav>
 				<div class="content">
-
-
-			<?php $qry = mysqli_query($connection, "select * from booking_view where profileId = '" . $_SESSION['profileId'] . "' order by bookingId DESC"); ?>
 					<section id="section-1">
 						
-						<?php while ($res = mysqli_fetch_assoc($qry)) { ?>
-						<div class="strip_booking">
-							<div class="row">
-								<div class="col-md-2 col-sm-2">
-									<div class="date">
-										<span class="month">Status</span>
-										<span class="day"><strong></strong><?php echo $res['bookingStatus']; ?></span>
-									</div>
-								</div>
-								<div class="col-md-6 col-sm-5">
-									<h3 class="tours_booking"><?php echo $res['packageName']; ?><span>2 Adults / 2 Nights</span></h3>
-								</div>
-								<div class="col-md-2 col-sm-3">
-									<ul class="info_booking">
-										<li><strong>Booking id</strong> <?php echo $res['bookingId']; ?></li>
-										<li><strong>Booked on</strong> <?php echo $res['dateBooked']; ?></li>
-									</ul>
-								</div>
-								<div class="col-md-2 col-sm-2">
-									<div class="booking_buttons">
-
-										<a href="#0" class="btn_2">Payments</a>
-										<a href="#0" class="btn_3">Cancel</a>
-									</div>
-								</div>
+						<div class=" table-responsive">
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th>Booking ID</th>
+											<th>Travel Dates</th>
+											<th>Slots Booked</th>
+											<th>Status</th>
+											<th>Action</th>
+										
+										</tr>
+									</thead>
+									<tbody>
+										<?php $qry3 = mysqli_query($connection, "select * from booking_view where profileId = '" . $_SESSION['profileId'] . "' order by bookingId DESC");
+										while ($res3 = mysqli_fetch_assoc($qry3)) { ?>
+										<tr>
+											<td><?php echo $res3['travelAndTourId']; ?></td>
+											<td><?php echo $res3['departureDate']; ?> - <?php echo $res3['returnDate']; ?></td>
+										
+											<td>0/<?php echo $res3['maxPax']; ?></td>
+											<td><?php echo $res3['travelAndTourStatus']; ?></td>
+											<td><a href="booking.php?travelAndTourId=<?php echo $res3['travelAndTourId'] ?>"><button class="btn btn-info">Book</button></a></td>
+										</tr>
+										<?php } ?>
+									</tbody>
+								</table>
 							</div>
-							<!-- End row -->
-						</div>
-						<!-- End strip booking -->
-
-					<?php } ?>
+						
 	
 
 					</section>

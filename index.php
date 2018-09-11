@@ -136,12 +136,14 @@
        
             <div class="row">
                 <div class="col-md-12">
+                    <form method="POST" action="controller.php">
                     <div class="form-group">
                         <label>View Packages within this date</label>
                         <input class="form-control input-daterange-datepicker" type="text" name="dates" />
                     </div>
-
-                    <button class="btn_1 green"><i class="icon-search"></i>Search now</button>
+                    <input type="text" name="from" value="search-package" hidden="">
+                    <button type="submit" class="btn_1 green"><i class="icon-search"></i>Search now</button>
+                    </form>
                     <br>
                 </div>
     
