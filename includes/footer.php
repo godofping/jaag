@@ -9,19 +9,21 @@
                 <div class="col-md-3 col-sm-3">
                     <h3>About</h3>
                     <ul>
-                        <li><a href="#">About us</a></li>
+                        <li><a href="about-us.php">About Us</a></li>
                       
-                        <li><a href="#">Login</a></li>
-                        <li><a href="#">Register</a></li>
+                        <?php if (!isset($_SESSION['profileId'])): ?>
+                            <li><a href="login.php">Login</a></li>
+                            <li><a href="register.php">Register</a></li>
+                        <?php endif ?>
                      
                     </ul>
                 </div>
                 <div class="col-md-3 col-sm-3">
                     <h3>Discover</h3>
                     <ul>
-                        <li><a href="#">Feedbacks</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Announcements</a></li>
+                        <li><a href="feedbacks.php">Feedbacks</a></li>
+                        <li><a href="contact-us.php">Contact Us</a></li>
+                        <li><a href="announcements.php">Announcements</a></li>
                        
                     </ul>
                 </div>
