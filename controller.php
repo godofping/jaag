@@ -142,7 +142,7 @@ if (isset($_POST['from']) and $_POST['from'] == 'add-comment') {
 
 
 	$_SESSION['do'] = 'added';
-	header("Location: reviews.php");
+	header("Location: feedbacks.php");
 
 }
 
