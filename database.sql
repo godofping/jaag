@@ -81,11 +81,11 @@ CREATE TABLE `comment_table` (
   PRIMARY KEY (`commentId`),
   KEY `FK_comment_table` (`profileId`),
   CONSTRAINT `FK_comment_table` FOREIGN KEY (`profileId`) REFERENCES `profile_table` (`profileId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 /*Data for the table `comment_table` */
 
-insert  into `comment_table`(`commentId`,`commentInfo`,`profileId`,`dateCommented`) values (2,'aaa',3,NULL);
+insert  into `comment_table`(`commentId`,`commentInfo`,`profileId`,`dateCommented`) values (2,'aaa',3,NULL),(3,'',3,NULL),(4,'asasd',3,NULL),(5,'asd',3,NULL),(6,'asdasdxx',3,NULL);
 
 /*Table structure for table `destination_table` */
 
