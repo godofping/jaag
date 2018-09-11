@@ -98,7 +98,7 @@
 						<div class="col-lg-3">
 							<div class="price_list">
 								<div><sup>₱</sup><?php echo number_format($res['price'], 2); ?><small><br>*Per person</small>
-									<p><a href="single_tour.html" class="btn_1">Details</a>
+									<p><a href="tour-details.php?packageId=<?php echo $res['packageId'] ?>" class="btn_1">Details</a>
 									</p>
 								</div>
 
@@ -363,4 +363,5 @@
     });
 </script>
 <script src="js/infobox.js"></script>
+
 

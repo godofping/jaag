@@ -244,9 +244,13 @@
         });
     </script>
     <!-- Map -->
-    <script src="http://maps.googleapis.com/maps/api/js"></script>
+<!--Review modal validation -->
+    <script src="assets/validate.js"></script>
     
 
 </body>
 
 </html>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3CL__ArRSv8my9WeW3ealb1WOquARXJA&callback=initMap"
+    async defer></script>
