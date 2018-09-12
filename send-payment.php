@@ -1,9 +1,9 @@
 <?php include("dashboard/includes/connection.php");include("includes/header.php"); ?>
 
-<section class="parallax-window" data-parallax="scroll" data-image-src="img/admin_top.jpg" data-natural-width="1400" data-natural-height="470">
+<section class="parallax-window" data-parallax="scroll" data-image-src="img/admin_top - Copy.jpg" data-natural-width="1400" data-natural-height="470">
 		<div class="parallax-content-1">
 			<div class="animated fadeInDown">
-				<h1>My Bookings</h1>
+				<h1>Send Payment</h1>
 				
 			</div>
 		</div>
@@ -17,7 +17,8 @@
 					<li><a href="index.php">Home</a>
 					</li>
 					<li><a>My Account</a></li>
-					<li>My Bookings</li>
+					<li><a href="my-bookings.php">My Bookings</a></li>
+					<li>Send Payment</li>
 				</ul>
 			</div>
 		</div>

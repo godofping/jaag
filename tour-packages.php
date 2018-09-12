@@ -98,7 +98,7 @@
 							<div class="img_list">
 								<?php $qry1 = mysqli_query($connection, "select * from package_media_view where packageId = '" . $res['packageId'] . "'");
 								$res1 = mysqli_fetch_assoc($qry1); ?>
-								<a href="single_tour.html"><img src="dashboard/<?php echo $res1['mediaLocation']; ?>" alt="Image">
+								<a href="tour-details.php?packageId=<?php echo $res['packageId'] ?>"><img src="dashboard/<?php echo $res1['mediaLocation']; ?>" alt="Image">
 									
 								</a>
 							</div>

@@ -85,6 +85,33 @@ $res1 = mysqli_fetch_assoc($qry1);
 			
 							</div>
 							<!-- End row  -->
+
+							
+<div class="row magnific-gallery">	
+
+							<?php 
+							$counter = 0;
+							$qry5 = mysqli_query($connection, "select * from package_media_view where packageId = '" . $res['packageId'] . "'"); while ($res5 = mysqli_fetch_assoc($qry5)) { ?>
+
+								<div class="col-md-4 col-sm-4">
+									<div class="img_wrapper_gallery">
+										<div class="img_container_gallery">
+											<a href="dashboard/<?php echo $res5['mediaLocation'] ?>" title="Photo title"><img src="dashboard/<?php echo $res5['mediaLocation'] ?>" alt="Image" class="img-responsive">
+												<i class="icon-resize-full-2"></i>
+											</a>
+										</div>
+									</div>
+								</div>
+
+				
+							<?php $counter++;?> 
+							
+<?php if ($counter % 3 == 0): ?>
+		</div><div class="row magnific-gallery">		
+<?php endif ?>	
+						<?php } ?>
+</div>			
+
 						</div>
 					</div>
 
