@@ -42,7 +42,7 @@
 											<th>Booking ID</th>
 											<th>Package Name</th>
 											<th>Travel Dates</th>
-											<th>Slots Booked</th>
+											<th>Number of Pax Booked</th>
 											<th>Status</th>
 											<th>Action</th>
 										
@@ -52,12 +52,13 @@
 										<?php $qry3 = mysqli_query($connection, "select * from booking_view where profileId = '" . $_SESSION['profileId'] . "' order by bookingId DESC");
 										while ($res3 = mysqli_fetch_assoc($qry3)) { ?>
 										<tr>
-											<td><?php echo $res3['travelAndTourId']; ?></td>
+											<td><?php echo $res3['bookingId']; ?></td>
+											<td><?php echo $res3['packageName']; ?></td>
 											<td><?php echo $res3['departureDate']; ?> - <?php echo $res3['returnDate']; ?></td>
 										
-											<td>0/<?php echo $res3['maxPax']; ?></td>
-											<td><?php echo $res3['travelAndTourStatus']; ?></td>
-											<td><a href="booking.php?travelAndTourId=<?php echo $res3['travelAndTourId'] ?>"><button class="btn btn-info">Book</button></a></td>
+											<td><?php echo $res3['numberOfPaxBooked']; ?></td>
+											<td><?php echo $res3['bookingStatus']; ?></td>
+											<td><a href="booking.php?travelAndTourId=<?php echo $res3['travelAndTourId'] ?>"><button class="btn btn-info">Send Payment</button></a></td>
 										</tr>
 										<?php } ?>
 									</tbody>

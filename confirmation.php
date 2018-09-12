@@ -40,6 +40,17 @@
 						For full payment please pay ₱<?php echo number_format($res['price'],2); ?>. </p>
 						<p>For sending payments please go to My Account > My Bookings > Send Payment.</p>
 						<p>Take note that you are not yet officially reserved unless you pay the down payment or the full payment.</p>
+
+						<h4>Policy</h4>
+
+						<p>Upon reservation no cancelation.</p>
+ 						<p>7 days before the tour cancelation are accepted.</p>
+ 						<p>3 days before the tour cancelation are acceptable but your oblige to pay the slot you reserved either you join nor not.</p>
+ 						<p>Reservation fee are non refundable.</p>
+   
+
+
+
 					</div>
 					<!--End step -->
 					
