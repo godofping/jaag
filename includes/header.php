@@ -174,7 +174,7 @@
                         <?php if (!isset($_SESSION['profileId'])): ?>
                                   <li>
                                 <div class="dropdown dropdown-access">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="access_link">Sign in</a>
+                                   
                                     <div class="dropdown-menu">
                                          <form method="POST" action="controller.php">
                                         <h4>Login</h4>

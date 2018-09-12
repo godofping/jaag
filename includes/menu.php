@@ -24,6 +24,14 @@
                                 </ul>
                             </li>
                             <?php endif ?>
+                            
+
+                            <?php if (!isset($_SESSION['profileId'])): ?>
+                               <li class="submenu"><a href="login.php">Log in</a></li>
+                               <li class="submenu"><a href="register.php">Register</a></li>
+                            <?php endif ?>
+
+                         
 
 
                        
