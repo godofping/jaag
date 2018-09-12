@@ -20,6 +20,7 @@
                                     <li><a href="my-bookings.php">My Bookings</a></li>
                                     <li><a href="profile.php">Profile</a></li>
                                     <li><a href="change-password.php">Change Password</a></li>
+                                    <li><a href="controller.php?from=logout">Log Out</a></li>
         
                                 </ul>
                             </li>
@@ -31,7 +32,7 @@
                                <li class="submenu"><a href="register.php">Register</a></li>
                             <?php endif ?>
 
-                         
+                      
 
 
                        

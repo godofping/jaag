@@ -7,7 +7,7 @@
                     <a href="mailto:help@jaag.com" id="email_footer">help@jaag.com</a>
                 </div>
                 <div class="col-md-3 col-sm-3">
-                    <h3>About</h3>
+                    <h3>Useful Links</h3>
                     <ul>
                         <li><a href="about-us.php">About Us</a></li>
                       
@@ -15,6 +15,13 @@
                             <li><a href="login.php">Login</a></li>
                             <li><a href="register.php">Register</a></li>
                         <?php endif ?>
+
+                        <?php if (isset($_SESSION['profileId'])): ?>
+                            <li><a  href="controller.php?from=logout">Log Out</a></li>
+     
+                        <?php endif ?>
+
+                       
                      
                     </ul>
                 </div>
