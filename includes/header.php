@@ -49,7 +49,9 @@
 
 
     <link href="css/timeline.css" rel="stylesheet">
-    
+    <!-- CSS -->
+    <link href="css/date_time_picker.css" rel="stylesheet">
+    <link href="css/jquery.switch.css" rel="stylesheet">
 
 
 
