@@ -139,7 +139,7 @@ $res1 = mysqli_fetch_assoc($qry1);
 			<!--End row -->
 
 	<div class="row margin_60" id="belowDiv" style="display: none;">
-		<aside class="col-md-8">
+		<aside class="col-md-6">
 			<div class="box_style_1">
 				<h3 class="inner">- Billing Statement -</h3>
 				<table class="table table_summary">
@@ -149,7 +149,7 @@ $res1 = mysqli_fetch_assoc($qry1);
 								Pax Number
 							</td>
 							<td class="text-right">
-								<span id="paxNumberSpan">2</span>
+								<span id="paxNumberSpan"></span>
 							</td>
 						</tr>
 						<tr>
@@ -167,7 +167,7 @@ $res1 = mysqli_fetch_assoc($qry1);
 								Total cost
 							</td>
 							<td class="text-right">
-								₱ <span id="costId"></span>
+								₱<span id="costSpan"></span>
 							</td>
 						</tr>
 					</tbody>
@@ -177,7 +177,7 @@ $res1 = mysqli_fetch_assoc($qry1);
 
 		</aside>
 
-		<aside class="col-md-4">
+		<aside class="col-md-6">
 			<div class="box_style_1">
 				<h3 class="inner">- Payment Form -</h3>
 				<div class="row">
@@ -185,9 +185,26 @@ $res1 = mysqli_fetch_assoc($qry1);
 						<div class="form-group">
 							<label>Mode of payment</label>
 							<select class="form-control">
-								<option>Bank Transfer</option>
+							<?php $qry5 = mysqli_query($connection, "select * from mode_of_payment_view");
+							while ($res5 = mysqli_fetch_assoc($qry5)) { ?>
+								<option value="<?php echo $res5['modeOfPaymentId'] ?>"><?php echo $res5['paymentMode'] ?> - <?php echo $res5['nameOfRemittanceOrBank'] ?></option>
+							<?php } ?>
 							</select>
 						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label>Type of payment</label>
+							<select class="form-control">
+								<option>Down Payment</option>
+								<option>Full Payment</option>
+							</select>
+						</div>
+						<p>For down payment please pay ₱<span id="downpayment"></span>.</p>
+						<p>For full payment please pay ₱<span id="fullpayment"></span>.</p>
 					</div>
 				</div>
 				<a class="btn_full" href="payment.html">Check out</a>
@@ -227,6 +244,8 @@ $res1 = mysqli_fetch_assoc($qry1);
 		       	theButton.style.display = "none";
 		       	changeButton.style.display = "block";
 		        document.getElementById("paxNumber").disabled = true;
+
+		        calculate();
 		        
 		    } else {
 		        x.style.display = "none";
@@ -248,6 +267,16 @@ $res1 = mysqli_fetch_assoc($qry1);
 	}
 
 	function calculate() {
+		var paxNumber = document.getElementById("paxNumber").value;
+		
+		document.getElementById("paxNumberSpan").textContent = paxNumber ;
+
+		document.getElementById("costSpan").textContent = (paxNumber * <?php echo $res['price']; ?>).toFixed(2);
+
+
+		document.getElementById("downpayment").textContent = ((paxNumber * <?php echo $res['price']; ?>) * .60).toFixed(2);
+
+		document.getElementById("fullpayment").textContent = (paxNumber * <?php echo $res['price']; ?>).toFixed(2);
 
 	}
 
