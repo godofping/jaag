@@ -125,11 +125,11 @@ CREATE TABLE `media_table` (
   CONSTRAINT `FK_media_table` FOREIGN KEY (`packageId`) REFERENCES `package_table` (`packageId`),
   CONSTRAINT `FK_media_table1` FOREIGN KEY (`paymentTransactionId`) REFERENCES `payment_transaction_table` (`paymentTransactionId`) ON DELETE SET NULL,
   CONSTRAINT `FK_media_table3` FOREIGN KEY (`postingId`) REFERENCES `posting_table` (`postingId`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=latin1;
 
 /*Data for the table `media_table` */
 
-insert  into `media_table`(`mediaId`,`mediaLocation`,`postingId`,`packageId`,`paymentTransactionId`) values (13,'media/386b81e31014a480f5abbd1089bf9037Enchanted-River-11.jpg',NULL,1,NULL),(14,'media/701b6c51d4017ef032663d897a9e8a62Riv.jpg',NULL,1,NULL),(15,'media/c6e70a1aa3d236578cce76a1cd13e8a7siargao-surigao-province.jpg',NULL,1,NULL),(16,'media/b03b8ae8b280f584dff61c824b945deeSurigao-del-Sur-Bogac-Spring.png',NULL,1,NULL),(17,'media/56235fc53b155738b0c5d0c74586eaf34.jpg',NULL,2,NULL),(18,'media/c238cf07380d960ae2947a7d47084f4c1200px-View_on_the_half_way_to_Kayangan_Lake_-_panoramio.jpg',NULL,2,NULL),(19,'media/6e119d089cbe9ce20d03be211e0b65a5beautiful-view-mountain-ranges-philippines-islands-mountain-views-100246883.jpg',NULL,2,NULL),(20,'media/811b17ea6018bca792208b6d4fd76f6abudahernel3.jpg',NULL,2,NULL),(21,'media/d42a6f5aec09508c4da0a9d97db7af74Hills View Mountain Villa Davao Room Rates (4).jpg',NULL,2,NULL),(22,'media/e2f7d6c45e52e80292c6b389feddf643HillsView03.gif',NULL,2,NULL),(23,'media/66d8e8eec57ea38f704158e87962a77emaxresdefault (1).jpg',NULL,2,NULL),(24,'media/1c4ae11ed4985ce67c1f881cf36768d6maxresdefault.jpg',NULL,2,NULL),(25,'media/45aae00794e4e00a752185308f06c6baoverview-3.jpg',NULL,2,NULL),(26,'media/881f50f9f1480f61d6f8e1d62f6a10edcamiguin.jpg',NULL,3,NULL),(27,'media/9944625c38dd9564cee4f4d4758a6598download (2).jpg',NULL,3,NULL),(28,'media/01c8d67a383a7f13c37e494a2ef700eemantigue-island-camiguin-travelanyway.jpg',NULL,3,NULL),(29,'media/aa422dcdca51b1b8a4be3bb3a5b23dfc5410599211_1a0492737b_b.jpg',NULL,6,NULL),(30,'media/cdf126124bcc287d773a748530c3fa2adownload.jpg',NULL,6,NULL),(31,'media/c921c468f478c7b74a8b6b1eb531b195entrance-to-sohoton-cove-inside-view.jpg',NULL,6,NULL),(32,'media/7cf357ccce1e943f00ea7083502b70eeimages.jpg',NULL,6,NULL),(33,'media/19f1839da3dcb0664a72d9581329a27csohoton-cave-opening.jpg',NULL,6,NULL),(34,'media/885c5df2035b79416ed05d74e32f891458963_1.jpg',NULL,5,NULL),(35,'media/88b4668706946f83d81005975288421fBarangan-Magsaysay-Dinagat-Islands.jpg',NULL,5,NULL),(36,'media/c7a9fef3e9912e8121b614ff77eab601Basilisa-Beach-Dinagat-Islands.jpg',NULL,5,NULL),(37,'media/1e648ce8b40c56f9d735feaca67c8c20IMG_8011982432648.jpeg',NULL,5,NULL),(38,'media/fbcb11a71758588a4a5104ca4348fc65Isla-Aga-Dinagat-Islands.jpg',NULL,5,NULL),(39,'media/e6878b58199b13e284eec10f1dbed005Sohoton-National-Park-Bucas-Grande-Surigao-del-Norte.jpg',NULL,5,NULL),(40,'media/0b378294054d4eec0ff20c3d1a31e5e1download.jpg',NULL,4,NULL),(41,'media/064c7e7b2733935a2173113b4ed286a7Footpath to Hikong Alo  Seven Falls Lake Sebu.jpg',NULL,4,NULL),(42,'media/144c126e13645866c09ce3c4067a0987images.jpg',NULL,4,NULL),(44,'dashboard/media/acd342fa73e151b455966006490092ffdownload (1).jpg',NULL,NULL,NULL),(46,'dashboard/media/9ba27daf4c128a4f9db455a67e7632f5download (1).jpg',NULL,NULL,NULL),(48,'media/ad24047ee1df064e4fa1012c656cbba6download.jpg',4,NULL,NULL),(49,'media/c2038e681c1f2684ec94d655bddb26cfFootpath to Hikong Alo  Seven Falls Lake Sebu.jpg',NULL,NULL,NULL),(50,'media/2f5781128a1dfc6a7ba7adef13571d66download (2).jpg',6,NULL,NULL);
+insert  into `media_table`(`mediaId`,`mediaLocation`,`postingId`,`packageId`,`paymentTransactionId`) values (13,'media/386b81e31014a480f5abbd1089bf9037Enchanted-River-11.jpg',NULL,1,NULL),(14,'media/701b6c51d4017ef032663d897a9e8a62Riv.jpg',NULL,1,NULL),(15,'media/c6e70a1aa3d236578cce76a1cd13e8a7siargao-surigao-province.jpg',NULL,1,NULL),(16,'media/b03b8ae8b280f584dff61c824b945deeSurigao-del-Sur-Bogac-Spring.png',NULL,1,NULL),(17,'media/56235fc53b155738b0c5d0c74586eaf34.jpg',NULL,2,NULL),(18,'media/c238cf07380d960ae2947a7d47084f4c1200px-View_on_the_half_way_to_Kayangan_Lake_-_panoramio.jpg',NULL,2,NULL),(19,'media/6e119d089cbe9ce20d03be211e0b65a5beautiful-view-mountain-ranges-philippines-islands-mountain-views-100246883.jpg',NULL,2,NULL),(20,'media/811b17ea6018bca792208b6d4fd76f6abudahernel3.jpg',NULL,2,NULL),(21,'media/d42a6f5aec09508c4da0a9d97db7af74Hills View Mountain Villa Davao Room Rates (4).jpg',NULL,2,NULL),(22,'media/e2f7d6c45e52e80292c6b389feddf643HillsView03.gif',NULL,2,NULL),(23,'media/66d8e8eec57ea38f704158e87962a77emaxresdefault (1).jpg',NULL,2,NULL),(24,'media/1c4ae11ed4985ce67c1f881cf36768d6maxresdefault.jpg',NULL,2,NULL),(25,'media/45aae00794e4e00a752185308f06c6baoverview-3.jpg',NULL,2,NULL),(26,'media/881f50f9f1480f61d6f8e1d62f6a10edcamiguin.jpg',NULL,3,NULL),(27,'media/9944625c38dd9564cee4f4d4758a6598download (2).jpg',NULL,3,NULL),(28,'media/01c8d67a383a7f13c37e494a2ef700eemantigue-island-camiguin-travelanyway.jpg',NULL,3,NULL),(29,'media/aa422dcdca51b1b8a4be3bb3a5b23dfc5410599211_1a0492737b_b.jpg',NULL,6,NULL),(30,'media/cdf126124bcc287d773a748530c3fa2adownload.jpg',NULL,6,NULL),(31,'media/c921c468f478c7b74a8b6b1eb531b195entrance-to-sohoton-cove-inside-view.jpg',NULL,6,NULL),(32,'media/7cf357ccce1e943f00ea7083502b70eeimages.jpg',NULL,6,NULL),(33,'media/19f1839da3dcb0664a72d9581329a27csohoton-cave-opening.jpg',NULL,6,NULL),(34,'media/885c5df2035b79416ed05d74e32f891458963_1.jpg',NULL,5,NULL),(35,'media/88b4668706946f83d81005975288421fBarangan-Magsaysay-Dinagat-Islands.jpg',NULL,5,NULL),(36,'media/c7a9fef3e9912e8121b614ff77eab601Basilisa-Beach-Dinagat-Islands.jpg',NULL,5,NULL),(37,'media/1e648ce8b40c56f9d735feaca67c8c20IMG_8011982432648.jpeg',NULL,5,NULL),(38,'media/fbcb11a71758588a4a5104ca4348fc65Isla-Aga-Dinagat-Islands.jpg',NULL,5,NULL),(39,'media/e6878b58199b13e284eec10f1dbed005Sohoton-National-Park-Bucas-Grande-Surigao-del-Norte.jpg',NULL,5,NULL),(40,'media/0b378294054d4eec0ff20c3d1a31e5e1download.jpg',NULL,4,NULL),(41,'media/064c7e7b2733935a2173113b4ed286a7Footpath to Hikong Alo  Seven Falls Lake Sebu.jpg',NULL,4,NULL),(42,'media/144c126e13645866c09ce3c4067a0987images.jpg',NULL,4,NULL),(44,'dashboard/media/acd342fa73e151b455966006490092ffdownload (1).jpg',NULL,NULL,NULL),(46,'dashboard/media/9ba27daf4c128a4f9db455a67e7632f5download (1).jpg',NULL,NULL,NULL),(48,'media/ad24047ee1df064e4fa1012c656cbba6download.jpg',4,NULL,NULL),(49,'media/c2038e681c1f2684ec94d655bddb26cfFootpath to Hikong Alo  Seven Falls Lake Sebu.jpg',NULL,NULL,NULL),(50,'media/2f5781128a1dfc6a7ba7adef13571d66download (2).jpg',6,NULL,NULL),(52,'dashboard/media/4c7f47f9d53509058e7d552790c2b8e6',NULL,NULL,NULL),(53,'dashboard/media/67ac2d9ff619b239dbdea2b671f3b829bdo-receipt.jpg',NULL,NULL,2);
 
 /*Table structure for table `mode_of_payment_table` */
 
@@ -194,7 +194,6 @@ CREATE TABLE `payment_transaction_table` (
   `nameOfSender` varchar(60) DEFAULT NULL,
   `paymentStatus` varchar(60) DEFAULT NULL,
   `bookingId` int(6) DEFAULT NULL,
-  `isTrue` tinyint(1) DEFAULT NULL,
   `paymentType` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`paymentTransactionId`),
   KEY `FK_payment_transaction_table` (`paymentStatus`),
@@ -202,9 +201,11 @@ CREATE TABLE `payment_transaction_table` (
   KEY `FK_payment_transaction_table123123` (`bookingId`),
   CONSTRAINT `FK_payment_transaction_table123123` FOREIGN KEY (`bookingId`) REFERENCES `booking_table` (`bookingId`),
   CONSTRAINT `FK_payment_transaction_table123344` FOREIGN KEY (`modeOfPaymentId`) REFERENCES `mode_of_payment_table` (`modeOfPaymentId`) ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `payment_transaction_table` */
+
+insert  into `payment_transaction_table`(`paymentTransactionId`,`modeOfPaymentId`,`amount`,`dateOfPayment`,`transactionNumber`,`nameOfSender`,`paymentStatus`,`bookingId`,`paymentType`) values (2,4,749.5,'2018-09-12','54asd-54asd54asd-54asd54asd-54sd','Albert Yap','Pending Confirmation',5,'Down Payment');
 
 /*Table structure for table `place_table` */
 
@@ -406,6 +407,72 @@ DROP TABLE IF EXISTS `package_view`;
  `price` double 
 )*/;
 
+/*Table structure for table `payment_transaction_media_view` */
+
+DROP TABLE IF EXISTS `payment_transaction_media_view`;
+
+/*!50001 DROP VIEW IF EXISTS `payment_transaction_media_view` */;
+/*!50001 DROP TABLE IF EXISTS `payment_transaction_media_view` */;
+
+/*!50001 CREATE TABLE  `payment_transaction_media_view`(
+ `mediaId` int(6) ,
+ `mediaLocation` text ,
+ `paymentTransactionId` int(6) ,
+ `modeOfPaymentId` int(6) ,
+ `amount` double ,
+ `dateOfPayment` date ,
+ `transactionNumber` varchar(60) ,
+ `nameOfSender` varchar(60) ,
+ `paymentStatus` varchar(60) ,
+ `bookingId` int(6) ,
+ `paymentType` varchar(60) 
+)*/;
+
+/*Table structure for table `payment_transaction_view` */
+
+DROP TABLE IF EXISTS `payment_transaction_view`;
+
+/*!50001 DROP VIEW IF EXISTS `payment_transaction_view` */;
+/*!50001 DROP TABLE IF EXISTS `payment_transaction_view` */;
+
+/*!50001 CREATE TABLE  `payment_transaction_view`(
+ `paymentTransactionId` int(6) ,
+ `modeOfPaymentId` int(6) ,
+ `amount` double ,
+ `dateOfPayment` date ,
+ `transactionNumber` varchar(60) ,
+ `nameOfSender` varchar(60) ,
+ `paymentStatus` varchar(60) ,
+ `bookingId` int(6) ,
+ `paymentType` varchar(60) ,
+ `paymentMode` varchar(60) ,
+ `nameOfRemittanceOrBank` varchar(60) ,
+ `profileId` int(6) ,
+ `travelAndTourId` int(6) ,
+ `bookingStatus` varchar(60) ,
+ `dateBooked` date ,
+ `numberOfPaxBooked` int(6) ,
+ `firstName` varchar(60) ,
+ `middleName` varchar(60) ,
+ `lastName` varchar(60) ,
+ `contactNumber` varchar(60) ,
+ `addressId` int(6) ,
+ `accountTypeId` int(6) ,
+ `userName` varchar(60) ,
+ `passWord` varchar(60) ,
+ `isDeleted` tinyint(1) ,
+ `packageId` int(6) ,
+ `departureDate` date ,
+ `returnDate` date ,
+ `maxPax` int(6) ,
+ `travelAndTourStatus` varchar(60) ,
+ `packageName` varchar(60) ,
+ `packageDetails` text ,
+ `inclusion` text ,
+ `exclusion` text ,
+ `price` double 
+)*/;
+
 /*Table structure for table `place_view` */
 
 DROP TABLE IF EXISTS `place_view`;
@@ -540,6 +607,20 @@ DROP TABLE IF EXISTS `travel_and_tour_view`;
 /*!50001 DROP VIEW IF EXISTS `package_view` */;
 
 /*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `package_view` AS select `package_table`.`packageId` AS `packageId`,`package_table`.`packageName` AS `packageName`,`package_table`.`packageDetails` AS `packageDetails`,`package_table`.`inclusion` AS `inclusion`,`package_table`.`exclusion` AS `exclusion`,`package_table`.`price` AS `price` from `package_table` */;
+
+/*View structure for view payment_transaction_media_view */
+
+/*!50001 DROP TABLE IF EXISTS `payment_transaction_media_view` */;
+/*!50001 DROP VIEW IF EXISTS `payment_transaction_media_view` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `payment_transaction_media_view` AS select `media_table`.`mediaId` AS `mediaId`,`media_table`.`mediaLocation` AS `mediaLocation`,`media_table`.`paymentTransactionId` AS `paymentTransactionId`,`payment_transaction_table`.`modeOfPaymentId` AS `modeOfPaymentId`,`payment_transaction_table`.`amount` AS `amount`,`payment_transaction_table`.`dateOfPayment` AS `dateOfPayment`,`payment_transaction_table`.`transactionNumber` AS `transactionNumber`,`payment_transaction_table`.`nameOfSender` AS `nameOfSender`,`payment_transaction_table`.`paymentStatus` AS `paymentStatus`,`payment_transaction_table`.`bookingId` AS `bookingId`,`payment_transaction_table`.`paymentType` AS `paymentType` from (`media_table` join `payment_transaction_table` on((`media_table`.`paymentTransactionId` = `payment_transaction_table`.`paymentTransactionId`))) */;
+
+/*View structure for view payment_transaction_view */
+
+/*!50001 DROP TABLE IF EXISTS `payment_transaction_view` */;
+/*!50001 DROP VIEW IF EXISTS `payment_transaction_view` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `payment_transaction_view` AS select `payment_transaction_table`.`paymentTransactionId` AS `paymentTransactionId`,`payment_transaction_table`.`modeOfPaymentId` AS `modeOfPaymentId`,`payment_transaction_table`.`amount` AS `amount`,`payment_transaction_table`.`dateOfPayment` AS `dateOfPayment`,`payment_transaction_table`.`transactionNumber` AS `transactionNumber`,`payment_transaction_table`.`nameOfSender` AS `nameOfSender`,`payment_transaction_table`.`paymentStatus` AS `paymentStatus`,`payment_transaction_table`.`bookingId` AS `bookingId`,`payment_transaction_table`.`paymentType` AS `paymentType`,`mode_of_payment_table`.`paymentMode` AS `paymentMode`,`mode_of_payment_table`.`nameOfRemittanceOrBank` AS `nameOfRemittanceOrBank`,`booking_table`.`profileId` AS `profileId`,`booking_table`.`travelAndTourId` AS `travelAndTourId`,`booking_table`.`bookingStatus` AS `bookingStatus`,`booking_table`.`dateBooked` AS `dateBooked`,`booking_table`.`numberOfPaxBooked` AS `numberOfPaxBooked`,`profile_table`.`firstName` AS `firstName`,`profile_table`.`middleName` AS `middleName`,`profile_table`.`lastName` AS `lastName`,`profile_table`.`contactNumber` AS `contactNumber`,`profile_table`.`addressId` AS `addressId`,`profile_table`.`accountTypeId` AS `accountTypeId`,`profile_table`.`userName` AS `userName`,`profile_table`.`passWord` AS `passWord`,`profile_table`.`isDeleted` AS `isDeleted`,`travel_and_tour_table`.`packageId` AS `packageId`,`travel_and_tour_table`.`departureDate` AS `departureDate`,`travel_and_tour_table`.`returnDate` AS `returnDate`,`travel_and_tour_table`.`maxPax` AS `maxPax`,`travel_and_tour_table`.`travelAndTourStatus` AS `travelAndTourStatus`,`package_table`.`packageName` AS `packageName`,`package_table`.`packageDetails` AS `packageDetails`,`package_table`.`inclusion` AS `inclusion`,`package_table`.`exclusion` AS `exclusion`,`package_table`.`price` AS `price` from (((((`payment_transaction_table` join `mode_of_payment_table` on((`payment_transaction_table`.`modeOfPaymentId` = `mode_of_payment_table`.`modeOfPaymentId`))) join `booking_table` on((`payment_transaction_table`.`bookingId` = `booking_table`.`bookingId`))) join `travel_and_tour_table` on((`booking_table`.`travelAndTourId` = `travel_and_tour_table`.`travelAndTourId`))) join `package_table` on((`travel_and_tour_table`.`packageId` = `package_table`.`packageId`))) join `profile_table` on((`booking_table`.`profileId` = `profile_table`.`profileId`))) */;
 
 /*View structure for view place_view */
 

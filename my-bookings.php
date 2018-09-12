@@ -60,7 +60,12 @@
 											<td><?php echo $res3['numberOfPaxBooked']; ?></td>
 											<td><?php echo $res3['dateBooked']; ?></td>
 											<td><?php echo $res3['bookingStatus']; ?></td>
-											<td><a href="send-payment.php?bookingId=<?php echo $res3['bookingId'] ?>"><button class="btn btn-info">Send Payment</button></a></td>
+											<td>
+												<a href="send-payment.php?bookingId=<?php echo base64_encode($res3['bookingId']) ?>"><button class="btn btn-info">Send Payment</button></a> <br><br>
+												<a class="btn btn-success" href="invoice.php?bookingId=<?php echo base64_encode($res3['bookingId']) ?>" target="_blank">View invoice</a>
+
+
+											</td>
 										</tr>
 										<?php } ?>
 									</tbody>
