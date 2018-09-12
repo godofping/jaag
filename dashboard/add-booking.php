@@ -32,10 +32,7 @@ include("includes/header.php");
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <!-- <button class="btn btn-success m-t-20 waves-effect text-left" data-toggle="modal" data-target="#addModal">Add Travel and Tour</button>
-                <br>
-                <button class="btn btn-success m-t-20 waves-effect text-left" data-toggle="modal" data-target="#addModal">Add Van Rental</button> -->
-
+         
             
 
                 <div id="travelAndtourForm">

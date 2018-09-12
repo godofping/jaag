@@ -8,7 +8,7 @@
             <!-- ============================================================== -->
             <footer class="footer">
 
-                © 2018 Jaag Travel and Tours and Van Rentals by STI.
+                © 2018 Jaag Travel and Tours by  STI.
 
             </footer>
             <!-- ============================================================== -->

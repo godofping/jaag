@@ -12,11 +12,11 @@ if (isset($_SESSION['accountType']) and ($_SESSION['accountType'] == 'Administra
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="jaag travel and tour and van rental">
+    <meta name="description" content="jaag travel and tour">
     <meta name="author" content="sti">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
-    <title>Jaag | Travel and Tours and Van Rental</title>
+    <title>Jaag Travel and Tours</title>
     <!-- Bootstrap Core CSS -->
     <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- toast CSS -->

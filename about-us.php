@@ -82,7 +82,7 @@
 			<div class="col-md-6 nopadding">
 				<div class="features-content">
 					<h3>"About Us"</h3>
-					<p>JAAG Travel and Tours and Van Rental aims to provide services to those customers that want to experience to visit tourist spot of different places and a rental of van for all. <br>Last 28th of November 2015 at Blk.4 Lot 28, Yellow Village Subdivision New Isabela Tacurong City, Sultan Kudarat, JAAG Travel and Tours and Van Rental starts operating led by Arra Mae Agusan. JAAG Travel and Tours and Van Rental aims to provide services to those customers that want to experience to visit tourist spot of different places. JAAG Travel and Tours and Van Rental consist of Sales and Marketing Department that has 8 employees, 12 drivers. </p>
+					<p>JAAG Travel and Tours aims to provide services to those customers that want to experience to visit tourist spot of different. <br>Last 28th of November 2015 at Blk.4 Lot 28, Yellow Village Subdivision New Isabela Tacurong City, Sultan Kudarat, JAAG Travel and Tours starts operating led by Arra Mae Agusan. JAAG Travel and Tours aims to provide services to those customers that want to experience to visit tourist spot of different places. JAAG Travel and Tours consist of Sales and Marketing Department that has 8 employees, 12 drivers. </p>
 
 					
 				</div>
