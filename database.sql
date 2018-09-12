@@ -65,9 +65,11 @@ CREATE TABLE `booking_table` (
   KEY `FK_booking_table123` (`profileId`),
   CONSTRAINT `FK_booking_table123` FOREIGN KEY (`profileId`) REFERENCES `profile_table` (`profileId`),
   CONSTRAINT `FK_booking_table2` FOREIGN KEY (`travelAndTourId`) REFERENCES `travel_and_tour_table` (`travelAndTourId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 /*Data for the table `booking_table` */
+
+insert  into `booking_table`(`bookingId`,`profileId`,`travelAndTourId`,`bookingStatus`,`dateBooked`,`numberOfPaxBooked`) values (5,3,1,'Pending Down Payment','2018-09-12',2);
 
 /*Table structure for table `comment_table` */
 
@@ -138,11 +140,11 @@ CREATE TABLE `mode_of_payment_table` (
   `paymentMode` varchar(60) DEFAULT NULL,
   `nameOfRemittanceOrBank` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`modeOfPaymentId`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 
 /*Data for the table `mode_of_payment_table` */
 
-insert  into `mode_of_payment_table`(`modeOfPaymentId`,`paymentMode`,`nameOfRemittanceOrBank`) values (4,'Bank Transfer','BDO'),(5,'Bank Transfer','DBP'),(6,'Bank Transfer','Metro Bank'),(7,'Bank Transfer','EastWest'),(8,'Bank Transfer','BPI'),(9,'Bank Transfer','Union Bank'),(10,'Bank Transfer','China Bank'),(11,'Bank Transfer','PNB'),(12,'Bank Transfer','RCBC'),(13,'Bank Transfer','Security Bank'),(14,'Remittance','Palawan Express Pera Padala'),(15,'Remittance','Cebuana Lhuillier Pera Padala'),(16,'Remittance','Western Union Sulit Padala and Overseas Money Transfer'),(17,'Remittance','M Lhuillier Kwarta Padala'),(18,'Remittance','LBC Instant Peso Padala'),(19,'Remittance','TrueMoney Money Padala'),(20,'Remittance','RD Pawnshop Cash Padala'),(21,'Remittance','Smart Money'),(22,'Remittance','Globe Gcash');
+insert  into `mode_of_payment_table`(`modeOfPaymentId`,`paymentMode`,`nameOfRemittanceOrBank`) values (4,'Bank Transfer','BDO'),(5,'Bank Transfer','DBP'),(6,'Bank Transfer','Metro Bank'),(7,'Bank Transfer','EastWest'),(8,'Bank Transfer','BPI'),(9,'Bank Transfer','Union Bank'),(10,'Bank Transfer','China Bank'),(11,'Bank Transfer','PNB'),(12,'Bank Transfer','RCBC'),(13,'Bank Transfer','Security Bank'),(14,'Remittance','Palawan Express Pera Padala'),(15,'Remittance','Cebuana Lhuillier Pera Padala'),(16,'Remittance','Western Union Sulit Padala and Overseas Money Transfer'),(17,'Remittance','M Lhuillier Kwarta Padala'),(18,'Remittance','LBC Instant Peso Padala'),(19,'Remittance','TrueMoney Money Padala'),(20,'Remittance','RD Pawnshop Cash Padala'),(21,'Remittance','Smart Money'),(22,'Remittance','Globe Gcash'),(23,'In House',NULL);
 
 /*Table structure for table `notification_table` */
 
@@ -298,19 +300,31 @@ DROP TABLE IF EXISTS `booking_view`;
  `bookingStatus` varchar(60) ,
  `dateBooked` date ,
  `numberOfPaxBooked` int(6) ,
- `firstName` varchar(60) ,
- `middleName` varchar(60) ,
- `lastName` varchar(60) ,
- `contactNumber` varchar(60) ,
  `packageId` int(6) ,
  `departureDate` date ,
  `returnDate` date ,
  `maxPax` int(6) ,
+ `travelAndTourStatus` varchar(60) ,
  `packageName` varchar(60) ,
  `packageDetails` text ,
  `inclusion` text ,
  `exclusion` text ,
- `price` double 
+ `price` double ,
+ `firstName` varchar(60) ,
+ `middleName` varchar(60) ,
+ `lastName` varchar(60) ,
+ `contactNumber` varchar(60) ,
+ `addressId` int(6) ,
+ `accountTypeId` int(6) ,
+ `userName` varchar(60) ,
+ `passWord` varchar(60) ,
+ `isDeleted` tinyint(1) ,
+ `accountType` varchar(60) ,
+ `province` varchar(60) ,
+ `city` varchar(60) ,
+ `barangay` varchar(60) ,
+ `street` varchar(60) ,
+ `buildingNumber` varchar(60) 
 )*/;
 
 /*Table structure for table `comment_view` */
@@ -347,6 +361,19 @@ DROP TABLE IF EXISTS `destination_view`;
  `placeName` varchar(60) ,
  `latitude` varchar(60) ,
  `longitude` varchar(60) 
+)*/;
+
+/*Table structure for table `mode_of_payment_view` */
+
+DROP TABLE IF EXISTS `mode_of_payment_view`;
+
+/*!50001 DROP VIEW IF EXISTS `mode_of_payment_view` */;
+/*!50001 DROP TABLE IF EXISTS `mode_of_payment_view` */;
+
+/*!50001 CREATE TABLE  `mode_of_payment_view`(
+ `modeOfPaymentId` int(6) ,
+ `paymentMode` varchar(60) ,
+ `nameOfRemittanceOrBank` varchar(60) 
 )*/;
 
 /*Table structure for table `package_media_view` */
@@ -477,7 +504,7 @@ DROP TABLE IF EXISTS `travel_and_tour_view`;
 /*!50001 DROP TABLE IF EXISTS `booking_view` */;
 /*!50001 DROP VIEW IF EXISTS `booking_view` */;
 
-/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `booking_view` AS select `booking_table`.`bookingId` AS `bookingId`,`booking_table`.`profileId` AS `profileId`,`booking_table`.`travelAndTourId` AS `travelAndTourId`,`booking_table`.`bookingStatus` AS `bookingStatus`,`booking_table`.`dateBooked` AS `dateBooked`,`booking_table`.`numberOfPaxBooked` AS `numberOfPaxBooked`,`profile_table`.`firstName` AS `firstName`,`profile_table`.`middleName` AS `middleName`,`profile_table`.`lastName` AS `lastName`,`profile_table`.`contactNumber` AS `contactNumber`,`travel_and_tour_table`.`packageId` AS `packageId`,`travel_and_tour_table`.`departureDate` AS `departureDate`,`travel_and_tour_table`.`returnDate` AS `returnDate`,`travel_and_tour_table`.`maxPax` AS `maxPax`,`package_table`.`packageName` AS `packageName`,`package_table`.`packageDetails` AS `packageDetails`,`package_table`.`inclusion` AS `inclusion`,`package_table`.`exclusion` AS `exclusion`,`package_table`.`price` AS `price` from (((`booking_table` join `profile_table` on((`booking_table`.`profileId` = `profile_table`.`profileId`))) join `travel_and_tour_table` on((`booking_table`.`travelAndTourId` = `travel_and_tour_table`.`travelAndTourId`))) join `package_table` on((`travel_and_tour_table`.`packageId` = `package_table`.`packageId`))) */;
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `booking_view` AS select `booking_table`.`bookingId` AS `bookingId`,`booking_table`.`profileId` AS `profileId`,`booking_table`.`travelAndTourId` AS `travelAndTourId`,`booking_table`.`bookingStatus` AS `bookingStatus`,`booking_table`.`dateBooked` AS `dateBooked`,`booking_table`.`numberOfPaxBooked` AS `numberOfPaxBooked`,`travel_and_tour_table`.`packageId` AS `packageId`,`travel_and_tour_table`.`departureDate` AS `departureDate`,`travel_and_tour_table`.`returnDate` AS `returnDate`,`travel_and_tour_table`.`maxPax` AS `maxPax`,`travel_and_tour_table`.`travelAndTourStatus` AS `travelAndTourStatus`,`package_table`.`packageName` AS `packageName`,`package_table`.`packageDetails` AS `packageDetails`,`package_table`.`inclusion` AS `inclusion`,`package_table`.`exclusion` AS `exclusion`,`package_table`.`price` AS `price`,`profile_table`.`firstName` AS `firstName`,`profile_table`.`middleName` AS `middleName`,`profile_table`.`lastName` AS `lastName`,`profile_table`.`contactNumber` AS `contactNumber`,`profile_table`.`addressId` AS `addressId`,`profile_table`.`accountTypeId` AS `accountTypeId`,`profile_table`.`userName` AS `userName`,`profile_table`.`passWord` AS `passWord`,`profile_table`.`isDeleted` AS `isDeleted`,`account_type_table`.`accountType` AS `accountType`,`address_table`.`province` AS `province`,`address_table`.`city` AS `city`,`address_table`.`barangay` AS `barangay`,`address_table`.`street` AS `street`,`address_table`.`buildingNumber` AS `buildingNumber` from (((((`booking_table` join `travel_and_tour_table` on((`booking_table`.`travelAndTourId` = `travel_and_tour_table`.`travelAndTourId`))) join `package_table` on((`travel_and_tour_table`.`packageId` = `package_table`.`packageId`))) join `profile_table` on((`booking_table`.`profileId` = `profile_table`.`profileId`))) join `address_table` on((`profile_table`.`addressId` = `address_table`.`addressId`))) join `account_type_table` on((`profile_table`.`accountTypeId` = `account_type_table`.`accountTypeId`))) */;
 
 /*View structure for view comment_view */
 
@@ -492,6 +519,13 @@ DROP TABLE IF EXISTS `travel_and_tour_view`;
 /*!50001 DROP VIEW IF EXISTS `destination_view` */;
 
 /*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `destination_view` AS select `destination_table`.`destinationId` AS `destinationId`,`destination_table`.`placeId` AS `placeId`,`destination_table`.`packageId` AS `packageId`,`place_table`.`placeName` AS `placeName`,`place_table`.`latitude` AS `latitude`,`place_table`.`longitude` AS `longitude` from (`destination_table` join `place_table` on((`destination_table`.`placeId` = `place_table`.`placeId`))) */;
+
+/*View structure for view mode_of_payment_view */
+
+/*!50001 DROP TABLE IF EXISTS `mode_of_payment_view` */;
+/*!50001 DROP VIEW IF EXISTS `mode_of_payment_view` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `mode_of_payment_view` AS select `mode_of_payment_table`.`modeOfPaymentId` AS `modeOfPaymentId`,`mode_of_payment_table`.`paymentMode` AS `paymentMode`,`mode_of_payment_table`.`nameOfRemittanceOrBank` AS `nameOfRemittanceOrBank` from `mode_of_payment_table` */;
 
 /*View structure for view package_media_view */
 
