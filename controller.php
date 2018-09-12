@@ -161,6 +161,16 @@ if (isset($_POST['from']) and $_POST['from'] == 'search-package') {
 
 }
 
+if (isset($_POST['from']) and $_POST['from'] == 'add-booking-online-customer') {
+	mysqli_query($connection, "insert into booking_table (profileId, travelAndTourId, bookingStatus, dateBooked, numberOfPaxBooked) values ('" . $_SESSION['profileId'] . "', '" . $_POST['travelAndTourId'] . "', 'Pending Down Payment', '" . date('Y-m-d') . "', '" . $_POST['paxNumber'] . "')");
+
+	$bookingId = mysqli_insert_id($connection);
+
+	$bookingId = base64_encode($bookingId);
+
+	$_SESSION['do'] = 'added';
+	header("Location: confirmation.php?bookingId=".$bookingId."");
+}
 
 
 

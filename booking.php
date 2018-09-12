@@ -138,8 +138,9 @@ $res1 = mysqli_fetch_assoc($qry1);
 			</div>
 			<!--End row -->
 
-	<div class="row margin_60" id="belowDiv" style="display: none;">
-		<aside class="col-md-6">
+	<div class="row" id="belowDiv" style="display: none;">
+		<div class="col-md-8"></div>
+		<aside class="col-md-4">
 			<div class="box_style_1">
 				<h3 class="inner">- Billing Statement -</h3>
 				<table class="table table_summary">
@@ -172,46 +173,21 @@ $res1 = mysqli_fetch_assoc($qry1);
 						</tr>
 					</tbody>
 				</table>
-		
-			</div>
+				<p>For down payment please pay ₱<span id="downpayment"></span>.</p>
+				<p>For full payment please pay ₱<span id="fullpayment"></span>.</p>
 
-		</aside>
-
-		<aside class="col-md-6">
-			<div class="box_style_1">
-				<h3 class="inner">- Payment Form -</h3>
-				<div class="row">
-					<div class="col-md-12">
-						<div class="form-group">
-							<label>Mode of payment</label>
-							<select class="form-control">
-							<?php $qry5 = mysqli_query($connection, "select * from mode_of_payment_view");
-							while ($res5 = mysqli_fetch_assoc($qry5)) { ?>
-								<option value="<?php echo $res5['modeOfPaymentId'] ?>"><?php echo $res5['paymentMode'] ?> - <?php echo $res5['nameOfRemittanceOrBank'] ?></option>
-							<?php } ?>
-							</select>
-						</div>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-md-12">
-						<div class="form-group">
-							<label>Type of payment</label>
-							<select class="form-control">
-								<option>Down Payment</option>
-								<option>Full Payment</option>
-							</select>
-						</div>
-						<p>For down payment please pay ₱<span id="downpayment"></span>.</p>
-						<p>For full payment please pay ₱<span id="fullpayment"></span>.</p>
-					</div>
-				</div>
-				<a class="btn_full" href="payment.html">Check out</a>
+				<form method="POST" action="controller.php">
+				<input type="text" name="travelAndTourId" value="<?php echo $res4['travelAndTourId']; ?>" hidden = "">
+				<input type="text" name="paxNumber" id="paxNumberFinal" hidden="">
+				<input type="text" name="from" value="add-booking-online-customer" hidden="">
+				<button type="submit" class="btn_full">Confirm Booking</button>
+				</form>
 
 			</div>
 
 		</aside>
+
+	
 		<!-- End aside -->
 	</div>
 	<!-- end belowDiv -->
@@ -268,13 +244,15 @@ $res1 = mysqli_fetch_assoc($qry1);
 
 	function calculate() {
 		var paxNumber = document.getElementById("paxNumber").value;
+
+		document.getElementById("paxNumberFinal").value = paxNumber;
 		
 		document.getElementById("paxNumberSpan").textContent = paxNumber ;
 
 		document.getElementById("costSpan").textContent = (paxNumber * <?php echo $res['price']; ?>).toFixed(2);
 
 
-		document.getElementById("downpayment").textContent = ((paxNumber * <?php echo $res['price']; ?>) * .60).toFixed(2);
+		document.getElementById("downpayment").textContent = ((paxNumber * <?php echo $res['price']; ?>) * .50).toFixed(2);
 
 		document.getElementById("fullpayment").textContent = (paxNumber * <?php echo $res['price']; ?>).toFixed(2);
 

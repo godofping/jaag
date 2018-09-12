@@ -93,8 +93,12 @@ $res1 = mysqli_fetch_assoc($qry1);
 					<div class="row">
 						<div class="col-md-3">
 							<h3>Schedule</h3>
+
 						</div>
 						<div class="col-md-9">
+							<?php if (!isset($_SESSION['profileId'])): ?>
+								<p>Please login for you able to book.</p>
+							<?php endif ?>
 							<div class=" table-responsive">
 								<table class="table table-striped">
 									<thead>
@@ -116,7 +120,9 @@ $res1 = mysqli_fetch_assoc($qry1);
 										
 											<td>0/<?php echo $res3['maxPax']; ?></td>
 											<td><?php echo $res3['travelAndTourStatus']; ?></td>
-											<td><a href="booking.php?travelAndTourId=<?php echo $res3['travelAndTourId'] ?>"><button class="btn btn-info">Book</button></a></td>
+											<td><?php if (isset($_SESSION['profileId'])): ?>
+												<a href="booking.php?travelAndTourId=<?php echo $res3['travelAndTourId'] ?>"><button class="btn btn-info">Book</button></a>
+											<?php endif ?></td>
 										</tr>
 										<?php } ?>
 									</tbody>
