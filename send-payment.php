@@ -33,8 +33,8 @@
 						<div class="col-md-3">
 							<h3>Payment History of Booking ID <?php echo base64_decode($_GET['bookingId']); ?></h3>
 							<hr>
-							<?php $qry = mysqli_query($connection, "select sum(amount) as totalAmountPaid from payment_transaction_view where bookingId = '" . base64_decode($_GET['bookingId']) . "'"); ?>
-							<h4>Total Amount Paid: ₱ </h4>
+							<?php $qry = mysqli_query($connection, "select COALESCE(SUM(amount),0) as totalAmountPaid from payment_transaction_view where bookingId = '" . base64_decode($_GET['bookingId']) . "' and paymentStatus = 'Recieved'"); $res = mysqli_fetch_assoc($qry); ?>
+							<h4>Total Amount Paid: ₱ <?php echo $res['totalAmountPaid']; ?></h4>
 
 						</div>
 						<div class="col-md-9">
@@ -52,6 +52,7 @@
 											<th>Remittance</th>
 											<th>Proof Image</th>
 											<th>Status</th>
+											
 										
 										</tr>
 									</thead>

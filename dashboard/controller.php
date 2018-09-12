@@ -292,6 +292,19 @@ if (isset($_POST['from']) and $_POST['from'] == 'delete-comment') {
 
 }
 
+if (isset($_POST['from']) and $_POST['from'] == 'update-payment-transaction') {
+
+	mysqli_query($connection, "update payment_transaction_table set paymentStatus = '" . $_POST['paymentStatus'] . "' where paymentTransactionId = '" . $_POST['paymentTransactionId'] . "'");
+
+
+	$_SESSION['do'] = 'updated';
+	header("Location: payment-transactions.php");
+
+
+}
+
+
+
 
 
 ?>

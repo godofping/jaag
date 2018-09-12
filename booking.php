@@ -177,14 +177,8 @@ $res1 = mysqli_fetch_assoc($qry1);
 					</div>
 					<!--/box_style_1 -->
 					</form>
-			
-				</aside>
-			</div>
-			<!--End row -->
-
-	<div class="row" id="belowDiv" style="display: none;">
-		<div class="col-md-8"></div>
-		<aside class="col-md-4">
+			<div class="row" id="belowDiv" style="display: none;">
+		<aside class="col-md-12">
 			<div class="box_style_1">
 				<h3 class="inner">- Billing Statement -</h3>
 				<table class="table table_summary">
@@ -235,6 +229,11 @@ $res1 = mysqli_fetch_assoc($qry1);
 		<!-- End aside -->
 	</div>
 	<!-- end belowDiv -->
+				</aside>
+			</div>
+			<!--End row -->
+
+	
 
 </div>
 <!--End container -->
