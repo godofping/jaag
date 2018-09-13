@@ -33,7 +33,7 @@ include("includes/header.php");
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-         
+                    <button class="btn btn-success m-t-20 waves-effect text-left" data-toggle="modal" data-target="#addModal">Add</button>
                     <div class="table-responsive m-t-20">
                         <table id="myTable" class="table table-bordered table-striped">
                             <thead>
@@ -86,91 +86,126 @@ include("includes/header.php");
                 <form method="POST" action="controller.php">
                     
                     <div class="row">
-                        <div class="col-md-12">
-                            <label>Place Name</label>
+                        <div class="col-md-4">
+                            <label>First Name</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="placeName" name="placeName" required="">
+                                <input type="text" class="form-control" id="firstName" name="firstName">
                             </div>
                             </div>
 
-                        <div class="col-md-12">
-                            <label>Latitude</label>
+                        <div class="col-md-4">
+                            <label>Middle Name</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="latitude" name="latitude" required="">
+                                <input type="text" class="form-control" id="middleName" name="middleName" required="">
                             </div>
                         </div>
 
-                        <div class="col-md-12">
-                            <label>Longitude</label>
+                        <div class="col-md-4">
+                            <label>Last Name</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="longitude" name="longitude" required="">
+                                <input type="text" class="form-control" id="lastName" name="lastName" required="">
                             </div>
                         </div>
                     </div>
 
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <label>Province</label>
+                            <div class="form-group">
+                                <select class="form-control" name="province" id="province" required="" onchange="populateCity()">
+                             
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-4">
+                            <label>City</label>
+                            <div class="form-group">
+                                <select class="form-control" name="city" id="city" required="" onchange="populateBarangay()">
+                            
+                                </select>
+                            </div>
+                            </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <label>Barangay</label>
+                            <div class="form-group">
+                                <select class="form-control" name="barangay" id="barangay" required="">
+                                  <option selected="" value="<?php echo $res['barangay'] ?>" disabled>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <label>Street</label>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="street" name="street">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label>Building Number</label>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="street_number" name="buildingNumber">
+                            </div>
+                        </div>
+
+                    </div>
 
 
-                <!-- other hidden inputs -->
-                <input type="text" name="from" value="add-place" hidden="">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Contact Number</label>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="contactNumber" name="contactNumber" required="">
+                            </div>
+                        </div>
+                    </div>
 
+                    <hr>
 
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-success waves-effect text-left">Submit</button>
-                <button type="button" class="btn btn-danger waves-effect text-left" data-dismiss="modal">Close</button>
-            </div>
-            </form>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-
-<?php 
-$qry = mysqli_query($connection, "select * from place_view");
-while ($res = mysqli_fetch_assoc($qry)) { ?>             
-<!-- modal content -->
-<div class="modal fade" id="updateModal<?php echo $res['placeId'] ?>" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="myLargeModalLabel">Update</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            </div>
-            <div class="modal-body">
-                <form method="POST" action="controller.php">
                     
                     <div class="row">
-                        <div class="col-md-12">
-                            <label>Place Name</label>
+                        <div class="col-md-4">
+                            <label>Pax Number</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="placeName" name="placeName" required="" value="<?php echo $res['placeName'] ?>">
-                            </div>
-                            </div>
+                                <select class="form-control" name="paxNumber" id="paxNumber">
+                                    <?php 
+                                    $qry12 = mysqli_query($connection, "select * from travel_and_tour_view where travelAndTourId = '" . $_GET['travelAndTourId'] . "'");
+                                    $res12 = mysqli_fetch_assoc($qry12);
 
-                        <div class="col-md-12">
-                            <label>Latitude</label>
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="latitude" name="latitude" required="" value="<?php echo $res['latitude'] ?>">
-                            </div>
-                        </div>
+                                    $qry13 = mysqli_query($connection, "select COALESCE(sum(numberOfPaxBooked),0) as slotsTaken from booking_table where travelAndTourId = '" . $_GET['travelAndTourId'] . "' AND (bookingStatus = 'Reserved - Pending Outstanding Payment' OR bookingStatus = 'Officially Reserved')");
 
-                        <div class="col-md-12">
-                            <label>Longitude</label>
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="longitude" name="longitude" required="" value="<?php echo $res['longitude'] ?>">
+                                    $res13 = mysqli_fetch_assoc($qry13);
+
+                                    for ($i=1; $i <=  $res12['maxPax'] - $res13['slotsTaken'] ; $i++) { ?>
+                                        <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                                    <?php } ?>
+                                </select>
                             </div>
                         </div>
                     </div>
 
+
+
+
+
+
                 <!-- other hidden inputs -->
-                <input type="text" name="from" value="update-place" hidden="">
-                <input type="text" name="placeId" value="<?php echo $res['placeId'] ?>"  hidden="">
+                <input type="text" name="from" value="add-attendant" hidden="">
+                <input type="text" name="province1" id="province1" hidden="">
+                <input type="text" name="city1" id="city1" hidden="">
+
+
 
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-success waves-effect text-left">Submit</button>
+                <button class="btn btn-success waves-effect text-left" onclick="pushData()">Submit</button>
                 <button type="button" class="btn btn-danger waves-effect text-left" data-dismiss="modal">Close</button>
             </div>
             </form>
@@ -181,35 +216,148 @@ while ($res = mysqli_fetch_assoc($qry)) { ?>
 </div>
 <!-- /.modal -->
 
-<!-- modal content -->
-<div class="modal fade" id="deleteModal<?php echo $res['placeId'] ?>" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="myLargeModalLabel">Delete</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            </div>
-            <div class="modal-body">
-                <form method="POST" action="controller.php">
-                    
-                    <h2>Are you sure to delete?</h2>
-
-                <!-- other hidden inputs -->
-                <input type="text" name="from" value="delete-place" hidden="">
-                <input type="text" name="placeId" value="<?php echo $res['placeId'] ?>" hidden="">
-
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-success waves-effect text-left">Yes</button>
-                <button type="button" class="btn btn-danger waves-effect text-left" data-dismiss="modal">No</button>
-            </div>
-            </form>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal --> 
-<?php } ?>
-
 <?php include("includes/footer.php") ?>
+
+<script type="text/javascript">
+
+function pushData()
+{
+    document.getElementById("province1").value = $("#province option:selected").text();
+    document.getElementById("city1").value = $("#city option:selected").text();
+
+    var form = document.getElementById("form");
+
+    document.getElementById("submitButton").addEventListener("click", function () {
+    form.submit();
+    });
+}
+
+var $select = $('[name=province]');
+
+  $.getJSON('JSON/refprovince.json', function(data){
+    $select.html('');
+
+    $select.append('<option value="<?php echo $res['province'] ?>" selected disabled><?php echo $res['province'] ?></option>');
+
+    for (var i = 0; i < data['PROVINCES'].length; i++) {
+      $select.append('<option value="'+ data['PROVINCES'][i]['provCode'] + '">' + "Region " + data['PROVINCES'][i]['regCode'] + ": " + data['PROVINCES'][i]['provDesc'] + '</option>');
+    }
+
+  });
+
+
+
+function populateCity() {
+
+  var $selectCity = $('[name=city]');
+
+  $.getJSON('JSON/refcitymun.json', function(data){
+    $selectCity.html('');
+    for (var i = 0; i < data['CITIES'].length; i++) {
+     if (data['CITIES'][i]['provCode'] == $("#province option:selected").val()) {
+       $selectCity.append('<option value="'+ data['CITIES'][i]['citymunCode'] + '">' + data['CITIES'][i]['citymunDesc'] + '</option>');
+     }
+
+
+    }
+
+  });
+}
+
+function populateBarangay() {
+
+  var $selectBarangay = $('[name=barangay]');
+
+  $.getJSON('JSON/refbrgy.json', function(data){
+    $selectBarangay.html('');
+
+    for (var i = 0; i < data['BARANGAYS'].length; i++) {
+
+     if (data['BARANGAYS'][i]['citymunCode'] == $("#city option:selected").val()) {
+       $selectBarangay.append('<option value="'+ data['BARANGAYS'][i]['brgyDesc'] + '">' + data['BARANGAYS'][i]['brgyDesc'] + '</option>');
+     }
+
+
+    }
+
+  });
+}
+
+
+
+</script>
+
+
+
+<script type="text/javascript">
+
+function pushData()
+{
+    document.getElementById("province1").value = $("#province option:selected").text();
+    document.getElementById("city1").value = $("#city option:selected").text();
+
+    var form = document.getElementById("form");
+
+    document.getElementById("submitButton").addEventListener("click", function () {
+    form.submit();
+    });
+}
+
+// populateProvince();
+// populateCity();
+// populateBarangay();
+
+function populateProvince(){
+    var $select = $('[name=province]');
+
+  $.getJSON('JSON/refprovince.json', function(data){
+    $select.html('');
+
+    for (var i = 0; i < data['PROVINCES'].length; i++) {
+      $select.append('<option value="'+ data['PROVINCES'][i]['provCode'] + '">' + "Region " + data['PROVINCES'][i]['regCode'] + ": " + data['PROVINCES'][i]['provDesc'] + '</option>');
+    }
+
+  });
+}
+
+
+
+function populateCity() {
+
+  var $selectCity = $('[name=city]');
+
+  $.getJSON('JSON/refcitymun.json', function(data){
+    $selectCity.html('');
+    for (var i = 0; i < data['CITIES'].length; i++) {
+     if (data['CITIES'][i]['provCode'] == $("#province option:selected").val()) {
+       $selectCity.append('<option value="'+ data['CITIES'][i]['citymunCode'] + '">' + data['CITIES'][i]['citymunDesc'] + '</option>');
+     }
+
+
+    }
+
+  });
+}
+
+function populateBarangay() {
+
+  var $selectBarangay = $('[name=barangay]');
+
+  $.getJSON('JSON/refbrgy.json', function(data){
+    $selectBarangay.html('');
+
+    for (var i = 0; i < data['BARANGAYS'].length; i++) {
+
+     if (data['BARANGAYS'][i]['citymunCode'] == $("#city option:selected").val()) {
+       $selectBarangay.append('<option value="'+ data['BARANGAYS'][i]['brgyDesc'] + '">' + data['BARANGAYS'][i]['brgyDesc'] + '</option>');
+     }
+
+
+    }
+
+  });
+}
+
+
+
+</script>

@@ -39,6 +39,7 @@ include("includes/header.php");
                                 <tr>
                                     <th>ID</th>
                                     <th>Package Name</th>
+                                    <th>Price</th>
                                     <th>Departure Date</th>
                                     <th>Return Date</th>
                                     <th>Pax</th>
@@ -53,6 +54,7 @@ include("includes/header.php");
                                 <tr>
                                     <td><?php echo $res['travelAndTourId']; ?></td>
                                     <td><?php echo $res['packageName']; ?></td>
+                                    <td>₱<?php echo number_format($res['price'],2) ?></td>
                                     <td><?php echo $res['departureDate']; ?></td>
                                     <td><?php echo $res['returnDate']; ?></td>
                                     <td><?php echo $res['maxPax']; ?></td>
