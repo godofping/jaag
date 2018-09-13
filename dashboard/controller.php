@@ -317,13 +317,52 @@ if (isset($_POST['from']) and $_POST['from'] == 'update-travel-and-tour-status')
 
 	mysqli_query($connection, "update travel_and_tour_table set travelAndTourStatus = '" . $_POST['travelAndTourStatus'] . "' where travelAndTourId = '" . $_POST['travelAndTourId'] . "'");
 
-
-	
 	$_SESSION['do'] = 'updated';
 	header("Location: travel-and-tour.php");
 
+}
+
+
+if (isset($_GET['from']) and $_GET['from'] == 'back-up') {
+
+
+	define("BACKUP_PATH", "database/");
+
+	$server_name   = "localhost";
+	$username      = "root";
+	$password      = "";
+	$database_name = "jaag_db";
+
+
+	$cmd = "mysqldump -h {$server_name} -u {$username} -p{$password} {$database_name} cart_item_table cart_table customer_table goodies_inventory_table menu_category_table menu_item_table order_table review_table user_table > " . BACKUP_PATH . "{$database_name}.sql";
+
+
+	exec($cmd);
+
+	$_SESSION['do'] = 'added';
+	header("Location: back-up-and-restore.php");
 
 }
+
+
+if (isset($_GET['from']) and $_GET['from'] == 'restore') {
+
+
+	$restore_file  = "database/jaag_db.sql";
+	$server_name   = "localhost";
+	$username      = "root";
+	$password      = "";
+	$database_name = "jaag_db";
+
+	$cmd = "mysql -h {$server_name} -u {$username} -p{$password} {$database_name} < $restore_file";
+	exec($cmd);
+	
+	$_SESSION['do'] = 'updated';
+	header("Location: back-up-and-restore.php");
+
+}
+
+
 
 
 

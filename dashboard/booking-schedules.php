@@ -66,21 +66,20 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title"><strong>Booking Information</strong></h4>
+                <h4 class="modal-title"><strong>Travel And Tour Information</strong></h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
-                <div class="form-group">
-                    <select class="form-control custom-select">
-                    <option value="">Male</option>
-                    <option value="">Female</option>
-                </select>
-                </div>
+                <p>Package Name: </p>
+                <p>Travel Dates: </p>
+                <p>Slots: </p>
+                <p>Status: </p>
+            
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-white waves-effect" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success save-event waves-effect waves-light">Create event</button>
-    
+               
+                </form>
             </div>
         </div>
     </div>
@@ -138,17 +137,13 @@
         var $this = this;
             var form = $("<form></form>");
             form.append("<label>Change event name</label>");
+  
             form.append("<div class='input-group'><input class='form-control' type=text value='" + calEvent.title + "' /><span class='input-group-btn'><button type='submit' class='btn btn-success waves-effect waves-light'><i class='fa fa-check'></i> Save</button></span></div>");
             $this.$modal.modal({
                 backdrop: 'static'
             });
     
-            $this.$modal.find('form').on('submit', function () {
-                calEvent.title = form.find("input[type=text]").val();
-                $this.$calendarObj.fullCalendar('updateEvent', calEvent);
-                $this.$modal.modal('hide');
-                return false;
-            });
+         
     },
     
     CalendarApp.prototype.enableDrag = function() {
@@ -185,6 +180,7 @@
             while ($res1 = mysqli_fetch_assoc($qry1)) { ?>
 
             {   
+
                 packageId: '<?php echo $res1['packageId'] ?>',
                 title: '<?php echo $res1['packageName'] ?>',
                 start: '<?php echo $res1['departureDate'] ?>',

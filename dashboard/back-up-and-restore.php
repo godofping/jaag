@@ -38,7 +38,7 @@ include("includes/header.php");
                             <h2>Back-up current data.</h2>
                         </div>
                         <div class="col-md-12">
-                            <button class="btn btn-info m-t-10 waves-effect text-left">Back-up</button>
+                            <a href="controller.php?from=back-up"><button class="btn btn-info m-t-10 waves-effect text-left">Back-up</button></a>
                         </div>
                     </div>
                     
@@ -47,7 +47,7 @@ include("includes/header.php");
                             <h2>Restore last back-up data.</h2>
                         </div>
                         <div class="col-md-12">
-                            <button class="btn btn-success m-t-10 waves-effect text-left">Restore</button>
+                            <a href="controller.php?from=restore"><button class="btn btn-success m-t-10 waves-effect text-left">Restore</button></a>
                         </div>
                     </div>
 
