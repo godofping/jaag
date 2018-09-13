@@ -35,9 +35,9 @@
 						<p>
 							Your booking is now placed. Thank you very much for booking with us. 
 						</p>
-						<p>For down payment please pay ₱<?php echo number_format($res['price'] * 0.50,2); ?>.
+						<p>For down payment please pay ₱<?php echo number_format(($res['price'] *  $res['numberOfPaxBooked']) * 0.50,2); ?>.
 
-						For full payment please pay ₱<?php echo number_format($res['price'],2); ?>. </p>
+						For full payment please pay ₱<?php echo number_format($res['price'] *  $res['numberOfPaxBooked'],2); ?>. </p>
 						<p>For sending payments please go to My Account > My Bookings > Send Payment.</p>
 						<p>Take note that you are not yet officially reserved unless you pay the down payment or the full payment.</p>
 
@@ -105,7 +105,7 @@
 										<strong>Total Payment</strong>
 									</td>
 									<td>
-										₱<?php echo number_format($res['price'],2); ?>
+										₱<?php echo number_format($res['price'] *  $res['numberOfPaxBooked'],2); ?>
 									</td>
 								</tr>
 							</tbody>

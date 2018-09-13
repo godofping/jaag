@@ -37,6 +37,7 @@ include("includes/header.php");
                             <thead>
                                 <tr>
                                     <th>ID</th>
+                                    <th>Booking ID</th>
                                     <th>Payment Type</th>
                                     <th>Amount Sent</th>
                                     <th>Date Sent</th>
@@ -55,6 +56,7 @@ include("includes/header.php");
                                         while ($res = mysqli_fetch_assoc($qry)) { ?>
                                             <tr>
                                                 <td><?php echo $res['paymentTransactionId']; ?></td>
+                                                <td><?php echo $res['bookingId']; ?></td>
                                                 <td><?php echo $res['paymentType']; ?></td>
                                                 <td>₱<?php echo number_format($res['amount'],2); ?></td>
                                                 <td><?php echo $res['dateOfPayment']; ?></td>
@@ -68,7 +70,9 @@ include("includes/header.php");
                                                     <a  target="_blank" href="../<?php echo $res1['mediaLocation'] ?>">view image</a>
                                                 </td>
                                                 <td><?php echo $res['paymentStatus']; ?></td>
-                                                <td><button type="button" class="btn btn-block btn-outline-warning" data-toggle="modal" data-target="#updateModal<?php echo $res['paymentTransactionId']; ?>">Update</button></td>
+                                                <td><button type="button" class="btn btn-block btn-outline-warning" data-toggle="modal" data-target="#updateModal<?php echo $res['paymentTransactionId']; ?>" <?php if ($res['paymentStatus'] == 'Recieved'): ?>
+                                                    disabled
+                                                <?php endif ?>>Update</button></td>
     
 
                                             </tr>
