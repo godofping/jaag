@@ -296,6 +296,16 @@ if (isset($_POST['from']) and $_POST['from'] == 'update-payment-transaction') {
 
 	mysqli_query($connection, "update payment_transaction_table set paymentStatus = '" . $_POST['paymentStatus'] . "' where paymentTransactionId = '" . $_POST['paymentTransactionId'] . "'");
 
+	if ($_POST['paymentType'] == 'Down Payment') {
+		mysqli_query($connection, "update booking_table set bookingStatus = 'Reserved - Pending Outstanding Payment' where bookingId = '" . $_POST['bookingId'] . "'");
+	}
+
+	if ($_POST['paymentType'] == 'Full Payment' or $_POST['paymentType'] == 'Outstanding Payment') {
+		mysqli_query($connection, "update booking_table set bookingStatus = 'Officially Reserved' where bookingId = '" . $_POST['bookingId'] . "'");
+	}
+
+	
+
 
 	$_SESSION['do'] = 'updated';
 	header("Location: payment-transactions.php");

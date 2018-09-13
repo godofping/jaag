@@ -110,7 +110,7 @@ while ($res = mysqli_fetch_assoc($qry)) { ?>
                             <label>Status</label>
                             <div class="form-group">
                                 <select class="form-control" name="paymentStatus" required="">
-                                    <option>Pending Confirmation</option>
+                                   <!--  <option>Pending Confirmation</option> -->
                                     <option>Recieved</option>
                                 </select>
                             </div>
@@ -121,7 +121,10 @@ while ($res = mysqli_fetch_assoc($qry)) { ?>
 
                 <!-- other hidden inputs -->
                 <input type="text" name="from" value="update-payment-transaction" hidden="">
+                
+                <input type="text" name="paymentType" value="<?php echo $res['paymentType'] ?>" hidden>
                 <input type="text" name="paymentTransactionId" value="<?php echo $res['paymentTransactionId'] ?>"  hidden="">
+                <input type="text" name="bookingId" value="<?php echo $res['bookingId'] ?>"  hidden="">
 
             </div>
             <div class="modal-footer">

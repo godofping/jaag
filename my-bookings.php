@@ -44,7 +44,8 @@
 											<th>Travel Dates</th>
 											<th>Number of Pax Booked</th>
 											<th>Date Booked</th>
-											<th>Status</th>
+											<th>Tour Status</th>
+											<th>Booking Status</th>
 											<th>Action</th>
 										
 										</tr>
@@ -59,6 +60,7 @@
 										
 											<td><?php echo $res3['numberOfPaxBooked']; ?></td>
 											<td><?php echo $res3['dateBooked']; ?></td>
+											<td><?php echo $res3['travelAndTourStatus']; ?></td>
 											<td><?php echo $res3['bookingStatus']; ?></td>
 											<td>
 												<a href="send-payment.php?bookingId=<?php echo base64_encode($res3['bookingId']) ?>"><button class="btn btn-info">Send Payment</button></a> <br><br>
