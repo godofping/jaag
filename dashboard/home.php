@@ -71,9 +71,9 @@ include("includes/header.php");
                         <div class="ml-auto">
                             <ul class="list-inline">
                                 <li>
-                                    <h6 class="text-muted text-success"><i class="fa fa-circle font-10 m-r-10 "></i>iMac</h6> </li>
+                                    <h6 class="text-muted text-success"><i class="fa fa-circle font-10 m-r-10 "></i>Bookings Income</h6> </li>
                                 <li>
-                                    <h6 class="text-muted  text-info"><i class="fa fa-circle font-10 m-r-10"></i>iPhone</h6> </li>
+                                  
                                     
                             </ul>
                         </div>
@@ -92,22 +92,22 @@ include("includes/header.php");
             <div class="card card-default">
                 <div class="card-header">
                    
-                    <h4 class="card-title m-b-0">Order Stats</h4>
+                    <h4 class="card-title m-b-0">Booking Stats</h4>
                 </div>
                 <div class="card-body collapse show">
                 <div id="morris-donut-chart" class="ecomm-donute" style="height: 317px;"></div>
                     <ul class="list-inline m-t-20 text-center">
                     <li >
-                        <h6 class="text-muted"><i class="fa fa-circle text-info"></i> Order</h65>
-                        <h4 class="m-b-0">8500</h4>
+                        <h6 class="text-muted"><i class="fa fa-circle text-info"></i> Pending Down Payment</h65>
+                        <h4 class="m-b-0"><?php $qry15 = mysqli_query($connection, "SELECT COUNT(*) as result FROM booking_view WHERE bookingStatus = 'Pending Down Payment'"); $res15 = mysqli_fetch_assoc($qry15); echo $res15['result']; ?></h4>
                     </li>
                     <li>
-                        <h6 class="text-muted"><i class="fa fa-circle text-danger"></i> Pending</h6>
-                        <h4 class="m-b-0">3630</h4>
+                        <h6 class="text-muted"><i class="fa fa-circle text-danger"></i> Pending Outstanding Payment</h6>
+                        <h4 class="m-b-0"><?php $qry15 = mysqli_query($connection, "SELECT COUNT(*) as result FROM booking_view WHERE bookingStatus = 'Pending Outstanding Payment'"); $res15 = mysqli_fetch_assoc($qry15); echo $res15['result']; ?></h4>
                     </li>
                     <li>
-                        <h6 class="text-muted"> <i class="fa fa-circle text-success"></i> Delivered</h6>
-                        <h4 class="m-b-0">4870</h4>
+                        <h6 class="text-muted"> <i class="fa fa-circle text-success"></i> Officially Reserved</h6>
+                        <h4 class="m-b-0"><?php $qry15 = mysqli_query($connection, "SELECT COUNT(*) as result FROM booking_view WHERE bookingStatus = 'Officially Reserved'"); $res15 = mysqli_fetch_assoc($qry15); echo $res15['result']; ?></h4>
                     </li>
                 </ul>
 
@@ -399,4 +399,123 @@ include("includes/header.php");
 
 <?php include("includes/footer.php") ?>
 
+
+<script type="text/javascript">
+    /*
+Template Name: Admin Press Admin
+Author: Themedesigner
+Email: niravjoshi87@gmail.com
+File: js
+*/
+$(function () {
+    "use strict";
+    // ============================================================== 
+    // Product chart
+    // ============================================================== 
+    Morris.Area({
+        element: 'morris-area-chart2',
+        data: [{
+            period: '2015',
+            Bookings: 152000,
+        },{
+            period: '2016',
+            Bookings: 230000,
+        },
+        {
+            period: '2017',
+            Bookings: 200000,
+        },
+        {
+            period: '2018',
+            Bookings: <?php $qry15 = mysqli_query($connection, "SELECT sum(amount) as result FROM payment_transaction_view WHERE paymentStatus = 'Recieved'"); $res15 = mysqli_fetch_assoc($qry15); echo $res15['result']; ?>,
+        }
+
+        ],
+        xkey: 'period',
+        ykeys: ['Bookings'],
+        labels: ['Bookings Income'],
+        pointSize: 0,
+        fillOpacity: 0.4,
+        pointStrokeColors:['#b4becb', '#01c0c8'],
+        behaveLikeLine: true,
+        gridLineColor: 'rgba(120, 130, 140, 0.13)',
+        lineWidth: 0,
+        smooth: true,
+        hideHover: 'auto',
+        lineColors: ['#b4becb', '#01c0c8'],
+        resize: true
+        
+    });
+   // ============================================================== 
+   // Morris donut chart
+   // ==============================================================       
+    Morris.Donut({
+        element: 'morris-donut-chart',
+        data: [{
+            label: "Pending Down Payment",
+            value: <?php $qry15 = mysqli_query($connection, "SELECT COUNT(*) as result FROM booking_view WHERE bookingStatus = 'Pending Down Payment'"); $res15 = mysqli_fetch_assoc($qry15); echo $res15['result']; ?>,
+
+        }, {
+            label: "Pending Outstanding Balance",
+            value: <?php $qry15 = mysqli_query($connection, "SELECT COUNT(*) as result FROM booking_view WHERE bookingStatus = 'Pending Outstanding Payment'"); $res15 = mysqli_fetch_assoc($qry15); echo $res15['result']; ?>,
+        }, {
+            label: "Officially Reserved",
+            value: <?php $qry15 = mysqli_query($connection, "SELECT COUNT(*) as result FROM booking_view WHERE bookingStatus = 'Officially Reserved'"); $res15 = mysqli_fetch_assoc($qry15); echo $res15['result']; ?>
+        }],
+        resize: true,
+        colors:['#26c6da', '#1976d2', '#ef5350']
+    });
+    // ============================================================== 
+    // sales difference
+    // ==============================================================
+    
+    // ============================================================== 
+    // sparkline chart
+    // ==============================================================
+    var sparklineLogin = function() { 
+       $('#sparklinedash').sparkline([ 0, 5, 6, 10, 9, 12, 4, 9], {
+            type: 'bar',
+            height: '50',
+            barWidth: '2',
+            resize: true,
+            barSpacing: '5',
+            barColor: '#26c6da'
+        });
+         $('#sparklinedash2').sparkline([ 0, 5, 6, 10, 9, 12, 4, 9], {
+            type: 'bar',
+            height: '50',
+            barWidth: '2',
+            resize: true,
+            barSpacing: '5',
+            barColor: '#7460ee'
+        });
+          $('#sparklinedash3').sparkline([ 0, 5, 6, 10, 9, 12, 4, 9], {
+            type: 'bar',
+            height: '50',
+            barWidth: '2',
+            resize: true,
+            barSpacing: '5',
+            barColor: '#03a9f3'
+        });
+           $('#sparklinedash4').sparkline([ 0, 5, 6, 10, 9, 12, 4, 9], {
+            type: 'bar',
+            height: '50',
+            barWidth: '2',
+            resize: true,
+            barSpacing: '5',
+            barColor: '#f62d51'
+        });
+       
+   }
+    var sparkResize;
+ 
+        $(window).resize(function(e) {
+            clearTimeout(sparkResize);
+            sparkResize = setTimeout(sparklineLogin, 500);
+        });
+        sparklineLogin();
+});
+
+
+</script>
 

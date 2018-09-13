@@ -5,9 +5,9 @@ Morris.Area({
         element: 'morris-area-chart',
         data: [{
             period: '2010',
-            iphone: 50,
-            ipad: 80,
-            itouch: 20
+            iphone: 1,
+            ipad: 1,
+            itouch: 1
         }, {
             period: '2011',
             iphone: 130,

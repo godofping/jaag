@@ -49,7 +49,7 @@
     <script src="assets/plugins/morrisjs/morris.min.js"></script>
     <!-- sparkline chart -->
     <script src="assets/plugins/sparkline/jquery.sparkline.min.js"></script>
-    <script src="js/dashboard4.js"></script>
+ 
     <!-- This is data table -->
     <script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
     <!-- start - This is for export functionality only -->
