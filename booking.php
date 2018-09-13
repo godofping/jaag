@@ -70,7 +70,13 @@ $res1 = mysqli_fetch_assoc($qry1);
 
 							<h5>from/per person ₱<?php echo number_format($res['price'],2); ?></h5>
 
-							<h5>Slots Booked: 0/<?php echo $res4['maxPax']; ?></h5>
+							<h5>Slots Booked: <?php 
+                                    $qry13 = mysqli_query($connection, "select COALESCE(sum(numberOfPaxBooked),0) as slotsTaken from booking_table where travelAndTourId = '" . $res4['travelAndTourId'] . "' AND bookingStatus = 'Reserved - Pending Outstanding Payment' OR bookingStatus = 'Officially Reserved'");
+                                    $res13 = mysqli_fetch_assoc($qry13);
+
+                                    echo $res13['slotsTaken'];
+
+                                    ?>/<?php echo $res4['maxPax']; ?></h5>
 							<p>
 								<?php echo $res['packageDetails']; ?>
 							</p>
@@ -162,7 +168,15 @@ $res1 = mysqli_fetch_assoc($qry1);
 								<div class="col-md-12">
 									<div class="form-group">
 										<label>Pax Number</label>
-										<input class="form-control" min="1" required name="paxNumber" id="paxNumber" type="number">
+										<select class="form-control" name="paxNumber" id="paxNumber">
+											<?php 
+                                    $qry13 = mysqli_query($connection, "select COALESCE(sum(numberOfPaxBooked),0) as slotsTaken from booking_table where travelAndTourId = '" . $res4['travelAndTourId'] . "' AND bookingStatus = 'Reserved - Pending Outstanding Payment' OR bookingStatus = 'Officially Reserved'");
+                                    $res13 = mysqli_fetch_assoc($qry13);
+
+                                    for ($i=1; $i <=  $res4['maxPax'] - $res13['slotsTaken'] ; $i++) { ?>
+                                    	<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                                	<?php } ?>
+										</select>
 									</div>
 								</div>
 				

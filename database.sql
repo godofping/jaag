@@ -65,11 +65,11 @@ CREATE TABLE `booking_table` (
   KEY `FK_booking_table123` (`profileId`),
   CONSTRAINT `FK_booking_table123` FOREIGN KEY (`profileId`) REFERENCES `profile_table` (`profileId`),
   CONSTRAINT `FK_booking_table2` FOREIGN KEY (`travelAndTourId`) REFERENCES `travel_and_tour_table` (`travelAndTourId`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 /*Data for the table `booking_table` */
 
-insert  into `booking_table`(`bookingId`,`profileId`,`travelAndTourId`,`bookingStatus`,`dateBooked`,`numberOfPaxBooked`) values (5,3,1,'Pending Down Payment','2018-09-12',2),(6,3,2,'Pending Down Payment','2018-09-13',1),(7,3,4,'Reserved - Pending Outstanding Payment','2018-09-13',2);
+insert  into `booking_table`(`bookingId`,`profileId`,`travelAndTourId`,`bookingStatus`,`dateBooked`,`numberOfPaxBooked`) values (5,3,1,'Pending Down Payment','2018-09-12',2),(6,3,2,'Pending Down Payment','2018-09-13',1),(7,3,4,'Reserved - Pending Outstanding Payment','2018-09-13',2),(8,3,5,'Pending Down Payment','2018-09-13',4);
 
 /*Table structure for table `comment_table` */
 

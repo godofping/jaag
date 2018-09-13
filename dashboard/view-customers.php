@@ -7,13 +7,14 @@ include("includes/header.php");
 <!-- ============================================================== -->
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h3 class="text-themecolor">Travel and Tour</h3>
+        <h3 class="text-themecolor">View Customers</h3>
     </div>
     <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="home.php">Home</a></li>
             <li class="breadcrumb-item">Bookings</li>
-            <li class="breadcrumb-item active"><a href="travel-and-tour.php">Travel and Tour</a></li>
+            <li class="breadcrumb-item"><a href="travel-and-tour.php">Travel and Tour</a></li>
+            <li class="breadcrumb-item active"><a href="travel-and-tour.php">View Customers</a></li>
         </ol>
     </div>
 
@@ -32,44 +33,32 @@ include("includes/header.php");
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <!-- <button class="btn btn-success m-t-20 waves-effect text-left" data-toggle="modal" data-target="#addModal">Add</button> -->
+         
                     <div class="table-responsive m-t-20">
                         <table id="myTable" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Package Name</th>
-                                    <th>Departure Date</th>
-                                    <th>Return Date</th>
-                                    <th>Pax</th>
-                                    <th>Booked Slots</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
+                                   
+                                    <th>Name</th>
+                                    <th>Number of Pax Booked</th>
+                                    <th>Date Booked</th>
+                                    <th>Booking Status</th>
+                                    <!-- <th>Actions</th> -->
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php $qry = mysqli_query($connection,"select * from travel_and_tour_view");
+                            <?php $qry = mysqli_query($connection,"select * from booking_view where travelAndTourId = '" . $_GET['travelAndTourId'] . "'");
                                     while ($res = mysqli_fetch_assoc($qry)) { ?>
                                 <tr>
-                                    <td><?php echo $res['travelAndTourId']; ?></td>
-                                    <td><?php echo $res['packageName']; ?></td>
-                                    <td><?php echo $res['departureDate']; ?></td>
-                                    <td><?php echo $res['returnDate']; ?></td>
-                                    <td><?php echo $res['maxPax']; ?></td>
-                                    <td>
-                                    <?php 
-                                    $qry13 = mysqli_query($connection, "select COALESCE(sum(numberOfPaxBooked),0) as slotsTaken from booking_table where travelAndTourId = '" . $res['travelAndTourId'] . "' AND bookingStatus = 'Reserved - Pending Outstanding Payment' OR bookingStatus = 'Officially Reserved'");
-                                    $res13 = mysqli_fetch_assoc($qry13);
-
-                                    echo $res13['slotsTaken'];
-
-                                    ?>
                                     
-                                     </td>
-                                     <td><?php echo $res['travelAndTourStatus']; ?></td>
-                                    <td>
-                                        <a href="view-customers.php?travelAndTourId=<?php echo $res['travelAndTourId'] ?>"><button type="button" class="btn btn-block btn-outline-warning">View Customers</button></a>
-                                    </td>
+                                    <td><?php echo $res['firstName'] . " " . $res['middleName'] . " " . $res['lastName']; ?></td>
+                                    <td><?php echo $res['numberOfPaxBooked']; ?></td>
+                                    <td><?php echo $res['dateBooked']; ?></td>
+                                    <td><?php echo $res['bookingStatus']; ?></td>
+                                   <!--  <td>
+                                        <button type="button" class="btn btn-block btn-outline-warning" data-toggle="modal" data-target="#updateModal<?php echo $res['placeId']; ?>">Update</button>
+                                        <button type="button" class="btn btn-block btn-outline-danger" data-toggle="modal" data-target="#deleteModal<?php echo $res['placeId']; ?>">Delete</button>
+                                    </td> -->
                                 </tr>
                             <?php } ?>
                             </tbody>
@@ -139,10 +128,10 @@ include("includes/header.php");
 <!-- /.modal -->
 
 <?php 
-$qry = mysqli_query($connection, "select * from travel_and_tour_view");
+$qry = mysqli_query($connection, "select * from place_view");
 while ($res = mysqli_fetch_assoc($qry)) { ?>             
 <!-- modal content -->
-<div class="modal fade" id="viewModal<?php echo $res['travelAndTourId'] ?>" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+<div class="modal fade" id="updateModal<?php echo $res['placeId'] ?>" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">

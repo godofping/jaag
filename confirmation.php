@@ -43,10 +43,10 @@
 
 						<h4>Policy</h4>
 
-						<p>Upon reservation no cancelation.</p>
- 						<p>7 days before the tour cancelation are accepted.</p>
- 						<p>3 days before the tour cancelation are acceptable but your oblige to pay the slot you reserved either you join nor not.</p>
- 						<p>Reservation fee are non refundable.</p>
+						<p>Upon reservation no cancellation.</p>
+ 						<p>7 days before the tour cancelations are accepted.</p>
+ 						<p>3 days before the tour cancellations are acceptable, but you oblige to pay the slot you reserved either you join nor not.</p>
+ 						<p>The reservation fee is non refundable.</p>
    
 
 

@@ -37,6 +37,7 @@ include("includes/header.php");
                             <thead>
                                 <tr>
                                     <th>ID</th>
+                                    <th>Travel and Tour ID</th>
                                     <th>Booking ID</th>
                                     <th>Payment Type</th>
                                     <th>Amount Sent</th>
@@ -56,6 +57,7 @@ include("includes/header.php");
                                         while ($res = mysqli_fetch_assoc($qry)) { ?>
                                             <tr>
                                                 <td><?php echo $res['paymentTransactionId']; ?></td>
+                                                <td><?php echo $res['travelAndTourId']; ?></td>
                                                 <td><?php echo $res['bookingId']; ?></td>
                                                 <td><?php echo $res['paymentType']; ?></td>
                                                 <td>₱<?php echo number_format($res['amount'],2); ?></td>

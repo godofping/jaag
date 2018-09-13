@@ -145,7 +145,13 @@ $res1 = mysqli_fetch_assoc($qry1);
 											<td><?php echo $res3['travelAndTourId']; ?></td>
 											<td><?php echo $res3['departureDate']; ?> - <?php echo $res3['returnDate']; ?></td>
 										
-											<td>0/<?php echo $res3['maxPax']; ?></td>
+											<td><?php 
+                                    $qry13 = mysqli_query($connection, "select COALESCE(sum(numberOfPaxBooked),0) as slotsTaken from booking_table where travelAndTourId = '" . $res3['travelAndTourId'] . "' AND bookingStatus = 'Reserved - Pending Outstanding Payment' OR bookingStatus = 'Officially Reserved'");
+                                    $res13 = mysqli_fetch_assoc($qry13);
+
+                                    echo $res13['slotsTaken'];
+
+                                    ?>/<?php echo $res3['maxPax']; ?></td>
 											<td><?php echo $res3['travelAndTourStatus']; ?></td>
 											<td><?php if (isset($_SESSION['profileId'])): ?>
 												<a href="booking.php?travelAndTourId=<?php echo $res3['travelAndTourId'] ?>"><button class="btn btn-info">Book</button></a>
