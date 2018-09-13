@@ -153,7 +153,7 @@ $res1 = mysqli_fetch_assoc($qry1);
 
                                     ?>/<?php echo $res3['maxPax']; ?></td>
 											<td><?php echo $res3['travelAndTourStatus']; ?></td>
-											<td><?php if (isset($_SESSION['profileId'])): ?>
+											<td><?php if (isset($_SESSION['profileId']) and $res13['slotsTaken'] != $res3['maxPax']): ?>
 												<a href="booking.php?travelAndTourId=<?php echo $res3['travelAndTourId'] ?>"><button class="btn btn-info">Book</button></a>
 											<?php endif ?></td>
 										</tr>
