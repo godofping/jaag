@@ -41,6 +41,8 @@
 							<?php $qry = mysqli_query($connection, "select * from booking_view where bookingId = '" . base64_decode($_GET['bookingId']) . "'"); $res = mysqli_fetch_assoc($qry); ?>
 							<h4>Outstanding Balance: ₱ <?php echo number_format($res['price'] * $res['numberOfPaxBooked'] - $totalAmountPaid ,2) ; ?></h4>
 
+
+
 						</div>
 						<div class="col-md-9">
 						
@@ -64,9 +66,23 @@
 									<tbody>
 										
 										<?php
+										$outstandingbalance = 0;
+										$fullypaid = 0;
 										$counter = 0;
 										 $qry = mysqli_query($connection, "select * from payment_transaction_view where bookingId = '" . base64_decode($_GET['bookingId']) . "'");
-										while ($res = mysqli_fetch_assoc($qry)) { ?>
+										while ($res = mysqli_fetch_assoc($qry)) { 
+
+											if ($res['paymentStatus'] == 'Recieved' and ($res['paymentType'] == 'Full Payment' or $res['paymentType'] == 'Outstanding Payment')) {
+												$fullypaid = 1;
+											}
+
+											if ($res['paymentStatus'] == 'Recieved' and $res['paymentType'] == 'Down Payment') {
+												$outstandingbalance += $res['amount'];
+											}
+
+
+
+											?>
 											<tr>
 												<td><?php echo $res['paymentTransactionId']; ?></td>
 												<td><?php echo $res['paymentType']; ?></td>
@@ -110,6 +126,15 @@
 								?>
 
 								<p>For Down Payment please pay ₱<?php echo number_format(($res['price'] * $res['numberOfPaxBooked']) * .50,2); ?><br>For Full Payment please pay ₱<?php echo number_format($res['price']*$res['numberOfPaxBooked'],2); ?></p>
+								<?php endif ?>
+
+								<?php if ($counter > 0): ?>
+								<?php 
+								$qry = mysqli_query($connection, "select * from booking_view where bookingId = '" . base64_decode($_GET['bookingId']) . "'");
+								$res = mysqli_fetch_assoc($qry); 
+								?>
+
+								<p>For Outstanding Payment please pay ₱<?php echo number_format($outstandingbalance,2); ?></p>
 								<?php endif ?>
 
 								<div class="form-group">
@@ -168,7 +193,10 @@
 						<br>
 						<input type="text" name="bookingId" value="<?php echo base64_decode($_GET['bookingId']) ?>" hidden="">
 						<input type="text" name="from" value="send-payment" hidden="">
-						<button type="submit" class="btn_full">Send Payment</button>
+
+						<button type="submit" class="btn_full" <?php if ($fullypaid == 1): ?>
+							disabled
+						<?php endif ?>>Send Payment</button>
 						</form>
 					</div>
 					<!--/box_style_1 -->

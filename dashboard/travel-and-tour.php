@@ -58,11 +58,12 @@ include("includes/header.php");
                                     <td><?php echo $res['maxPax']; ?></td>
                                     <td>
                                     <?php 
-                                    $qry13 = mysqli_query($connection, "select COALESCE(sum(numberOfPaxBooked),0) as slotsTaken from booking_table where travelAndTourId = '" . $res['travelAndTourId'] . "' AND bookingStatus = 'Reserved - Pending Outstanding Payment' OR bookingStatus = 'Officially Reserved'");
+                                    $slotsTaken = 0;
+                                    $qry13 = mysqli_query($connection, "select COALESCE(sum(numberOfPaxBooked),0) as slotsTaken from booking_table where travelAndTourId = '" . $res['travelAndTourId'] . "' AND (bookingStatus = 'Reserved - Pending Outstanding Payment' OR bookingStatus = 'Officially Reserved')");
                                     $res13 = mysqli_fetch_assoc($qry13);
 
-                                    echo $res13['slotsTaken'];
-
+                                    $slotsTaken =  $res13['slotsTaken'];
+                                    echo $slotsTaken;
                                     ?>
                                     
                                      </td>
