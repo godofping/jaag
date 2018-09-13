@@ -56,6 +56,36 @@ include("includes/header.php");
             </div>
         </div>
 
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2 class="m-b-0"><i class="mdi mdi-book text-info"></i></h2>
+                            <h3 class=""><?php $qry = mysqli_query($connection, "SELECT count(*) as Total FROM booking_view WHERE dateBooked = '" . date('Y-m-d') . "'"); $res = mysqli_fetch_assoc($qry); echo $res['Total'] ?></h3>
+                            <h6 class="card-subtitle">Today Bookings</h6></div>
+                    </div>
+                    </div>
+
+            </div>
+        </div>
+
+
+<div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2 class="m-b-0"><i class="mdi mdi-account-circle text-info"></i></h2>
+                            <h3 class=""><?php $qry = mysqli_query($connection, "SELECT count(*) as Total FROM payment_transaction_view WHERE dateOfPayment = '" . date('Y-m-d') . "'"); $res = mysqli_fetch_assoc($qry); echo $res['Total'] ?></h3>
+                            <h6 class="card-subtitle">Today Payments Sent</h6></div>
+                    </div>
+                    </div>
+
+            </div>
+        </div>
+
+
 
     </div>
         
