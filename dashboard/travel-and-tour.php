@@ -69,7 +69,8 @@ include("includes/header.php");
                                      </td>
                                      <td><?php echo $res['travelAndTourStatus']; ?></td>
                                     <td>
-                                        <a href="view-customers.php?travelAndTourId=<?php echo $res['travelAndTourId'] ?>"><button type="button" class="btn btn-block btn-outline-warning">View Customers</button></a>
+                                        <a href="view-customers.php?travelAndTourId=<?php echo $res['travelAndTourId'] ?>"><button type="button" class="btn btn-block btn-outline-warning">View Customers</button></a> <br>
+                                        <button type="button" data-toggle="modal" data-target="#updateModal<?php echo $res['travelAndTourId']; ?>" class="btn btn-block btn-outline-info">Update Status</button>
                                     </td>
                                 </tr>
                             <?php } ?>
@@ -143,7 +144,7 @@ include("includes/header.php");
 $qry = mysqli_query($connection, "select * from travel_and_tour_view");
 while ($res = mysqli_fetch_assoc($qry)) { ?>             
 <!-- modal content -->
-<div class="modal fade" id="viewModal<?php echo $res['travelAndTourId'] ?>" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+<div class="modal fade" id="updateModal<?php echo $res['travelAndTourId'] ?>" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -155,30 +156,25 @@ while ($res = mysqli_fetch_assoc($qry)) { ?>
                     
                     <div class="row">
                         <div class="col-md-12">
-                            <label>Place Name</label>
+                            <label>Status</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="placeName" name="placeName" required="" value="<?php echo $res['placeName'] ?>">
-                            </div>
-                            </div>
-
-                        <div class="col-md-12">
-                            <label>Latitude</label>
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="latitude" name="latitude" required="" value="<?php echo $res['latitude'] ?>">
+                                <select class="form-control" name="travelAndTourStatus" required="">
+                                    <option value="Available">Available</option>
+                                    <option value="Fully Booked">Fully Booked</option>
+                                    <option value="Cancelled due to weather">Cancelled due to weather</option>
+                                    <option value="Cancelled due to unsufficient pax">Cancelled due to unsufficient pax</option>
+                                    <option value="Ongoing Tour">Ongoing Tour</option>
+                                    <option value="Finished">Finished</option>
+                                </select>
                             </div>
                         </div>
 
-                        <div class="col-md-12">
-                            <label>Longitude</label>
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="longitude" name="longitude" required="" value="<?php echo $res['longitude'] ?>">
-                            </div>
-                        </div>
+                        
                     </div>
 
                 <!-- other hidden inputs -->
-                <input type="text" name="from" value="update-place" hidden="">
-                <input type="text" name="placeId" value="<?php echo $res['placeId'] ?>"  hidden="">
+                <input type="text" name="from" value="update-travel-and-tour-status" hidden="">
+                <input type="text" name="travelAndTourId" value="<?php echo $res['travelAndTourId'] ?>"  hidden="">
 
             </div>
             <div class="modal-footer">

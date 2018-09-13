@@ -313,6 +313,18 @@ if (isset($_POST['from']) and $_POST['from'] == 'update-payment-transaction') {
 
 }
 
+if (isset($_POST['from']) and $_POST['from'] == 'update-travel-and-tour-status') {
+
+	mysqli_query($connection, "update travel_and_tour_table set travelAndTourStatus = '" . $_POST['travelAndTourStatus'] . "' where travelAndTourId = '" . $_POST['travelAndTourId'] . "'");
+
+
+	
+	$_SESSION['do'] = 'updated';
+	header("Location: travel-and-tour.php");
+
+
+}
+
 
 
 

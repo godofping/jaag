@@ -285,7 +285,7 @@ CREATE TABLE `travel_and_tour_table` (
 
 /*Data for the table `travel_and_tour_table` */
 
-insert  into `travel_and_tour_table`(`travelAndTourId`,`packageId`,`departureDate`,`returnDate`,`maxPax`,`travelAndTourStatus`) values (1,3,'2018-09-18','2018-09-21',14,'Available'),(2,2,'2018-09-23','2018-09-24',14,'Available'),(3,1,'2018-09-27','2018-09-28',14,'Available'),(4,4,'2019-09-06','2019-09-09',14,'Available'),(5,5,'2018-10-17','2018-10-20',14,'Available');
+insert  into `travel_and_tour_table`(`travelAndTourId`,`packageId`,`departureDate`,`returnDate`,`maxPax`,`travelAndTourStatus`) values (1,3,'2018-09-18','2018-09-21',14,'Available'),(2,2,'2018-09-23','2018-09-24',14,'Available'),(3,1,'2018-09-27','2018-09-28',14,'Available'),(4,4,'2019-09-06','2019-09-09',14,'Available'),(5,5,'2018-10-17','2018-10-20',14,'Fully Booked');
 
 /*Table structure for table `booking_view` */
 
