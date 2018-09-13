@@ -128,15 +128,15 @@ include("includes/header.php");
                 <div id="morris-donut-chart" class="ecomm-donute" style="height: 317px;"></div>
                     <ul class="list-inline m-t-20 text-center">
                     <li >
-                        <h6 class="text-muted"><i class="fa fa-circle text-info"></i> Pending Down Payment</h65>
+                        <h6 class="text-muted"><i class="fa fa-circle text-success"></i> Pending Down Payment</h65>
                         <h4 class="m-b-0"><?php $qry15 = mysqli_query($connection, "SELECT COUNT(*) as result FROM booking_view WHERE bookingStatus = 'Pending Down Payment'"); $res15 = mysqli_fetch_assoc($qry15); echo $res15['result']; ?></h4>
                     </li>
                     <li>
-                        <h6 class="text-muted"><i class="fa fa-circle text-danger"></i> Pending Outstanding Payment</h6>
+                        <h6 class="text-muted"><i class="fa fa-circle text-info"></i> Pending Outstanding Payment</h6>
                         <h4 class="m-b-0"><?php $qry15 = mysqli_query($connection, "SELECT COUNT(*) as result FROM booking_view WHERE bookingStatus = 'Pending Outstanding Payment'"); $res15 = mysqli_fetch_assoc($qry15); echo $res15['result']; ?></h4>
                     </li>
                     <li>
-                        <h6 class="text-muted"> <i class="fa fa-circle text-success"></i> Officially Reserved</h6>
+                        <h6 class="text-muted"> <i class="fa fa-circle text-danger"></i> Officially Reserved</h6>
                         <h4 class="m-b-0"><?php $qry15 = mysqli_query($connection, "SELECT COUNT(*) as result FROM booking_view WHERE bookingStatus = 'Officially Reserved'"); $res15 = mysqli_fetch_assoc($qry15); echo $res15['result']; ?></h4>
                     </li>
                 </ul>
