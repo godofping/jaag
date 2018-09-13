@@ -37,10 +37,10 @@
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12">
                                     <div id="calendar-events" class="">
-                                        <div  data-class="bg-info"><i class="fa fa-circle text-info"></i> My Event One</div>
-                                        <div  data-class="bg-success"><i class="fa fa-circle text-success"></i> My Event Two</div>
-                                        <div  data-class="bg-danger"><i class="fa fa-circle text-danger"></i> My Event Three</div>
-                                        <div data-class="bg-warning"><i class="fa fa-circle text-warning"></i> My Event Four</div>
+                                        <div  data-class="bg-info"><i class="fa fa-circle text-info"></i> Available</div>
+                                        <div  data-class="bg-success"><i class="fa fa-circle text-success"></i>Fully Booked</div>
+                                        <div  data-class="bg-danger"><i class="fa fa-circle text-danger"></i>Cancelled</div>
+                                        <div data-class="bg-warning"><i class="fa fa-circle text-warning"></i>Finished</div>
                                     </div>
                           
                                 
@@ -181,14 +181,37 @@
         var today = new Date($.now());
 
         var defaultEvents =  [
+            <?php $qry1 = mysqli_query($connection, "select * from travel_and_tour_view");
+            while ($res1 = mysqli_fetch_assoc($qry1)) { ?>
+
             {   
-                packageId: '2',
-                title: 'Surigao Tour!',
-                start: '2018-09-4',
-                end: '2018-09-5',
-                className: 'bg-success'
+                packageId: '<?php echo $res1['packageId'] ?>',
+                title: '<?php echo $res1['packageName'] ?>',
+                start: '<?php echo $res1['departureDate'] ?>',
+                end: '<?php echo $res1['returnDate'] ?>',
+                className: 'bg-<?php 
+
+                if ($res1['travelAndTourStatus']== 'Available') {
+                 echo 'info'; 
+                }
+                elseif($res1['travelAndTourStatus']== 'Fully Booked') { 
+                echo 'success';
+                }
+                elseif($res1['travelAndTourStatus']== 'Cancelled due to weather') { 
+                echo 'danger';
+                }
+                elseif($res1['travelAndTourStatus']== 'Cancelled due to unsufficient pax') { 
+                echo 'danger';
+                }
+                elseif($res1['travelAndTourStatus']== 'Finished') { 
+                echo 'warning';
+                } 
+
+
+                ?>'
             },
-            
+
+            <?php } ?>
             ];
 
         var $this = this;

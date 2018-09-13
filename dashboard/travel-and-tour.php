@@ -163,7 +163,6 @@ while ($res = mysqli_fetch_assoc($qry)) { ?>
                                     <option value="Fully Booked">Fully Booked</option>
                                     <option value="Cancelled due to weather">Cancelled due to weather</option>
                                     <option value="Cancelled due to unsufficient pax">Cancelled due to unsufficient pax</option>
-                                    <option value="Ongoing Tour">Ongoing Tour</option>
                                     <option value="Finished">Finished</option>
                                 </select>
                             </div>
