@@ -131,6 +131,9 @@
             <?php if ($_SESSION['do'] == 'username-taken'): ?>
                 toastr["error"]("Username is already taken!", "Message");
             <?php endif ?>
+            <?php if ($_SESSION['do'] == 'login-first'): ?>
+                toastr["error"]("Please login first before booking!", "Message");
+            <?php endif ?>
 
 
 

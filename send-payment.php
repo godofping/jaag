@@ -36,9 +36,12 @@
 							<?php
 							$totalAmountPaid = 0;
 							 $qry = mysqli_query($connection, "select COALESCE(SUM(amount),0) as totalAmountPaid from payment_transaction_view where bookingId = '" . base64_decode($_GET['bookingId']) . "' and paymentStatus = 'Recieved'"); $res = mysqli_fetch_assoc($qry); ?>
+
 							<h4>Total Amount Paid: ₱<?php echo number_format($res['totalAmountPaid'],2);$totalAmountPaid =  $res['totalAmountPaid'];?></h4>
 
 							<?php $qry = mysqli_query($connection, "select * from booking_view where bookingId = '" . base64_decode($_GET['bookingId']) . "'"); $res = mysqli_fetch_assoc($qry); ?>
+
+
 							<h4>Outstanding Balance: ₱ <?php echo number_format($res['price'] * $res['numberOfPaxBooked'] - $totalAmountPaid ,2) ; ?></h4>
 
 
@@ -128,7 +131,7 @@
 								<p>For Down Payment please pay ₱<?php echo number_format(($res['price'] * $res['numberOfPaxBooked']) * .50,2); ?><br>For Full Payment please pay ₱<?php echo number_format($res['price']*$res['numberOfPaxBooked'],2); ?></p>
 								<?php endif ?>
 
-								<?php if ($counter > 0): ?>
+								<?php if ($counter > 0 and $fullypaid != 1): ?>
 								<?php 
 								$qry = mysqli_query($connection, "select * from booking_view where bookingId = '" . base64_decode($_GET['bookingId']) . "'");
 								$res = mysqli_fetch_assoc($qry); 

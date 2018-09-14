@@ -114,6 +114,7 @@ while ($res = mysqli_fetch_assoc($qry)) { ?>
                                 <select class="form-control" name="paymentStatus" required="">
                                    <!--  <option>Pending Confirmation</option> -->
                                     <option>Recieved</option>
+                                    <option>Wrong Payment Details</option>
                                 </select>
                             </div>
                             </div>

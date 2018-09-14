@@ -159,8 +159,16 @@
         <div class="container margin_60">
 
             <div class="main_title">
+                
+                <?php if (isset($_GET['from']) and isset($_GET['to'])): ?>
+                <h2><span>Available</span> Packages</h2>
+                    <p>within this dates "<?php echo $_GET['from'] . " " . $_GET['to']; ?>"</p>
+                <?php endif ?>
+
+                <?php if (!isset($_GET['from']) and !isset($_GET['to'])): ?>
                 <h2><span>Tour</span> Packages</h2>
-                <p>New tour packages</p>
+                    <p>New tour packages</p>
+                <?php endif ?>
             </div>
 
 <div class="row">    
@@ -168,7 +176,19 @@
 
 <?php 
 $counter = 1;
-$qry = mysqli_query($connection, "SELECT * FROM travel_and_tour_view ORDER BY travelAndTourId desc"); 
+
+if (isset($_GET['from']) and isset($_GET['to'])) {
+                $qry = mysqli_query($connection, "SELECT * FROM travel_and_tour_view WHERE departureDate >= '" . $_GET['from'] . "' AND returnDate <= '" . $_GET['to'] .  "'
+");
+ }
+ else
+ {
+    $qry = mysqli_query($connection, "select * from package_view LIMIT 6");
+ }
+
+
+
+
 while ($res = mysqli_fetch_assoc($qry)) { 
    
 $qry1 = mysqli_query($connection, "select * from package_media_view where packageId = '" . $res['packageId'] . "' LIMIT 1");
@@ -208,7 +228,7 @@ $res1 = mysqli_fetch_assoc($qry1);
             
             <!-- End row -->
             <p class="text-center add_bottom_30">
-                <a href="all_tours_list.html" class="btn_1 medium"><i class="icon-eye-7"></i>View all tours</a>
+                <a href="tour-packages.php" class="btn_1 medium"><i class="icon-eye-7"></i>View all tours</a>
             </p>
 
             <hr>

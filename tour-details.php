@@ -153,9 +153,27 @@ $res1 = mysqli_fetch_assoc($qry1);
 
                                     ?>/<?php echo $res3['maxPax']; ?></td>
 											<td><?php echo $res3['travelAndTourStatus']; ?></td>
-											<td><?php if (isset($_SESSION['profileId']) and $res13['slotsTaken'] != $res3['maxPax']): ?>
-												<a href="booking.php?travelAndTourId=<?php echo $res3['travelAndTourId'] ?>"><button class="btn btn-info">Book</button></a>
-											<?php endif ?></td>
+											<td>
+												
+
+											<?php if ($res13['slotsTaken'] == $res3['maxPax']) { ?>
+												<button disabled="" class="btn btn-info">Book</button>
+											<?php } else { ?>
+												<a 
+												<?php if (isset($_SESSION['profileId'])) { ?>
+													href="booking.php?travelAndTourId=<?php echo $res3['travelAndTourId'] ?>"
+												<?php } else { ?>
+													href="controller.php?packageId=<?php echo $_GET['packageId'] ?>&from=tour-packages-login-first"
+												<?php } ?> ><button class="btn btn-info">Book</button></a>
+											<?php }  ?>
+													
+											
+
+
+												
+												
+
+											</td>
 										</tr>
 										<?php } ?>
 									</tbody>

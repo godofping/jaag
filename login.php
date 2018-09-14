@@ -23,6 +23,12 @@
                             </div>
                        		<input type="text" name="from" value="login" hidden="
                        		">
+
+                            <?php if (isset($_GET['packageId'])): ?>
+                                <input type="text" name="packageId" value="<?php echo $_GET['packageId'] ?>" hidden="
+                            ">
+
+                            <?php endif ?>
                             <button type="submit" class="btn_full">Sign in</button>
                             <a href="register.php " class="btn_full_outline">Register</a>
                         </form>

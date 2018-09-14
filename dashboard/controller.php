@@ -318,7 +318,7 @@ if (isset($_POST['from']) and $_POST['from'] == 'update-travel-and-tour-status')
 	mysqli_query($connection, "update travel_and_tour_table set travelAndTourStatus = '" . $_POST['travelAndTourStatus'] . "' where travelAndTourId = '" . $_POST['travelAndTourId'] . "'");
 
 	$_SESSION['do'] = 'updated';
-	header("Location: travel-and-tour.php");
+	header("Location: view-travel-and-tour.php?travelAndTourId=".$_POST['travelAndTourId']."");
 
 }
 
@@ -362,10 +362,56 @@ if (isset($_GET['from']) and $_GET['from'] == 'restore') {
 
 }
 
+if (isset($_POST['from']) and $_POST['from'] == 'add-walk-in-customer') {
+
+
+	mysqli_query($connection, "insert into address_table (buildingNumber, street, barangay, city, province) values ('" . $_POST['buildingNumber'] . "', '" . $_POST['street'] . "', '" . $_POST['barangay'] . "', '" . $_POST['city1'] . "', '" . $_POST['province1'] . "')");
+	$addressId = mysqli_insert_id($connection);
+
+
+
+	mysqli_query($connection, "insert into profile_table (firstName, middleName, lastName, contactNumber, addressId, accountTypeId) values ('" . $_POST['firstName'] . "', '" . $_POST['middleName'] . "', '" . $_POST['lastName'] . "', '" . $_POST['contactNumber'] . "', '" . $addressId . "', '3')");
+
+	$profileId = mysqli_insert_id($connection);
 
 
 
 
+	mysqli_query($connection,"insert into booking_table (profileId, travelAndTourId, bookingStatus, dateBooked, numberOfPaxBooked) values ('" . $profileId . "', '" . $_POST['travelAndTourId'] . "', 'Reserved - Pending Outstanding Payment', '" . date('Y-m-d') . "', '" . $_POST['paxNumber'] . "')");
+	$bookingId = mysqli_insert_id($connection);
 
+
+
+	mysqli_query($connection, "insert into payment_transaction_table (bookingId,modeOfPaymentId, amount, dateOfPayment, transactionNumber, nameOfSender, paymentStatus,paymentType) values ('" . $bookingId . "','" . $_POST['modeOfPaymentId'] . "', '" . $_POST['amount'] . "', '" . date('Y-m-d') . "', '" . $_POST['transactionNumber'] . "', '" . $_POST['nameOfSender'] . "', 'Recieved','" . $_POST['paymentType'] . "')");
+
+
+	if ($_POST['paymentType'] == 'Outstanding Balance' or $_POST['paymentType'] == 'Full Payment') {
+		mysqli_query($connection, "update booking_table set bookingStatus = 'Officially Reserved' where bookingId = '" . $bookingId . "'");
+	}
+
+
+	$paymentTransactionId = mysqli_insert_id($connection);
+	
+
+
+	$target_dir = "media/";
+	$target_file = $target_dir . md5(date("Y-m-d H:i:s")) .basename($_FILES["mediaLocation"]["name"]);
+	$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+    move_uploaded_file($_FILES["mediaLocation"]["tmp_name"], $target_file);
+
+    $target_file = "dashboard/" . $target_file;
+
+	mysqli_query($connection, "insert into media_table (mediaLocation, paymentTransactionId) values ('" . $target_file . "', '" . $paymentTransactionId . "')");
+
+	$mediaId = mysqli_insert_id($connection);
+
+
+
+	
+
+	$_SESSION['do'] = 'added';
+	header("Location: view-travel-and-tour.php?travelAndTourId=".$_POST['travelAndTourId']."");
+
+}
 
 ?>

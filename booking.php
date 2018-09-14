@@ -190,9 +190,10 @@ $res1 = mysqli_fetch_assoc($qry1);
 						
 					</div>
 					<!--/box_style_1 -->
+					<span ></span>
 					</form>
 			<div class="row" id="belowDiv" style="display: none;">
-		<aside class="col-md-12">
+		<aside class="col-md-12" >
 			<div class="box_style_1">
 				<h3 class="inner">- Billing Statement -</h3>
 				<table class="table table_summary">
@@ -261,6 +262,7 @@ $res1 = mysqli_fetch_assoc($qry1);
 <?php include("includes/footer.php"); ?>
 <script type="text/javascript">
 	function showBelowDiv() {
+
 		var paxNumber = document.getElementById("paxNumber").value;
 		
 
@@ -279,6 +281,7 @@ $res1 = mysqli_fetch_assoc($qry1);
 		        document.getElementById("paxNumber").disabled = true;
 
 		        calculate();
+		        document.getElementById('changeButton').scrollIntoView();
 		        
 		    } else {
 		        x.style.display = "none";

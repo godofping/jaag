@@ -71,8 +71,7 @@ include("includes/header.php");
                                      </td>
                                      <td><?php echo $res['travelAndTourStatus']; ?></td>
                                     <td>
-                                        <a href="view-customers.php?travelAndTourId=<?php echo $res['travelAndTourId'] ?>"><button type="button" class="btn btn-block btn-outline-warning">View Customers</button></a> <br>
-                                        <button type="button" data-toggle="modal" data-target="#updateModal<?php echo $res['travelAndTourId']; ?>" class="btn btn-block btn-outline-info">Update Status</button>
+                                        <a href="view-travel-and-tour.php?travelAndTourId=<?php echo $res['travelAndTourId'] ?>"><button type="button" class="btn btn-block btn-outline-warning">View</button></a> <br>
                                     </td>
                                 </tr>
                             <?php } ?>

@@ -67,13 +67,28 @@ if (isset($_POST['from']) and $_POST['from'] == 'login') {
 		$_SESSION['accountType'] = 'Online Customer';
 		$_SESSION['profileId'] = $res['profileId'];
 		$_SESSION['do'] = 'login-success';
-		header("Location: index.php");
+
+		if (isset($_POST['packageId'])) {
+			header("Location: tour-details.php?packageId=".$_POST['packageId']."");
+		}
+		else
+		{
+			header("Location: index.php");
+		}
+		
 	}
 	else
 	{
 
-		$_SESSION['do'] = 'login-failed';
-		header("Location: login.php");
+		if (isset($_POST['packageId'])) {
+			header("Location: login.php?a=login=first&packageId=".$_POST['packageId']."");
+		}
+		else
+		{
+			$_SESSION['do'] = 'login-failed';
+			header("Location: login.php");
+		}
+
 
 	}
 }
@@ -136,7 +151,7 @@ if (isset($_POST['from']) and $_POST['from'] == 'search-package') {
 	$date2 = date('Y-m-d', strtotime($date2));
 
 	
-	header("Location: tour-packages.php?from=".$date1."&to=".$date2."");
+	header("Location: index.php?from=".$date1."&to=".$date2."");
 
 
 }
@@ -169,8 +184,16 @@ if (isset($_POST['from']) and $_POST['from'] == 'send-payment') {
 
 
 	$_SESSION['do'] = 'added';
-	header("Location: send-payment.php?bookingId=".base64_encode($_POST['bookingId'])."");
+	header("Location: send-payment.php?bookingId=".base64_encode($_POST['bookingStatus'])."");
 }
+
+
+if (isset($_GET['from']) and $_GET['from'] == 'tour-packages-login-first') {
+	$_SESSION['do'] = 'login-first';
+	header("Location: login.php?a=login=first&packageId=".$_GET['packageId']."");
+
+}
+
 
 
 
