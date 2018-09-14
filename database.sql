@@ -65,11 +65,11 @@ CREATE TABLE `booking_table` (
   KEY `FK_booking_table123` (`profileId`),
   CONSTRAINT `FK_booking_table123` FOREIGN KEY (`profileId`) REFERENCES `profile_table` (`profileId`),
   CONSTRAINT `FK_booking_table2` FOREIGN KEY (`travelAndTourId`) REFERENCES `travel_and_tour_table` (`travelAndTourId`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 /*Data for the table `booking_table` */
 
-insert  into `booking_table`(`bookingId`,`profileId`,`travelAndTourId`,`bookingStatus`,`dateBooked`,`numberOfPaxBooked`) values (5,3,1,'Pending Down Payment','2018-09-12',2),(6,3,2,'Pending Down Payment','2018-09-13',1),(7,3,4,'Officially Reserved','2018-09-13',2),(8,3,5,'Officially Reserved','2018-09-13',4),(9,4,5,'Officially Reserved','2018-09-13',10);
+insert  into `booking_table`(`bookingId`,`profileId`,`travelAndTourId`,`bookingStatus`,`dateBooked`,`numberOfPaxBooked`) values (5,3,1,'Pending Down Payment','2018-09-12',2),(6,3,2,'Pending Down Payment','2018-09-13',1),(7,3,4,'Officially Reserved','2018-09-13',2),(8,3,5,'Officially Reserved','2018-09-13',4),(9,4,5,'Officially Reserved','2018-09-13',10),(10,3,3,'Officially Reserved','2018-09-14',14);
 
 /*Table structure for table `comment_table` */
 
@@ -125,11 +125,11 @@ CREATE TABLE `media_table` (
   CONSTRAINT `FK_media_table` FOREIGN KEY (`packageId`) REFERENCES `package_table` (`packageId`),
   CONSTRAINT `FK_media_table1` FOREIGN KEY (`paymentTransactionId`) REFERENCES `payment_transaction_table` (`paymentTransactionId`) ON DELETE SET NULL,
   CONSTRAINT `FK_media_table3` FOREIGN KEY (`postingId`) REFERENCES `posting_table` (`postingId`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=latin1;
 
 /*Data for the table `media_table` */
 
-insert  into `media_table`(`mediaId`,`mediaLocation`,`postingId`,`packageId`,`paymentTransactionId`) values (13,'media/386b81e31014a480f5abbd1089bf9037Enchanted-River-11.jpg',NULL,1,NULL),(14,'media/701b6c51d4017ef032663d897a9e8a62Riv.jpg',NULL,1,NULL),(15,'media/c6e70a1aa3d236578cce76a1cd13e8a7siargao-surigao-province.jpg',NULL,1,NULL),(16,'media/b03b8ae8b280f584dff61c824b945deeSurigao-del-Sur-Bogac-Spring.png',NULL,1,NULL),(17,'media/56235fc53b155738b0c5d0c74586eaf34.jpg',NULL,2,NULL),(18,'media/c238cf07380d960ae2947a7d47084f4c1200px-View_on_the_half_way_to_Kayangan_Lake_-_panoramio.jpg',NULL,2,NULL),(19,'media/6e119d089cbe9ce20d03be211e0b65a5beautiful-view-mountain-ranges-philippines-islands-mountain-views-100246883.jpg',NULL,2,NULL),(20,'media/811b17ea6018bca792208b6d4fd76f6abudahernel3.jpg',NULL,2,NULL),(21,'media/d42a6f5aec09508c4da0a9d97db7af74Hills View Mountain Villa Davao Room Rates (4).jpg',NULL,2,NULL),(22,'media/e2f7d6c45e52e80292c6b389feddf643HillsView03.gif',NULL,2,NULL),(23,'media/66d8e8eec57ea38f704158e87962a77emaxresdefault (1).jpg',NULL,2,NULL),(24,'media/1c4ae11ed4985ce67c1f881cf36768d6maxresdefault.jpg',NULL,2,NULL),(25,'media/45aae00794e4e00a752185308f06c6baoverview-3.jpg',NULL,2,NULL),(26,'media/881f50f9f1480f61d6f8e1d62f6a10edcamiguin.jpg',NULL,3,NULL),(27,'media/9944625c38dd9564cee4f4d4758a6598download (2).jpg',NULL,3,NULL),(28,'media/01c8d67a383a7f13c37e494a2ef700eemantigue-island-camiguin-travelanyway.jpg',NULL,3,NULL),(29,'media/aa422dcdca51b1b8a4be3bb3a5b23dfc5410599211_1a0492737b_b.jpg',NULL,6,NULL),(30,'media/cdf126124bcc287d773a748530c3fa2adownload.jpg',NULL,6,NULL),(31,'media/c921c468f478c7b74a8b6b1eb531b195entrance-to-sohoton-cove-inside-view.jpg',NULL,6,NULL),(32,'media/7cf357ccce1e943f00ea7083502b70eeimages.jpg',NULL,6,NULL),(33,'media/19f1839da3dcb0664a72d9581329a27csohoton-cave-opening.jpg',NULL,6,NULL),(34,'media/885c5df2035b79416ed05d74e32f891458963_1.jpg',NULL,5,NULL),(35,'media/88b4668706946f83d81005975288421fBarangan-Magsaysay-Dinagat-Islands.jpg',NULL,5,NULL),(36,'media/c7a9fef3e9912e8121b614ff77eab601Basilisa-Beach-Dinagat-Islands.jpg',NULL,5,NULL),(37,'media/1e648ce8b40c56f9d735feaca67c8c20IMG_8011982432648.jpeg',NULL,5,NULL),(38,'media/fbcb11a71758588a4a5104ca4348fc65Isla-Aga-Dinagat-Islands.jpg',NULL,5,NULL),(39,'media/e6878b58199b13e284eec10f1dbed005Sohoton-National-Park-Bucas-Grande-Surigao-del-Norte.jpg',NULL,5,NULL),(40,'media/0b378294054d4eec0ff20c3d1a31e5e1download.jpg',NULL,4,NULL),(41,'media/064c7e7b2733935a2173113b4ed286a7Footpath to Hikong Alo  Seven Falls Lake Sebu.jpg',NULL,4,NULL),(42,'media/144c126e13645866c09ce3c4067a0987images.jpg',NULL,4,NULL),(48,'media/ad24047ee1df064e4fa1012c656cbba6download.jpg',4,NULL,NULL),(49,'media/c2038e681c1f2684ec94d655bddb26cfFootpath to Hikong Alo  Seven Falls Lake Sebu.jpg',NULL,NULL,NULL),(50,'media/2f5781128a1dfc6a7ba7adef13571d66download (2).jpg',6,NULL,NULL),(53,'dashboard/media/67ac2d9ff619b239dbdea2b671f3b829bdo-receipt.jpg',NULL,NULL,NULL),(54,'media/3491b2d96d19a85eee076ea1808328c7bdo-receipt.jpg',NULL,NULL,NULL),(55,'media/a93fd534f9b72c7383087c67fe92409ebdo-receipt.jpg',NULL,NULL,NULL),(56,'dashboard/media/7ba840d7149fd1fd9e12ad91d9b25c27bdo-receipt.jpg',NULL,NULL,NULL),(57,'dashboard/media/aa77d8f31572efcc18c8b37d26c359aabdo-receipt.jpg',NULL,NULL,NULL),(58,'dashboard/media/1cdc46a83fae5a7c15722f33ac53a27cbdo-receipt.jpg',NULL,NULL,7),(59,'dashboard/media/f4d96e96788d34518ce41f61673d2361unnamed.jpg',NULL,NULL,8),(60,'dashboard/media/b4b0bbb9e3b6831237c47e784a76f57bDSC01055.JPG',NULL,NULL,9),(61,'dashboard/media/543ebc9fda0f95ce19738143ead370c0download (3).jpg',NULL,NULL,10);
+insert  into `media_table`(`mediaId`,`mediaLocation`,`postingId`,`packageId`,`paymentTransactionId`) values (13,'media/386b81e31014a480f5abbd1089bf9037Enchanted-River-11.jpg',NULL,1,NULL),(14,'media/701b6c51d4017ef032663d897a9e8a62Riv.jpg',NULL,1,NULL),(15,'media/c6e70a1aa3d236578cce76a1cd13e8a7siargao-surigao-province.jpg',NULL,1,NULL),(16,'media/b03b8ae8b280f584dff61c824b945deeSurigao-del-Sur-Bogac-Spring.png',NULL,1,NULL),(17,'media/56235fc53b155738b0c5d0c74586eaf34.jpg',NULL,2,NULL),(18,'media/c238cf07380d960ae2947a7d47084f4c1200px-View_on_the_half_way_to_Kayangan_Lake_-_panoramio.jpg',NULL,2,NULL),(19,'media/6e119d089cbe9ce20d03be211e0b65a5beautiful-view-mountain-ranges-philippines-islands-mountain-views-100246883.jpg',NULL,2,NULL),(20,'media/811b17ea6018bca792208b6d4fd76f6abudahernel3.jpg',NULL,2,NULL),(21,'media/d42a6f5aec09508c4da0a9d97db7af74Hills View Mountain Villa Davao Room Rates (4).jpg',NULL,2,NULL),(22,'media/e2f7d6c45e52e80292c6b389feddf643HillsView03.gif',NULL,2,NULL),(23,'media/66d8e8eec57ea38f704158e87962a77emaxresdefault (1).jpg',NULL,2,NULL),(24,'media/1c4ae11ed4985ce67c1f881cf36768d6maxresdefault.jpg',NULL,2,NULL),(25,'media/45aae00794e4e00a752185308f06c6baoverview-3.jpg',NULL,2,NULL),(26,'media/881f50f9f1480f61d6f8e1d62f6a10edcamiguin.jpg',NULL,3,NULL),(27,'media/9944625c38dd9564cee4f4d4758a6598download (2).jpg',NULL,3,NULL),(28,'media/01c8d67a383a7f13c37e494a2ef700eemantigue-island-camiguin-travelanyway.jpg',NULL,3,NULL),(29,'media/aa422dcdca51b1b8a4be3bb3a5b23dfc5410599211_1a0492737b_b.jpg',NULL,6,NULL),(30,'media/cdf126124bcc287d773a748530c3fa2adownload.jpg',NULL,6,NULL),(31,'media/c921c468f478c7b74a8b6b1eb531b195entrance-to-sohoton-cove-inside-view.jpg',NULL,6,NULL),(32,'media/7cf357ccce1e943f00ea7083502b70eeimages.jpg',NULL,6,NULL),(33,'media/19f1839da3dcb0664a72d9581329a27csohoton-cave-opening.jpg',NULL,6,NULL),(34,'media/885c5df2035b79416ed05d74e32f891458963_1.jpg',NULL,5,NULL),(35,'media/88b4668706946f83d81005975288421fBarangan-Magsaysay-Dinagat-Islands.jpg',NULL,5,NULL),(36,'media/c7a9fef3e9912e8121b614ff77eab601Basilisa-Beach-Dinagat-Islands.jpg',NULL,5,NULL),(37,'media/1e648ce8b40c56f9d735feaca67c8c20IMG_8011982432648.jpeg',NULL,5,NULL),(38,'media/fbcb11a71758588a4a5104ca4348fc65Isla-Aga-Dinagat-Islands.jpg',NULL,5,NULL),(39,'media/e6878b58199b13e284eec10f1dbed005Sohoton-National-Park-Bucas-Grande-Surigao-del-Norte.jpg',NULL,5,NULL),(40,'media/0b378294054d4eec0ff20c3d1a31e5e1download.jpg',NULL,4,NULL),(41,'media/064c7e7b2733935a2173113b4ed286a7Footpath to Hikong Alo  Seven Falls Lake Sebu.jpg',NULL,4,NULL),(42,'media/144c126e13645866c09ce3c4067a0987images.jpg',NULL,4,NULL),(48,'media/ad24047ee1df064e4fa1012c656cbba6download.jpg',4,NULL,NULL),(49,'media/c2038e681c1f2684ec94d655bddb26cfFootpath to Hikong Alo  Seven Falls Lake Sebu.jpg',NULL,NULL,NULL),(50,'media/2f5781128a1dfc6a7ba7adef13571d66download (2).jpg',6,NULL,NULL),(53,'dashboard/media/67ac2d9ff619b239dbdea2b671f3b829bdo-receipt.jpg',NULL,NULL,NULL),(54,'media/3491b2d96d19a85eee076ea1808328c7bdo-receipt.jpg',NULL,NULL,NULL),(55,'media/a93fd534f9b72c7383087c67fe92409ebdo-receipt.jpg',NULL,NULL,NULL),(56,'dashboard/media/7ba840d7149fd1fd9e12ad91d9b25c27bdo-receipt.jpg',NULL,NULL,NULL),(57,'dashboard/media/aa77d8f31572efcc18c8b37d26c359aabdo-receipt.jpg',NULL,NULL,NULL),(58,'dashboard/media/1cdc46a83fae5a7c15722f33ac53a27cbdo-receipt.jpg',NULL,NULL,7),(59,'dashboard/media/f4d96e96788d34518ce41f61673d2361unnamed.jpg',NULL,NULL,8),(60,'dashboard/media/b4b0bbb9e3b6831237c47e784a76f57bDSC01055.JPG',NULL,NULL,9),(61,'dashboard/media/543ebc9fda0f95ce19738143ead370c0download (3).jpg',NULL,NULL,10),(62,'dashboard/media/ed72d4b8b4d70e9049b183fe99436e03download (3).jpg',NULL,NULL,11);
 
 /*Table structure for table `mode_of_payment_table` */
 
@@ -201,11 +201,11 @@ CREATE TABLE `payment_transaction_table` (
   KEY `FK_payment_transaction_table123123` (`bookingId`),
   CONSTRAINT `FK_payment_transaction_table123123` FOREIGN KEY (`bookingId`) REFERENCES `booking_table` (`bookingId`),
   CONSTRAINT `FK_payment_transaction_table123344` FOREIGN KEY (`modeOfPaymentId`) REFERENCES `mode_of_payment_table` (`modeOfPaymentId`) ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 /*Data for the table `payment_transaction_table` */
 
-insert  into `payment_transaction_table`(`paymentTransactionId`,`modeOfPaymentId`,`amount`,`dateOfPayment`,`transactionNumber`,`nameOfSender`,`paymentStatus`,`bookingId`,`paymentType`) values (7,4,1399,'2018-09-13','a45sd-a5s4-45sd-5sd','Albert Yap','Recieved',7,'Down Payment'),(8,6,3996,'2018-09-13','6a5sd-as56d4-5s4d-d4554','John Sabnal','Recieved',8,'Full Payment'),(9,4,1399,'2018-09-13','as56d4-a5sd4-ds54','Albert Yap','Recieved',7,'Outstanding Payment'),(10,14,9990,'2018-09-13','6s5d-a6s5d-d54d45','Lucio Salamanca','Recieved',9,'Full Payment');
+insert  into `payment_transaction_table`(`paymentTransactionId`,`modeOfPaymentId`,`amount`,`dateOfPayment`,`transactionNumber`,`nameOfSender`,`paymentStatus`,`bookingId`,`paymentType`) values (7,4,1399,'2018-09-13','a45sd-a5s4-45sd-5sd','Albert Yap','Recieved',7,'Down Payment'),(8,6,3996,'2018-09-13','6a5sd-as56d4-5s4d-d4554','John Sabnal','Recieved',8,'Full Payment'),(9,4,1399,'2018-09-13','as56d4-a5sd4-ds54','Albert Yap','Recieved',7,'Outstanding Payment'),(10,14,9990,'2018-09-13','6s5d-a6s5d-d54d45','Lucio Salamanca','Recieved',9,'Full Payment'),(11,4,11186,'2018-09-14','5s6d-as65d564-a54sd6-45sdsd','Albert Tan','Recieved',10,'Full Payment');
 
 /*Table structure for table `place_table` */
 
@@ -375,6 +375,29 @@ DROP TABLE IF EXISTS `mode_of_payment_view`;
  `modeOfPaymentId` int(6) ,
  `paymentMode` varchar(60) ,
  `nameOfRemittanceOrBank` varchar(60) 
+)*/;
+
+/*Table structure for table `notifications_view` */
+
+DROP TABLE IF EXISTS `notifications_view`;
+
+/*!50001 DROP VIEW IF EXISTS `notifications_view` */;
+/*!50001 DROP TABLE IF EXISTS `notifications_view` */;
+
+/*!50001 CREATE TABLE  `notifications_view`(
+ `notificationId` int(6) ,
+ `notificationMessage` text ,
+ `profileId` int(6) ,
+ `isRead` tinyint(1) ,
+ `firstName` varchar(60) ,
+ `middleName` varchar(60) ,
+ `lastName` varchar(60) ,
+ `contactNumber` varchar(60) ,
+ `addressId` int(6) ,
+ `accountTypeId` int(6) ,
+ `userName` varchar(60) ,
+ `passWord` varchar(60) ,
+ `isDeleted` tinyint(1) 
 )*/;
 
 /*Table structure for table `package_media_view` */
@@ -593,6 +616,13 @@ DROP TABLE IF EXISTS `travel_and_tour_view`;
 /*!50001 DROP VIEW IF EXISTS `mode_of_payment_view` */;
 
 /*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `mode_of_payment_view` AS select `mode_of_payment_table`.`modeOfPaymentId` AS `modeOfPaymentId`,`mode_of_payment_table`.`paymentMode` AS `paymentMode`,`mode_of_payment_table`.`nameOfRemittanceOrBank` AS `nameOfRemittanceOrBank` from `mode_of_payment_table` */;
+
+/*View structure for view notifications_view */
+
+/*!50001 DROP TABLE IF EXISTS `notifications_view` */;
+/*!50001 DROP VIEW IF EXISTS `notifications_view` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `notifications_view` AS select `notification_table`.`notificationId` AS `notificationId`,`notification_table`.`notificationMessage` AS `notificationMessage`,`notification_table`.`profileId` AS `profileId`,`notification_table`.`isRead` AS `isRead`,`profile_table`.`firstName` AS `firstName`,`profile_table`.`middleName` AS `middleName`,`profile_table`.`lastName` AS `lastName`,`profile_table`.`contactNumber` AS `contactNumber`,`profile_table`.`addressId` AS `addressId`,`profile_table`.`accountTypeId` AS `accountTypeId`,`profile_table`.`userName` AS `userName`,`profile_table`.`passWord` AS `passWord`,`profile_table`.`isDeleted` AS `isDeleted` from (`notification_table` join `profile_table` on((`notification_table`.`profileId` = `profile_table`.`profileId`))) */;
 
 /*View structure for view package_media_view */
 

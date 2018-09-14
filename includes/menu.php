@@ -24,6 +24,14 @@
         
                                 </ul>
                             </li>
+
+                            <li class="submenu">
+                                <a href="javascript:void(0);" class="show-submenu">Notications<i class="icon-down-open-mini"></i></a>
+                                <ul>
+                                    <li><a href="javascript:void(0);">Bla bla bla..</a></li>
+        
+                                </ul>
+                            </li>
                             <?php endif ?>
                             
 

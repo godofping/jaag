@@ -268,3 +268,5 @@
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3CL__ArRSv8my9WeW3ealb1WOquARXJA&callback=initMap"
     async defer></script>
+
+    <!-- <script src="js/notify_func.js"></script> -->
