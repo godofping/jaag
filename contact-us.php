@@ -34,6 +34,11 @@
 					<p>
 						Blk.4 Lot 28, Yellow Village Subdivision New Isabela Tacurong City, Sultan Kudarat
 					</p>
+
+					<h4>Facebook <span><i class="icon-pin pull-right"></i></span></h4>
+					<p>
+						<a target="_blank" href="https://www.facebook.com/jaagtravelandtour23/" >https://www.facebook.com/jaagtravelandtour23/</a>
+					</p>
 					<hr>
 					<h4>Help center <span><i class="icon-help pull-right"></i></span></h4>
 					<p>
