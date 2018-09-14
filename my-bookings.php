@@ -64,7 +64,8 @@
 											<td><?php echo $res3['bookingStatus']; ?></td>
 											<td>
 												<a href="send-payment.php?bookingId=<?php echo base64_encode($res3['bookingId']) ?>"><button class="btn btn-info">Send Payment</button></a> <br><br>
-												<a class="btn btn-success" href="invoice.php?bookingId=<?php echo base64_encode($res3['bookingId']) ?>" target="_blank">View invoice</a>
+												<a class="btn btn-success" href="invoice.php?bookingId=<?php echo base64_encode($res3['bookingId']) ?>" target="_blank">View invoice</a> <br><br>
+												<a class="btn btn-danger" href="invoice.php?bookingId=<?php echo base64_encode($res3['bookingId']) ?>" target="_blank">Cancel Booking</a>
 
 
 											</td>

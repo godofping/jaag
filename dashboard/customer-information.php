@@ -43,7 +43,7 @@ include("includes/header.php");
                                     <th>Address</th>
                                     <th>Contact Number</th>
                                     <th>Account Type</th>
-                                    <th>Username</th>
+             
                                   
                                 </tr>
                             </thead>
@@ -69,7 +69,7 @@ include("includes/header.php");
                                     <td><?php echo $res['buildingNumber'] . " " . $res['street'] . " " . $res['barangay'] . " " . $res['city'] . " " . $res['province']; ?></td>
                                     <td><?php echo $res['contactNumber']; ?></td>
                                     <td><?php echo $res['accountType']; ?></td>
-                                    <td><?php echo $res['userName']; ?></td>
+                                  
                            
                                 </tr>
                             <?php } ?>

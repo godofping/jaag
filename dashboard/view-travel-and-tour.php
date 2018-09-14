@@ -94,7 +94,11 @@ include("includes/header.php");
                                     <td><?php echo $res['dateBooked']; ?></td>
                                     <td><?php echo $res['bookingStatus']; ?></td>
                                     <td><?php echo $res['accountType']; ?></td>
-                                    <td> <button type="button" class="btn btn-block btn-outline-danger" data-toggle="modal" data-target="#viewPaymentsModal<?php echo $res['bookingId'] ?>">View Payments</button></td>
+                                    <td> 
+                                        <button type="button" class="btn btn-block btn-outline-danger" data-toggle="modal" data-target="#viewPaymentsModal<?php echo $res['bookingId'] ?>">View Payments</button>
+                                        <button type="button" class="btn btn-block btn-outline-danger" data-toggle="modal" data-target="#viewPaymentsModal<?php echo $res['bookingId'] ?>">Attendance</button>
+
+                                    </td>
                                 </tr>
                             <?php } ?>
                             </tbody>

@@ -42,11 +42,11 @@ CREATE TABLE `address_table` (
   `street` varchar(60) DEFAULT NULL,
   `buildingNumber` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`addressId`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 /*Data for the table `address_table` */
 
-insert  into `address_table`(`addressId`,`province`,`city`,`barangay`,`street`,`buildingNumber`) values (1,'Region 12: SULTAN KUDARAT','CITY OF TACURONG','Poblacion','Malvar Street','65'),(2,'Region 12: SULTAN KUDARAT','ESPERANZA','Magsaysay','Lapu- lapu Street','44'),(3,'Region 14: KALINGA','PASIL','Dalupa','Di Makita Street','99'),(4,'1298','129804','Ar-arusip','asd','22'),(5,'','','New Panay','Barangay Road','65'),(6,'Region 12: SULTAN KUDARAT','ESPERANZA','Poblacion','Barangay Road','65'),(7,'Region 12: SULTAN KUDARAT','ISULAN (Capital)','Kalawag I (Pob.)','National Road','56'),(8,'Region 12: SULTAN KUDARAT','CITY OF TACURONG','New Isabela','Barangay Road',''),(9,'Region 12: SULTAN KUDARAT','CITY OF TACURONG','New Isabela','Barangay Road',''),(10,'Region 12: SULTAN KUDARAT','CITY OF TACURONG','New Isabela','Barangay Road',''),(11,'Region 12: SULTAN KUDARAT','CITY OF TACURONG','New Isabela','Barangay Road',''),(12,'Region 12: SULTAN KUDARAT','CITY OF TACURONG','New Isabela','Barangay Road',''),(13,'','','New Isabela','Barangay Road','65'),(14,'','','Adams (Pob.)','123','123'),(15,'','','Adams (Pob.)','12','312'),(16,'','','San Pablo','123','123');
+insert  into `address_table`(`addressId`,`province`,`city`,`barangay`,`street`,`buildingNumber`) values (8,'Region 12: SULTAN KUDARAT','CITY OF TACURONG','New Isabela','Barangay Road','');
 
 /*Table structure for table `booking_table` */
 
@@ -63,13 +63,13 @@ CREATE TABLE `booking_table` (
   KEY `FK_booking_table` (`bookingStatus`),
   KEY `FK_booking_table2` (`travelAndTourId`),
   KEY `FK_booking_table123` (`profileId`),
-  CONSTRAINT `FK_booking_table123` FOREIGN KEY (`profileId`) REFERENCES `profile_table` (`profileId`),
-  CONSTRAINT `FK_booking_table2` FOREIGN KEY (`travelAndTourId`) REFERENCES `travel_and_tour_table` (`travelAndTourId`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+  CONSTRAINT `FK_booking_table123` FOREIGN KEY (`profileId`) REFERENCES `profile_table` (`profileId`) ON DELETE SET NULL,
+  CONSTRAINT `FK_booking_table2` FOREIGN KEY (`travelAndTourId`) REFERENCES `travel_and_tour_table` (`travelAndTourId`) ON DELETE SET NULL
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 /*Data for the table `booking_table` */
 
-insert  into `booking_table`(`bookingId`,`profileId`,`travelAndTourId`,`bookingStatus`,`dateBooked`,`numberOfPaxBooked`) values (5,3,1,'Pending Down Payment','2018-09-12',2),(6,3,2,'Pending Down Payment','2018-09-13',1),(7,3,4,'Officially Reserved','2018-09-13',2),(8,3,5,'Officially Reserved','2018-09-13',4),(9,4,5,'Officially Reserved','2018-09-13',10),(10,3,3,'Officially Reserved','2018-09-14',14),(11,3,4,'Pending Down Payment','2018-09-14',12);
+insert  into `booking_table`(`bookingId`,`profileId`,`travelAndTourId`,`bookingStatus`,`dateBooked`,`numberOfPaxBooked`) values (7,NULL,NULL,'Officially Reserved','2018-09-13',2),(8,NULL,NULL,'Officially Reserved','2018-09-13',4),(9,NULL,NULL,'Officially Reserved','2018-09-13',10),(10,NULL,NULL,'Officially Reserved','2018-09-14',14),(11,NULL,NULL,'Pending Down Payment','2018-09-14',12),(12,NULL,NULL,'Officially Reserved','2018-09-14',12);
 
 /*Table structure for table `comment_table` */
 
@@ -82,12 +82,10 @@ CREATE TABLE `comment_table` (
   `dateCommented` date DEFAULT NULL,
   PRIMARY KEY (`commentId`),
   KEY `FK_comment_table` (`profileId`),
-  CONSTRAINT `FK_comment_table` FOREIGN KEY (`profileId`) REFERENCES `profile_table` (`profileId`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+  CONSTRAINT `FK_comment_table` FOREIGN KEY (`profileId`) REFERENCES `profile_table` (`profileId`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `comment_table` */
-
-insert  into `comment_table`(`commentId`,`commentInfo`,`profileId`,`dateCommented`) values (2,'aaa',3,NULL),(3,'',3,NULL),(4,'asasd',3,NULL),(5,'asd',3,NULL),(6,'asdasdxx',3,NULL),(7,'testing',3,NULL);
 
 /*Table structure for table `destination_table` */
 
@@ -102,11 +100,9 @@ CREATE TABLE `destination_table` (
   KEY `FK_destination_table2` (`packageId`),
   CONSTRAINT `FK_destination_table` FOREIGN KEY (`placeId`) REFERENCES `place_table` (`placeId`) ON DELETE SET NULL,
   CONSTRAINT `FK_destination_table2` FOREIGN KEY (`packageId`) REFERENCES `package_table` (`packageId`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `destination_table` */
-
-insert  into `destination_table`(`destinationId`,`placeId`,`packageId`) values (8,21,6),(9,16,5),(10,20,4),(11,12,3),(12,7,2),(13,2,1);
 
 /*Table structure for table `media_table` */
 
@@ -125,11 +121,9 @@ CREATE TABLE `media_table` (
   CONSTRAINT `FK_media_table` FOREIGN KEY (`packageId`) REFERENCES `package_table` (`packageId`),
   CONSTRAINT `FK_media_table1` FOREIGN KEY (`paymentTransactionId`) REFERENCES `payment_transaction_table` (`paymentTransactionId`) ON DELETE SET NULL,
   CONSTRAINT `FK_media_table3` FOREIGN KEY (`postingId`) REFERENCES `posting_table` (`postingId`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `media_table` */
-
-insert  into `media_table`(`mediaId`,`mediaLocation`,`postingId`,`packageId`,`paymentTransactionId`) values (13,'media/386b81e31014a480f5abbd1089bf9037Enchanted-River-11.jpg',NULL,1,NULL),(14,'media/701b6c51d4017ef032663d897a9e8a62Riv.jpg',NULL,1,NULL),(15,'media/c6e70a1aa3d236578cce76a1cd13e8a7siargao-surigao-province.jpg',NULL,1,NULL),(16,'media/b03b8ae8b280f584dff61c824b945deeSurigao-del-Sur-Bogac-Spring.png',NULL,1,NULL),(17,'media/56235fc53b155738b0c5d0c74586eaf34.jpg',NULL,2,NULL),(18,'media/c238cf07380d960ae2947a7d47084f4c1200px-View_on_the_half_way_to_Kayangan_Lake_-_panoramio.jpg',NULL,2,NULL),(19,'media/6e119d089cbe9ce20d03be211e0b65a5beautiful-view-mountain-ranges-philippines-islands-mountain-views-100246883.jpg',NULL,2,NULL),(20,'media/811b17ea6018bca792208b6d4fd76f6abudahernel3.jpg',NULL,2,NULL),(21,'media/d42a6f5aec09508c4da0a9d97db7af74Hills View Mountain Villa Davao Room Rates (4).jpg',NULL,2,NULL),(22,'media/e2f7d6c45e52e80292c6b389feddf643HillsView03.gif',NULL,2,NULL),(23,'media/66d8e8eec57ea38f704158e87962a77emaxresdefault (1).jpg',NULL,2,NULL),(24,'media/1c4ae11ed4985ce67c1f881cf36768d6maxresdefault.jpg',NULL,2,NULL),(25,'media/45aae00794e4e00a752185308f06c6baoverview-3.jpg',NULL,2,NULL),(26,'media/881f50f9f1480f61d6f8e1d62f6a10edcamiguin.jpg',NULL,3,NULL),(27,'media/9944625c38dd9564cee4f4d4758a6598download (2).jpg',NULL,3,NULL),(28,'media/01c8d67a383a7f13c37e494a2ef700eemantigue-island-camiguin-travelanyway.jpg',NULL,3,NULL),(29,'media/aa422dcdca51b1b8a4be3bb3a5b23dfc5410599211_1a0492737b_b.jpg',NULL,6,NULL),(30,'media/cdf126124bcc287d773a748530c3fa2adownload.jpg',NULL,6,NULL),(31,'media/c921c468f478c7b74a8b6b1eb531b195entrance-to-sohoton-cove-inside-view.jpg',NULL,6,NULL),(32,'media/7cf357ccce1e943f00ea7083502b70eeimages.jpg',NULL,6,NULL),(33,'media/19f1839da3dcb0664a72d9581329a27csohoton-cave-opening.jpg',NULL,6,NULL),(34,'media/885c5df2035b79416ed05d74e32f891458963_1.jpg',NULL,5,NULL),(35,'media/88b4668706946f83d81005975288421fBarangan-Magsaysay-Dinagat-Islands.jpg',NULL,5,NULL),(36,'media/c7a9fef3e9912e8121b614ff77eab601Basilisa-Beach-Dinagat-Islands.jpg',NULL,5,NULL),(37,'media/1e648ce8b40c56f9d735feaca67c8c20IMG_8011982432648.jpeg',NULL,5,NULL),(38,'media/fbcb11a71758588a4a5104ca4348fc65Isla-Aga-Dinagat-Islands.jpg',NULL,5,NULL),(39,'media/e6878b58199b13e284eec10f1dbed005Sohoton-National-Park-Bucas-Grande-Surigao-del-Norte.jpg',NULL,5,NULL),(40,'media/0b378294054d4eec0ff20c3d1a31e5e1download.jpg',NULL,4,NULL),(41,'media/064c7e7b2733935a2173113b4ed286a7Footpath to Hikong Alo  Seven Falls Lake Sebu.jpg',NULL,4,NULL),(42,'media/144c126e13645866c09ce3c4067a0987images.jpg',NULL,4,NULL),(48,'media/ad24047ee1df064e4fa1012c656cbba6download.jpg',4,NULL,NULL),(49,'media/c2038e681c1f2684ec94d655bddb26cfFootpath to Hikong Alo  Seven Falls Lake Sebu.jpg',NULL,NULL,NULL),(50,'media/2f5781128a1dfc6a7ba7adef13571d66download (2).jpg',6,NULL,NULL),(53,'dashboard/media/67ac2d9ff619b239dbdea2b671f3b829bdo-receipt.jpg',NULL,NULL,NULL),(54,'media/3491b2d96d19a85eee076ea1808328c7bdo-receipt.jpg',NULL,NULL,NULL),(55,'media/a93fd534f9b72c7383087c67fe92409ebdo-receipt.jpg',NULL,NULL,NULL),(56,'dashboard/media/7ba840d7149fd1fd9e12ad91d9b25c27bdo-receipt.jpg',NULL,NULL,NULL),(57,'dashboard/media/aa77d8f31572efcc18c8b37d26c359aabdo-receipt.jpg',NULL,NULL,NULL),(58,'dashboard/media/1cdc46a83fae5a7c15722f33ac53a27cbdo-receipt.jpg',NULL,NULL,7),(59,'dashboard/media/f4d96e96788d34518ce41f61673d2361unnamed.jpg',NULL,NULL,8),(60,'dashboard/media/b4b0bbb9e3b6831237c47e784a76f57bDSC01055.JPG',NULL,NULL,9),(61,'dashboard/media/543ebc9fda0f95ce19738143ead370c0download (3).jpg',NULL,NULL,10),(62,'dashboard/media/ed72d4b8b4d70e9049b183fe99436e03download (3).jpg',NULL,NULL,11);
 
 /*Table structure for table `mode_of_payment_table` */
 
@@ -144,7 +138,7 @@ CREATE TABLE `mode_of_payment_table` (
 
 /*Data for the table `mode_of_payment_table` */
 
-insert  into `mode_of_payment_table`(`modeOfPaymentId`,`paymentMode`,`nameOfRemittanceOrBank`) values (4,'Bank Transfer','BDO'),(5,'Bank Transfer','DBP'),(6,'Bank Transfer','Metro Bank'),(7,'Bank Transfer','EastWest'),(8,'Bank Transfer','BPI'),(9,'Bank Transfer','Union Bank'),(10,'Bank Transfer','China Bank'),(11,'Bank Transfer','PNB'),(12,'Bank Transfer','RCBC'),(13,'Bank Transfer','Security Bank'),(14,'Remittance','Palawan Express Pera Padala'),(15,'Remittance','Cebuana Lhuillier Pera Padala'),(16,'Remittance','Western Union Sulit Padala and Overseas Money Transfer'),(17,'Remittance','M Lhuillier Kwarta Padala'),(18,'Remittance','LBC Instant Peso Padala'),(19,'Remittance','TrueMoney Money Padala'),(20,'Remittance','RD Pawnshop Cash Padala'),(21,'Remittance','Smart Money'),(22,'Remittance','Globe Gcash'),(23,'In House','Over the counter');
+insert  into `mode_of_payment_table`(`modeOfPaymentId`,`paymentMode`,`nameOfRemittanceOrBank`) values (4,'Bank Transfer','BDO'),(6,'Bank Transfer','Metro Bank'),(8,'Bank Transfer','BPI'),(11,'Bank Transfer','PNB'),(14,'Remittance','Palawan Express Pera Padala'),(15,'Remittance','Cebuana Lhuillier Pera Padala'),(16,'Remittance','Western Union Sulit Padala and Overseas Money Transfer'),(17,'Remittance','M Lhuillier Kwarta Padala'),(18,'Remittance','LBC Instant Peso Padala'),(19,'Remittance','TrueMoney Money Padala'),(20,'Remittance','RD Pawnshop Cash Padala'),(21,'Remittance','Smart Money'),(22,'Remittance','Globe Gcash'),(23,'In House','Over the counter');
 
 /*Table structure for table `notification_table` */
 
@@ -157,7 +151,7 @@ CREATE TABLE `notification_table` (
   `isRead` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`notificationId`),
   KEY `FK_notification_table` (`profileId`),
-  CONSTRAINT `FK_notification_table` FOREIGN KEY (`profileId`) REFERENCES `profile_table` (`profileId`)
+  CONSTRAINT `FK_notification_table` FOREIGN KEY (`profileId`) REFERENCES `profile_table` (`profileId`) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `notification_table` */
@@ -179,8 +173,6 @@ CREATE TABLE `package_table` (
 
 /*Data for the table `package_table` */
 
-insert  into `package_table`(`packageId`,`packageName`,`packageDetails`,`inclusion`,`exclusion`,`price`) values (1,'Surigao Tour','Details....','TRANSPORTATIONS','MEALS',799),(2,'Buda Tour','Bla bla bla...','TRANSPORATIONS','MEALS',699),(3,'Camiguin Island Tour','Bla bla bla bla','TRANSPORTATION','MEALS',1499),(4,'Lake Sebu Tour','none','TRANSPORTATION','MEALS, TICKETS',1399),(5,'Dinagat Tour','...','TRANSPORATIONS','MEALS',999),(6,'Sohoton Tour','....','TRANSPORATIONS','MEALS',1999);
-
 /*Table structure for table `payment_transaction_table` */
 
 DROP TABLE IF EXISTS `payment_transaction_table`;
@@ -201,11 +193,9 @@ CREATE TABLE `payment_transaction_table` (
   KEY `FK_payment_transaction_table123123` (`bookingId`),
   CONSTRAINT `FK_payment_transaction_table123123` FOREIGN KEY (`bookingId`) REFERENCES `booking_table` (`bookingId`),
   CONSTRAINT `FK_payment_transaction_table123344` FOREIGN KEY (`modeOfPaymentId`) REFERENCES `mode_of_payment_table` (`modeOfPaymentId`) ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 /*Data for the table `payment_transaction_table` */
-
-insert  into `payment_transaction_table`(`paymentTransactionId`,`modeOfPaymentId`,`amount`,`dateOfPayment`,`transactionNumber`,`nameOfSender`,`paymentStatus`,`bookingId`,`paymentType`) values (7,4,1399,'2018-09-13','a45sd-a5s4-45sd-5sd','Albert Yap','Recieved',7,'Down Payment'),(8,6,3996,'2018-09-13','6a5sd-as56d4-5s4d-d4554','John Sabnal','Recieved',8,'Full Payment'),(9,4,1399,'2018-09-13','as56d4-a5sd4-ds54','Albert Yap','Recieved',7,'Outstanding Payment'),(10,14,9990,'2018-09-13','6s5d-a6s5d-d54d45','Lucio Salamanca','Recieved',9,'Full Payment'),(11,4,11186,'2018-09-14','5s6d-as65d564-a54sd6-45sdsd','Albert Tan','Recieved',10,'Full Payment');
 
 /*Table structure for table `place_table` */
 
@@ -234,12 +224,10 @@ CREATE TABLE `posting_table` (
   `profileId` int(6) DEFAULT NULL,
   PRIMARY KEY (`postingId`),
   KEY `FK_posting_table` (`profileId`),
-  CONSTRAINT `FK_posting_table` FOREIGN KEY (`profileId`) REFERENCES `profile_table` (`profileId`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+  CONSTRAINT `FK_posting_table` FOREIGN KEY (`profileId`) REFERENCES `profile_table` (`profileId`) ON DELETE SET NULL
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 /*Data for the table `posting_table` */
-
-insert  into `posting_table`(`postingId`,`postingDescription`,`datePosted`,`profileId`) values (4,'watch out','2018-09-07',2),(6,'Announcement bla bla bla','2018-09-07',2);
 
 /*Table structure for table `profile_table` */
 
@@ -260,12 +248,12 @@ CREATE TABLE `profile_table` (
   KEY `FK_profile_table` (`accountTypeId`),
   KEY `FK_profile_table1` (`addressId`),
   CONSTRAINT `FK_profile_table` FOREIGN KEY (`accountTypeId`) REFERENCES `account_type_table` (`accountTypeId`),
-  CONSTRAINT `FK_profile_table1` FOREIGN KEY (`addressId`) REFERENCES `address_table` (`addressId`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+  CONSTRAINT `FK_profile_table1` FOREIGN KEY (`addressId`) REFERENCES `address_table` (`addressId`) ON DELETE SET NULL
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 /*Data for the table `profile_table` */
 
-insert  into `profile_table`(`profileId`,`firstName`,`middleName`,`lastName`,`contactNumber`,`addressId`,`accountTypeId`,`userName`,`passWord`,`isDeleted`) values (2,'Jose','Malinao','Aguacito','09754214199',1,1,'admin','21232f297a57a5a743894a0e4a801fc3',0),(3,'Alberto','Ranga','Madula','09754363944',2,4,'customer','91ec1f9324753048c0096d036a694f86',0),(4,'Mariella','Gumela','Vettan','09368545152',3,4,'customer1','91ec1f9324753048c0096d036a694f86',0),(13,'Daniel','Benson','DeVera','09754363944',12,5,'daniel2620','8bd39eae38511daad6152e84545e504d',0),(14,'asd','asd','asd','123',16,4,'123','202cb962ac59075b964b07152d234b70',0);
+insert  into `profile_table`(`profileId`,`firstName`,`middleName`,`lastName`,`contactNumber`,`addressId`,`accountTypeId`,`userName`,`passWord`,`isDeleted`) values (2,'Jose','Malinao','Aguacito','09754214199',8,1,'admin','21232f297a57a5a743894a0e4a801fc3',0);
 
 /*Table structure for table `travel_and_tour_table` */
 
@@ -280,12 +268,10 @@ CREATE TABLE `travel_and_tour_table` (
   `travelAndTourStatus` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`travelAndTourId`),
   KEY `FK_travel_and_tour_table` (`packageId`),
-  CONSTRAINT `FK_travel_and_tour_table` FOREIGN KEY (`packageId`) REFERENCES `package_table` (`packageId`)
+  CONSTRAINT `FK_travel_and_tour_table` FOREIGN KEY (`packageId`) REFERENCES `package_table` (`packageId`) ON DELETE SET NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 /*Data for the table `travel_and_tour_table` */
-
-insert  into `travel_and_tour_table`(`travelAndTourId`,`packageId`,`departureDate`,`returnDate`,`maxPax`,`travelAndTourStatus`) values (1,3,'2018-09-18','2018-09-21',14,'Available'),(2,2,'2018-09-23','2018-09-24',14,'Available'),(3,1,'2018-09-27','2018-09-28',14,'Fully Booked'),(4,4,'2019-09-06','2019-09-09',14,'Available'),(5,5,'2018-10-17','2018-10-20',14,'Fully Booked');
 
 /*Table structure for table `booking_view` */
 
@@ -338,6 +324,7 @@ DROP TABLE IF EXISTS `comment_view`;
 /*!50001 CREATE TABLE  `comment_view`(
  `commentId` int(6) ,
  `commentInfo` text ,
+ `dateCommented` date ,
  `profileId` int(6) ,
  `firstName` varchar(60) ,
  `middleName` varchar(60) ,
@@ -601,7 +588,7 @@ DROP TABLE IF EXISTS `travel_and_tour_view`;
 /*!50001 DROP TABLE IF EXISTS `comment_view` */;
 /*!50001 DROP VIEW IF EXISTS `comment_view` */;
 
-/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `comment_view` AS select `comment_table`.`commentId` AS `commentId`,`comment_table`.`commentInfo` AS `commentInfo`,`comment_table`.`profileId` AS `profileId`,`profile_table`.`firstName` AS `firstName`,`profile_table`.`middleName` AS `middleName`,`profile_table`.`lastName` AS `lastName`,`profile_table`.`contactNumber` AS `contactNumber`,`profile_table`.`accountTypeId` AS `accountTypeId`,`account_type_table`.`accountType` AS `accountType`,`profile_table`.`userName` AS `userName` from ((`profile_table` join `account_type_table` on((`profile_table`.`accountTypeId` = `account_type_table`.`accountTypeId`))) join `comment_table` on((`comment_table`.`profileId` = `profile_table`.`profileId`))) */;
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `comment_view` AS select `comment_table`.`commentId` AS `commentId`,`comment_table`.`commentInfo` AS `commentInfo`,`comment_table`.`dateCommented` AS `dateCommented`,`comment_table`.`profileId` AS `profileId`,`profile_table`.`firstName` AS `firstName`,`profile_table`.`middleName` AS `middleName`,`profile_table`.`lastName` AS `lastName`,`profile_table`.`contactNumber` AS `contactNumber`,`profile_table`.`accountTypeId` AS `accountTypeId`,`account_type_table`.`accountType` AS `accountType`,`profile_table`.`userName` AS `userName` from ((`profile_table` join `account_type_table` on((`profile_table`.`accountTypeId` = `account_type_table`.`accountTypeId`))) join `comment_table` on((`comment_table`.`profileId` = `profile_table`.`profileId`))) */;
 
 /*View structure for view destination_view */
 

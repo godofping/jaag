@@ -133,6 +133,7 @@ if (isset($_POST['from']) and $_POST['from'] == 'add-booking') {
 
 
 if (isset($_POST['from']) and $_POST['from'] == 'add-comment') {
+	
 	mysqli_query($connection, "insert into comment_table (commentInfo, profileId, dateCommented) values ('" . $_POST['commentInfo'] . "', '" . $_SESSION['profileId'] . "', '" . date('Y-m-d') . "')");
 
 

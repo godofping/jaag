@@ -47,7 +47,8 @@
                             </ul>
                         </li>
 
-                        <li> <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-settings"></i><span class="hide-menu">Settings</span></a>
+                        <?php if ($_SESSION['accountType'] == 'Administrator'): ?>
+                            <li> <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-settings"></i><span class="hide-menu">Settings</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="attendants.php">Attendants</a></li>
                                 <li><a href="places.php">Places</a></li>
@@ -55,6 +56,7 @@
                             </ul>
                         </li>
 
+                        <?php endif ?>
 
                                              
                     </ul>
