@@ -34,9 +34,9 @@
 		while ($res = mysqli_fetch_assoc($qry)) { ?>
 			<li>
 				<div class="cbp_tmlabel">
-					<div class="pull-right hidden-xs">Feedback by <strong><?php echo $res['firstName']; ?></strong>
+					<div class="pull-right hidden-xs">Feedback by <strong><?php echo $res['firstName']; ?></strong><br> <?php echo $res['dateCommented']; ?>
 					</div>
-				
+				<br>
 					<p><?php echo $res['commentInfo']; ?></p>
 				</div>
 			</li>

@@ -147,108 +147,79 @@ include("includes/header.php");
     </div>
 
 <div class="row">
+
 <div class="col-lg-6">
-    <!-- Column -->
     <div class="card">
-        <div class="card-body">
-            <h4 class="card-title">Annoucements</h4>
-             <button class="btn btn-success m-t-20 waves-effect text-left" data-toggle="modal" data-target="#addModal">Add</button>
-        </div>
+    <div class="card-body">
+        <h4 class="card-title">Annoucements</h4>
+        <button class="btn btn-success m-t-20 waves-effect text-left" data-toggle="modal" data-target="#addModal">Add</button>
+        <br>
+        <br>
+        <div class="message-box">
+            <div class="message-widget message-scroll">
+                <!-- Message -->
+                <?php $qry = mysqli_query($connection, "SELECT * FROM posting_view ORDER BY postingId desc"); 
+                while ($res = mysqli_fetch_assoc($qry)) { ?>
+                <a>
+                    <span data-toggle="modal" data-target="#deletePostingModal<?php echo $res['postingId'] ?>"><i class="mdi mdi-delete"></i></span>
+                 <div class="mail-contnet">
+                        <h5><?php echo  $res['firstName'] . " " . $res['middleName'] . " " . $res['lastName'] . " (" . $res['accountType'] . ")"; ?></h5> <span class="mail-desc">
+                            <?php $qry1 = mysqli_query($connection, "select * from posting_media_view where postingId = '" . $res['postingId'] . "'"); $res1 = mysqli_fetch_assoc($qry1); ?>
+                        <span class="time">Date Posted: <?php echo $res['datePosted']; ?></span>
 
-
-
-        <?php $qry = mysqli_query($connection, "SELECT * FROM posting_view ORDER BY postingId desc"); 
-        while ($res = mysqli_fetch_assoc($qry)) { ?>
-            <div class="comment-widgets m-b-20">
-            <!-- Comment Row -->
-
-                <div class="d-flex flex-row comment-row">
-
-                    <div class="comment-text w-100">
-                        <h5><?php echo  $res['firstName'] . " " . $res['middleName'] . " " . $res['lastName'] . " (" . $res['accountType'] . ")"; ?></h5>
-                                        <div class="comment-footer">
-                                            <span class="date"><?php echo date("l, jS \of F Y",strtotime($res['datePosted'])); ?></span>
-                                            <span class="action-icons">
-                                                  <!--   <a data-toggle="modal" data-target="#updateModal<?php echo $res['postingId'] ?>"><i class="mdi mdi-pencil-circle"></i></a> -->
-                                                    <a data-toggle="modal" data-target="#deleteModal<?php echo $res['postingId'] ?>"><i class="mdi mdi-delete"></i></a>
-                                               
-                                                </span>
-                                        </div>
-
-                           
-           
-                        <?php $qry1 = mysqli_query($connection, "select * from posting_media_view where postingId = '" . $res['postingId'] . "'"); $res1 = mysqli_fetch_assoc($qry1); ?>
+                       
                         <img class="img img-responsive" src="<?php echo $res1['mediaLocation'] ?>">
-                        <div class="comment-footer">
-                            
+                        <br><br>
+                        
+                            </span>
+                            <p><?php echo $res['postingDescription']; ?></p>
+
                         </div>
-                            <p class="m-b-5 m-t-10"><?php echo $res['postingDescription']; ?></p>
-                    </div>
-                </div>
+                </a>
+                <?php } ?>
             </div>
-        <?php } ?>
-
-
-
-
+        </div>
     </div>
+</div>
+
     <!-- Column -->
 </div>
 
 <div class="col-lg-6">
-    <!-- Column -->
     <div class="card">
-        <div class="card-body">
-            <h4 class="card-title">Reviews</h4>
-         
-        </div>
-
-
-
-        <?php $qry = mysqli_query($connection, "SELECT * from comment_view"); 
-        while ($res = mysqli_fetch_assoc($qry)) { ?>
-            <div class="comment-widgets m-b-20">
-            <!-- Comment Row -->
-
-                    
-                    <div class="comment-text w-100">
-                          <span class="action-icons">
-                            
+    <div class="card-body">
+        <h4 class="card-title">Reviews</h4>
+        <div class="message-box">
+            <div class="message-widget message-scroll">
+                <!-- Message -->
+                <?php $qry = mysqli_query($connection, "SELECT * from comment_view"); 
+                while ($res = mysqli_fetch_assoc($qry)) { ?>
+                        <a>
+                         <div class="mail-contnet">
+                                <h5><?php echo  $res['firstName'] . " " . $res['middleName'] . " " . $res['lastName'] . " (" . $res['accountType'] . ")"; ?></h5>
                                 <span data-toggle="modal" data-target="#deleteModal<?php echo $res['commentId'] ?>"><i class="mdi mdi-delete"></i></span>
-                                               
-                                                </span>
-                        <hr>
-                        <h5><?php echo  $res['firstName'] . " " . $res['middleName'] . " " . $res['lastName'] . " (" . $res['accountType'] . ")"; ?></h5>
-                        
-                   
-                     
-                            <p class="m-b-5 m-t-10"><?php echo $res['commentInfo']; ?></p>
-                            <hr>
-                    </div>
-            
-
+                                <span class="time">Date Posted: <?php echo $res['dateCommented']; ?></span>
+                                
+                                <br>
+                                <span><?php echo $res['commentInfo']; ?></span> 
+                                
+                        </div>
+                        </a>
+                <?php } ?>
             </div>
-
-        <?php } ?>
-
-
-
-
+        </div>
     </div>
+</div>
+
     <!-- Column -->
 </div>
-</div>
-
 
 </div>
 
 
-                
-                <!-- Row -->
-                <!-- ============================================================== -->
-                <!-- End PAge Content -->
-                <!-- ============================================================== -->
-                <!-- ============================================================== -->
+</div>
+
+
 
 
 <!-- modal content -->
@@ -355,7 +326,7 @@ include("includes/header.php");
 <!-- /.modal -->
 
 <!-- modal content -->
-<div class="modal fade" id="deleteModal<?php echo $res['postingId'] ?>" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+<div class="modal fade" id="deletePostingModal<?php echo $res['postingId'] ?>" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -427,16 +398,12 @@ include("includes/header.php");
 <?php } ?>
 
 
+
 <?php include("includes/footer.php") ?>
 
 
 <script type="text/javascript">
-    /*
-Template Name: Admin Press Admin
-Author: Themedesigner
-Email: niravjoshi87@gmail.com
-File: js
-*/
+
 $(function () {
     "use strict";
     // ============================================================== 
