@@ -65,11 +65,11 @@ CREATE TABLE `booking_table` (
   KEY `FK_booking_table123` (`profileId`),
   CONSTRAINT `FK_booking_table123` FOREIGN KEY (`profileId`) REFERENCES `profile_table` (`profileId`),
   CONSTRAINT `FK_booking_table2` FOREIGN KEY (`travelAndTourId`) REFERENCES `travel_and_tour_table` (`travelAndTourId`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 /*Data for the table `booking_table` */
 
-insert  into `booking_table`(`bookingId`,`profileId`,`travelAndTourId`,`bookingStatus`,`dateBooked`,`numberOfPaxBooked`) values (5,3,1,'Pending Down Payment','2018-09-12',2),(6,3,2,'Pending Down Payment','2018-09-13',1),(7,3,4,'Officially Reserved','2018-09-13',2),(8,3,5,'Officially Reserved','2018-09-13',4),(9,4,5,'Officially Reserved','2018-09-13',10),(10,3,3,'Officially Reserved','2018-09-14',14);
+insert  into `booking_table`(`bookingId`,`profileId`,`travelAndTourId`,`bookingStatus`,`dateBooked`,`numberOfPaxBooked`) values (5,3,1,'Pending Down Payment','2018-09-12',2),(6,3,2,'Pending Down Payment','2018-09-13',1),(7,3,4,'Officially Reserved','2018-09-13',2),(8,3,5,'Officially Reserved','2018-09-13',4),(9,4,5,'Officially Reserved','2018-09-13',10),(10,3,3,'Officially Reserved','2018-09-14',14),(11,3,4,'Pending Down Payment','2018-09-14',12);
 
 /*Table structure for table `comment_table` */
 
@@ -144,7 +144,7 @@ CREATE TABLE `mode_of_payment_table` (
 
 /*Data for the table `mode_of_payment_table` */
 
-insert  into `mode_of_payment_table`(`modeOfPaymentId`,`paymentMode`,`nameOfRemittanceOrBank`) values (4,'Bank Transfer','BDO'),(5,'Bank Transfer','DBP'),(6,'Bank Transfer','Metro Bank'),(7,'Bank Transfer','EastWest'),(8,'Bank Transfer','BPI'),(9,'Bank Transfer','Union Bank'),(10,'Bank Transfer','China Bank'),(11,'Bank Transfer','PNB'),(12,'Bank Transfer','RCBC'),(13,'Bank Transfer','Security Bank'),(14,'Remittance','Palawan Express Pera Padala'),(15,'Remittance','Cebuana Lhuillier Pera Padala'),(16,'Remittance','Western Union Sulit Padala and Overseas Money Transfer'),(17,'Remittance','M Lhuillier Kwarta Padala'),(18,'Remittance','LBC Instant Peso Padala'),(19,'Remittance','TrueMoney Money Padala'),(20,'Remittance','RD Pawnshop Cash Padala'),(21,'Remittance','Smart Money'),(22,'Remittance','Globe Gcash'),(23,'In House',NULL);
+insert  into `mode_of_payment_table`(`modeOfPaymentId`,`paymentMode`,`nameOfRemittanceOrBank`) values (4,'Bank Transfer','BDO'),(5,'Bank Transfer','DBP'),(6,'Bank Transfer','Metro Bank'),(7,'Bank Transfer','EastWest'),(8,'Bank Transfer','BPI'),(9,'Bank Transfer','Union Bank'),(10,'Bank Transfer','China Bank'),(11,'Bank Transfer','PNB'),(12,'Bank Transfer','RCBC'),(13,'Bank Transfer','Security Bank'),(14,'Remittance','Palawan Express Pera Padala'),(15,'Remittance','Cebuana Lhuillier Pera Padala'),(16,'Remittance','Western Union Sulit Padala and Overseas Money Transfer'),(17,'Remittance','M Lhuillier Kwarta Padala'),(18,'Remittance','LBC Instant Peso Padala'),(19,'Remittance','TrueMoney Money Padala'),(20,'Remittance','RD Pawnshop Cash Padala'),(21,'Remittance','Smart Money'),(22,'Remittance','Globe Gcash'),(23,'In House','Over the counter');
 
 /*Table structure for table `notification_table` */
 
@@ -285,7 +285,7 @@ CREATE TABLE `travel_and_tour_table` (
 
 /*Data for the table `travel_and_tour_table` */
 
-insert  into `travel_and_tour_table`(`travelAndTourId`,`packageId`,`departureDate`,`returnDate`,`maxPax`,`travelAndTourStatus`) values (1,3,'2018-09-18','2018-09-21',14,'Available'),(2,2,'2018-09-23','2018-09-24',14,'Available'),(3,1,'2018-09-27','2018-09-28',14,'Available'),(4,4,'2019-09-06','2019-09-09',14,'Available'),(5,5,'2018-10-17','2018-10-20',14,'Fully Booked');
+insert  into `travel_and_tour_table`(`travelAndTourId`,`packageId`,`departureDate`,`returnDate`,`maxPax`,`travelAndTourStatus`) values (1,3,'2018-09-18','2018-09-21',14,'Available'),(2,2,'2018-09-23','2018-09-24',14,'Available'),(3,1,'2018-09-27','2018-09-28',14,'Fully Booked'),(4,4,'2019-09-06','2019-09-09',14,'Available'),(5,5,'2018-10-17','2018-10-20',14,'Fully Booked');
 
 /*Table structure for table `booking_view` */
 

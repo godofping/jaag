@@ -7,13 +7,13 @@ include("includes/header.php");
 <!-- ============================================================== -->
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h3 class="text-themecolor">Walk-in Customers</h3>
+        <h3 class="text-themecolor">Online Customers</h3>
     </div>
     <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
             <li class="breadcrumb-item">Customers</li>
-            <li class="breadcrumb-item active">Walk-in Customers</li>
+            <li class="breadcrumb-item active">Online Customers</li>
         </ol>
     </div>
 
@@ -41,6 +41,7 @@ include("includes/header.php");
                                     <th>Name</th>
                                     <th>Address</th>
                                     <th>Contact Number</th>
+
                                   
                                 </tr>
                             </thead>
@@ -52,6 +53,7 @@ include("includes/header.php");
                                     <td><?php echo $res['firstName'] . " " . $res['middleName'] . " " . $res['lastName']; ?></td>
                                     <td><?php echo $res['buildingNumber'] . " " . $res['street'] . " " . $res['barangay'] . " " . $res['city'] . " " . $res['province']; ?></td>
                                     <td><?php echo $res['contactNumber']; ?></td>
+                      
                            
                                 </tr>
                             <?php } ?>
@@ -66,7 +68,7 @@ include("includes/header.php");
     <!-- ============================================================== -->
     <!-- End PAge Content -->
     <!-- ============================================================== -->
-                
+    
 
 
 <?php include("includes/footer.php") ?>

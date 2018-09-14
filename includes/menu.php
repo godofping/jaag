@@ -14,6 +14,15 @@
                             <li class="submenu"><a href="about-us.php">About Us</a></li>
                             <li class="submenu"><a href="contact-us.php">Contact Us</a></li>
                              <?php if (isset($_SESSION['profileId'])): ?>
+
+                            <li class="submenu">
+                                <a href="javascript:void(0);" class="show-submenu">Notications<i class="icon-down-open-mini"></i></a>
+                                <ul>
+                                    <li><a href="javascript:void(0);">Bla bla bla..</a></li>
+        
+                                </ul>
+                            </li>
+
                             <li class="submenu">
                                 <a href="javascript:void(0);" class="show-submenu">My Account<i class="icon-down-open-mini"></i></a>
                                 <ul>
@@ -25,13 +34,7 @@
                                 </ul>
                             </li>
 
-                            <li class="submenu">
-                                <a href="javascript:void(0);" class="show-submenu">Notications<i class="icon-down-open-mini"></i></a>
-                                <ul>
-                                    <li><a href="javascript:void(0);">Bla bla bla..</a></li>
-        
-                                </ul>
-                            </li>
+                            
                             <?php endif ?>
                             
 

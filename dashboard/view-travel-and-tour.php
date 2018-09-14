@@ -43,7 +43,7 @@ include("includes/header.php");
                         Travel Dates: <?php echo $res['departureDate']; ?> - <?php echo $res['returnDate']; ?><br><br>
                         Slots Booked: <?php 
                                     $slotsTaken = 0;
-                                    $qry13 = mysqli_query($connection, "select COALESCE(sum(numberOfPaxBooked),0) as slotsTaken from booking_table where travelAndTourId = '" . $res['travelAndTourId'] . "' AND (bookingStatus = 'Reserved - Pending Outstanding Payment' OR bookingStatus = 'Officially Reserved')");
+                                    $qry13 = mysqli_query($connection, "select COALESCE(sum(numberOfPaxBooked),0) as slotsTaken from booking_table where travelAndTourId = '" . $res['travelAndTourId'] . "'");
                                     $res13 = mysqli_fetch_assoc($qry13);
 
                                     $slotsTaken =  $res13['slotsTaken'];
@@ -80,6 +80,7 @@ include("includes/header.php");
                                     <th>Number of Pax Booked</th>
                                     <th>Date Booked</th>
                                     <th>Booking Status</th>
+                                    <th>Customer Type</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -92,6 +93,7 @@ include("includes/header.php");
                                     <td><?php echo $res['numberOfPaxBooked']; ?></td>
                                     <td><?php echo $res['dateBooked']; ?></td>
                                     <td><?php echo $res['bookingStatus']; ?></td>
+                                    <td><?php echo $res['accountType']; ?></td>
                                     <td> <button type="button" class="btn btn-block btn-outline-danger" data-toggle="modal" data-target="#viewPaymentsModal<?php echo $res['bookingId'] ?>">View Payments</button></td>
                                 </tr>
                             <?php } ?>
@@ -376,6 +378,7 @@ while ($res = mysqli_fetch_assoc($qry)) { ?>
                                     <th>Proof Image</th>
                                     <th>Status</th>
                                  
+                                 
                             
                                 </tr>
                             </thead>
@@ -392,13 +395,13 @@ while ($res = mysqli_fetch_assoc($qry)) { ?>
                                                 <td><?php echo $res1['transactionNumber']; ?></td>
                                                 <td><?php echo $res1['nameOfSender']; ?></td>
                                                 <td><?php echo $res1['paymentMode']." " .$res1['nameOfRemittanceOrBank']; ?></td>
-                                                <td><?php echo "select * from payment_transaction_media_view where paymentTransactionId = '" . $res1['paymentTransactionId'] . "'"; ?>
-                                                    <?php $qry12 = mysqli_query($connection, "select * from payment_transaction_media_view where paymentTransactionId = '" . $res1['paymentTransactionId'] . "'"); $res12 = mysqli_fetch_assoc($qry12);
+                                                <td><?php $qry12 = mysqli_query($connection, "select * from payment_transaction_media_view where paymentTransactionId = '" . $res1['paymentTransactionId'] . "'"); $res12 = mysqli_fetch_assoc($qry12);
 
                                                      ?>
                                                     <a  target="_blank" href="../<?php echo $res12['mediaLocation'] ?>">view image</a>
                                                 </td>
                                                 <td><?php echo $res1['paymentStatus']; ?></td>
+                                            
                                                
     
 
@@ -406,7 +409,7 @@ while ($res = mysqli_fetch_assoc($qry)) { ?>
                                         <?php } ?>
                             </tbody>
                         </table>
-                    </div>
+                </div>
          
 
             </div>

@@ -61,7 +61,7 @@ include("includes/header.php");
                                     <td>
                                     <?php 
                                     $slotsTaken = 0;
-                                    $qry13 = mysqli_query($connection, "select COALESCE(sum(numberOfPaxBooked),0) as slotsTaken from booking_table where travelAndTourId = '" . $res['travelAndTourId'] . "' AND (bookingStatus = 'Reserved - Pending Outstanding Payment' OR bookingStatus = 'Officially Reserved')");
+                                    $qry13 = mysqli_query($connection, "select COALESCE(sum(numberOfPaxBooked),0) as slotsTaken from booking_table where travelAndTourId = '" . $res['travelAndTourId'] . "'");
                                     $res13 = mysqli_fetch_assoc($qry13);
 
                                     $slotsTaken =  $res13['slotsTaken'];
