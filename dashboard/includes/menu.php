@@ -30,11 +30,13 @@
                             </ul>
                         </li>
 
-                        <li> <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-book-open-variant"></i><span class="hide-menu">Billings</span></a>
+                        <?php if ($_SESSION['accountType'] == 'Administrator'): ?>
+                            <li> <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-book-open-variant"></i><span class="hide-menu">Billings</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="payment-transactions.php">Payment Transactions</a></li>
                             </ul>
                         </li>
+                        <?php endif ?>
 
                         <li> <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-library-books"></i><span class="hide-menu">Reports</span></a>
                             <ul aria-expanded="false" class="collapse">

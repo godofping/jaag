@@ -266,7 +266,7 @@ include("includes/header.php");
                         
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Transaction Code</label>
+                                <label>Transaction Code/ OR Number</label>
                                 <input class="form-control" type="text" name="transactionNumber">
                             </div>
                         </div>
