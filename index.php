@@ -178,7 +178,7 @@
 $counter = 1;
 
 if (isset($_GET['from']) and isset($_GET['to'])) {
-                $qry = mysqli_query($connection, "SELECT * FROM travel_and_tour_view WHERE departureDate >= '" . $_GET['from'] . "' AND returnDate <= '" . $_GET['to'] .  "'
+                $qry = mysqli_query($connection, "SELECT * FROM travel_and_tour_view WHERE departureDate >= '" . $_GET['from'] . "' AND returnDate <= '" . $_GET['to'] .  "' and travelAndTourStatus = 'Available'
 ");
  }
  else
