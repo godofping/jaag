@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v8.53 
-MySQL - 5.5.5-10.1.33-MariaDB : Database - jaag_db
+MySQL - 5.5.5-10.1.34-MariaDB : Database - jaag_db
 *********************************************************************
 */
 
@@ -42,11 +42,11 @@ CREATE TABLE `address_table` (
   `street` varchar(60) DEFAULT NULL,
   `buildingNumber` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`addressId`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 /*Data for the table `address_table` */
 
-insert  into `address_table`(`addressId`,`province`,`city`,`barangay`,`street`,`buildingNumber`) values (8,'Region 12: SULTAN KUDARAT','CITY OF TACURONG','New Isabela','Barangay Road','');
+insert  into `address_table`(`addressId`,`province`,`city`,`barangay`,`street`,`buildingNumber`) values (8,'Region 12: SULTAN KUDARAT','CITY OF TACURONG','','Barangay Road',''),(18,'Region 12: SULTAN KUDARAT','CITY OF TACURONG','Poblacion','Diego Silang','44'),(19,'Region 12: SOUTH COTABATO','SURALLAH','Lamian','',''),(20,'','','Gansing','Barangay Road','');
 
 /*Table structure for table `booking_table` */
 
@@ -65,11 +65,11 @@ CREATE TABLE `booking_table` (
   KEY `FK_booking_table123` (`profileId`),
   CONSTRAINT `FK_booking_table123` FOREIGN KEY (`profileId`) REFERENCES `profile_table` (`profileId`) ON DELETE SET NULL,
   CONSTRAINT `FK_booking_table2` FOREIGN KEY (`travelAndTourId`) REFERENCES `travel_and_tour_table` (`travelAndTourId`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 /*Data for the table `booking_table` */
 
-insert  into `booking_table`(`bookingId`,`profileId`,`travelAndTourId`,`bookingStatus`,`dateBooked`,`numberOfPaxBooked`) values (7,NULL,NULL,'Officially Reserved','2018-09-13',2),(8,NULL,NULL,'Officially Reserved','2018-09-13',4),(9,NULL,NULL,'Officially Reserved','2018-09-13',10),(10,NULL,NULL,'Officially Reserved','2018-09-14',14),(11,NULL,NULL,'Pending Down Payment','2018-09-14',12),(12,NULL,NULL,'Officially Reserved','2018-09-14',12);
+insert  into `booking_table`(`bookingId`,`profileId`,`travelAndTourId`,`bookingStatus`,`dateBooked`,`numberOfPaxBooked`) values (7,NULL,NULL,'Officially Reserved','2018-09-13',2),(8,NULL,NULL,'Officially Reserved','2018-09-13',4),(9,NULL,NULL,'Officially Reserved','2018-09-13',10),(10,NULL,NULL,'Officially Reserved','2018-09-14',14),(11,NULL,NULL,'Pending Down Payment','2018-09-14',12),(12,NULL,NULL,'Officially Reserved','2018-09-14',12),(13,17,6,'Officially Reserved','2018-09-15',3),(14,18,8,'Officially Reserved','2018-09-15',16),(15,18,6,'Pending Down Payment','2018-09-15',2);
 
 /*Table structure for table `comment_table` */
 
@@ -83,9 +83,11 @@ CREATE TABLE `comment_table` (
   PRIMARY KEY (`commentId`),
   KEY `FK_comment_table` (`profileId`),
   CONSTRAINT `FK_comment_table` FOREIGN KEY (`profileId`) REFERENCES `profile_table` (`profileId`) ON DELETE SET NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `comment_table` */
+
+insert  into `comment_table`(`commentId`,`commentInfo`,`profileId`,`dateCommented`) values (1,'Such a great experience!',18,'2018-09-15');
 
 /*Table structure for table `destination_table` */
 
@@ -100,9 +102,11 @@ CREATE TABLE `destination_table` (
   KEY `FK_destination_table2` (`packageId`),
   CONSTRAINT `FK_destination_table` FOREIGN KEY (`placeId`) REFERENCES `place_table` (`placeId`) ON DELETE SET NULL,
   CONSTRAINT `FK_destination_table2` FOREIGN KEY (`packageId`) REFERENCES `package_table` (`packageId`) ON DELETE SET NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `destination_table` */
+
+insert  into `destination_table`(`destinationId`,`placeId`,`packageId`) values (1,1,7),(2,2,8),(3,20,9);
 
 /*Table structure for table `media_table` */
 
@@ -121,9 +125,11 @@ CREATE TABLE `media_table` (
   CONSTRAINT `FK_media_table` FOREIGN KEY (`packageId`) REFERENCES `package_table` (`packageId`),
   CONSTRAINT `FK_media_table1` FOREIGN KEY (`paymentTransactionId`) REFERENCES `payment_transaction_table` (`paymentTransactionId`) ON DELETE SET NULL,
   CONSTRAINT `FK_media_table3` FOREIGN KEY (`postingId`) REFERENCES `posting_table` (`postingId`) ON DELETE SET NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 /*Data for the table `media_table` */
+
+insert  into `media_table`(`mediaId`,`mediaLocation`,`postingId`,`packageId`,`paymentTransactionId`) values (1,'media/6e818dbf39a8406e16f2f75b67b103a14.jpg',NULL,7,NULL),(2,'media/c3464ecf7abee6ccdd48cab3f43f50f21200px-View_on_the_half_way_to_Kayangan_Lake_-_panoramio.jpg',NULL,7,NULL),(3,'media/43970d108f79eb0958c670c5cb8fe7fbbeautiful-view-mountain-ranges-philippines-islands-mountain-views-100246883.jpg',NULL,7,NULL),(4,'media/8cedabe7576455fca198fab4a3aa39a4budahernel3.jpg',NULL,7,NULL),(5,'media/b9a90ed33960bfd49695109140fe13d7maxresdefault (1).jpg',NULL,7,NULL),(6,'media/aab82c7b8fc537eb3de4ce007b89eec4maxresdefault.jpg',NULL,7,NULL),(7,'media/dac7a9e35a9a07830726765e9b758d76Enchanted-River-11.jpg',NULL,8,NULL),(8,'media/294c86e8e9d13f7bcd2334c7a65c8c1bRiv.jpg',NULL,8,NULL),(9,'media/127fc585fe069a4d164e9343afbad524siargao-surigao-province.jpg',NULL,8,NULL),(10,'media/2dc1f8b358330066fe3b01039ec413a6Surigao-del-Sur-Bogac-Spring.png',NULL,8,NULL),(11,'media/3d2d90013b1a14220bae0000e54ea255download.jpg',NULL,9,NULL),(12,'media/745b35d500d1820c9a5e54088cb1b671Footpath to Hikong Alo  Seven Falls Lake Sebu.jpg',NULL,9,NULL),(13,'media/36c561ac11e6be0a565005848d4aeda0images.jpg',NULL,9,NULL),(15,'dashboard/media/fae23928a90df95135cd9439a143a763download (3).jpg',NULL,NULL,14);
 
 /*Table structure for table `mode_of_payment_table` */
 
@@ -169,9 +175,11 @@ CREATE TABLE `package_table` (
   `price` double DEFAULT NULL,
   PRIMARY KEY (`packageId`),
   KEY `FK_package_table1` (`price`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 /*Data for the table `package_table` */
+
+insert  into `package_table`(`packageId`,`packageName`,`packageDetails`,`inclusion`,`exclusion`,`price`) values (7,'Buda Tour','A day tour that makes your life more adventurous.','Transportation','Habal Habal, entrances, meals',600),(8,'Surigao Tour','Great experience you will enjoy!!','Transportation, lodging','Meals',3499),(9,'Lake Sebu Tour','Tilapiahan of the South!','Transportation','Meals',799);
 
 /*Table structure for table `payment_transaction_table` */
 
@@ -193,9 +201,11 @@ CREATE TABLE `payment_transaction_table` (
   KEY `FK_payment_transaction_table123123` (`bookingId`),
   CONSTRAINT `FK_payment_transaction_table123123` FOREIGN KEY (`bookingId`) REFERENCES `booking_table` (`bookingId`),
   CONSTRAINT `FK_payment_transaction_table123344` FOREIGN KEY (`modeOfPaymentId`) REFERENCES `mode_of_payment_table` (`modeOfPaymentId`) ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 /*Data for the table `payment_transaction_table` */
+
+insert  into `payment_transaction_table`(`paymentTransactionId`,`modeOfPaymentId`,`amount`,`dateOfPayment`,`transactionNumber`,`nameOfSender`,`paymentStatus`,`bookingId`,`paymentType`) values (13,23,1800,'2018-09-15','none','Ann Cruz','Recieved',13,'Full Payment'),(14,14,55984,'2018-09-15','65sad-6sd-sd-dsadas','Leonides Maximus Malagar','Recieved',14,'Full Payment');
 
 /*Table structure for table `place_table` */
 
@@ -249,11 +259,11 @@ CREATE TABLE `profile_table` (
   KEY `FK_profile_table1` (`addressId`),
   CONSTRAINT `FK_profile_table` FOREIGN KEY (`accountTypeId`) REFERENCES `account_type_table` (`accountTypeId`),
   CONSTRAINT `FK_profile_table1` FOREIGN KEY (`addressId`) REFERENCES `address_table` (`addressId`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 /*Data for the table `profile_table` */
 
-insert  into `profile_table`(`profileId`,`firstName`,`middleName`,`lastName`,`contactNumber`,`addressId`,`accountTypeId`,`userName`,`passWord`,`isDeleted`) values (2,'Jose','Malinao','Aguacito','09754214199',8,1,'admin','21232f297a57a5a743894a0e4a801fc3',0);
+insert  into `profile_table`(`profileId`,`firstName`,`middleName`,`lastName`,`contactNumber`,`addressId`,`accountTypeId`,`userName`,`passWord`,`isDeleted`) values (2,'Arra Mae','Pablo','Agusan','09972609952',8,1,'admin','21232f297a57a5a743894a0e4a801fc3',0),(16,'Earl John','Padrones','Mercado','0997078319',18,5,'earl johnefd2','7c7eceade6ba3db058dc92db5d73b2ea',0),(17,'Ann','Panne','Cruz','0906758088',19,3,NULL,NULL,0),(18,'Leonides','Maximus','Malagar','09754363944',20,4,'customer','91ec1f9324753048c0096d036a694f86',0);
 
 /*Table structure for table `travel_and_tour_table` */
 
@@ -269,9 +279,11 @@ CREATE TABLE `travel_and_tour_table` (
   PRIMARY KEY (`travelAndTourId`),
   KEY `FK_travel_and_tour_table` (`packageId`),
   CONSTRAINT `FK_travel_and_tour_table` FOREIGN KEY (`packageId`) REFERENCES `package_table` (`packageId`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 /*Data for the table `travel_and_tour_table` */
+
+insert  into `travel_and_tour_table`(`travelAndTourId`,`packageId`,`departureDate`,`returnDate`,`maxPax`,`travelAndTourStatus`) values (6,7,'2018-09-17','2018-09-17',15,'Available'),(7,9,'2018-09-19','2018-09-19',13,'Available'),(8,8,'2018-10-01','2018-10-04',16,'Fully Booked'),(9,7,'2018-09-16','2018-09-16',14,'Available');
 
 /*Table structure for table `booking_view` */
 
