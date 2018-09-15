@@ -69,7 +69,7 @@ include("includes/header.php");
             <div class="card">
                 <div class="card-body">
                     <h2>Customers</h2>
-                    <button class="btn btn-success m-t-20 waves-effect text-left" data-toggle="modal" data-target="#addModal" <?php if ($maxPax - $slotsTaken == 0): ?>
+                    <button class="btn btn-success m-t-20 waves-effect text-left" data-toggle="modal" data-target="#addModal" <?php if ($maxPax - $slotsTaken == 0 or $res['travelAndTourStatus'] != 'Available'): ?>
                         disabled
                     <?php endif ?>>Add</button>
                     <div class="table-responsive m-t-20">

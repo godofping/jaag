@@ -139,7 +139,7 @@ $res1 = mysqli_fetch_assoc($qry1);
 										</tr>
 									</thead>
 									<tbody>
-										<?php $qry3 = mysqli_query($connection, "select * from travel_and_tour_view where packageId = '" . $_GET['packageId'] . "' and travelAndTourStatus = 'Available'");
+										<?php $qry3 = mysqli_query($connection, "select * from travel_and_tour_view where packageId = '" . $_GET['packageId'] . "'");
 										while ($res3 = mysqli_fetch_assoc($qry3)) { ?>
 										<tr>
 											<td><?php echo $res3['travelAndTourId']; ?></td>
@@ -156,7 +156,7 @@ $res1 = mysqli_fetch_assoc($qry1);
 											<td>
 												
 
-											<?php if ($res13['slotsTaken'] == $res3['maxPax']) { ?>
+											<?php if ($res13['slotsTaken'] == $res3['maxPax'] or $res3['travelAndTourStatus'] != 'Available') { ?>
 												<button disabled="" class="btn btn-info">Book</button>
 											<?php } else { ?>
 												<a 
