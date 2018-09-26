@@ -3,7 +3,7 @@
             <div class="row">
                 <div class="col-md-4 col-sm-3">
                     <h3>Need help?</h3>
-                    <a href="tel://004542344599" id="phone">+09168574996</a>
+                    <a href="tel://004542344599" id="phone">+639972609952</a>
                     <a href="mailto:help@jaag.com" id="email_footer">help@jaag.com</a>
                 </div>
                 <div class="col-md-3 col-sm-3">

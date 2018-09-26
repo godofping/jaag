@@ -44,29 +44,39 @@
 		</ul>
 			</div>
 
-			<div class="col-md-3">
-				<form method="POST" action="controller.php">
-					<div class="box_style_1 expose">
-						<h3 class="inner">Submit Feedback</h3>
-						<div class="row">
-							<div class="col-md-12">
-								<div class="form-group">
-									<label>Feedback:</label>
-									<textarea name="commentInfo" class="form-control" rows="5" required=""></textarea>
+			
+				<?php if (isset($_SESSION['profileId'])): ?>
+				<div class="col-md-3">
+					<form method="POST" action="controller.php">
+						<div class="box_style_1 expose">
+							<h3 class="inner">Submit Feedback</h3>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label>Feedback:</label>
+										<textarea name="commentInfo" class="form-control" rows="5" required=""></textarea>
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-6">
+									
 								</div>
 							</div>
-							<div class="col-md-6 col-sm-6">
-								
-							</div>
+							
+							<br>
+							<input type="text" name="from" value="add-comment" hidden="">
+							<input type="submit" class="btn_full" value="Submit">
 						</div>
-						
-						<br>
-						<input type="text" name="from" value="add-comment" hidden="">
-						<input type="submit" class="btn_full" value="Submit">
-					</div>
-				</form>
+					</form>
+				</div>
+				<?php endif ?>
 
-			</div>
+				<?php if (!isset($_SESSION['profileId'])): ?>
+				<div class="col-md-3">
+					<h4>Please <a href="login.php">login</a> to submit feedback.</h4>	
+				</div>	
+				<?php endif ?>
+
+			
 		</div>
 	</div>
 	<!-- End container -->

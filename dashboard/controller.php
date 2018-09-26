@@ -47,21 +47,15 @@ if (isset($_POST['from']) and $_POST['from'] == 'add-attendant') {
 	$fourCharacters = substr(md5($_POST['firstName']), 0, 4);
 	$userName = strtolower($_POST['firstName'] . $fourCharacters);
 
-	mysqli_query($connection, "insert into address_table (buildingNumber, street, barangay, city, province) values ('" . $_POST['buildingNumber'] . "', '" . $_POST['street'] . "', '" . $_POST['barangay'] . "', '" . $_POST['city1'] . "', '" . $_POST['province1'] . "')");
+	mysqli_query($connection, "insert into address_table (buildingNumber, street, barangay, city, province) values ('" . mysqli_escape_string($connection, $_POST['buildingNumber']) . "', '" . mysqli_escape_string($connection, $_POST['street']) . "', '" . $_POST['barangay'] . "', '" . $_POST['city1'] . "', '" . $_POST['province1'] . "')");
 	$addressId = mysqli_insert_id($connection);
 
-	mysqli_query($connection, "insert into profile_table (firstName, middleName, lastName, contactNumber, addressId, accountTypeId, userName, passWord) values ('" . $_POST['firstName'] . "', '" . $_POST['middleName'] . "', '" . $_POST['lastName'] . "', '" . $_POST['contactNumber'] . "', '" . $addressId . "', 5, '" . $userName . "', '" . md5($fourCharacters) . "')");
+	mysqli_query($connection, "insert into profile_table (firstName, middleName, lastName, contactNumber, addressId, accountTypeId, userName, passWord) values ('" . mysqli_escape_string($connection, $_POST['firstName']) . "', '" . mysqli_escape_string($connection, $_POST['middleName']) . "', '" . mysqli_escape_string($connection, $_POST['lastName']) . "', '" . mysqli_escape_string($connection, $_POST['contactNumber']) . "', '" . $addressId . "', 5, '" . $userName . "', '" . md5($fourCharacters) . "')");
 
 	$_SESSION['do'] = 'added';
 	header("Location: attendants.php");
 }
 
-if (isset($_POST['from']) and $_POST['from'] == 'update-driver') {
-	mysqli_query($connection, "update driver_table set driverFirstName = '" . $_POST['driverFirstName'] . "', driverMiddleName = '" . $_POST['driverMiddleName'] . "', driverLastName = '" . $_POST['driverLastName'] . "', driverAddress = '" . $_POST['driverAddress'] . "', driverContactNumber = '" . $_POST['driverContactNumber'] . "' where driverId = '" . $_POST['driverId'] . "'");
-
-	$_SESSION['do'] = 'updated';
-	header("Location: attendants.php");
-}
 
 if (isset($_POST['from']) and $_POST['from'] == 'delete-attendant') {
 	mysqli_query($connection, "update profile_table set isDeleted = 1 where profileId = '" . $_POST['profileId'] . "'");
@@ -71,14 +65,14 @@ if (isset($_POST['from']) and $_POST['from'] == 'delete-attendant') {
 }
 
 if (isset($_POST['from']) and $_POST['from'] == 'add-place') {
-	mysqli_query($connection, "insert into place_table (placeName, latitude, longitude) values ('" . $_POST['placeName'] . "', '" . $_POST['latitude'] . "', '" . $_POST['longitude'] . "')");
+	mysqli_query($connection, "insert into place_table (placeName, latitude, longitude) values ('" . mysqli_escape_string($connection, $_POST['placeName']) . "', '" . $_POST['latitude'] . "', '" . $_POST['longitude'] . "')");
 
 	$_SESSION['do'] = 'added';
 	header("Location: places.php");
 }
 
 if (isset($_POST['from']) and $_POST['from'] == 'update-place') {
-	mysqli_query($connection, "update place_table set placeName = '" . $_POST['placeName'] . "',latitude = '" . $_POST['latitude'] . "', longitude = '" . $_POST['longitude'] . "' where placeId = '" . $_POST['placeId'] . "'");
+	mysqli_query($connection, "update place_table set placeName = '" . mysqli_escape_string($connection, $_POST['placeName']) . "',latitude = '" . $_POST['latitude'] . "', longitude = '" . $_POST['longitude'] . "' where placeId = '" . $_POST['placeId'] . "'");
 
 	$_SESSION['do'] = 'updated';
 	header("Location: places.php");
@@ -92,9 +86,9 @@ if (isset($_POST['from']) and $_POST['from'] == 'delete-place') {
 }
 
 if (isset($_POST['from']) and $_POST['from'] == 'update-profile') {
-	mysqli_query($connection, "update profile_table set firstName = '" . $_POST['firstName'] . "', middleName = '" . $_POST['middleName'] . "', lastName = '" . $_POST['lastName'] . "', contactNumber = '" . $_POST['contactNumber'] . "' where profileId = '" . $_POST['profileId'] . "'");
+	mysqli_query($connection, "update profile_table set firstName = '" . mysqli_escape_string($connection, $_POST['firstName']) . "', middleName = '" . mysqli_escape_string($connection, $_POST['middleName']) . "', lastName = '" . mysqli_escape_string($connection, $_POST['lastName']) . "', contactNumber = '" . mysqli_escape_string($connection, $_POST['contactNumber']) . "' where profileId = '" . $_POST['profileId'] . "'");
 
-	mysqli_query($connection, "update address_table set buildingNumber = '" . $_POST['buildingNumber'] . "', street = '" . $_POST['street'] . "', barangay = '" . $_POST['barangay'] . "', city = '" . $_POST['city1'] . "', province = '" . $_POST['province1'] . "' where addressId = '" . $_POST['addressId'] . "'");
+	mysqli_query($connection, "update address_table set buildingNumber = '" . mysqli_escape_string($connection, $_POST['buildingNumber']) . "', street = '" . mysqli_escape_string($connection, $_POST['street']) . "', barangay = '" . $_POST['barangay'] . "', city = '" . $_POST['city1'] . "', province = '" . $_POST['province1'] . "' where addressId = '" . $_POST['addressId'] . "'");
 
 	$_SESSION['do'] = 'updated';
 	header("Location: update-profile.php");
@@ -117,9 +111,7 @@ if (isset($_POST['from']) and $_POST['from'] == 'change-password') {
 
 if (isset($_POST['from']) and $_POST['from'] == 'add-package') {
 
-
-
-	mysqli_query($connection, "insert into package_table (packageName, packageDetails, price, inclusion, exclusion) values ('" . $_POST['packageName'] . "', '" . $_POST['packageDetails'] . "', '" . $_POST['price'] . "', '" . $_POST['inclusion'] . "', '" . $_POST['exclusion'] . "')");
+	mysqli_query($connection, "insert into package_table (packageName, packageDetails, price, inclusion, exclusion) values ('" . mysqli_escape_string($connection, $_POST['packageName']) . "', '" . mysqli_escape_string($connection, $_POST['packageDetails']) . "', '" . $_POST['price'] . "', '" . mysqli_escape_string($connection, $_POST['inclusion']) . "', '" . mysqli_escape_string($connection, $_POST['exclusion']) . "')");
 	$packageId = mysqli_insert_id($connection);
 
 	foreach ($_POST['places'] as $placeId)
@@ -136,7 +128,7 @@ if (isset($_POST['from']) and $_POST['from'] == 'add-package') {
 if (isset($_POST['from']) and $_POST['from'] == 'update-package') {
 
 
-	mysqli_query($connection, "update package_table set packageName = '" . $_POST['packageName'] . "', packageDetails = '" . $_POST['packageDetails'] . "', inclusion = '" . $_POST['inclusion'] . "', exclusion = '" . $_POST['exclusion'] . "', price= '" . $_POST['price'] . "' where packageId = '" . $_POST['packageId'] . "'");
+	mysqli_query($connection, "update package_table set packageName = '" . mysqli_escape_string($connection, $_POST['packageName']) . "', packageDetails = '" . mysqli_escape_string($connection, $_POST['packageDetails']) . "', inclusion = '" . mysqli_escape_string($connection, $_POST['inclusion']) . "', exclusion = '" . mysqli_escape_string($connection, $_POST['exclusion']) . "', price= '" . $_POST['price'] . "' where packageId = '" . $_POST['packageId'] . "'");
 
 	mysqli_query($connection, "delete from destination_table where packageId = '" . $_POST['packageId'] . "'");
 
@@ -225,7 +217,7 @@ if (isset($_POST['from']) and $_POST['from'] == 'add-booking-travel') {
 
 if (isset($_POST['from']) and $_POST['from'] == 'add-announcement') {
 
-	mysqli_query($connection,"insert into posting_table (postingDescription, datePosted, profileId) values ('" . $_POST['postingDescription'] . "', '" . date('Y-m-d') . "', '" . $_SESSION['profileId'] . "')");
+	mysqli_query($connection,"insert into posting_table (postingDescription, datePosted, profileId) values ('" . mysqli_escape_string($connection, $_POST['postingDescription']) . "', '" . date('Y-m-d') . "', '" . $_SESSION['profileId'] . "')");
 
 	$postingId = mysqli_insert_id($connection);
 

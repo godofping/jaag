@@ -100,9 +100,10 @@ if (isset($_GET['from']) and $_GET['from'] == 'notvalid') {
 }
 
 if (isset($_POST['from']) and $_POST['from'] == 'update-profile') {
-	mysqli_query($connection, "update address_table set buildingNumber = '" . $_POST['buildingNumber'] . "', street = '" . $_POST['street'] . "', barangay = '" . $_POST['barangay'] . "', city = '" . $_POST['city1'] . "', province = '" . $_POST['province1'] . "' where addressId = '" . $_POST['addressId'] . "'");
 
-	mysqli_query($connection, "update profile_table set firstName = '" . $_POST['firstName'] . "', middleName = '" . $_POST['middleName'] . "', lastName = '" . $_POST['lastName'] . "', contactNumber = '" . $_POST['contactNumber'] . "' where profileId = '" . $_POST['profileId'] . "'");
+	mysqli_query($connection, "update address_table set buildingNumber = '" . mysqli_escape_string($connection, $_POST['buildingNumber']) . "', street = '" . mysqli_escape_string($connection, $_POST['street']) . "', barangay = '" . $_POST['barangay'] . "', city = '" . $_POST['city1'] . "', province = '" . $_POST['province1'] . "' where addressId = '" . $_POST['addressId'] . "'");
+
+	mysqli_query($connection, "update profile_table set firstName = '" . mysqli_escape_string($connection, $_POST['firstName']) . "', middleName = '" . mysqli_escape_string($connection, $_POST['middleName']) . "', lastName = '" . mysqli_escape_string($connection, $_POST['lastName']) . "', contactNumber = '" . mysqli_escape_string($connection, $_POST['contactNumber']) . "' where profileId = '" . $_POST['profileId'] . "'");
 
 	$_SESSION['do'] = 'updated';
 	header("Location: profile.php");
@@ -134,7 +135,7 @@ if (isset($_POST['from']) and $_POST['from'] == 'add-booking') {
 
 if (isset($_POST['from']) and $_POST['from'] == 'add-comment') {
 	
-	mysqli_query($connection, "insert into comment_table (commentInfo, profileId, dateCommented) values ('" . $_POST['commentInfo'] . "', '" . $_SESSION['profileId'] . "', '" . date('Y-m-d') . "')");
+	mysqli_query($connection, "insert into comment_table (commentInfo, profileId, dateCommented) values ('" . mysqli_escape_string($connection, $_POST['commentInfo']) . "', '" . $_SESSION['profileId'] . "', '" . date('Y-m-d') . "')");
 
 
 	$_SESSION['do'] = 'added';
@@ -172,7 +173,7 @@ if (isset($_POST['from']) and $_POST['from'] == 'add-booking-online-customer') {
 if (isset($_POST['from']) and $_POST['from'] == 'send-payment') {
 
 
-	mysqli_query($connection, "insert into payment_transaction_table (bookingId,modeOfPaymentId, amount, dateOfPayment, transactionNumber, nameOfSender, paymentStatus,paymentType) values ('" . $_POST['bookingId'] . "','" . $_POST['modeOfPaymentId'] . "', '" . $_POST['amount'] . "', '" . date('Y-m-d') . "', '" . $_POST['transactionNumber'] . "', '" . $_POST['nameOfSender'] . "', 'Pending Confirmation','" . $_POST['paymentType'] . "')");
+	mysqli_query($connection, "insert into payment_transaction_table (bookingId,modeOfPaymentId, amount, dateOfPayment, transactionNumber, nameOfSender, paymentStatus,paymentType) values ('" . $_POST['bookingId'] . "','" . $_POST['modeOfPaymentId'] . "', '" . $_POST['amount'] . "', '" . date('Y-m-d') . "', '" . mysqli_escape_string($connection, $_POST['transactionNumber']) . "', '" . mysqli_escape_string($connection, $_POST['nameOfSender']) . "', 'Pending Confirmation','" . $_POST['paymentType'] . "')");
 
 	$paymentTransactionId = mysqli_insert_id($connection);
 

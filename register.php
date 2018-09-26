@@ -15,19 +15,19 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>First Name</label>
+                                        <label>First Name <small style="color: red"> * required</small></label>
                                         <input type="text" class=" form-control" name="firstName" required="" value="<?php if(isset($_SESSION['firstName'])){echo $_SESSION['firstName'];} ?>">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Middle Name</label>
+                                        <label>Middle Name <small style="color: red"> * required</small></label>
                                         <input type="text" class=" form-control" name="middleName" required=""value="<?php if(isset($_SESSION['middleName'])){echo $_SESSION['middleName'];} ?>">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Last Name</label>
+                                        <label>Last Name <small style="color: red"> * required</small></label>
                                         <input type="text" class=" form-control" name="lastName" required="" value="<?php if(isset($_SESSION['lastName'])){echo $_SESSION['lastName'];} ?>">
                                     </div>
                                 </div>
@@ -36,7 +36,7 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Province</label>
+                                        <label>Province <small style="color: red"> * required</small></label>
                                         <select class="form-control" name="province" id="province" required="" onchange="populateCity()" value="<?php if(isset($_SESSION['province'])){echo $_SESSION['province'];} ?>">
                                             
                                         </select>
@@ -44,7 +44,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>City</label>
+                                        <label>City <small style="color: red"> * required</small></label>
                                         <select class="form-control" name="city" id="city" required="" onchange="populateBarangay()" >
                                             
                                         </select>
@@ -52,7 +52,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Barangay</label>
+                                        <label>Barangay <small style="color: red"> * required</small></label>
                                         <select class="form-control" name="barangay" id="barangay" required="">
                                             
                                         </select>
@@ -63,20 +63,20 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Street</label>
-                                        <input type="text" class=" form-control" name="street" required="" value="<?php if(isset($_SESSION['street'])){echo $_SESSION['street'];} ?>">
+                                        <label>Street <small style="color: red"> (optional)</small></label>
+                                        <input type="text" class=" form-control" name="street" value="<?php if(isset($_SESSION['street'])){echo $_SESSION['street'];} ?>">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Building Number</label>
+                                        <label>Building Number <small style="color: red"> (optional)</small></label>
                                         <input type="text" class=" form-control" name="buildingNumber" value="<?php if(isset($_SESSION['buildingNumber'])){echo $_SESSION['buildingNumber'];} ?>">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Contact Number</label>
-                                        <input type="text" class=" form-control" name="contactNumber" required="" value="<?php if(isset($_SESSION['contactNumber'])){echo $_SESSION['contactNumber'];} ?>">
+                                        <label>Contact Number <small style="color: red"> * required</small></label>
+                                        <input type="text" class=" form-control" name="contactNumber" required="" value="<?php if(isset($_SESSION['contactNumber'])){echo $_SESSION['contactNumber'];} ?>" placeholder="09xxxxxxxxx">
                                     </div>
                                 </div>
                             </div>

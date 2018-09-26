@@ -71,23 +71,24 @@ include("includes/header.php");
                             <label>City</label>
                             <div class="form-group">
                                 <select class="form-control" name="city" id="city" required="" onchange="populateBarangay()">
-                                  <option selected="" value="<?php echo $res['city'] ?>" disabled><?php echo $res['city'] ?></option>
+                                  <option selected="" value="<?php echo $res['city'] ?>" ><?php echo $res['city'] ?></option>
                                 </select>
                             </div>
-                            </div>
-                    </div>
-
-                    <div class="row">
+                        </div>
 
                         <div class="col-md-4">
                             <label>Barangay</label>
                             <div class="form-group">
                                 <select class="form-control" name="barangay" id="barangay" required="">
-                                  <option selected="" value="<?php echo $res['barangay'] ?>" disabled><?php echo $res['barangay'] ?></option>
+                                  <option selected="" value="<?php echo $res['barangay'] ?>"><?php echo $res['barangay'] ?></option>
                                 </select>
                             </div>
                         </div>
-                        
+
+                    </div>
+
+                    <div class="row">
+
                         <div class="col-md-4">
                             <label>Street</label>
                             <div class="form-group">
@@ -102,17 +103,16 @@ include("includes/header.php");
                             </div>
                         </div>
 
-                    </div>
-
-
-                    <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-4">
                             <label>Contact Number</label>
                             <div class="form-group">
                                 <input type="text" class="form-control" id="contactNumber" name="contactNumber" required="" value="<?php echo $res['contactNumber'] ?>">
                             </div>
                         </div>
+
                     </div>
+
+
 
                     <!-- other hidden inputs -->
                     <input type="text" name="from" value="update-profile" hidden="">
@@ -134,10 +134,13 @@ include("includes/header.php");
                 <!-- End PAge Content -->
                 <!-- ============================================================== -->
 
+<br><br><br><br><br><br><br><br><br><br>
+
             
 <?php include("includes/footer.php") ?>
 
 <script type="text/javascript">
+populateProvince();
 
 function pushData()
 {
@@ -151,9 +154,10 @@ function pushData()
     });
 }
 
-var $select = $('#province');
+function populateProvince() {
 
-  $.getJSON('JSON/refprovince.json', function(data){
+    var $select = $('#province');
+    $.getJSON('JSON/refprovince.json', function(data){
     $select.html('');
 
     $select.append('<option value="<?php echo $res['province'] ?>" selected disabled><?php echo $res['province'] ?></option>');
@@ -162,9 +166,9 @@ var $select = $('#province');
       $select.append('<option value="'+ data['PROVINCES'][i]['provCode'] + '">' + "Region " + data['PROVINCES'][i]['regCode'] + ": " + data['PROVINCES'][i]['provDesc'] + '</option>');
     }
 
-  });
+    });
 
-
+}
 
 function populateCity() {
 
