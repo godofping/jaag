@@ -156,20 +156,20 @@
     </div>
 </section>
 
-        <div class="container margin_60">
+<div class="container margin_60">
 
-            <div class="main_title">
-                
-                <?php if (isset($_GET['from']) and isset($_GET['to'])): ?>
-                <h2><span>Available</span> Packages</h2>
-                    <p>within this dates "<?php echo $_GET['from'] . " " . $_GET['to']; ?>"</p>
-                <?php endif ?>
+    <div class="main_title">
+        
+        <?php if (isset($_GET['from']) and isset($_GET['to'])): ?>
+        <h2><span>Available</span> Packages</h2>
+            <p>within this dates "<?php echo $_GET['from'] . " " . $_GET['to']; ?>"</p>
+        <?php endif ?>
 
-                <?php if (!isset($_GET['from']) and !isset($_GET['to'])): ?>
-                <h2><span>Tour</span> Packages</h2>
-                    <p>New tour packages</p>
-                <?php endif ?>
-            </div>
+        <?php if (!isset($_GET['from']) and !isset($_GET['to'])): ?>
+        <h2><span>Tour</span> Packages</h2>
+            <p>New tour packages</p>
+        <?php endif ?>
+    </div>
 
 <div class="row">    
 
@@ -225,18 +225,139 @@ $res1 = mysqli_fetch_assoc($qry1);
 
 </div>
             
-            <!-- End row -->
-            <p class="text-center add_bottom_30">
-                <a href="tour-packages.php" class="btn_1 medium"><i class="icon-eye-7"></i>View all tours</a>
-            </p>
+    <!-- End row -->
+    <p class="text-center add_bottom_30">
+        <a href="tour-packages.php" class="btn_1 medium"><i class="icon-eye-7"></i>View all tours</a>
+    </p>
 
-            <hr>
+    <hr>
 
-      
 
-      
+
+
+</div>
+<!-- End container -->
+
+<div class="container margin_60">
+
+    <div class="main_title">
+        
+        <h2><span>Latest</span> Tours</h2>
+            <p>These are our latest tours</p>
+
+    </div>
+
+<div class="row">    
+
+
+<?php 
+$counter = 1;
+
+$qry = mysqli_query($connection, "SELECT * FROM travel_and_tour_view where travelAndTourStatus = 'Available' group by packageId");
+
+while ($res = mysqli_fetch_assoc($qry)) { 
+   
+$qry1 = mysqli_query($connection, "select * from package_media_view where packageId = '" . $res['packageId'] . "' LIMIT 1");
+$res1 = mysqli_fetch_assoc($qry1); 
+?>  
+        <?php if ($counter % 3 == 0): ?>
+            <div class="row">
+        <?php endif ?>
+        
+            <div class="col-md-4 col-sm-6 wow zoomIn" data-wow-delay="0.1s">
+                    <div class="tour_container">
+                        <div class="ribbon_3 popular"><span>New</span></div>
+                        <div class="img_container">
+                            <a href="tour-details.php?packageId=<?php echo $res['packageId'] ?>">
+                                <img src="dashboard/<?php echo $res1['mediaLocation'] ?>" class="img-responsive" alt="image">
+                                <div class="short_info">
+                                    <span class="price"><sup>‎₱</sup><?php echo number_format($res['price'], 2); ?></span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="tour_title">
+                            <a href="tour-details.php?packageId=<?php echo $res['packageId'] ?>"><h3><strong><?php echo $res['packageName']; ?></strong></h3></a>
+                  
+                            <!-- End wish list-->
+                            <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Travel ID</th>
+                                            <th>Travel Dates</th>
+                                            <th>Slots Booked</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $qry3 = mysqli_query($connection, "select * from travel_and_tour_view where packageId = '" . $res['packageId'] . "'");
+                                        while ($res3 = mysqli_fetch_assoc($qry3)) { ?>
+                                        <tr>
+                                            <td><?php echo $res3['travelAndTourId']; ?></td>
+                                            <td><?php echo $res3['departureDate']; ?> - <?php echo $res3['returnDate']; ?></td>
+                                        
+                                            <td><?php 
+                                    $qry13 = mysqli_query($connection, "select COALESCE(sum(numberOfPaxBooked),0) as slotsTaken from booking_table where travelAndTourId = '" . $res3['travelAndTourId'] . "'");
+                                    $res13 = mysqli_fetch_assoc($qry13);
+
+                                    echo $res13['slotsTaken'];
+
+                                    ?>/<?php echo $res3['maxPax']; ?></td>
+                                            <td><?php echo $res3['travelAndTourStatus']; ?></td>
+                                            <td>
+                                                
+
+                                            <?php if ($res13['slotsTaken'] == $res3['maxPax'] or $res3['travelAndTourStatus'] != 'Available') { ?>
+                                                <button disabled="" class="btn btn-info">Book</button>
+                                            <?php } else { ?>
+                                                <a 
+                                                <?php if (isset($_SESSION['profileId'])) { ?>
+                                                    href="booking.php?travelAndTourId=<?php echo $res3['travelAndTourId'] ?>"
+                                                <?php } else { ?>
+                                                    href="controller.php?packageId=<?php echo $_GET['packageId'] ?>&from=tour-packages-login-first"
+                                                <?php } ?> ><button class="btn btn-info">Book</button></a>
+                                            <?php }  ?>
+                                                    
+                                            
+
+
+                                                
+                                                
+
+                                            </td>
+                                        </tr>
+                                        <?php } ?>
+                                    </tbody>
+                                </table>
+
+                        </div>
+
+                    </div>
+                    <!-- End box tour -->
+                </div>
+                <!-- End col-md-4 -->
+        <?php if ($counter % 3 == 0): ?>
         </div>
-        <!-- End container -->
+        <?php endif ?>
+            
+<?php $counter++; } ?>
+
+</div>
+            
+    <!-- End row -->
+    <p class="text-center add_bottom_30">
+        <a href="tour-packages.php" class="btn_1 medium"><i class="icon-eye-7"></i>View all tours</a>
+    </p>
+
+    <hr>
+
+
+
+
+</div>
+
+
 
 
 
