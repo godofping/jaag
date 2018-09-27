@@ -253,18 +253,18 @@ $res1 = mysqli_fetch_assoc($qry1);
 <?php 
 $counter = 1;
 
-$qry = mysqli_query($connection, "SELECT * FROM travel_and_tour_view where travelAndTourStatus = 'Available' group by packageId");
+$qry = mysqli_query($connection, "SELECT * FROM travel_and_tour_view where travelAndTourStatus = 'Available' group by packageId LIMIT 6");
 
 while ($res = mysqli_fetch_assoc($qry)) { 
    
 $qry1 = mysqli_query($connection, "select * from package_media_view where packageId = '" . $res['packageId'] . "' LIMIT 1");
 $res1 = mysqli_fetch_assoc($qry1); 
 ?>  
-        <?php if ($counter % 3 == 0): ?>
+        <?php if ($counter % 2 == 0): ?>
             <div class="row">
         <?php endif ?>
         
-            <div class="col-md-4 col-sm-6 wow zoomIn" data-wow-delay="0.1s">
+            <div class="col-md-6 col-sm-6 wow zoomIn" data-wow-delay="0.1s">
                     <div class="tour_container">
                         <div class="ribbon_3 popular"><span>New</span></div>
                         <div class="img_container">
@@ -337,7 +337,7 @@ $res1 = mysqli_fetch_assoc($qry1);
                     <!-- End box tour -->
                 </div>
                 <!-- End col-md-4 -->
-        <?php if ($counter % 3 == 0): ?>
+        <?php if ($counter % 2 == 0): ?>
         </div>
         <?php endif ?>
             
