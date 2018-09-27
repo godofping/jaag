@@ -161,20 +161,22 @@ include("includes/header.php");
                 <?php $qry = mysqli_query($connection, "SELECT * FROM posting_view ORDER BY postingId desc"); 
                 while ($res = mysqli_fetch_assoc($qry)) { ?>
                 <a>
-                    <span data-toggle="modal" data-target="#deletePostingModal<?php echo $res['postingId'] ?>"><i class="mdi mdi-delete"></i></span>
+                    
                  <div class="mail-contnet">
-                        <h5><?php echo  $res['firstName'] . " " . $res['middleName'] . " " . $res['lastName'] . " (" . $res['accountType'] . ")"; ?></h5> <span class="mail-desc">
+                    <h5><?php echo  $res['firstName'] . " " . $res['middleName'] . " " . $res['lastName'] . " (" . $res['accountType'] . ")"; ?> <button class="btn btn-circle btn-warning" data-toggle="modal" data-target="#deletePostingModal<?php echo $res['postingId'] ?>"><i class="mdi mdi-delete"></i></button></h5> 
+                        <span class="mail-desc">
                             <?php $qry1 = mysqli_query($connection, "select * from posting_media_view where postingId = '" . $res['postingId'] . "'"); $res1 = mysqli_fetch_assoc($qry1); ?>
                         <span class="time">Date Posted: <?php echo $res['datePosted']; ?></span>
+                        <br>
 
                        
                         <img class="img img-responsive" src="<?php echo $res1['mediaLocation'] ?>">
                         <br><br>
-                        
-                            </span>
-                            <p><?php echo $res['postingDescription']; ?></p>
+                        </span>
+                        <p><?php echo $res['postingDescription']; ?></p>
+                            
 
-                        </div>
+                </div>
                 </a>
                 <?php } ?>
             </div>
@@ -196,12 +198,20 @@ include("includes/header.php");
                 while ($res = mysqli_fetch_assoc($qry)) { ?>
                         <a>
                          <div class="mail-contnet">
-                                <h5><?php echo  $res['firstName'] . " " . $res['middleName'] . " " . $res['lastName'] . " (" . $res['accountType'] . ")"; ?></h5>
-                                <span data-toggle="modal" data-target="#deleteModal<?php echo $res['commentId'] ?>"><i class="mdi mdi-delete"></i></span>
+                                <h5><?php echo  $res['firstName'] . " " . $res['middleName'] . " " . $res['lastName'] . " (" . $res['accountType'] . ")"; ?> <button class="btn btn-circle btn-warning" data-toggle="modal" data-target="#deleteModal<?php echo $res['commentId'] ?>"><i class="mdi mdi-delete"></i></button> <button class="btn btn-circle btn-info" data-toggle="modal" data-target="#replyModal<?php echo $res['commentId'] ?>"><i class="mdi mdi-reply"></i></button></h5>
+                                
                                 <span class="time">Date Posted: <?php echo $res['dateCommented']; ?></span>
                                 
                                 <br>
                                 <span><?php echo $res['commentInfo']; ?></span> 
+                                <?php if (!is_null($res['respond'])): ?>
+                                     <hr>
+
+                                <h4>Reply: <?php echo $res['respond']; ?></h4> 
+                                 <?php endif ?>
+                               
+
+
                                 
                         </div>
                         </a>
@@ -385,6 +395,47 @@ include("includes/header.php");
             <div class="modal-footer">
                 <button type="submit" class="btn btn-success waves-effect text-left">Yes</button>
                 <button type="button" class="btn btn-danger waves-effect text-left" data-dismiss="modal">No</button>
+            </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal --> 
+
+
+            <!-- modal content -->
+<div class="modal fade" id="replyModal<?php echo $res['commentId'] ?>" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myLargeModalLabel">Reply</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="controller.php">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>Message</label>
+                            <div class="form-group">
+                                <textarea type="text" class="form-control" id="respond" name="respond" required="" rows="3"></textarea>
+                            </div>
+                        </div>
+
+                    </div> 
+                
+
+                <!-- other hidden inputs -->
+                <input type="text" name="from" value="add-reply" hidden="">
+                <input type="text" name="commentId" value="<?php echo $res['commentId']; ?>" hidden="">
+
+               
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success waves-effect text-left">Submit</button>
+                <button type="button" class="btn btn-danger waves-effect text-left" data-dismiss="modal">Close</button>
             </div>
             </form>
         </div>

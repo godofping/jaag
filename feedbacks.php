@@ -38,6 +38,10 @@
 					</div>
 				<br>
 					<p><?php echo $res['commentInfo']; ?></p>
+					<?php if (!is_null($res['respond'])): ?>
+						<hr>
+					<p>Reply: <?php echo $res['respond']; ?></p>
+					<?php endif ?>
 				</div>
 			</li>
 		<?php } ?>

@@ -406,4 +406,15 @@ if (isset($_POST['from']) and $_POST['from'] == 'add-walk-in-customer') {
 
 }
 
+
+if (isset($_POST['from']) and $_POST['from'] == 'add-reply') {
+
+	mysqli_query($connection, "update comment_table set respond = '" . $_POST['respond'] . "' where commentId = '" . $_POST['commentId'] . "'");
+
+	$_SESSION['do'] = 'added';
+	header("Location: home.php");
+}
+
+
+
 ?>

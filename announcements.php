@@ -31,7 +31,7 @@
 						<hr>
 
 						<?php 
-						$qry = mysqli_query($connection, "select * from posting_view order by postingId ASC");
+						$qry = mysqli_query($connection, "select * from posting_view order by postingId DESC");
 						while ($res = mysqli_fetch_assoc($qry)) { 
 							$qry1 = mysqli_query($connection, "select * from posting_media_view where postingId = '" . $res['postingId'] . "'");
 							$res1 = mysqli_fetch_assoc($qry1);
