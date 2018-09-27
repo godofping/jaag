@@ -59,7 +59,7 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
     <link href="css/style.css" rel="stylesheet">
-    <link href="css/colors/default-dark.css" id="theme" rel="stylesheet">
+    <link href="css/colors/green.css" id="theme" rel="stylesheet">
     
 </head>
 
@@ -90,10 +90,10 @@
                             <!-- Dark Logo icon -->
                          
                             <!-- Light Logo icon -->
-                            <img src="assets/images/logo-blue.png" alt="homepage" class="light-logo" height="40px" />
+                            <img src="assets/images/logo-blue.png" alt="homepage" class="dark-logo" height="40px" />
                         </b>
                         <!--End Logo icon -->
-                        <!-- Logo text --> <span style="color: white;">JAAG Dashboard</span></a>
+                        <!-- Logo text --> <span>JAAG Dashboard</span></a>
                 </div>
                 <!-- ============================================================== -->
                 <!-- End Logo -->
