@@ -8,7 +8,7 @@
             	<div id="login">
                 		<div class="text-center"><img src="img/logo_sticky.png" alt="Image" data-retina="true" ></div>
                         <hr>
-                        <form method="POST" action="controller.php">
+                        <form method="POST" action="controller.php" id="form">
                         <div class="row">
                         </div> <!-- end row -->
 
@@ -76,7 +76,8 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Contact Number <small style="color: red"> * required</small></label>
-                                        <input type="text" class=" form-control" name="contactNumber" required="" value="<?php if(isset($_SESSION['contactNumber'])){echo $_SESSION['contactNumber'];} ?>" placeholder="09xxxxxxxxx">
+                                        <input type="text" minlength="11" maxlength="11" class=" form-control" name="contactNumber" id="contactNumber1" required="" value="<?php if(isset($_SESSION['contactNumber'])){echo $_SESSION['contactNumber'];} ?>" placeholder="09xxxxxxxxx">
+                                        <span id="contactNumberResult"></span>
                                     </div>
                                 </div>
                             </div>
@@ -86,16 +87,20 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Username</label>
-                                        <input type="text" class=" form-control" name="userName" placeholder="Username" required="">
+                                        <label>Username <small style="color: red"> * required</small></label>
+                                        <input type="text" class=" form-control" name="userName" id="userName1" placeholder="Username" required="">
+
                                     </div>
+                                    <span id="userNameResult"></span>
+
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Password</label>
+                                        <label>Password <small style="color: red"> * required</small></label>
                                         <input type="password" class=" form-control" name="passWord" placeholder="Password" required="">
                                     </div>
                                 </div>
+
                             </div>
 
                             
@@ -104,16 +109,15 @@
 
                        		<input type="text" name="from" value="register" hidden="
                        		">
-                            <input type="text" name="barangay1" hidden="
-                            ">
-                            <input type="text" name="city1" hidden="
-                            ">
+                            <input type="text" id="province1" hidden="">
+                            <input type="text" id="city1" hidden="">
 
-
-
-                            <button class="btn_full" onclick="pushData();">Create an account</button>
+                            <br>
+                            </form>
+                            <span id="submit" class="btn_full" onclick="pushData();">Create an account</span>
+         
                            
-                        </form>
+                        
                     </div>
             </div>
         </div>
@@ -124,18 +128,79 @@
 
 <?php include("includes/footer.php"); ?>
 
- <script type="text/javascript">
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+    var userName = $('#userName1').val();
+
+    $.post('check.php',{userName:userName,from:"userName"},
+    function(data)
+    {
+        $('#userNameResult').html(data);
+    });
+
+
+    var contactNumber = $('#contactNumber1').val();
+
+
+    $.post('check.php',{contactNumber:contactNumber,from:"contactNumber"},
+    function(data)
+    {
+        $('#contactNumberResult').html(data);
+    });
+
+ 
+});
+
+$('#userName1').keyup(function()
+{
+    var userName = $('#userName1').val();
+
+
+        $.post('check.php',{userName:userName,from:"userName"},
+        function(data)
+        {
+            $('#userNameResult').html(data);
+        });
+
+        
+});
+
+$('#contactNumber1').keyup(function()
+{
+    var contactNumber = $('#contactNumber1').val();
+
+
+        $.post('check.php',{contactNumber:contactNumber,from:"contactNumber"},
+        function(data)
+        {
+            $('#contactNumberResult').html(data);
+        });
+
+        
+});
+
+
+
 
 function pushData()
 {
+
     document.getElementById("province1").value = $("#province option:selected").text();
     document.getElementById("city1").value = $("#city option:selected").text();
 
-    var form = document.getElementById("form");
-
-    document.getElementById("submitButton").addEventListener("click", function () {
-    form.submit();
-    });
+    var userNameResult = document.getElementById('userNameResult').innerText;
+    var contactNumberResult = document.getElementById('contactNumberResult').innerText;
+    
+    if (userNameResult == "Username is available" && contactNumberResult == "Contact number is available") {
+        document.getElementById('form').submit();
+    }
+    else
+    {
+        window.alert("Something wrong. Please check the form.");
+    }
+    
 }
 
 

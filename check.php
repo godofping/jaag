@@ -1,0 +1,44 @@
+<?php 
+include("dashboard/includes/connection.php");
+
+
+$from = mysqli_real_escape_string($connection,htmlentities(trim($_POST['from'])));
+
+if ($from == 'userName') {
+
+	$userName = mysqli_real_escape_string($connection,htmlentities(trim($_POST['userName'])));
+
+	$qry = mysqli_query($connection, "select * from profile_view where userName = '" . $userName . "'");
+
+	if (mysqli_num_rows($qry) > 0) {
+		echo "Username is already taken";
+	}
+	elseif(mysqli_num_rows($qry) == 0 and $userName != "")
+	{
+		echo "Username is available";
+	}
+}
+
+if ($from == 'contactNumber') {
+
+	$contactNumber = mysqli_real_escape_string($connection,htmlentities(trim($_POST['contactNumber'])));
+
+	$qry = mysqli_query($connection, "select * from profile_view where contactNumber = '" . $contactNumber . "'");
+
+	if (mysqli_num_rows($qry) > 0) {
+		echo "Contact number is already taken";
+	}
+	elseif(mysqli_num_rows($qry) == 0 and strlen($contactNumber) == "11")
+	{
+		echo "Contact number is available";
+	}
+	else
+	{
+		$remaining = 11 - strlen($contactNumber);
+		echo abs($remaining) . " character(s) left";
+	}
+
+}
+
+
+?>

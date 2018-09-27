@@ -58,8 +58,8 @@
     <script src="js/jszip.min.js"></script>
     <script src="js/pdfmake.min.js"></script>
     <script src="js/vfs_fonts.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+    <script src="js/buttons.html5.min.js"></script>
+    <script src="js/buttons.print.min.js"></script>
     <script src="assets/plugins/toast-master/js/jquery.toast.js"></script>
     <script src="js/toastr.js"></script>
     <script type="text/javascript" src="assets/plugins/multiselect/js/jquery.multi-select.js"></script>
