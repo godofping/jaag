@@ -71,29 +71,29 @@
 						<!-- End row -->
 
 						<div class="divider"></div>
-						<form method="POST" action="controller.php">
+						<form method="POST" action="controller.php" id="form">
 						<div class="row">
 							<div class="col-md-12">
 								<h4>Edit profile</h4>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
-									<label>First name</label>
-									<input class="form-control" name="firstName" type="text" value="<?php echo $res['firstName'] ?>" required>
+									<label>First name <small style="color: red"> * required</small></label>
+									<input class="form-control" name="firstName" id="firstName" type="text" value="<?php echo $res['firstName'] ?>" required>
 								</div>
 							</div>
 
 							<div class="col-md-4">
 								<div class="form-group">
-									<label>Middle name</label>
-									<input class="form-control" name="middleName" type="text" value="<?php echo $res['middleName'] ?>" required>
+									<label>Middle name <small style="color: red"> * required</small></label>
+									<input class="form-control" name="middleName" id="middleName" type="text" value="<?php echo $res['middleName'] ?>" required>
 								</div>
 							</div>
 
 							<div class="col-md-4">
 								<div class="form-group">
-									<label>Last name</label>
-									<input class="form-control" name="lastName" type="text" value="<?php echo $res['lastName'] ?>" required>
+									<label>Last name <small style="color: red"> * required</small></label>
+									<input class="form-control" name="lastName" id="lastName" type="text" value="<?php echo $res['lastName'] ?>" required>
 								</div>
 							</div>
 
@@ -103,8 +103,9 @@
 						<div class="row">
 							<div class="col-md-4">
 								<div class="form-group">
-									<label>Contact number</label>
-									<input class="form-control" name="contactNumber" type="text" value="<?php echo $res['contactNumber'] ?>" required>
+									<label>Contact number <small style="color: red"> * required</small></label>
+									<input class="form-control" name="contactNumber" id="contactNumber1" type="text" value="<?php echo $res['contactNumber'] ?>" required placeholder="09xxxxxxxxx" minlength="11" maxlength="11" disabled>
+                                        <span id="contactNumberResult"></span>
 								</div>
 							</div>
 						</div>
@@ -118,13 +119,13 @@
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
-									<label>Province</label>
-									<select class="form-control" name="province" id="province" required="" onchange="populateCity()"></select>
+									<label>Province <small style="color: red"> * required</small></label>
+									<select class="form-control" name="province" id="province" required="" onchange="populateCity();populateBarangay();"></select>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
-									<label>City</label>
+									<label>City <small style="color: red"> * required</small></label>
 									<select class="form-control" name="city" id="city" required="" onchange="populateBarangay()">
 										<option><?php echo $res['city']; ?></option>
 									</select>
@@ -132,7 +133,7 @@
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
-								<label>Barangay</label>
+								<label>Barangay <small style="color: red"> * required</small></label>
 								<select class="form-control" name="barangay" id="barangay">
 									<option><?php echo $res['barangay']; ?></option>
 								</select>
@@ -143,13 +144,13 @@
 						<div class="row">
 							<div class="col-md-4">
 								<div class="form-group">
-									<label>Street</label>
+									<label>Street <small style="color: red"> (optional)</small></label>
 									<input class="form-control" name="street" type="text" value="<?php echo $res['street'] ?>" >
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
-									<label>Building number</label>
+									<label>Building number <small style="color: red"> (optional)</small></label>
 									<input class="form-control" name="buildingNumber" type="text" value="<?php echo $res['buildingNumber'] ?>" >
 								</div>
 							</div>
@@ -157,14 +158,14 @@
 						<!-- End row -->
 
 						<input type="text" name="from" value="update-profile" hidden="">
-				<input type="text" name="profileId" value="<?php echo $res['profileId'] ?>" hidden="">
-				<input type="text" name="addressId" value="<?php echo $res['addressId'] ?>" hidden="">
+						<input type="text" name="profileId" value="<?php echo $res['profileId'] ?>" hidden="">
+						<input type="text" name="addressId" value="<?php echo $res['addressId'] ?>" hidden="">
 
-				<input type="text" name="province1" id="province1" hidden="">
-                <input type="text" name="city1" id="city1" hidden="">
+						<input type="text" name="province1" id="province1" hidden="">
+		                <input type="text" name="city1" id="city1" hidden="">
 
 							<hr>
-							<button  class="btn_1 green" onclick="pushData()">Update Profile</button>
+							<button type="submit" name="submitform" class="btn_1 green" onclick="pushData()">Update Profile</button>
 					</section>
 					<!-- End section 4 -->
 				</form>
@@ -180,33 +181,72 @@
 
 <script type="text/javascript">
 
+$(document).ready(function(){
+
+
+
+    var contactNumber = $('#contactNumber1').val();
+
+
+    $.post('check.php',{contactNumber:contactNumber,from:"contactNumberProfile"},
+    function(data)
+    {
+        $('#contactNumberResult').html(data);
+    });
+
+ 
+});
+
+
+$('#contactNumber1').keyup(function()
+{
+    var contactNumber = $('#contactNumber1').val();
+
+
+        $.post('check.php',{contactNumber:contactNumber,from:"contactNumberProfile"},
+        function(data)
+        {
+            $('#contactNumberResult').html(data);
+        });
+
+        
+});
+
+
+
+
 function pushData()
 {
+
+
+
     document.getElementById("province1").value = $("#province option:selected").text();
     document.getElementById("city1").value = $("#city option:selected").text();
 
-    var form = document.getElementById("form");
 
-    document.getElementById("submitButton").addEventListener("click", function () {
-    form.submit();
-    });
+    
+    
 }
 
-var $select = $('#province');
+
+populateProvince();
+
+
+function populateProvince() {
+    var $select = $('#province');
 
   $.getJSON('dashboard/JSON/refprovince.json', function(data){
     $select.html('');
-
-  	$select.append('<option><?php echo $res['province']; ?></option>');
+ 
+ 	$select.append('<option><?php echo $res['province']; ?></option>');
 
     for (var i = 0; i < data['PROVINCES'].length; i++) {
       $select.append('<option value="'+ data['PROVINCES'][i]['provCode'] + '">' + "Region " + data['PROVINCES'][i]['regCode'] + ": " + data['PROVINCES'][i]['provDesc'] + '</option>');
     }
 
-
   });
 
-
+}
 
 function populateCity() {
 
@@ -214,14 +254,13 @@ function populateCity() {
 
   $.getJSON('dashboard/JSON/refcitymun.json', function(data){
     $selectCity.html('');
-
     for (var i = 0; i < data['CITIES'].length; i++) {
      if (data['CITIES'][i]['provCode'] == $("#province option:selected").val()) {
        $selectCity.append('<option value="'+ data['CITIES'][i]['citymunCode'] + '">' + data['CITIES'][i]['citymunDesc'] + '</option>');
      }
+
+
     }
-
-
 
   });
 }
@@ -232,8 +271,6 @@ function populateBarangay() {
 
   $.getJSON('dashboard/JSON/refbrgy.json', function(data){
     $selectBarangay.html('');
-
-    $select.append('<option><?php echo $res['barangay']; ?></option>');
 
     for (var i = 0; i < data['BARANGAYS'].length; i++) {
 

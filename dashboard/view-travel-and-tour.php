@@ -152,7 +152,7 @@ include("includes/header.php");
                         <div class="col-md-4">
                             <label>Province</label>
                             <div class="form-group">
-                                <select class="form-control" name="province" id="province" required="" onchange="populateCity()">
+                                <select class="form-control" name="province" id="province" required="" onchange="populateCity();populateBarangay();">
                              
                                 </select>
                             </div>

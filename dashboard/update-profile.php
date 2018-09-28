@@ -34,21 +34,21 @@ include("includes/header.php");
                     
                     <div class="row">
                         <div class="col-md-4">
-                            <label>First Name</label>
+                            <label>First Name <small style="color: red"> * required</small></label>
                             <div class="form-group">
                                 <input type="text" class="form-control" id="firstName" name="firstName" required="" value="<?php echo $res['firstName'] ?>">
                             </div>
                             </div>
 
                         <div class="col-md-4">
-                            <label>Middle Name</label>
+                            <label>Middle Name <small style="color: red"> * required</small></label>
                             <div class="form-group">
                                 <input type="text" class="form-control" id="middleName" name="middleName" required="" value="<?php echo $res['middleName'] ?>">
                             </div>
                         </div>
 
                         <div class="col-md-4">
-                            <label>Last Name</label>
+                            <label>Last Name <small style="color: red"> * required</small></label>
                             <div class="form-group">
                                 <input type="text" class="form-control" id="lastName" name="lastName" required="" value="<?php echo $res['lastName'] ?>">
                             </div>
@@ -58,9 +58,9 @@ include("includes/header.php");
                     <div class="row">
 
                         <div class="col-md-4">
-                            <label>Province</label>
+                            <label>Province <small style="color: red"> * required</small></label>
                             <div class="form-group">
-                                <select class="form-control" name="province" id="province" required="" onchange="populateCity()">
+                                <select class="form-control" name="province" id="province" required="" onchange="populateCity();populateBarangay();">
                                   <option selected="" value="<?php echo $res['province'] ?>" disabled><?php echo $res['province'] ?></option>
                                 </select>
                             </div>
@@ -68,7 +68,7 @@ include("includes/header.php");
                         </div>
 
                         <div class="col-md-4">
-                            <label>City</label>
+                            <label>City <small style="color: red"> * required</small></label>
                             <div class="form-group">
                                 <select class="form-control" name="city" id="city" required="" onchange="populateBarangay()">
                                   <option selected="" value="<?php echo $res['city'] ?>" ><?php echo $res['city'] ?></option>
@@ -77,7 +77,7 @@ include("includes/header.php");
                         </div>
 
                         <div class="col-md-4">
-                            <label>Barangay</label>
+                            <label>Barangay <small style="color: red"> * required</small></label>
                             <div class="form-group">
                                 <select class="form-control" name="barangay" id="barangay" required="">
                                   <option selected="" value="<?php echo $res['barangay'] ?>"><?php echo $res['barangay'] ?></option>
@@ -90,24 +90,27 @@ include("includes/header.php");
                     <div class="row">
 
                         <div class="col-md-4">
-                            <label>Street</label>
+                            <label>Street <small style="color: red"> (optional)</small></label>
                             <div class="form-group">
                                 <input type="text" class="form-control" id="street" name="street" value="<?php echo $res['street'] ?>">
                             </div>
                         </div>
 
                         <div class="col-md-4">
-                            <label>Building Number</label>
+                            <label>Building Number <small style="color: red"> (optional)</small></label>
                             <div class="form-group">
                                 <input type="text" class="form-control" id="street_number" name="buildingNumber" value="<?php echo $res['buildingNumber'] ?>">
                             </div>
                         </div>
 
                         <div class="col-md-4">
-                            <label>Contact Number</label>
+                            <label>Contact Number <small style="color: red"> * required</small></label>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="contactNumber" name="contactNumber" required="" value="<?php echo $res['contactNumber'] ?>">
+                                <input type="text" class="form-control" id="contactNumber1" name="contactNumber" required="" value="<?php echo $res['contactNumber'] ?>" maxlength="11" minlength='11' placeholder="09xxxxxxxxxxx">
+                                <small id="contactNumberResult" class="form-control-feedback"> </small>
                             </div>
+                            
+
                         </div>
 
                     </div>
@@ -124,7 +127,7 @@ include("includes/header.php");
 
                     <div class="row float-right">
                         
-                         <button  class="btn btn-success waves-effect" id="submitButton" onclick="pushData()">Submit</button>
+                         <button type="submit" class="btn btn-success waves-effect" name="submitform" id="submitButton" onclick="pushData()">Submit</button>
                     </div>
 
                 </form>
@@ -140,18 +143,85 @@ include("includes/header.php");
 <?php include("includes/footer.php") ?>
 
 <script type="text/javascript">
+
+
+
+$(document).ready(function(){
+
+    var contactNumber = $('#contactNumber1').val();
+
+
+    $.post('check.php',{contactNumber:contactNumber,from:"contactNumberProfile"},
+    function(data)
+    {
+        $('#contactNumberResult').html(data);
+    });
+
+ 
+});
+
+
+$('#contactNumber1').keyup(function()
+{
+    var contactNumber = $('#contactNumber1').val();
+
+
+        $.post('check.php',{contactNumber:contactNumber,from:"contactNumberProfile"},
+        function(data)
+        {
+            $('#contactNumberResult').html(data);
+        });
+
+        
+});
+
+
 populateProvince();
 
 function pushData()
 {
+
+    var error = "";
+
     document.getElementById("province1").value = $("#province option:selected").text();
     document.getElementById("city1").value = $("#city option:selected").text();
 
-    var form = document.getElementById("form");
+    var firstName = document.getElementById("firstName").value;
+    var middleName = document.getElementById("middleName").value;
+    var lastName = document.getElementById("lastName").value;
+    var contactNumber = document.getElementById("contactNumber1").value;
+    var contactNumberResult = document.getElementById('contactNumberResult').innerText;
 
-    document.getElementById("submitButton").addEventListener("click", function () {
-    form.submit();
-    });
+    if (firstName.length == 0) {
+        error += "Please enter first name. \n";
+    }
+    if (middleName.length == 0) {
+        error += "Please enter middle name. \n";
+    }
+    if (lastName.length == 0) {
+        error += "Please enter last name. \n";
+    }
+    if (contactNumber.length == 0) {
+        error += "Please enter contact number. \n";
+    }
+
+
+
+    if (contactNumber.length != 0 && (contactNumberResult == "Incorrect format" || contactNumberResult == "Contact number is already taken")) {
+        error += "Please change contact number. \n";
+    }
+
+    if (error.length == 0) {
+        document.getElementById("form").submit();
+    }
+    else
+    {
+        window.alert(error);
+    }
+
+    error = "";
+    
+    
 }
 
 function populateProvince() {

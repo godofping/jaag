@@ -37,7 +37,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Province <small style="color: red"> * required</small></label>
-                                        <select class="form-control" name="province" id="province" required="" onchange="populateCity()" value="<?php if(isset($_SESSION['province'])){echo $_SESSION['province'];} ?>">
+                                        <select class="form-control" name="province" id="province" required="" onchange="populateCity();populateBarangay();" value="<?php if(isset($_SESSION['province'])){echo $_SESSION['province'];} ?>">
                                             
                                         </select>
                                     </div>
@@ -107,10 +107,9 @@
 
 
 
-                       		<input type="text" name="from" value="register" hidden="
-                       		">
-                            <input type="text" id="province1" hidden="">
-                            <input type="text" id="city1" hidden="">
+                       		<input type="text" name="from" value="register" hidden="">
+                            <input type="text" id="province1" name="province1"  hidden="">
+                            <input type="text" id="city1" name="city1"  hidden="">
 
                             <br>
                             

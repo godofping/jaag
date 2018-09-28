@@ -1,5 +1,5 @@
 <?php 
-include("dashboard/includes/connection.php");
+include("includes/connection.php");
 
 
 $from = mysqli_real_escape_string($connection,htmlentities(trim($_POST['from'])));
@@ -33,7 +33,13 @@ if ($from == 'contactNumber') {
 		echo "Contact number is available";
 	}
 	elseif (preg_match ('/[^0-9]/i', $contactNumber) or substr($contactNumber, 0, 2) != "09") {
-		echo "Incorrect format";
+		if ($contactNumber == "") {
+				echo "Please enter contat number";
+			}
+			else
+			{
+				echo "Incorrect format";
+			}
 	}
 	else
 	{
@@ -64,7 +70,13 @@ if ($from == 'contactNumberProfile') {
 			echo "Contact number is available";
 		}
 		elseif (preg_match ('/[^0-9]/i', $contactNumber) or substr($contactNumber, 0, 2) != "09") {
-			echo "Incorrect format";
+			if ($contactNumber == "") {
+				echo "Please enter contat number";
+			}
+			else
+			{
+				echo "Incorrect format";
+			}
 		}
 		else
 		{
