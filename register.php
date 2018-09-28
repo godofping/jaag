@@ -16,19 +16,19 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>First Name <small style="color: red"> * required</small></label>
-                                        <input type="text" class=" form-control" name="firstName" required="" value="<?php if(isset($_SESSION['firstName'])){echo $_SESSION['firstName'];} ?>">
+                                        <input type="text" class=" form-control" name="firstName" id="firstName" required="" value="<?php if(isset($_SESSION['firstName'])){echo $_SESSION['firstName'];} ?>">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Middle Name <small style="color: red"> * required</small></label>
-                                        <input type="text" class=" form-control" name="middleName" required=""value="<?php if(isset($_SESSION['middleName'])){echo $_SESSION['middleName'];} ?>">
+                                        <input type="text" class=" form-control" name="middleName" id="middleName" required=""value="<?php if(isset($_SESSION['middleName'])){echo $_SESSION['middleName'];} ?>">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Last Name <small style="color: red"> * required</small></label>
-                                        <input type="text" class=" form-control" name="lastName" required="" value="<?php if(isset($_SESSION['lastName'])){echo $_SESSION['lastName'];} ?>">
+                                        <input type="text" class=" form-control" name="lastName" id="lastName" required="" value="<?php if(isset($_SESSION['lastName'])){echo $_SESSION['lastName'];} ?>">
                                     </div>
                                 </div>
                             </div>
@@ -97,7 +97,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Password <small style="color: red"> * required</small></label>
-                                        <input type="password" class=" form-control" name="passWord" placeholder="Password" required="">
+                                        <input type="password" class=" form-control" name="passWord" id="passWord1" placeholder="Password" required="">
                                     </div>
                                 </div>
 
@@ -113,8 +113,10 @@
                             <input type="text" id="city1" hidden="">
 
                             <br>
+                            
+                        
+                            <button type="submit" name="submitform" class="btn_full" onclick="pushData(); return false;">Create an account</button>
                             </form>
-                            <span id="submit" class="btn_full" onclick="pushData();">Create an account</span>
          
                            
                         
@@ -167,6 +169,9 @@ $('#userName1').keyup(function()
         
 });
 
+
+
+
 $('#contactNumber1').keyup(function()
 {
     var contactNumber = $('#contactNumber1').val();
@@ -187,19 +192,57 @@ $('#contactNumber1').keyup(function()
 function pushData()
 {
 
+    var error = "";
+
     document.getElementById("province1").value = $("#province option:selected").text();
     document.getElementById("city1").value = $("#city option:selected").text();
 
+    var firstName = document.getElementById("firstName").value;
+    var middleName = document.getElementById("middleName").value;
+    var lastName = document.getElementById("lastName").value;
+    var passWord = document.getElementById("passWord1").value;
+    var contactNumber = document.getElementById("contactNumber1").value;
+    var userName = document.getElementById("userName1").value;
+
     var userNameResult = document.getElementById('userNameResult').innerText;
     var contactNumberResult = document.getElementById('contactNumberResult').innerText;
-    
-    if (userNameResult == "Username is available" && contactNumberResult == "Contact number is available") {
-        document.getElementById('form').submit();
+
+    if (firstName.length == 0) {
+        error += "Please enter first name. \n";
+    }
+    if (middleName.length == 0) {
+        error += "Please enter middle name. \n";
+    }
+    if (lastName.length == 0) {
+        error += "Please enter last name. \n";
+    }
+    if (contactNumber.length == 0) {
+        error += "Please enter contact number. \n";
+    }
+    if (userName.length == 0) {
+        error += "Please enter username. \n";
+    }
+    if (passWord.length == 0) {
+        error += "Please enter password. \n";
+    }
+
+    if (userName.length != 0 && userNameResult != "Username is available") {
+        error += "Please change username. \n";
+    }
+
+    if (contactNumber.length != 0 && contactNumberResult != "Contact number is available") {
+        error += "Please change contact number. \n";
+    }
+
+    if (error.length == 0) {
+        document.getElementById("form").submit();
     }
     else
     {
-        window.alert("Something wrong. Please check the form.");
+        window.alert(error);
     }
+
+    
     
 }
 

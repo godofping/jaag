@@ -28,14 +28,18 @@ if ($from == 'contactNumber') {
 	if (mysqli_num_rows($qry) > 0) {
 		echo "Contact number is already taken";
 	}
-	elseif(mysqli_num_rows($qry) == 0 and strlen($contactNumber) == "11")
+	elseif(mysqli_num_rows($qry) == 0 and strlen($contactNumber) == "11" and substr($contactNumber, 0, 2) == "09")
 	{
 		echo "Contact number is available";
+	}
+	elseif (preg_match ('/[^0-9]/i', $contactNumber) or substr($contactNumber, 0, 2) != "09") {
+		echo "Incorrect format";
 	}
 	else
 	{
 		$remaining = 11 - strlen($contactNumber);
 		echo abs($remaining) . " character(s) left";
+
 	}
 
 }
