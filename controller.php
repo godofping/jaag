@@ -153,6 +153,14 @@ if (isset($_POST['from']) and $_POST['from'] == 'add-booking') {
 	mysqli_query($connection,"insert into booking_table (profileId, travelAndTourId, statusId, dateBooked, numberOfPaxBooked) values ('" . $_SESSION['profileId'] . "', '" . $_POST['travelAndTourId'] . "', '7', '" . date('Y-m-d') . "', '" . $_POST['pax'] . "')");
 	$bookingId = mysqli_insert_id($connection);
 
+	$qry = mysqli_query($connection, "select * from profile_view where accountType = 'Attendant' or accountType = 'Administrator'");
+
+	while ($res = mysqli_fetch_assoc($qry)) {
+		mysqli_query($connection, "insert into notification_table (notificationMessage, profileId, isRead, dateAndTime) values ('New booking with the Booking ID: ". $bookingId . " ', '" . $res['profileId'] . "', '0', '" . date('Y-m-d H:i:s') . "') ");
+
+		echo "insert into notification_table (notificationMessage, profileId, isRead, dateAndTime) values ('New payment with the Payment ID: ". $bookingId . " ', '" . $res['profileId'] . "', '0', '" . date('Y-m-d H:i:s') . "') ";
+	}
+
 	$_SESSION['do'] = 'added';
 	header("Location: booking-reciept.php?bookingId=". $bookingId . "");
 }
@@ -185,11 +193,25 @@ if (isset($_POST['from']) and $_POST['from'] == 'search-package') {
 }
 
 if (isset($_POST['from']) and $_POST['from'] == 'add-booking-online-customer') {
-	mysqli_query($connection, "insert into booking_table (profileId, travelAndTourId, bookingStatus, dateBooked, numberOfPaxBooked) values ('" . $_SESSION['profileId'] . "', '" . $_POST['travelAndTourId'] . "', 'Pending Payment', '" . date('Y-m-d') . "', '" . $_POST['paxNumber'] . "')");
+	mysqli_query($connection, "insert into booking_table (profileId, travelAndTourId, bookingStatus, dateBooked, numberOfPaxBooked) values ('" . $_SESSION['profileId'] . "', '" . $_POST['travelAndTourId'] . "', 'Reserved - Pending Down Payment', '" . date('Y-m-d') . "', '" . $_POST['paxNumber'] . "')");
 
 	$bookingId = mysqli_insert_id($connection);
 
+
+	$qry = mysqli_query($connection, "select * from profile_view where accountType = 'Attendant' or accountType = 'Administrator'");
+
+	while ($res = mysqli_fetch_assoc($qry)) {
+		mysqli_query($connection, "insert into notification_table (notificationMessage, profileId, isRead, dateAndTime) values ('New Booking with the Booking ID: ". $bookingId . " ', '" . $res['profileId'] . "', '0', '" . date('Y-m-d H:i:s') . "') ");
+
+	
+	}
+
 	$bookingId = base64_encode($bookingId);
+
+
+
+
+
 
 	$_SESSION['do'] = 'added';
 	header("Location: confirmation.php?bookingId=".$bookingId."");
@@ -209,6 +231,15 @@ if (isset($_POST['from']) and $_POST['from'] == 'send-payment') {
     move_uploaded_file($_FILES["mediaLocation"]["tmp_name"], $target_file);
 
 	mysqli_query($connection, "insert into media_table (mediaLocation, paymentTransactionId) values ('" . $target_file . "', '" . $paymentTransactionId . "')");
+
+
+	$qry = mysqli_query($connection, "select * from profile_view where accountType = 'Attendant' or accountType = 'Administrator'");
+
+	while ($res = mysqli_fetch_assoc($qry)) {
+		mysqli_query($connection, "insert into notification_table (notificationMessage, profileId, isRead, dateAndTime) values ('New payment with the Payment ID: ". $paymentTransactionId . " ', '" . $res['profileId'] . "', '0', '" . date('Y-m-d H:i:s') . "') ");
+
+		echo "insert into notification_table (notificationMessage, profileId, isRead, dateAndTime) values ('New payment with the Payment ID: ". $paymentTransactionId . " ', '" . $res['profileId'] . "', '0', '" . date('Y-m-d H:i:s') . "') ";
+	}
 
 
 	$_SESSION['do'] = 'added';

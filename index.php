@@ -308,11 +308,16 @@ $res1 = mysqli_fetch_assoc($qry1);
                                             <td><?php echo $res3['travelAndTourStatus']; ?></td>
                                             
                                             <td>
-                                                <?php $qry6 = mysqli_query($connection, "SELECT * FROM booking_view WHERE profileId = '" . $_SESSION['profileId'] . "' AND (departureDate between '" . $res3['departureDate'] . "' and '" . $res3['returnDate'] . "' AND returnDate between '" . $res3['departureDate'] . "' and '" . $res3['returnDate'] . "')");
+                                                <?php 
 
 
-                                                    if (mysqli_num_rows($qry6) > 0) {
-                                                        echo "Conflict Schedule";
+                                                    if (isset($_SESSION['profileId'])) {
+                                                        $qry6 = mysqli_query($connection, "SELECT * FROM booking_view WHERE profileId = '" . $_SESSION['profileId'] . "' AND (departureDate between '" . $res3['departureDate'] . "' and '" . $res3['returnDate'] . "' AND returnDate between '" . $res3['departureDate'] . "' and '" . $res3['returnDate'] . "')");
+
+
+                                                        if (mysqli_num_rows($qry6) > 0) {
+                                                            echo "Conflict Schedule";
+                                                        }
                                                     }
                                                 
 
@@ -323,14 +328,22 @@ $res1 = mysqli_fetch_assoc($qry1);
                                             <td>
                                                 
 
-                                            <?php if ($res13['slotsTaken'] == $res3['maxPax'] or $res3['travelAndTourStatus'] != 'Available' or mysqli_num_rows($qry6) > 0) { ?>
-                                                <button disabled="" class="btn btn-info">Book</button>
+                                            <?php if ($res13['slotsTaken'] == $res3['maxPax'] or $res3['travelAndTourStatus'] != 'Available' ) { 
+                                                if (mysqli_num_rows($qry6) > 0) { ?>
+                                                   <button disabled="" class="btn btn-info">Book</button>
+                                               <?php }
+                                                else
+                                                { ?>
+                                                    <button disabled="" class="btn btn-info">Book</button>
+                                                <?php }
+                                                ?>
+                                                
                                             <?php } else { ?>
                                                 <a 
                                                 <?php if (isset($_SESSION['profileId'])) { ?>
                                                     href="booking.php?travelAndTourId=<?php echo $res3['travelAndTourId'] ?>"
                                                 <?php } else { ?>
-                                                    href="controller.php?packageId=<?php echo $_GET['packageId'] ?>&from=tour-packages-login-first"
+                                                    href="controller.php?packageId=<?php echo $res['packageId'] ?>&from=tour-packages-login-first"
                                                 <?php } ?> ><button class="btn btn-info">Book</button></a>
                                             <?php }  ?>
                                                     

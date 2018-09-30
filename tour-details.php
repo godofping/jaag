@@ -129,64 +129,77 @@ $res1 = mysqli_fetch_assoc($qry1);
 							<div class=" table-responsive">
 								<table class="table table-striped">
 									<thead>
-										<tr>
-											<th>Travel ID</th>
-											<th>Travel Dates</th>
-											<th>Slots Booked</th>
-											<th>Status</th>
-											<th>Remark</th>
-											<th>Action</th>
-										
-										</tr>
-									</thead>
-									<tbody>
-										<?php $qry3 = mysqli_query($connection, "select * from travel_and_tour_view where packageId = '" . $_GET['packageId'] . "'");
-										while ($res3 = mysqli_fetch_assoc($qry3)) { ?>
-										<tr>
-											<td><?php echo $res3['travelAndTourId']; ?></td>
-											<td><?php echo $res3['departureDate']; ?> - <?php echo $res3['returnDate']; ?></td>
-										
-											<td><?php 
+                                        <tr>
+                                            <th>Travel ID</th>
+                                            <th>Travel Dates</th>
+                                            <th>Slots Booked</th>
+                                            <th>Status</th>
+                                            <th>Remark</th>
+                                            <th>Action</th>
+                                        
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $qry3 = mysqli_query($connection, "select * from travel_and_tour_view where packageId = '" . $res['packageId'] . "'");
+                                        while ($res3 = mysqli_fetch_assoc($qry3)) { ?>
+                                        <tr>
+                                            <td><?php echo $res3['travelAndTourId']; ?></td>
+                                            <td><?php echo $res3['departureDate']; ?> - <?php echo $res3['returnDate']; ?></td>
+                                        
+                                            <td><?php 
                                     $qry13 = mysqli_query($connection, "select COALESCE(sum(numberOfPaxBooked),0) as slotsTaken from booking_table where travelAndTourId = '" . $res3['travelAndTourId'] . "'");
                                     $res13 = mysqli_fetch_assoc($qry13);
 
                                     echo $res13['slotsTaken'];
 
                                     ?>/<?php echo $res3['maxPax']; ?></td>
-											<td><?php echo $res3['travelAndTourStatus']; ?></td>
-											
-											<td>
-												<?php $qry6 = mysqli_query($connection, "SELECT * FROM booking_view WHERE profileId = '" . $_SESSION['profileId'] . "' AND (departureDate between '" . $res3['departureDate'] . "' and '" . $res3['returnDate'] . "' AND returnDate between '" . $res3['departureDate'] . "' and '" . $res3['returnDate'] . "')");
+                                            <td><?php echo $res3['travelAndTourStatus']; ?></td>
+                                            
+                                            <td>
+                                                <?php 
 
 
-													if (mysqli_num_rows($qry6) > 0) {
-														echo "Conflict Schedule";
-													}
-												
+                                                    if (isset($_SESSION['profileId'])) {
+                                                        $qry6 = mysqli_query($connection, "SELECT * FROM booking_view WHERE profileId = '" . $_SESSION['profileId'] . "' AND (departureDate between '" . $res3['departureDate'] . "' and '" . $res3['returnDate'] . "' AND returnDate between '" . $res3['departureDate'] . "' and '" . $res3['returnDate'] . "')");
 
 
-												?>
-											</td>
+                                                        if (mysqli_num_rows($qry6) > 0) {
+                                                            echo "Conflict Schedule";
+                                                        }
+                                                    }
+                                                
 
-											<td>
-												
 
-											<?php if ($res13['slotsTaken'] == $res3['maxPax'] or $res3['travelAndTourStatus'] != 'Available' or mysqli_num_rows($qry6) > 0) { ?>
-												<button disabled="" class="btn btn-info">Book</button>
-											<?php } else { ?>
-												<a 
-												<?php if (isset($_SESSION['profileId'])) { ?>
-													href="booking.php?travelAndTourId=<?php echo $res3['travelAndTourId'] ?>"
-												<?php } else { ?>
-													href="controller.php?packageId=<?php echo $_GET['packageId'] ?>&from=tour-packages-login-first"
-												<?php } ?> ><button class="btn btn-info">Book</button></a>
-											<?php }  ?>
-													
+                                                ?>
+                                            </td>
 
-											</td>
-										</tr>
-										<?php } ?>
-									</tbody>
+                                            <td>
+                                                
+
+                                            <?php if ($res13['slotsTaken'] == $res3['maxPax'] or $res3['travelAndTourStatus'] != 'Available' ) { 
+                                                if (mysqli_num_rows($qry6) > 0) { ?>
+                                                   <button disabled="" class="btn btn-info">Book</button>
+                                               <?php }
+                                                else
+                                                { ?>
+                                                    <button disabled="" class="btn btn-info">Book</button>
+                                                <?php }
+                                                ?>
+                                                
+                                            <?php } else { ?>
+                                                <a 
+                                                <?php if (isset($_SESSION['profileId'])) { ?>
+                                                    href="booking.php?travelAndTourId=<?php echo $res3['travelAndTourId'] ?>"
+                                                <?php } else { ?>
+                                                    href="controller.php?packageId=<?php echo $res['packageId'] ?>&from=tour-packages-login-first"
+                                                <?php } ?> ><button class="btn btn-info">Book</button></a>
+                                            <?php }  ?>
+                                                    
+
+                                            </td>
+                                        </tr>
+                                        <?php } ?>
+                                    </tbody>
 								</table>
 							</div>
 						

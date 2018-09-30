@@ -295,7 +295,7 @@ if (isset($_POST['from']) and $_POST['from'] == 'update-payment-transaction') {
 	}
 
 	if ($_POST['paymentType'] == 'Full Payment' or $_POST['paymentType'] == 'Outstanding Payment') {
-		mysqli_query($connection, "update booking_table set bookingStatus = 'Officially Reserved' where bookingId = '" . $_POST['bookingId'] . "'");
+		mysqli_query($connection, "update booking_table set bookingStatus = 'Booked' where bookingId = '" . $_POST['bookingId'] . "'");
 	}
 
 	
@@ -380,7 +380,7 @@ if (isset($_POST['from']) and $_POST['from'] == 'add-walk-in-customer') {
 
 
 	if ($_POST['paymentType'] == 'Outstanding Balance' or $_POST['paymentType'] == 'Full Payment') {
-		mysqli_query($connection, "update booking_table set bookingStatus = 'Officially Reserved' where bookingId = '" . $bookingId . "'");
+		mysqli_query($connection, "update booking_table set bookingStatus = 'Booked' where bookingId = '" . $bookingId . "'");
 	}
 
 

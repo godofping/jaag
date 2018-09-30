@@ -142,6 +142,6 @@ while ($res = mysqli_fetch_assoc($qry)) { ?>
 </div>
 <!-- /.modal -->
 <?php } ?>   
-
+<br><br>
 
 <?php include("includes/footer.php") ?>

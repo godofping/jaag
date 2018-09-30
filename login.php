@@ -32,6 +32,7 @@
                             <button type="submit" class="btn_full">Sign in</button>
                             <a href="register.php " class="btn_full_outline">Register</a>
                         </form>
+                      
                     </div>
             </div>
         </div>

@@ -122,15 +122,22 @@
                                         <div class="message-center">
                                             
                                             
-                                            <a>
-                                                <div class="btn btn-primary btn-circle"><i class="ti-user"></i></div>
-                                                <div class="mail-contnet">
-                                                    <h5>Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span> </div>
-                                            </a>
+                                            <?php
+                                             $qry = mysqli_query($connection, "select * from notification_view where profileId = '" . $_SESSION['profileId'] . "' order by notificationId DESC LIMIT 10");
+
+
+
+                                            while ($res = mysqli_fetch_assoc($qry)) { ?>
+                                                <a>
+                                                
+                                                    <div class="mail-contnet">
+                                                    <h5><?php echo $res['notificationMessage']; ?></h5> <span class="mail-desc"></span> <span class="time"><?php echo $res['dateAndTime']; ?></span> </div>
+                                                </a>
+                                           <?php  } ?>
                                         </div>
                                     </li>
                                     <li>
-                                        <a class="nav-link text-center" href="javascript:void(0);"> <strong>Check all notifications</strong> <i class="fa fa-angle-right"></i> </a>
+                                        <a class="nav-link text-center" href="notifications.php"> <strong>Check all notifications</strong> <i class="fa fa-angle-right"></i> </a>
                                     </li>
                                 </ul>
                             </div>

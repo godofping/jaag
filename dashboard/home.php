@@ -128,16 +128,16 @@ include("includes/header.php");
                 <div id="morris-donut-chart" class="ecomm-donute" style="height: 317px;"></div>
                     <ul class="list-inline m-t-20 text-center">
                     <li >
-                        <h6 class="text-muted"><i class="fa fa-circle text-success"></i> Pending Down Payment</h65>
-                        <h4 class="m-b-0"><?php $qry15 = mysqli_query($connection, "SELECT COUNT(*) as result FROM booking_view WHERE bookingStatus = 'Pending Down Payment'"); $res15 = mysqli_fetch_assoc($qry15); echo $res15['result']; ?></h4>
+                        <h6 class="text-muted"><i class="fa fa-circle text-success"></i> Reserved - Pending Down Payment</h6>
+                        <h4 class="m-b-0"><?php $qry15 = mysqli_query($connection, "SELECT COUNT(*) as result FROM booking_view WHERE bookingStatus = 'Reserved - Pending Down Payment'"); $res15 = mysqli_fetch_assoc($qry15); echo $res15['result']; ?></h4>
                     </li>
                     <li>
-                        <h6 class="text-muted"><i class="fa fa-circle text-info"></i> Pending Outstanding Payment</h6>
-                        <h4 class="m-b-0"><?php $qry15 = mysqli_query($connection, "SELECT COUNT(*) as result FROM booking_view WHERE bookingStatus = 'Pending Outstanding Payment'"); $res15 = mysqli_fetch_assoc($qry15); echo $res15['result']; ?></h4>
+                        <h6 class="text-muted"><i class="fa fa-circle text-info"></i> Reserve</h6>
+                        <h4 class="m-b-0"><?php $qry15 = mysqli_query($connection, "SELECT COUNT(*) as result FROM booking_view WHERE bookingStatus = 'Reserve'"); $res15 = mysqli_fetch_assoc($qry15); echo $res15['result']; ?></h4>
                     </li>
                     <li>
-                        <h6 class="text-muted"> <i class="fa fa-circle text-danger"></i> Officially Reserved</h6>
-                        <h4 class="m-b-0"><?php $qry15 = mysqli_query($connection, "SELECT COUNT(*) as result FROM booking_view WHERE bookingStatus = 'Officially Reserved'"); $res15 = mysqli_fetch_assoc($qry15); echo $res15['result']; ?></h4>
+                        <h6 class="text-muted"> <i class="fa fa-circle text-danger"></i> Booked</h6>
+                        <h4 class="m-b-0"><?php $qry15 = mysqli_query($connection, "SELECT COUNT(*) as result FROM booking_view WHERE bookingStatus = 'Booked'"); $res15 = mysqli_fetch_assoc($qry15); echo $res15['result']; ?></h4>
                     </li>
                 </ul>
 
@@ -475,7 +475,7 @@ $(function () {
         },
         {
             period: '2018',
-            Bookings: <?php $qry15 = mysqli_query($connection, "SELECT sum(amount) as result FROM payment_transaction_view WHERE paymentStatus = 'Recieved'"); $res15 = mysqli_fetch_assoc($qry15); echo $res15['result']; ?>,
+            Bookings: <?php $qry15 = mysqli_query($connection, "SELECT coalesce(sum(amount),0) as result FROM payment_transaction_view WHERE paymentStatus = 'Recieved'"); $res15 = mysqli_fetch_assoc($qry15); echo $res15['result']; ?>,
         }
 
         ],
@@ -500,15 +500,15 @@ $(function () {
     Morris.Donut({
         element: 'morris-donut-chart',
         data: [{
-            label: "Pending Down Payment",
-            value: <?php $qry15 = mysqli_query($connection, "SELECT COUNT(*) as result FROM booking_view WHERE bookingStatus = 'Pending Down Payment'"); $res15 = mysqli_fetch_assoc($qry15); echo $res15['result']; ?>,
+            label: "Reserved - Pending Down Payment",
+            value: <?php $qry15 = mysqli_query($connection, "SELECT COUNT(*) as result FROM booking_view WHERE bookingStatus = 'Reserved - Pending Down Payment'"); $res15 = mysqli_fetch_assoc($qry15); echo $res15['result']; ?>,
 
         }, {
-            label: "Pending Outstanding Balance",
-            value: <?php $qry15 = mysqli_query($connection, "SELECT COUNT(*) as result FROM booking_view WHERE bookingStatus = 'Pending Outstanding Payment'"); $res15 = mysqli_fetch_assoc($qry15); echo $res15['result']; ?>,
+            label: "Reserve",
+            value: <?php $qry15 = mysqli_query($connection, "SELECT COUNT(*) as result FROM booking_view WHERE bookingStatus = 'Reserve'"); $res15 = mysqli_fetch_assoc($qry15); echo $res15['result']; ?>,
         }, {
-            label: "Officially Reserved",
-            value: <?php $qry15 = mysqli_query($connection, "SELECT COUNT(*) as result FROM booking_view WHERE bookingStatus = 'Officially Reserved'"); $res15 = mysqli_fetch_assoc($qry15); echo $res15['result']; ?>
+            label: "Booked",
+            value: <?php $qry15 = mysqli_query($connection, "SELECT COUNT(*) as result FROM booking_view WHERE bookingStatus = 'Booked'"); $res15 = mysqli_fetch_assoc($qry15); echo $res15['result']; ?>
         }],
         resize: true,
         colors:['#26c6da', '#1976d2', '#ef5350']
