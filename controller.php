@@ -34,7 +34,7 @@ if (isset($_POST['from']) and $_POST['from'] == 'register') {
 		$thisismymessage = "Your activation code is " . substr(md5($_POST['userName']), 0, 4);
 		$ch = curl_init();
 		$parameters = array(
-		    'apikey' => '14e254097a6501ab143f58ebab54c335', //Your API KEY
+		    'apikey' => $apikey, //Your API KEY
 		    'number' => $_POST['contactNumber'],
 		    'message' => $thisismymessage,
 		    'sendername' => 'SEMAPHORE'
@@ -150,15 +150,38 @@ if (isset($_POST['from']) and $_POST['from'] == 'update-password') {
 
 if (isset($_POST['from']) and $_POST['from'] == 'add-booking') {
 
-	mysqli_query($connection,"insert into booking_table (profileId, travelAndTourId, statusId, dateBooked, numberOfPaxBooked) values ('" . $_SESSION['profileId'] . "', '" . $_POST['travelAndTourId'] . "', '7', '" . date('Y-m-d') . "', '" . $_POST['pax'] . "')");
+	mysqli_query($connection,"insert into booking_table (profileId, travelAndTourId, dateBooked, numberOfPaxBooked) values ('" . $_SESSION['profileId'] . "', '" . $_POST['travelAndTourId'] . "', '" . date('Y-m-d') . "', '" . $_POST['pax'] . "')");
 	$bookingId = mysqli_insert_id($connection);
 
 	$qry = mysqli_query($connection, "select * from profile_view where accountType = 'Attendant' or accountType = 'Administrator'");
 
+
 	while ($res = mysqli_fetch_assoc($qry)) {
 		mysqli_query($connection, "insert into notification_table (notificationMessage, profileId, isRead, dateAndTime) values ('New booking with the Booking ID: ". $bookingId . " ', '" . $res['profileId'] . "', '0', '" . date('Y-m-d H:i:s') . "') ");
 
-		echo "insert into notification_table (notificationMessage, profileId, isRead, dateAndTime) values ('New payment with the Payment ID: ". $bookingId . " ', '" . $res['profileId'] . "', '0', '" . date('Y-m-d H:i:s') . "') ";
+		$thisismymessage = "New booking with the Booking ID: " . $bookingId."";
+		$ch = curl_init();
+		$parameters = array(
+		    'apikey' => $apikey, //Your API KEY
+		    'number' => $res['contactNumber'],
+		    'message' => $thisismymessage,
+		    'sendername' => 'SEMAPHORE'
+		);
+		curl_setopt( $ch, CURLOPT_URL,'http://api.semaphore.co/api/v4/messages' );
+		curl_setopt( $ch, CURLOPT_POST, 1 );
+
+		//Send the parameters set above with the request
+		curl_setopt( $ch, CURLOPT_POSTFIELDS, http_build_query( $parameters ) );
+
+		// Receive response from server
+		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+		$output = curl_exec( $ch );
+		curl_close ($ch);
+
+		//Show the server response
+		echo $output;
+
+
 	}
 
 	$_SESSION['do'] = 'added';
@@ -283,7 +306,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'resend-activation') {
 	$thisismymessage = "Your activation code is " . substr(md5($res['userName']), 0, 4);
 		$ch = curl_init();
 		$parameters = array(
-		    'apikey' => '14e254097a6501ab143f58ebab54c335', //Your API KEY
+		    'apikey' => $apikey, //Your API KEY
 		    'number' => $res['contactNumber'],
 		    'message' => $thisismymessage,
 		    'sendername' => 'SEMAPHORE'

@@ -326,26 +326,30 @@ $res1 = mysqli_fetch_assoc($qry1);
                                             </td>
 
                                             <td>
-                                                
+                                             
+<?php 
 
-                                            <?php if ($res13['slotsTaken'] == $res3['maxPax'] or $res3['travelAndTourStatus'] != 'Available' ) { 
-                                                if (mysqli_num_rows($qry6) > 0) { ?>
-                                                   <button disabled="" class="btn btn-info">Book</button>
-                                               <?php }
-                                                else
-                                                { ?>
-                                                    <button disabled="" class="btn btn-info">Book</button>
-                                                <?php }
-                                                ?>
-                                                
-                                            <?php } else { ?>
-                                                <a 
-                                                <?php if (isset($_SESSION['profileId'])) { ?>
-                                                    href="booking.php?travelAndTourId=<?php echo $res3['travelAndTourId'] ?>"
-                                                <?php } else { ?>
-                                                    href="controller.php?packageId=<?php echo $res['packageId'] ?>&from=tour-packages-login-first"
-                                                <?php } ?> ><button class="btn btn-info">Book</button></a>
-                                            <?php }  ?>
+if (isset($_SESSION['profileId'])) {
+    if ($res13['slotsTaken'] == $res3['maxPax'] or $res3['travelAndTourStatus'] != 'Available' or mysqli_num_rows($qry6) > 0) {?>
+        <button disabled="" class="btn btn-info">Book</button>
+<?php }else{ ?>
+        <a href="booking.php?travelAndTourId=<?php echo $res3['travelAndTourId'] ?>"><button class="btn btn-info">Book</button></a>
+    <?php
+}
+    
+}
+else
+{
+    if ($res13['slotsTaken'] == $res3['maxPax'] or $res3['travelAndTourStatus'] != 'Available') {?>
+        <button disabled="" class="btn btn-info">Book</button>
+<?php }else{?>
+        <a  href="controller.php?packageId=<?php echo $res['packageId'] ?>&from=tour-packages-login-first"><button class="btn btn-info">Book</button></a>
+<?php }
+}
+
+?>
+
+                                            
                                                     
 
                                             </td>
