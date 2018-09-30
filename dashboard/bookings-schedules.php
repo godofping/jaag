@@ -30,7 +30,8 @@ include("includes/header.php");
                 <!-- ============================================================== -->
                 <div class="row">
                     <div class="col-12">
-                        <div class="card-body">
+                        <div class="card">
+                            <div class="card-body">
                     <!-- <button class="btn btn-success m-t-20 waves-effect text-left" data-toggle="modal" data-target="#addModal">Add</button> -->
                     <div class="table-responsive m-t-20">
                         <table id="myTable" class="table table-bordered table-striped">
@@ -76,6 +77,7 @@ include("includes/header.php");
                         </table>
                     </div>
                 </div>
+                        </div>
                     </div>
                 </div>
                 <!-- ============================================================== -->
