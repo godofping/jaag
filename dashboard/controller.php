@@ -291,7 +291,7 @@ if (isset($_POST['from']) and $_POST['from'] == 'update-payment-transaction') {
 	mysqli_query($connection, "update payment_transaction_table set paymentStatus = '" . $_POST['paymentStatus'] . "' where paymentTransactionId = '" . $_POST['paymentTransactionId'] . "'");
 
 	if ($_POST['paymentType'] == 'Down Payment') {
-		mysqli_query($connection, "update booking_table set bookingStatus = 'Reserved - Pending Outstanding Payment' where bookingId = '" . $_POST['bookingId'] . "'");
+		mysqli_query($connection, "update booking_table set bookingStatus = 'Reserve' where bookingId = '" . $_POST['bookingId'] . "'");
 	}
 
 	if ($_POST['paymentType'] == 'Full Payment' or $_POST['paymentType'] == 'Outstanding Payment') {
@@ -371,7 +371,7 @@ if (isset($_POST['from']) and $_POST['from'] == 'add-walk-in-customer') {
 
 
 
-	mysqli_query($connection,"insert into booking_table (profileId, travelAndTourId, bookingStatus, dateBooked, numberOfPaxBooked) values ('" . $profileId . "', '" . $_POST['travelAndTourId'] . "', 'Reserved - Pending Outstanding Payment', '" . date('Y-m-d') . "', '" . $_POST['paxNumber'] . "')");
+	mysqli_query($connection,"insert into booking_table (profileId, travelAndTourId, bookingStatus, dateBooked, numberOfPaxBooked) values ('" . $profileId . "', '" . $_POST['travelAndTourId'] . "', 'Reserve', '" . date('Y-m-d') . "', '" . $_POST['paxNumber'] . "')");
 	$bookingId = mysqli_insert_id($connection);
 
 

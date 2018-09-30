@@ -1,16 +1,18 @@
 <?php 
 include("dashboard/includes/connection.php");
 
+
+
 if (isset($_POST['from']) and $_POST['from'] == 'register') {
 
 	$qry = mysqli_query($connection, "select * from profile_view where userName = '" . $_POST['userName'] . "'");
 
 	if (mysqli_num_rows($qry) == 0) {
 
-		mysqli_query($connection, "insert into address_table (province, city, barangay, street, buildingNumber) values ('" . $_POST['province1'] . "', '" . $_POST['city1'] . "', '" . $_POST['barangay'] . "', '" . $_POST['street'] . "', '" . $_POST['buildingNumber'] . "')");
+		mysqli_query($connection, "insert into address_table (province, city, barangay, street, buildingNumber) values ('" . mysqli_escape_string($connection, $_POST['province1']) . "', '" . mysqli_escape_string($connection, $_POST['city1']) . "', '" . mysqli_escape_string($connection, $_POST['barangay']) . "', '" . mysqli_escape_string($connection, $_POST['street']) . "', '" . mysqli_escape_string($connection, $_POST['buildingNumber']) . "')");
 		$addressId = mysqli_insert_id($connection);
 
-		mysqli_query($connection, "insert into profile_table (firstName, middleName, lastName, contactNumber, addressId, accountTypeId, userName, passWord) values ('" . $_POST['firstName'] . "', '" . $_POST['middleName'] . "','" . $_POST['lastName'] . "','" . $_POST['contactNumber'] . "','" . $addressId . "','4', '" . $_POST['userName'] . "', '" . md5($_POST['passWord']) . "')");
+		mysqli_query($connection, "insert into profile_table (firstName, middleName, lastName, contactNumber, addressId, accountTypeId, userName, passWord) values ('" . mysqli_escape_string($connection, $_POST['firstName']) . "', '" . mysqli_escape_string($connection, $_POST['middleName']) . "','" . mysqli_escape_string($connection, $_POST['lastName']) . "','" . mysqli_escape_string($connection, $_POST['contactNumber']) . "','" . $addressId . "','4', '" . mysqli_escape_string($connection, $_POST['userName']) . "', '" . md5(mysqli_escape_string($connection, $_POST['passWord'])) . "')");
 		$profileId = mysqli_insert_id($connection);
 
 		$_SESSION['profileId'] = $profileId;
@@ -27,6 +29,30 @@ if (isset($_POST['from']) and $_POST['from'] == 'register') {
 		unset($_SESSION['street']);
 		unset($_SESSION['buildingNumber']);
 		unset($_SESSION['contactNumber']);
+
+
+		$thisismymessage = "Your activation code is " . substr(md5($_POST['userName']), 0, 4);
+		$ch = curl_init();
+		$parameters = array(
+		    'apikey' => '14e254097a6501ab143f58ebab54c335', //Your API KEY
+		    'number' => $_POST['contactNumber'],
+		    'message' => $thisismymessage,
+		    'sendername' => 'SEMAPHORE'
+		);
+		curl_setopt( $ch, CURLOPT_URL,'http://api.semaphore.co/api/v4/messages' );
+		curl_setopt( $ch, CURLOPT_POST, 1 );
+
+		//Send the parameters set above with the request
+		curl_setopt( $ch, CURLOPT_POSTFIELDS, http_build_query( $parameters ) );
+
+		// Receive response from server
+		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+		$output = curl_exec( $ch );
+		curl_close ($ch);
+
+		//Show the server response
+		echo $output;
+
 
 		header("Location: index.php");
 	}
@@ -159,7 +185,7 @@ if (isset($_POST['from']) and $_POST['from'] == 'search-package') {
 }
 
 if (isset($_POST['from']) and $_POST['from'] == 'add-booking-online-customer') {
-	mysqli_query($connection, "insert into booking_table (profileId, travelAndTourId, bookingStatus, dateBooked, numberOfPaxBooked) values ('" . $_SESSION['profileId'] . "', '" . $_POST['travelAndTourId'] . "', 'Pending Down Payment', '" . date('Y-m-d') . "', '" . $_POST['paxNumber'] . "')");
+	mysqli_query($connection, "insert into booking_table (profileId, travelAndTourId, bookingStatus, dateBooked, numberOfPaxBooked) values ('" . $_SESSION['profileId'] . "', '" . $_POST['travelAndTourId'] . "', 'Pending Payment', '" . date('Y-m-d') . "', '" . $_POST['paxNumber'] . "')");
 
 	$bookingId = mysqli_insert_id($connection);
 
@@ -196,6 +222,61 @@ if (isset($_GET['from']) and $_GET['from'] == 'tour-packages-login-first') {
 
 }
 
+
+if (isset($_POST['from']) and $_POST['from'] == 'activation') {
+	$qry = mysqli_query($connection, "select * from profile_view where profileId = '" . $_SESSION['profileId'] . "'");
+	$res = mysqli_fetch_assoc($qry);
+
+	
+
+
+	if ($_POST['activationCode'] == substr(md5($res['userName']), 0, 4)) {
+		mysqli_query($connection, "update profile_table set isActivated = 1 where profileId = '" . $_SESSION['profileId'] . "'");
+	$_SESSION['do'] = 'activated';
+		header("Location: index.php");
+	}
+	else
+	{
+		$_SESSION['do'] = 'wrong-activation-code';
+		header("Location: activation.php");
+	}
+
+	
+}
+
+if (isset($_GET['from']) and $_GET['from'] == 'resend-activation') {
+	$qry = mysqli_query($connection, "select * from profile_view where profileId = '" . $_SESSION['profileId'] . "'");
+	$res = mysqli_fetch_assoc($qry);
+
+
+	$thisismymessage = "Your activation code is " . substr(md5($res['userName']), 0, 4);
+		$ch = curl_init();
+		$parameters = array(
+		    'apikey' => '14e254097a6501ab143f58ebab54c335', //Your API KEY
+		    'number' => $res['contactNumber'],
+		    'message' => $thisismymessage,
+		    'sendername' => 'SEMAPHORE'
+		);
+		curl_setopt( $ch, CURLOPT_URL,'http://api.semaphore.co/api/v4/messages' );
+		curl_setopt( $ch, CURLOPT_POST, 1 );
+
+		//Send the parameters set above with the request
+		curl_setopt( $ch, CURLOPT_POSTFIELDS, http_build_query( $parameters ) );
+
+		// Receive response from server
+		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+		$output = curl_exec( $ch );
+		curl_close ($ch);
+
+		//Show the server response
+		echo $output;
+
+
+	$_SESSION['do'] = 'activation-sent';
+	header("Location: activation.php");
+
+	
+}
 
 
 

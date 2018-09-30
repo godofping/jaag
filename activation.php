@@ -1,16 +1,11 @@
+<?php include("dashboard/includes/connection.php"); ?>
+
 <?php 
     if (isset($_SESSION['profileId']) and $_SESSION['accountType'] != 'Online Customer'){
         header("Location: controller.php?from=notvalid");
     }
 
     
-    if (isset($_SESSION['profileId']) and $_SESSION['accountType'] == 'Online Customer') {
-        $qry = mysqli_query($connection, "select * from profile_view where profileId = '" . $_SESSION['profileId'] . "'");
-        $res = mysqli_fetch_assoc($qry);
-        if ($res['isActivated'] == 0) {
-            header("Location: activation.php");
-        }
-    }
     
  ?>
 
@@ -235,3 +230,83 @@
     </header><!-- End Header -->
     
 	
+
+<section class="parallax-window" data-parallax="scroll" data-image-src="img/admin_top - Copy - Copy.jpg" data-natural-width="1400" data-natural-height="470">
+		<div class="parallax-content-1">
+			<div class="animated fadeInDown">
+				<h1>Activation</h1>
+				
+			</div>
+		</div>
+	</section>
+	<!-- End section -->
+
+	<main>
+		<div id="position">
+			<div class="container">
+				<ul>
+					<li><a href="index.php">Home</a>
+					</li>
+					<li><a>My Account</a></li>
+					<li><a href="my-bookings.php">My Bookings</a></li>
+					<li>Send Payment</li>
+				</ul>
+			</div>
+		</div>
+
+		<!-- End Position -->
+		<div class="margin_60 container">
+			<div class="row">
+				
+				<div class="col-md-12">
+
+					<div class="row">
+						<div class="col-md-12">
+							<h3>Please enter the activation code. <small>click <a href="controller.php?from=resend-activation">here</a> to resend activation code.</small></h3>
+							<hr>
+							
+							<form method="POST" action="controller.php">
+
+
+							<div class="col-md-12">
+				
+
+								<div class="form-group">
+									<label>Activation Code</label>
+									<input class="form-control" type="text" name="activationCode" required="" maxlength="4" minlength="4">
+								</div>
+
+								
+							</div>
+
+
+						
+						</div>
+					
+						<br>
+					
+						<input type="text" name="from" value="activation" hidden="">
+
+						<button type="submit" class="btn_full">Activate</button>
+						</form>
+
+
+
+						</div>
+				
+					</div>
+				</div>
+
+	
+
+
+			</div>
+			<!-- end row -->
+		</div>
+		<!-- End tabs -->
+			
+			<!-- end container -->
+	</main>
+	<!-- End main -->
+<?php include("includes/footer.php"); ?>
+

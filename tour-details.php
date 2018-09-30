@@ -134,6 +134,7 @@ $res1 = mysqli_fetch_assoc($qry1);
 											<th>Travel Dates</th>
 											<th>Slots Booked</th>
 											<th>Status</th>
+											<th>Remark</th>
 											<th>Action</th>
 										
 										</tr>
@@ -153,10 +154,24 @@ $res1 = mysqli_fetch_assoc($qry1);
 
                                     ?>/<?php echo $res3['maxPax']; ?></td>
 											<td><?php echo $res3['travelAndTourStatus']; ?></td>
+											
+											<td>
+												<?php $qry6 = mysqli_query($connection, "SELECT * FROM booking_view WHERE profileId = '" . $_SESSION['profileId'] . "' AND (departureDate between '" . $res3['departureDate'] . "' and '" . $res3['returnDate'] . "' AND returnDate between '" . $res3['departureDate'] . "' and '" . $res3['returnDate'] . "')");
+
+
+													if (mysqli_num_rows($qry6) > 0) {
+														echo "Conflict Schedule";
+													}
+												
+
+
+												?>
+											</td>
+
 											<td>
 												
 
-											<?php if ($res13['slotsTaken'] == $res3['maxPax'] or $res3['travelAndTourStatus'] != 'Available') { ?>
+											<?php if ($res13['slotsTaken'] == $res3['maxPax'] or $res3['travelAndTourStatus'] != 'Available' or mysqli_num_rows($qry6) > 0) { ?>
 												<button disabled="" class="btn btn-info">Book</button>
 											<?php } else { ?>
 												<a 
@@ -167,11 +182,6 @@ $res1 = mysqli_fetch_assoc($qry1);
 												<?php } ?> ><button class="btn btn-info">Book</button></a>
 											<?php }  ?>
 													
-											
-
-
-												
-												
 
 											</td>
 										</tr>

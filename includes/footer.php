@@ -128,11 +128,20 @@
             <?php if ($_SESSION['do'] == 'logout'): ?>
                 toastr["success"]("Successfully logout!", "Message");
             <?php endif ?>
+            <?php if ($_SESSION['do'] == 'activated'): ?>
+                toastr["success"]("Successfully activated!", "Message");
+            <?php endif ?>
+            <?php if ($_SESSION['do'] == 'activation-sent'): ?>
+                toastr["success"]("Activation code sent!", "Message");
+            <?php endif ?>
             <?php if ($_SESSION['do'] == 'username-taken'): ?>
                 toastr["error"]("Username is already taken!", "Message");
             <?php endif ?>
             <?php if ($_SESSION['do'] == 'login-first'): ?>
                 toastr["error"]("Please login first before booking!", "Message");
+            <?php endif ?>
+            <?php if ($_SESSION['do'] == 'wrong-activation-code'): ?>
+                toastr["error"]("Wrong activation code!", "Message");
             <?php endif ?>
 
 

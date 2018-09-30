@@ -46,13 +46,13 @@ CREATE TABLE `address_table` (
   `street` varchar(60) DEFAULT NULL,
   `buildingNumber` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`addressId`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 
 /*Data for the table `address_table` */
 
 LOCK TABLES `address_table` WRITE;
 
-insert  into `address_table`(`addressId`,`province`,`city`,`barangay`,`street`,`buildingNumber`) values (1,'Region 10: MISAMIS OCCIDENTAL','BONIFACIO','Bag-ong Anonang','Malvar Street','65'),(2,'Region 02: BATANES','BASCO (Capital)','Ihubok I (Kaychanarianan)','Lapu- lapu Street','44'),(3,'Region 14: KALINGA','PASIL','Dalupa','Di Makita Street','99'),(4,'1298','129804','Ar-arusip','asd','22'),(5,'','','New Panay','Barangay Road','65'),(6,'Region 12: SULTAN KUDARAT','ESPERANZA','Poblacion','Barangay Road','65'),(7,'Region 12: SULTAN KUDARAT','ISULAN (Capital)','Kalawag I (Pob.)','National Road','56'),(8,'Region 12: SULTAN KUDARAT','CITY OF TACURONG','New Isabela','Barangay Road',''),(9,'Region 12: SULTAN KUDARAT','CITY OF TACURONG','New Isabela','Barangay Road',''),(10,'Region 12: SULTAN KUDARAT','CITY OF TACURONG','New Isabela','Barangay Road',''),(11,'Region 12: SULTAN KUDARAT','CITY OF TACURONG','New Isabela','Barangay Road',''),(12,'Region 12: SULTAN KUDARAT','CITY OF TACURONG','New Isabela','Barangay Road',''),(13,'','','New Isabela','Barangay Road','65'),(14,'','','Adams (Pob.)','123','123'),(15,'','','Adams (Pob.)','12','312'),(16,'','','San Pablo','123','123'),(17,'','','Adams (Pob.)','',''),(18,'','','Adams (Pob.)','',''),(19,'','','Cullalabo Del Sur','1231','23123123'),(20,'','','Adams (Pob.)','',''),(21,'','','Adams (Pob.)','',''),(22,'','','Adams (Pob.)','',''),(23,'Region 02: CAGAYAN','ABULUG','Dana-Ili','123','123'),(24,'Region 01: ILOCOS SUR','ALILEM','Alilem Daya (Pob.)','','');
+insert  into `address_table`(`addressId`,`province`,`city`,`barangay`,`street`,`buildingNumber`) values (1,'Region 10: MISAMIS OCCIDENTAL','BONIFACIO','Bag-ong Anonang','Malvar Street','65'),(2,'Region 02: BATANES','BASCO (Capital)','Ihubok I (Kaychanarianan)','Lapu- lapu Street','44'),(3,'Region 14: KALINGA','PASIL','Dalupa','Di Makita Street','99'),(4,'1298','129804','Ar-arusip','asd','22'),(5,'','','New Panay','Barangay Road','65'),(6,'Region 12: SULTAN KUDARAT','ESPERANZA','Poblacion','Barangay Road','65'),(7,'Region 12: SULTAN KUDARAT','ISULAN (Capital)','Kalawag I (Pob.)','National Road','56'),(8,'Region 12: SULTAN KUDARAT','CITY OF TACURONG','New Isabela','Barangay Road',''),(9,'Region 12: SULTAN KUDARAT','CITY OF TACURONG','New Isabela','Barangay Road',''),(10,'Region 12: SULTAN KUDARAT','CITY OF TACURONG','New Isabela','Barangay Road',''),(11,'Region 12: SULTAN KUDARAT','CITY OF TACURONG','New Isabela','Barangay Road',''),(12,'Region 12: SULTAN KUDARAT','CITY OF TACURONG','New Isabela','Barangay Road',''),(13,'','','New Isabela','Barangay Road','65'),(14,'','','Adams (Pob.)','123','123'),(15,'','','Adams (Pob.)','12','312'),(16,'','','San Pablo','123','123'),(17,'','','Adams (Pob.)','',''),(18,'','','Adams (Pob.)','',''),(19,'','','Cullalabo Del Sur','1231','23123123'),(20,'','','Adams (Pob.)','',''),(21,'','','Adams (Pob.)','',''),(22,'','','Adams (Pob.)','',''),(23,'Region 02: CAGAYAN','ABULUG','Dana-Ili','123','123'),(24,'Region 01: ILOCOS SUR','ALILEM','Alilem Daya (Pob.)','',''),(25,'Region 12: SULTAN KUDARAT','CITY OF TACURONG','New Lagao','','');
 
 UNLOCK TABLES;
 
@@ -73,13 +73,13 @@ CREATE TABLE `booking_table` (
   KEY `FK_booking_table123` (`profileId`),
   CONSTRAINT `FK_booking_table123` FOREIGN KEY (`profileId`) REFERENCES `profile_table` (`profileId`),
   CONSTRAINT `FK_booking_table2` FOREIGN KEY (`travelAndTourId`) REFERENCES `travel_and_tour_table` (`travelAndTourId`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 /*Data for the table `booking_table` */
 
 LOCK TABLES `booking_table` WRITE;
 
-insert  into `booking_table`(`bookingId`,`profileId`,`travelAndTourId`,`bookingStatus`,`dateBooked`,`numberOfPaxBooked`) values (5,3,1,'Pending Down Payment','2018-09-12',2),(6,3,2,'Pending Down Payment','2018-09-13',1),(7,3,4,'Officially Reserved','2018-09-13',2),(8,3,5,'Officially Reserved','2018-09-13',4),(9,4,5,'Officially Reserved','2018-09-13',10);
+insert  into `booking_table`(`bookingId`,`profileId`,`travelAndTourId`,`bookingStatus`,`dateBooked`,`numberOfPaxBooked`) values (12,3,6,'Reserve','2018-09-30',3),(14,23,6,'Pending Payment','2018-09-30',4);
 
 UNLOCK TABLES;
 
@@ -146,13 +146,13 @@ CREATE TABLE `media_table` (
   CONSTRAINT `FK_media_table` FOREIGN KEY (`packageId`) REFERENCES `package_table` (`packageId`),
   CONSTRAINT `FK_media_table1` FOREIGN KEY (`paymentTransactionId`) REFERENCES `payment_transaction_table` (`paymentTransactionId`) ON DELETE SET NULL,
   CONSTRAINT `FK_media_table3` FOREIGN KEY (`postingId`) REFERENCES `posting_table` (`postingId`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=latin1;
 
 /*Data for the table `media_table` */
 
 LOCK TABLES `media_table` WRITE;
 
-insert  into `media_table`(`mediaId`,`mediaLocation`,`postingId`,`packageId`,`paymentTransactionId`) values (13,'media/386b81e31014a480f5abbd1089bf9037Enchanted-River-11.jpg',NULL,1,NULL),(14,'media/701b6c51d4017ef032663d897a9e8a62Riv.jpg',NULL,1,NULL),(15,'media/c6e70a1aa3d236578cce76a1cd13e8a7siargao-surigao-province.jpg',NULL,1,NULL),(16,'media/b03b8ae8b280f584dff61c824b945deeSurigao-del-Sur-Bogac-Spring.png',NULL,1,NULL),(17,'media/56235fc53b155738b0c5d0c74586eaf34.jpg',NULL,2,NULL),(18,'media/c238cf07380d960ae2947a7d47084f4c1200px-View_on_the_half_way_to_Kayangan_Lake_-_panoramio.jpg',NULL,2,NULL),(19,'media/6e119d089cbe9ce20d03be211e0b65a5beautiful-view-mountain-ranges-philippines-islands-mountain-views-100246883.jpg',NULL,2,NULL),(20,'media/811b17ea6018bca792208b6d4fd76f6abudahernel3.jpg',NULL,2,NULL),(21,'media/d42a6f5aec09508c4da0a9d97db7af74Hills View Mountain Villa Davao Room Rates (4).jpg',NULL,2,NULL),(22,'media/e2f7d6c45e52e80292c6b389feddf643HillsView03.gif',NULL,2,NULL),(23,'media/66d8e8eec57ea38f704158e87962a77emaxresdefault (1).jpg',NULL,2,NULL),(24,'media/1c4ae11ed4985ce67c1f881cf36768d6maxresdefault.jpg',NULL,2,NULL),(25,'media/45aae00794e4e00a752185308f06c6baoverview-3.jpg',NULL,2,NULL),(26,'media/881f50f9f1480f61d6f8e1d62f6a10edcamiguin.jpg',NULL,3,NULL),(27,'media/9944625c38dd9564cee4f4d4758a6598download (2).jpg',NULL,3,NULL),(28,'media/01c8d67a383a7f13c37e494a2ef700eemantigue-island-camiguin-travelanyway.jpg',NULL,3,NULL),(29,'media/aa422dcdca51b1b8a4be3bb3a5b23dfc5410599211_1a0492737b_b.jpg',NULL,6,NULL),(30,'media/cdf126124bcc287d773a748530c3fa2adownload.jpg',NULL,6,NULL),(31,'media/c921c468f478c7b74a8b6b1eb531b195entrance-to-sohoton-cove-inside-view.jpg',NULL,6,NULL),(32,'media/7cf357ccce1e943f00ea7083502b70eeimages.jpg',NULL,6,NULL),(33,'media/19f1839da3dcb0664a72d9581329a27csohoton-cave-opening.jpg',NULL,6,NULL),(34,'media/885c5df2035b79416ed05d74e32f891458963_1.jpg',NULL,5,NULL),(35,'media/88b4668706946f83d81005975288421fBarangan-Magsaysay-Dinagat-Islands.jpg',NULL,5,NULL),(36,'media/c7a9fef3e9912e8121b614ff77eab601Basilisa-Beach-Dinagat-Islands.jpg',NULL,5,NULL),(37,'media/1e648ce8b40c56f9d735feaca67c8c20IMG_8011982432648.jpeg',NULL,5,NULL),(38,'media/fbcb11a71758588a4a5104ca4348fc65Isla-Aga-Dinagat-Islands.jpg',NULL,5,NULL),(39,'media/e6878b58199b13e284eec10f1dbed005Sohoton-National-Park-Bucas-Grande-Surigao-del-Norte.jpg',NULL,5,NULL),(40,'media/0b378294054d4eec0ff20c3d1a31e5e1download.jpg',NULL,4,NULL),(41,'media/064c7e7b2733935a2173113b4ed286a7Footpath to Hikong Alo  Seven Falls Lake Sebu.jpg',NULL,4,NULL),(42,'media/144c126e13645866c09ce3c4067a0987images.jpg',NULL,4,NULL),(48,'media/ad24047ee1df064e4fa1012c656cbba6download.jpg',4,NULL,NULL),(49,'media/c2038e681c1f2684ec94d655bddb26cfFootpath to Hikong Alo  Seven Falls Lake Sebu.jpg',NULL,NULL,NULL),(50,'media/2f5781128a1dfc6a7ba7adef13571d66download (2).jpg',6,NULL,NULL),(53,'dashboard/media/67ac2d9ff619b239dbdea2b671f3b829bdo-receipt.jpg',NULL,NULL,NULL),(54,'media/3491b2d96d19a85eee076ea1808328c7bdo-receipt.jpg',NULL,NULL,NULL),(55,'media/a93fd534f9b72c7383087c67fe92409ebdo-receipt.jpg',NULL,NULL,NULL),(56,'dashboard/media/7ba840d7149fd1fd9e12ad91d9b25c27bdo-receipt.jpg',NULL,NULL,NULL),(57,'dashboard/media/aa77d8f31572efcc18c8b37d26c359aabdo-receipt.jpg',NULL,NULL,NULL),(58,'dashboard/media/1cdc46a83fae5a7c15722f33ac53a27cbdo-receipt.jpg',NULL,NULL,7),(59,'dashboard/media/f4d96e96788d34518ce41f61673d2361unnamed.jpg',NULL,NULL,8),(60,'dashboard/media/b4b0bbb9e3b6831237c47e784a76f57bDSC01055.JPG',NULL,NULL,9),(61,'dashboard/media/543ebc9fda0f95ce19738143ead370c0download (3).jpg',NULL,NULL,10),(62,'media/09b39f4d8399c148e28ad08a5078e4a9Windows-10-1709-Fall-Creators-Update-with-Intune-Update-Rings2.jpg',NULL,NULL,NULL),(63,'media/5bf8f3fe33220d324ede076dcdd1d4c5Windows-10-1709-Fall-Creators-Update-with-Intune-Update-Rings2.jpg',NULL,NULL,NULL),(64,'media/f7f235b37462a28982cd896e59fd4a24Windows-10-1709-Fall-Creators-Update-with-Intune-Update-Rings2.jpg',NULL,NULL,NULL),(65,'media/aff61842fe81a9602c9f8653f106ab2cWindows-10-1709-Fall-Creators-Update-with-Intune-Update-Rings2.jpg',10,NULL,NULL);
+insert  into `media_table`(`mediaId`,`mediaLocation`,`postingId`,`packageId`,`paymentTransactionId`) values (13,'media/386b81e31014a480f5abbd1089bf9037Enchanted-River-11.jpg',NULL,1,NULL),(14,'media/701b6c51d4017ef032663d897a9e8a62Riv.jpg',NULL,1,NULL),(15,'media/c6e70a1aa3d236578cce76a1cd13e8a7siargao-surigao-province.jpg',NULL,1,NULL),(16,'media/b03b8ae8b280f584dff61c824b945deeSurigao-del-Sur-Bogac-Spring.png',NULL,1,NULL),(17,'media/56235fc53b155738b0c5d0c74586eaf34.jpg',NULL,2,NULL),(18,'media/c238cf07380d960ae2947a7d47084f4c1200px-View_on_the_half_way_to_Kayangan_Lake_-_panoramio.jpg',NULL,2,NULL),(19,'media/6e119d089cbe9ce20d03be211e0b65a5beautiful-view-mountain-ranges-philippines-islands-mountain-views-100246883.jpg',NULL,2,NULL),(20,'media/811b17ea6018bca792208b6d4fd76f6abudahernel3.jpg',NULL,2,NULL),(21,'media/d42a6f5aec09508c4da0a9d97db7af74Hills View Mountain Villa Davao Room Rates (4).jpg',NULL,2,NULL),(22,'media/e2f7d6c45e52e80292c6b389feddf643HillsView03.gif',NULL,2,NULL),(23,'media/66d8e8eec57ea38f704158e87962a77emaxresdefault (1).jpg',NULL,2,NULL),(24,'media/1c4ae11ed4985ce67c1f881cf36768d6maxresdefault.jpg',NULL,2,NULL),(25,'media/45aae00794e4e00a752185308f06c6baoverview-3.jpg',NULL,2,NULL),(26,'media/881f50f9f1480f61d6f8e1d62f6a10edcamiguin.jpg',NULL,3,NULL),(27,'media/9944625c38dd9564cee4f4d4758a6598download (2).jpg',NULL,3,NULL),(28,'media/01c8d67a383a7f13c37e494a2ef700eemantigue-island-camiguin-travelanyway.jpg',NULL,3,NULL),(29,'media/aa422dcdca51b1b8a4be3bb3a5b23dfc5410599211_1a0492737b_b.jpg',NULL,6,NULL),(30,'media/cdf126124bcc287d773a748530c3fa2adownload.jpg',NULL,6,NULL),(31,'media/c921c468f478c7b74a8b6b1eb531b195entrance-to-sohoton-cove-inside-view.jpg',NULL,6,NULL),(32,'media/7cf357ccce1e943f00ea7083502b70eeimages.jpg',NULL,6,NULL),(33,'media/19f1839da3dcb0664a72d9581329a27csohoton-cave-opening.jpg',NULL,6,NULL),(34,'media/885c5df2035b79416ed05d74e32f891458963_1.jpg',NULL,5,NULL),(35,'media/88b4668706946f83d81005975288421fBarangan-Magsaysay-Dinagat-Islands.jpg',NULL,5,NULL),(36,'media/c7a9fef3e9912e8121b614ff77eab601Basilisa-Beach-Dinagat-Islands.jpg',NULL,5,NULL),(37,'media/1e648ce8b40c56f9d735feaca67c8c20IMG_8011982432648.jpeg',NULL,5,NULL),(38,'media/fbcb11a71758588a4a5104ca4348fc65Isla-Aga-Dinagat-Islands.jpg',NULL,5,NULL),(39,'media/e6878b58199b13e284eec10f1dbed005Sohoton-National-Park-Bucas-Grande-Surigao-del-Norte.jpg',NULL,5,NULL),(40,'media/0b378294054d4eec0ff20c3d1a31e5e1download.jpg',NULL,4,NULL),(41,'media/064c7e7b2733935a2173113b4ed286a7Footpath to Hikong Alo  Seven Falls Lake Sebu.jpg',NULL,4,NULL),(42,'media/144c126e13645866c09ce3c4067a0987images.jpg',NULL,4,NULL),(48,'media/ad24047ee1df064e4fa1012c656cbba6download.jpg',4,NULL,NULL),(49,'media/c2038e681c1f2684ec94d655bddb26cfFootpath to Hikong Alo  Seven Falls Lake Sebu.jpg',NULL,NULL,NULL),(50,'media/2f5781128a1dfc6a7ba7adef13571d66download (2).jpg',6,NULL,NULL),(53,'dashboard/media/67ac2d9ff619b239dbdea2b671f3b829bdo-receipt.jpg',NULL,NULL,NULL),(54,'media/3491b2d96d19a85eee076ea1808328c7bdo-receipt.jpg',NULL,NULL,NULL),(55,'media/a93fd534f9b72c7383087c67fe92409ebdo-receipt.jpg',NULL,NULL,NULL),(56,'dashboard/media/7ba840d7149fd1fd9e12ad91d9b25c27bdo-receipt.jpg',NULL,NULL,NULL),(57,'dashboard/media/aa77d8f31572efcc18c8b37d26c359aabdo-receipt.jpg',NULL,NULL,NULL),(58,'dashboard/media/1cdc46a83fae5a7c15722f33ac53a27cbdo-receipt.jpg',NULL,NULL,NULL),(59,'dashboard/media/f4d96e96788d34518ce41f61673d2361unnamed.jpg',NULL,NULL,NULL),(60,'dashboard/media/b4b0bbb9e3b6831237c47e784a76f57bDSC01055.JPG',NULL,NULL,NULL),(61,'dashboard/media/543ebc9fda0f95ce19738143ead370c0download (3).jpg',NULL,NULL,NULL),(62,'media/09b39f4d8399c148e28ad08a5078e4a9Windows-10-1709-Fall-Creators-Update-with-Intune-Update-Rings2.jpg',NULL,NULL,NULL),(63,'media/5bf8f3fe33220d324ede076dcdd1d4c5Windows-10-1709-Fall-Creators-Update-with-Intune-Update-Rings2.jpg',NULL,NULL,NULL),(64,'media/f7f235b37462a28982cd896e59fd4a24Windows-10-1709-Fall-Creators-Update-with-Intune-Update-Rings2.jpg',NULL,NULL,NULL),(65,'media/aff61842fe81a9602c9f8653f106ab2cWindows-10-1709-Fall-Creators-Update-with-Intune-Update-Rings2.jpg',10,NULL,NULL),(66,'dashboard/media/74a1e7aeac7a694bb82b582aa6964e5642332479_325008914915271_8107766354871844864_n.jpg',NULL,NULL,11);
 
 UNLOCK TABLES;
 
@@ -238,13 +238,13 @@ CREATE TABLE `payment_transaction_table` (
   KEY `FK_payment_transaction_table123123` (`bookingId`),
   CONSTRAINT `FK_payment_transaction_table123123` FOREIGN KEY (`bookingId`) REFERENCES `booking_table` (`bookingId`),
   CONSTRAINT `FK_payment_transaction_table123344` FOREIGN KEY (`modeOfPaymentId`) REFERENCES `mode_of_payment_table` (`modeOfPaymentId`) ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 /*Data for the table `payment_transaction_table` */
 
 LOCK TABLES `payment_transaction_table` WRITE;
 
-insert  into `payment_transaction_table`(`paymentTransactionId`,`modeOfPaymentId`,`amount`,`dateOfPayment`,`transactionNumber`,`nameOfSender`,`paymentStatus`,`bookingId`,`paymentType`) values (7,4,1399,'2018-09-13','a45sd-a5s4-45sd-5sd','Albert Yap','Recieved',7,'Down Payment'),(8,6,3996,'2018-09-13','6a5sd-as56d4-5s4d-d4554','John Sabnal','Recieved',8,'Full Payment'),(9,4,1399,'2018-09-13','as56d4-a5sd4-ds54','Albert Yap','Recieved',7,'Outstanding Payment'),(10,14,9990,'2018-09-13','6s5d-a6s5d-d54d45','Lucio Salamanca','Recieved',9,'Full Payment');
+insert  into `payment_transaction_table`(`paymentTransactionId`,`modeOfPaymentId`,`amount`,`dateOfPayment`,`transactionNumber`,`nameOfSender`,`paymentStatus`,`bookingId`,`paymentType`) values (11,4,1198.5,'2018-09-30','98asd5-a6sd5','Lester','Recieved',12,'Down Payment');
 
 UNLOCK TABLES;
 
@@ -305,19 +305,19 @@ CREATE TABLE `profile_table` (
   `userName` varchar(60) DEFAULT NULL,
   `passWord` varchar(60) DEFAULT NULL,
   `isDeleted` tinyint(1) DEFAULT '0',
-  `isValid` tinyint(1) DEFAULT '0',
+  `isActivated` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`profileId`),
   KEY `FK_profile_table` (`accountTypeId`),
   KEY `FK_profile_table1` (`addressId`),
   CONSTRAINT `FK_profile_table` FOREIGN KEY (`accountTypeId`) REFERENCES `account_type_table` (`accountTypeId`),
   CONSTRAINT `FK_profile_table1` FOREIGN KEY (`addressId`) REFERENCES `address_table` (`addressId`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 
 /*Data for the table `profile_table` */
 
 LOCK TABLES `profile_table` WRITE;
 
-insert  into `profile_table`(`profileId`,`firstName`,`middleName`,`lastName`,`contactNumber`,`addressId`,`accountTypeId`,`userName`,`passWord`,`isDeleted`,`isValid`) values (2,'1','Malinao','Aguacito','09166666666',1,1,'admin','21232f297a57a5a743894a0e4a801fc3',0,0),(3,'Alberto','Ranga','Madula','09555',2,4,'customer','91ec1f9324753048c0096d036a694f86',0,0),(4,'Mariella','Gumela','Vettan','09368545152',3,4,'customer1','91ec1f9324753048c0096d036a694f86',0,0),(13,'Daniel','Benson','DeVera','09754363944',12,5,'daniel2620','8bd39eae38511daad6152e84545e504d',0,0),(14,'asd','asd','asd','123',16,4,'123','202cb962ac59075b964b07152d234b70',0,0),(15,'Rex','Ron','Par','09169085995',17,4,'asd','7815696ecbf1c96e6894b779456d330e',0,0),(16,'asd','asd','asda','09169085900',18,4,'asdasd','a3dcb4d229de6fde0db5686dee47145d',0,0),(17,'','asd','asdasd','09169085991',19,4,'asdasdd','9406539a103956dc36cb7ad35547198c',0,0),(18,'123','123','123','12312312312',20,4,'1231231','d6a2e3c51e2434ed72ca2e8ecfe9a34c',0,0),(19,'as','asd','as','asdasasasda',21,4,'a','0cc175b9c0f1b6a831c399e269772661',0,0),(20,'1','2','3','09122222222',22,4,'1234','c4ca4238a0b923820dcc509a6f75849b',0,0),(21,'123','123','123','09169085995',23,4,'admin1','21232f297a57a5a743894a0e4a801fc3',0,0),(22,'aaaaaa','aaaaaaaaaa','aaaaaaaaaaaaaa','09111111111',24,5,'aaaaaa0b4e','96249796ab8ecbc5c656bd6cccf60b2f',0,0);
+insert  into `profile_table`(`profileId`,`firstName`,`middleName`,`lastName`,`contactNumber`,`addressId`,`accountTypeId`,`userName`,`passWord`,`isDeleted`,`isActivated`) values (2,'1','Malinao','Aguacito','09166666666',1,1,'admin','21232f297a57a5a743894a0e4a801fc3',0,1),(3,'Alberto','Ranga','Madula','09555',2,4,'customer','91ec1f9324753048c0096d036a694f86',0,1),(4,'Mariella','Gumela','Vettan','09368545152',3,4,'customer1','91ec1f9324753048c0096d036a694f86',0,1),(13,'Daniel','Benson','DeVera','09169085555',12,5,'daniel2620','8bd39eae38511daad6152e84545e504d',0,1),(23,'Lester','Jan','Castillo','09754363944',25,4,'lester','21426b290d975ec5d264c38031da8fac',0,1);
 
 UNLOCK TABLES;
 
@@ -335,13 +335,13 @@ CREATE TABLE `travel_and_tour_table` (
   PRIMARY KEY (`travelAndTourId`),
   KEY `FK_travel_and_tour_table` (`packageId`),
   CONSTRAINT `FK_travel_and_tour_table` FOREIGN KEY (`packageId`) REFERENCES `package_table` (`packageId`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 /*Data for the table `travel_and_tour_table` */
 
 LOCK TABLES `travel_and_tour_table` WRITE;
 
-insert  into `travel_and_tour_table`(`travelAndTourId`,`packageId`,`departureDate`,`returnDate`,`maxPax`,`travelAndTourStatus`) values (1,3,'2018-09-18','2018-09-21',14,'Fully Booked'),(2,2,'2018-09-23','2018-09-24',14,'Available'),(3,1,'2018-09-27','2018-09-28',14,'Available'),(4,4,'2019-09-06','2019-09-09',14,'Available'),(5,5,'2018-10-17','2018-10-20',14,'Fully Booked');
+insert  into `travel_and_tour_table`(`travelAndTourId`,`packageId`,`departureDate`,`returnDate`,`maxPax`,`travelAndTourStatus`) values (6,1,'2018-10-08','2018-10-10',14,'Available'),(7,1,'2018-10-18','2018-10-20',14,'Available');
 
 UNLOCK TABLES;
 
@@ -620,7 +620,7 @@ DROP TABLE IF EXISTS `profile_view`;
  `userName` varchar(60) ,
  `passWord` varchar(60) ,
  `isDeleted` tinyint(1) ,
- `isValid` tinyint(1) ,
+ `isActivated` tinyint(1) ,
  `province` varchar(60) ,
  `city` varchar(60) ,
  `barangay` varchar(60) ,
@@ -739,7 +739,7 @@ DROP TABLE IF EXISTS `travel_and_tour_view`;
 /*!50001 DROP TABLE IF EXISTS `profile_view` */;
 /*!50001 DROP VIEW IF EXISTS `profile_view` */;
 
-/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `profile_view` AS select `profile_table`.`profileId` AS `profileId`,`profile_table`.`firstName` AS `firstName`,`profile_table`.`middleName` AS `middleName`,`profile_table`.`lastName` AS `lastName`,`profile_table`.`contactNumber` AS `contactNumber`,`profile_table`.`addressId` AS `addressId`,`profile_table`.`accountTypeId` AS `accountTypeId`,`profile_table`.`userName` AS `userName`,`profile_table`.`passWord` AS `passWord`,`profile_table`.`isDeleted` AS `isDeleted`,`profile_table`.`isValid` AS `isValid`,`address_table`.`province` AS `province`,`address_table`.`city` AS `city`,`address_table`.`barangay` AS `barangay`,`address_table`.`street` AS `street`,`address_table`.`buildingNumber` AS `buildingNumber`,`account_type_table`.`accountType` AS `accountType` from ((`profile_table` join `address_table` on((`profile_table`.`addressId` = `address_table`.`addressId`))) join `account_type_table` on((`profile_table`.`accountTypeId` = `account_type_table`.`accountTypeId`))) */;
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `profile_view` AS select `profile_table`.`profileId` AS `profileId`,`profile_table`.`firstName` AS `firstName`,`profile_table`.`middleName` AS `middleName`,`profile_table`.`lastName` AS `lastName`,`profile_table`.`contactNumber` AS `contactNumber`,`profile_table`.`addressId` AS `addressId`,`profile_table`.`accountTypeId` AS `accountTypeId`,`profile_table`.`userName` AS `userName`,`profile_table`.`passWord` AS `passWord`,`profile_table`.`isDeleted` AS `isDeleted`,`profile_table`.`isActivated` AS `isActivated`,`address_table`.`province` AS `province`,`address_table`.`city` AS `city`,`address_table`.`barangay` AS `barangay`,`address_table`.`street` AS `street`,`address_table`.`buildingNumber` AS `buildingNumber`,`account_type_table`.`accountType` AS `accountType` from ((`profile_table` join `address_table` on((`profile_table`.`addressId` = `address_table`.`addressId`))) join `account_type_table` on((`profile_table`.`accountTypeId` = `account_type_table`.`accountTypeId`))) */;
 
 /*View structure for view travel_and_tour_view */
 
