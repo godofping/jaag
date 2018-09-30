@@ -288,17 +288,88 @@ if (isset($_POST['from']) and $_POST['from'] == 'delete-comment') {
 
 if (isset($_POST['from']) and $_POST['from'] == 'update-payment-transaction') {
 
+
+
 	mysqli_query($connection, "update payment_transaction_table set paymentStatus = '" . $_POST['paymentStatus'] . "' where paymentTransactionId = '" . $_POST['paymentTransactionId'] . "'");
 
-	if ($_POST['paymentType'] == 'Down Payment') {
-		mysqli_query($connection, "update booking_table set bookingStatus = 'Reserve' where bookingId = '" . $_POST['bookingId'] . "'");
-	}
+	if ($_POST['paymentStatus'] != 'Wrong Payment Details') {
+		$qry = mysqli_query($connection, "select * from booking_view where bookingId = '" . $_POST['bookingId'] . "'");
 
-	if ($_POST['paymentType'] == 'Full Payment' or $_POST['paymentType'] == 'Outstanding Payment') {
-		mysqli_query($connection, "update booking_table set bookingStatus = 'Booked' where bookingId = '" . $_POST['bookingId'] . "'");
-	}
+		$res = mysqli_fetch_assoc($qry);
 
-	
+		if ($_POST['paymentType'] == 'Down Payment') {
+			mysqli_query($connection, "update booking_table set bookingStatus = 'Reserve' where bookingId = '" . $_POST['bookingId'] . "'");
+
+			mysqli_query($connection, "insert into notification_table (notificationMessage, profileId, isRead, dateAndTime) values ('" . 'Your payment with the Payment ID: ' . $_POST['paymentTransactionId'] .' is now Recieved and Your booking with the Booking ID: ' . $_POST['bookingId'] . " has now the status of Reserve" . "', '" . $res['profileId'] . "', '0', '" . date('Y-m-d H:i:s') . "') ");
+
+				$thisismymessage = "Your payment with the Payment ID: " . $_POST['paymentTransactionId'] . " is now Recieved and Your booking with the Booking ID: " . $_POST['bookingId'] . " has now the status of Reserve";
+		}
+
+		if ($_POST['paymentType'] == 'Full Payment' or $_POST['paymentType'] == 'Outstanding Payment') {
+			mysqli_query($connection, "update booking_table set bookingStatus = 'Booked' where bookingId = '" . $_POST['bookingId'] . "'");
+
+			mysqli_query($connection, "insert into notification_table (notificationMessage, profileId, isRead, dateAndTime) values ('" . 'Your payment with the Payment ID: ' . $_POST['paymentTransactionId'] .' is now Recieved and Your booking with the Booking ID: ' . $_POST['bookingId'] . " has now the status of Booked" . "', '" . $res['profileId'] . "', '0', '" . date('Y-m-d H:i:s') . "') ");
+
+				$thisismymessage = "Your payment with the Payment ID: " . $_POST['paymentTransactionId'] . " is now Recieved and Your booking with the Booking ID: " . $_POST['bookingId'] . " has now the status of Booked";
+
+		
+		}
+
+		
+		$ch = curl_init();
+		$parameters = array(
+		    'apikey' => $apikey, //Your API KEY
+		    'number' => $res['contactNumber'],
+		    'message' => $thisismymessage,
+		    'sendername' => 'SEMAPHORE'
+		);
+		curl_setopt( $ch, CURLOPT_URL,'http://api.semaphore.co/api/v4/messages' );
+		curl_setopt( $ch, CURLOPT_POST, 1 );
+
+		//Send the parameters set above with the request
+		curl_setopt( $ch, CURLOPT_POSTFIELDS, http_build_query( $parameters ) );
+
+		// Receive response from server
+		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+		$output = curl_exec( $ch );
+		curl_close ($ch);
+
+		//Show the server response
+		echo $output;
+	}
+	else
+	{	
+		$qry = mysqli_query($connection, "select * from booking_view where bookingId = '" . $_POST['bookingId'] . "'");
+
+		$res = mysqli_fetch_assoc($qry);
+
+		mysqli_query($connection, "insert into notification_table (notificationMessage, profileId, isRead, dateAndTime) values ('" . 'Your payment with the Payment ID: ' . $_POST['paymentTransactionId'] .' has a Wrong Payment Details'."','" . $res['profileId'] . "', '0', '" . date('Y-m-d H:i:s') . "') ");
+
+
+
+				$thisismymessage = "Your payment with the Payment ID: " . $_POST['paymentTransactionId'] . " has a Wrong Payment Details";
+				$ch = curl_init();
+		$parameters = array(
+		    'apikey' => $apikey, //Your API KEY
+		    'number' => $res['contactNumber'],
+		    'message' => $thisismymessage,
+		    'sendername' => 'SEMAPHORE'
+		);
+		curl_setopt( $ch, CURLOPT_URL,'http://api.semaphore.co/api/v4/messages' );
+		curl_setopt( $ch, CURLOPT_POST, 1 );
+
+		//Send the parameters set above with the request
+		curl_setopt( $ch, CURLOPT_POSTFIELDS, http_build_query( $parameters ) );
+
+		// Receive response from server
+		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+		$output = curl_exec( $ch );
+		curl_close ($ch);
+
+		//Show the server response
+		echo $output;
+
+	}
 
 
 	$_SESSION['do'] = 'updated';
@@ -417,6 +488,11 @@ if (isset($_POST['from']) and $_POST['from'] == 'add-reply') {
 	header("Location: home.php");
 }
 
+if (isset($_POST['from']) and $_POST['from'] == 'attendance') {
+	mysqli_query($connection, "update booking_table set isAttended = '" . $_POST['isAttended'] . "' where bookingId = '" . $_POST['bookingId'] . "' ");
 
+	$_SESSION['do'] = 'updated';
+	header("Location: view-travel-and-tour.php?travelAndTourId=".$_POST['travelAndTourId']."");
+}
 
 ?>

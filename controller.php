@@ -226,6 +226,28 @@ if (isset($_POST['from']) and $_POST['from'] == 'add-booking-online-customer') {
 	while ($res = mysqli_fetch_assoc($qry)) {
 		mysqli_query($connection, "insert into notification_table (notificationMessage, profileId, isRead, dateAndTime) values ('New Booking with the Booking ID: ". $bookingId . " ', '" . $res['profileId'] . "', '0', '" . date('Y-m-d H:i:s') . "') ");
 
+		$thisismymessage = "New booking with the Booking ID: " . $bookingId."";
+		$ch = curl_init();
+		$parameters = array(
+		    'apikey' => $apikey, //Your API KEY
+		    'number' => $res['contactNumber'],
+		    'message' => $thisismymessage,
+		    'sendername' => 'SEMAPHORE'
+		);
+		curl_setopt( $ch, CURLOPT_URL,'http://api.semaphore.co/api/v4/messages' );
+		curl_setopt( $ch, CURLOPT_POST, 1 );
+
+		//Send the parameters set above with the request
+		curl_setopt( $ch, CURLOPT_POSTFIELDS, http_build_query( $parameters ) );
+
+		// Receive response from server
+		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+		$output = curl_exec( $ch );
+		curl_close ($ch);
+
+		//Show the server response
+		echo $output;
+
 	
 	}
 
@@ -261,7 +283,29 @@ if (isset($_POST['from']) and $_POST['from'] == 'send-payment') {
 	while ($res = mysqli_fetch_assoc($qry)) {
 		mysqli_query($connection, "insert into notification_table (notificationMessage, profileId, isRead, dateAndTime) values ('New payment with the Payment ID: ". $paymentTransactionId . " ', '" . $res['profileId'] . "', '0', '" . date('Y-m-d H:i:s') . "') ");
 
-		echo "insert into notification_table (notificationMessage, profileId, isRead, dateAndTime) values ('New payment with the Payment ID: ". $paymentTransactionId . " ', '" . $res['profileId'] . "', '0', '" . date('Y-m-d H:i:s') . "') ";
+		$thisismymessage = "New payment with the Payment ID: " . $paymentTransactionId."";
+		$ch = curl_init();
+		$parameters = array(
+		    'apikey' => $apikey, //Your API KEY
+		    'number' => $res['contactNumber'],
+		    'message' => $thisismymessage,
+		    'sendername' => 'SEMAPHORE'
+		);
+		curl_setopt( $ch, CURLOPT_URL,'http://api.semaphore.co/api/v4/messages' );
+		curl_setopt( $ch, CURLOPT_POST, 1 );
+
+		//Send the parameters set above with the request
+		curl_setopt( $ch, CURLOPT_POSTFIELDS, http_build_query( $parameters ) );
+
+		// Receive response from server
+		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+		$output = curl_exec( $ch );
+		curl_close ($ch);
+
+		//Show the server response
+		echo $output;
+
+	
 	}
 
 
@@ -331,6 +375,10 @@ if (isset($_GET['from']) and $_GET['from'] == 'resend-activation') {
 
 	
 }
+
+
+
+
 
 
 

@@ -15,10 +15,21 @@
                             <li class="submenu"><a href="contact-us.php">Contact Us</a></li>
                              <?php if (isset($_SESSION['profileId'])): ?>
 
-                            <li class="submenu">
-                                <a href="javascript:void(0);" class="show-submenu">Notications<i class="icon-down-open-mini"></i></a>
+                            <li class="megamenu submenu">
+                                <a href="javascript:void(0);" class="show-submenu-mega">Notications<i class="icon-down-open-mini"></i></a>
                                 <ul>
-                                    <li><a href="javascript:void(0);">Bla bla bla..</a></li>
+                                    <?php
+                                    $qry = mysqli_query($connection, "select * from notification_view where profileId = '" . $_SESSION['profileId'] . "' order by notificationId DESC LIMIT 10");
+
+                                            while ($res = mysqli_fetch_assoc($qry)) { ?>
+                                               <li>
+                                                    <a>
+                                                
+                                               
+                                                    <h7><?php echo $res['notificationMessage']; ?></h7> <span class="mail-desc"></span> <span class="time"> <br><small><?php echo $res['dateAndTime']; ?></small></span> 
+                                                </a>
+                                               </li>
+                                           <?php  } ?>
         
                                 </ul>
                             </li>

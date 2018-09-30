@@ -68,7 +68,7 @@ include("includes/header.php");
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <h2>Customers</h2>
+                    <h2>List of clients for travel</h2>
                     <button class="btn btn-success m-t-20 waves-effect text-left" data-toggle="modal" data-target="#addModal" <?php if ($maxPax - $slotsTaken == 0 or $res['travelAndTourStatus'] != 'Available'): ?>
                         disabled
                     <?php endif ?>>Add</button>
@@ -81,6 +81,7 @@ include("includes/header.php");
                                     <th>Date Booked</th>
                                     <th>Booking Status</th>
                                     <th>Customer Type</th>
+                                    <th>Attendance</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -94,9 +95,16 @@ include("includes/header.php");
                                     <td><?php echo $res['dateBooked']; ?></td>
                                     <td><?php echo $res['bookingStatus']; ?></td>
                                     <td><?php echo $res['accountType']; ?></td>
+                                    <td><?php if ($res['isAttended'] == 0) {
+                                        echo "TBA";
+                                    }elseif ($res['isAttended'] == 1) {
+                                        echo "Present";
+                                    }elseif ($res['isAttended'] == 2) {
+                                        echo "Absent";
+                                    } ?></td>
                                     <td> 
                                         <button type="button" class="btn btn-block btn-outline-danger" data-toggle="modal" data-target="#viewPaymentsModal<?php echo $res['bookingId'] ?>">View Payments</button>
-                                        <button type="button" class="btn btn-block btn-outline-danger" data-toggle="modal" data-target="#viewPaymentsModal<?php echo $res['bookingId'] ?>">Attendance</button>
+                                        <button type="button" class="btn btn-block btn-outline-warning" data-toggle="modal" data-target="#attendanceModal<?php echo $res['bookingId'] ?>">Attendance</button>
 
                                     </td>
                                 </tr>
@@ -419,6 +427,51 @@ while ($res = mysqli_fetch_assoc($qry)) { ?>
             </div>
             <div class="modal-footer">
               
+                <button type="button" class="btn btn-danger waves-effect text-left" data-dismiss="modal">Close</button>
+            </div>
+          
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal --> 
+
+
+
+<!-- modal content -->
+<div class="modal fade" id="attendanceModal<?php echo $res['bookingId'] ?>" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myLargeModalLabel">View</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+            <form method="POST" action="controller.php">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Attendance</label>
+                            <select class="form-control" name="isAttended" required="">
+                                <option value="0">TBA</option>
+                                <option value="1">Present</option>
+                                <option value="2">Absent</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            
+            <input type="text" name="from" value="attendance" hidden="">
+            <input type="text" name="bookingId" value="<?php echo $res['bookingId'] ?>" hidden="">
+            <input type="text" name="travelAndTourId" value="<?php echo $_GET['travelAndTourId'] ?>" hidden="">
+            
+         
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success waves-effect text-left">Submit</button>
+                 </form>
                 <button type="button" class="btn btn-danger waves-effect text-left" data-dismiss="modal">Close</button>
             </div>
           
