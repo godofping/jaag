@@ -134,21 +134,21 @@ include("includes/header.php");
                 <form method="POST" action="controller.php" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-md-4">
-                            <label>First Name</label>
+                            <label>First Name <small style="color: red"> * required</small></label>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="firstName" name="firstName">
+                                <input type="text" class="form-control" id="firstName" name="firstName" required="">
                             </div>
                             </div>
 
                         <div class="col-md-4">
-                            <label>Middle Name</label>
+                            <label>Middle Name <small style="color: red"> * required</small></label>
                             <div class="form-group">
                                 <input type="text" class="form-control" id="middleName" name="middleName" required="">
                             </div>
                         </div>
 
                         <div class="col-md-4">
-                            <label>Last Name</label>
+                            <label>Last Name <small style="color: red"> * required</small></label>
                             <div class="form-group">
                                 <input type="text" class="form-control" id="lastName" name="lastName" required="">
                             </div>
@@ -158,7 +158,7 @@ include("includes/header.php");
                     <div class="row">
 
                         <div class="col-md-4">
-                            <label>Province</label>
+                            <label>Province <small style="color: red"> * required</small></label>
                             <div class="form-group">
                                 <select class="form-control" name="province" id="province" required="" onchange="populateCity();populateBarangay();">
                              
@@ -168,7 +168,7 @@ include("includes/header.php");
                         </div>
 
                         <div class="col-md-4">
-                            <label>City</label>
+                            <label>City <small style="color: red"> * required</small></label>
                             <div class="form-group">
                                 <select class="form-control" name="city" id="city" required="" onchange="populateBarangay()">
                             
@@ -180,7 +180,7 @@ include("includes/header.php");
                     <div class="row">
 
                         <div class="col-md-4">
-                            <label>Barangay</label>
+                            <label>Barangay <small style="color: red"> * required</small></label>
                             <div class="form-group">
                                 <select class="form-control" name="barangay" id="barangay" required="">
                                   <option selected="" value="<?php echo $res['barangay'] ?>" disabled>
@@ -189,14 +189,14 @@ include("includes/header.php");
                         </div>
                         
                         <div class="col-md-4">
-                            <label>Street</label>
+                            <label>Street <small style="color: red"> (optional)</small></label>
                             <div class="form-group">
                                 <input type="text" class="form-control" id="street" name="street">
                             </div>
                         </div>
 
                         <div class="col-md-4">
-                            <label>Building Number</label>
+                            <label>Building Number <small style="color: red"> (optional)</small></label>
                             <div class="form-group">
                                 <input type="text" class="form-control" id="street_number" name="buildingNumber">
                             </div>
@@ -207,7 +207,7 @@ include("includes/header.php");
 
                     <div class="row">
                         <div class="col-md-4">
-                            <label>Contact Number</label>
+                            <label>Contact Number <small style="color: red"> * required</small></label>
                             <div class="form-group">
                                 <input type="text" class="form-control" id="contactNumber" name="contactNumber" required="">
                             </div>
@@ -219,9 +219,9 @@ include("includes/header.php");
                     
                     <div class="row">
                         <div class="col-md-4">
-                            <label>Pax Number</label>
+                            <label>Pax Number <small style="color: red"> * required</small></label>
                             <div class="form-group">
-                                <select class="form-control" name="paxNumber" id="paxNumber" onchange="calculate();">
+                                <select class="form-control" name="paxNumber" id="paxNumber" onchange="calculate();" required="">
                                     <?php
                                     $res13 = mysqli_fetch_assoc($qry13);
 
@@ -235,7 +235,7 @@ include("includes/header.php");
                         </div>
 
                         <div class="col-md-4">
-                            <label>Payment Type</label>
+                            <label>Payment Type <small style="color: red"> * required</small></label>
                             <div class="form-group">
                                 <select class="form-control" name="paymentType" required="">
                                     <option>Down Payment</option>
@@ -246,7 +246,7 @@ include("includes/header.php");
 
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Remittance</label>
+                                <label>Remittance <small style="color: red"> * required</small></label>
                                 <select class="form-control" name="modeOfPaymentId" id="modeOfPaymentId" required="">
                                     <?php $qry = mysqli_query($connection, "select * from mode_of_payment_view"); while ($res = mysqli_fetch_assoc($qry)) { ?>
                                             <option value="<?php echo $res['modeOfPaymentId'] ?>"><?php echo $res['paymentMode'] . " - " . $res['nameOfRemittanceOrBank']; ?></option>
@@ -260,21 +260,21 @@ include("includes/header.php");
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Amount</label>
+                                <label>Amount <small style="color: red"> * required</small></label>
                                 <input class="form-control" type="number" step="any" name="amount" required="">
                             </div>
                         </div>
 
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Sender</label>
-                                <input class="form-control" type="text" name="nameOfSender">
+                                <label>Sender <small style="color: red"> * required</small></label>
+                                <input class="form-control" type="text" name="nameOfSender" required="">
                             </div>
                         </div>
                         
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Transaction Code/ OR Number</label>
+                                <label>Transaction Code/ OR Number <small style="color: red"> (optional)</small></label>
                                 <input class="form-control" type="text" name="transactionNumber">
                             </div>
                         </div>
@@ -283,7 +283,7 @@ include("includes/header.php");
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Proof Image</label>
+                                <label>Proof Image <small style="color: red"> (optional)</small></label>
                                 <input class="form-control" type="file" name="mediaLocation">
                             </div>
                         </div>
