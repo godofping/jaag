@@ -428,18 +428,21 @@ if (isset($_GET['from']) and $_GET['from'] == 'back-up') {
 	define("BACKUP_PATH", "database/");
 
 	$server_name   = "localhost";
-	$username      = "root";
-	$password      = "";
+	$username      = "pmsrowicuzgj";
+	$password      = "TAKAM1#aaaa";
 	$database_name = "jaag_db";
 
 
-	$cmd = "mysqldump -h {$server_name} -u {$username} -p{$password} {$database_name} cart_item_table cart_table customer_table goodies_inventory_table menu_category_table menu_item_table order_table review_table user_table > " . BACKUP_PATH . "{$database_name}.sql";
-
+	$cmd = "mysqldump -h {$server_name} -u {$username} -p{$password} {$database_name} account_type_table address_table booking_table comment_table destination_table media_table mode_of_payment_table notification_table package_table payment_transaction_table place_table posting_table profile_table travel_and_tour_table > " . BACKUP_PATH . "{$database_name}.sql";
+	
 
 	exec($cmd);
 
 	$_SESSION['do'] = 'added';
 	header("Location: back-up-and-restore.php");
+
+
+
 
 }
 
@@ -449,8 +452,8 @@ if (isset($_GET['from']) and $_GET['from'] == 'restore') {
 
 	$restore_file  = "database/jaag_db.sql";
 	$server_name   = "localhost";
-	$username      = "root";
-	$password      = "";
+	$username      = "pmsrowicuzgj";
+	$password      = "TAKAM1#aaaa";
 	$database_name = "jaag_db";
 
 	$cmd = "mysql -h {$server_name} -u {$username} -p{$password} {$database_name} < $restore_file";
