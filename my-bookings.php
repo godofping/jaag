@@ -64,8 +64,20 @@
 											<td><?php echo $res3['bookingStatus']; ?></td>
 											<td>
 												<a href="send-payment.php?bookingId=<?php echo base64_encode($res3['bookingId']) ?>"><button class="btn btn-info">Send Payment</button></a> <br><br>
+
 												<a class="btn btn-success" href="invoice.php?bookingId=<?php echo base64_encode($res3['bookingId']) ?>" target="_blank">View invoice</a> <br><br>
-												<a class="btn btn-danger" href="invoice.php?bookingId=<?php echo base64_encode($res3['bookingId']) ?>" target="_blank">Cancel Booking</a>
+
+												<?php 
+												$datedifference =  (strtotime($res3['departureDate']) - strtotime(date('Y-m-d'))) / 86400;
+
+												if ($datedifference >= 7 and $res3['bookingStatus'] != 'Cancelled by the customer') { ?>
+													<a class="btn btn-danger" href="controller.php?from=cancel-booking&bookingId=<?php echo base64_encode($res3['bookingId']) ?>">Cancel Booking</a>
+												<?php } elseif($datedifference < 7 and $res3['bookingStatus'] != 'Cancelled by the customer') { ?>
+													<button class="btn btn-danger" disabled="" data-toggle="tooltip" title="Cancellation is not available because the departure date is now less than 7 days.">Cancel Booking</button>
+
+												<?php } ?>
+
+												
 
 
 											</td>

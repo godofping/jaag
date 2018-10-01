@@ -1,39 +1,7 @@
 <?php 
 include("dashboard/includes/connection.php");
 
-if (isset($_GET['from']) and $_GET['from'] == 'test') {
 
-	$qry = mysqli_query($connection, "select * from booking_view where bookingStatus != 'Booked'");
-
-	while ($res = mysqli_fetch_assoc($qry)) {
-	
-
-		$thisismymessage = "Please pay your booking with the Booking ID: " . $res['bookingId']."";
-		$ch = curl_init();
-		$parameters = array(
-		    'apikey' => $apikey, //Your API KEY
-		    'number' => $res['contactNumber'],
-		    'message' => $thisismymessage,
-		    'sendername' => 'SEMAPHORE'
-		);
-		curl_setopt( $ch, CURLOPT_URL,'http://api.semaphore.co/api/v4/messages' );
-		curl_setopt( $ch, CURLOPT_POST, 1 );
-
-		//Send the parameters set above with the request
-		curl_setopt( $ch, CURLOPT_POSTFIELDS, http_build_query( $parameters ) );
-
-		// Receive response from server
-		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
-		$output = curl_exec( $ch );
-		curl_close ($ch);
-
-		//Show the server response
-		echo $output;
-
-	
-	}
-
-}
 
 if (isset($_POST['from']) and $_POST['from'] == 'register') {
 
@@ -409,8 +377,77 @@ if (isset($_GET['from']) and $_GET['from'] == 'resend-activation') {
 }
 
 
+if (isset($_GET['from']) and $_GET['from'] == 'test') {
+
+	$qry = mysqli_query($connection, "select * from booking_view where bookingStatus != 'Booked'");
+
+	while ($res = mysqli_fetch_assoc($qry)) {
+	
+
+		$thisismymessage = "Please pay your booking with the Booking ID: " . $res['bookingId']."";
+		$ch = curl_init();
+		$parameters = array(
+		    'apikey' => $apikey, //Your API KEY
+		    'number' => $res['contactNumber'],
+		    'message' => $thisismymessage,
+		    'sendername' => 'SEMAPHORE'
+		);
+		curl_setopt( $ch, CURLOPT_URL,'http://api.semaphore.co/api/v4/messages' );
+		curl_setopt( $ch, CURLOPT_POST, 1 );
+
+		//Send the parameters set above with the request
+		curl_setopt( $ch, CURLOPT_POSTFIELDS, http_build_query( $parameters ) );
+
+		// Receive response from server
+		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+		$output = curl_exec( $ch );
+		curl_close ($ch);
+
+		//Show the server response
+		echo $output;
+
+	
+	}
+
+}
+
+if (isset($_GET['from']) and $_GET['from'] == 'cancel-booking') {
+	mysqli_query($connection, "update booking_table set bookingStatus = 'Cancelled by the customer' where bookingId = '" . base64_decode($_GET['bookingId']) . "'");
 
 
+	$qry = mysqli_query($connection, "select * from profile_view where accountType = 'Attendant' or accountType = 'Administrator'");
+
+
+	while ($res = mysqli_fetch_assoc($qry)) {
+		mysqli_query($connection, "insert into notification_table (notificationMessage, profileId, isRead, dateAndTime) values ('The booking with the Booking ID: ". base64_decode($_GET['bookingId']) . " is cancelled by the customer" . " ', '" . $res['profileId'] . "', '0', '" . date('Y-m-d H:i:s') . "') ");
+
+		$thisismymessage = "New booking with the Booking ID: " . base64_decode($_GET['bookingId']) ." is cancelled by the customer";
+		$ch = curl_init();
+		$parameters = array(
+		    'apikey' => $apikey, //Your API KEY
+		    'number' => $res['contactNumber'],
+		    'message' => $thisismymessage,
+		    'sendername' => 'SEMAPHORE'
+		);
+		curl_setopt( $ch, CURLOPT_URL,'http://api.semaphore.co/api/v4/messages' );
+		curl_setopt( $ch, CURLOPT_POST, 1 );
+
+		//Send the parameters set above with the request
+		curl_setopt( $ch, CURLOPT_POSTFIELDS, http_build_query( $parameters ) );
+
+		// Receive response from server
+		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+		$output = curl_exec( $ch );
+		curl_close ($ch);
+
+		//Show the server response
+		echo $output;
+
+		$_SESSION['do'] = 'updated';
+		header("Location: my-bookings.php");
+
+	}
+}
 
 
 
