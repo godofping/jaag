@@ -382,6 +382,40 @@ if (isset($_POST['from']) and $_POST['from'] == 'update-travel-and-tour-status')
 
 	mysqli_query($connection, "update travel_and_tour_table set travelAndTourStatus = '" . $_POST['travelAndTourStatus'] . "' where travelAndTourId = '" . $_POST['travelAndTourId'] . "'");
 
+
+	$qry = mysqli_query($connection, "select * from booking_view where travelAndTourId = '" . $_POST['travelAndTourId'] . "'");
+
+		
+		while ($res = mysqli_fetch_assoc($qry)) {
+			mysqli_query($connection, "insert into notification_table (notificationMessage, profileId, isRead, dateAndTime) values ('" . 'The Travel and Tour ID: ' . $_POST['travelAndTourId'] .' is '. $_POST['travelAndTourStatus'] ."','" . $res['profileId'] . "', '0', '" . date('Y-m-d H:i:s') . "') ");
+
+
+
+				$thisismymessage = "The Travel and Tour ID: " . $_POST['travelAndTourId'] . " is " . $_POST['travelAndTourStatus'];
+				$ch = curl_init();
+		$parameters = array(
+		    'apikey' => $apikey, //Your API KEY
+		    'number' => $res['contactNumber'],
+		    'message' => $thisismymessage,
+		    'sendername' => 'SEMAPHORE'
+		);
+		curl_setopt( $ch, CURLOPT_URL,'http://api.semaphore.co/api/v4/messages' );
+		curl_setopt( $ch, CURLOPT_POST, 1 );
+
+		//Send the parameters set above with the request
+		curl_setopt( $ch, CURLOPT_POSTFIELDS, http_build_query( $parameters ) );
+
+		// Receive response from server
+		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+		$output = curl_exec( $ch );
+		curl_close ($ch);
+
+		//Show the server response
+		echo $output;
+		}
+		
+
+
 	$_SESSION['do'] = 'updated';
 	header("Location: view-travel-and-tour.php?travelAndTourId=".$_POST['travelAndTourId']."");
 
