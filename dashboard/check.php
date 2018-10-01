@@ -88,4 +88,31 @@ if ($from == 'contactNumberProfile') {
 
 }
 
+if ($from == 'list-of-travelers') {
+	$packageId = mysqli_real_escape_string($connection,htmlentities(trim($_POST['packageId'])));
+	$qry = mysqli_query($connection, "select * from travel_and_tour_view where packageId = '" . $packageId . "'");
+	?>
+	
+	<div class="row">
+		<div class="col-md-4">
+		<div class="form-group">
+			<label>Travel Dates</label>
+			<select class="form-control" name="travelAndTourId" id="travelAndTourId" required="">
+				<div>
+					<option disabled="" selected="">Please select</option>
+				<?php $qry = mysqli_query($connection, "select * from travel_and_tour_view where packageId = '" . $packageId . "'");
+				while ($res = mysqli_fetch_assoc($qry)) { ?>
+					<option value="<?php echo $res['travelAndTourId']; ?>"><?php echo $res['departureDate']; ?> - <?php echo $res['returnDate']; ?></option>
+				</div>
+				<?php } ?>
+			</select>
+		</div>
+	</div>
+	</div>
+	
+
+<?php
+}
+
+
 ?>

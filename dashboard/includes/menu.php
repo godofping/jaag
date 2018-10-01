@@ -52,6 +52,7 @@
                         <li> <a class="has-arrow waves-effect " aria-expanded="false"><i class="mdi mdi-library-books"></i><span class="hide-menu">Reports</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="bookings-schedules.php">Booking Schedules</a></li>
+                                <li><a href="list-of-travelers.php">List of Travelers</a></li>
                                 <li><a href="customer-information.php">Customer Information</a></li>
                                 <li><a href="unattended-customers.php">Unattended Customers</a></li>
                                 <li><a href="cancellation.php">Cancellation</a></li>

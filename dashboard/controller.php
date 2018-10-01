@@ -532,4 +532,8 @@ if (isset($_POST['from']) and $_POST['from'] == 'attendance') {
 	header("Location: view-travel-and-tour.php?travelAndTourId=".$_POST['travelAndTourId']."");
 }
 
+if (isset($_POST['from']) and $_POST['from'] == 'search-list-of-travelers') {
+	header("Location: list-of-travelers.php?travelAndTourId=".$_POST['travelAndTourId']."");
+}
+
 ?>

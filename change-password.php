@@ -1,4 +1,14 @@
 <?php include("dashboard/includes/connection.php");include("includes/header.php"); ?>
+<?php 
+
+if (!isset($_SESSION['profileId'])) {
+	?>
+<script type="text/javascript">
+	window.location.href = "index.php";
+</script>
+	<?php
+}
+ ?>
 
 <section class="parallax-window" data-parallax="scroll" data-image-src="img/admin_top.jpg" data-natural-width="1400" data-natural-height="470">
 		<div class="parallax-content-1">
