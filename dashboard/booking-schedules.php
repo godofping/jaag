@@ -137,16 +137,84 @@
     CalendarApp.prototype.onEventClick =  function (calEvent, jsEvent, view) {
         var $this = this;
             var form = $("<form></form>");
-            form.append("<label>Change event name</label>");
-  
-            form.append("<div class='input-group'><input class='form-control' type=text value='" + calEvent.title + "' /><span class='input-group-btn'><button type='submit' class='btn btn-success waves-effect waves-light'><i class='fa fa-check'></i> Save</button></span></div>");
+            form.append("<label>Package Name</label>");
+            form.append("<div class='input-group'><input class='form-control' type=text value='" + calEvent.title + "' disabled /><span class='input-group-btn'></span></div>");
+
+            form.append("<label>Travel And Tour Id</label>");
+            form.append("<div class='input-group'><input class='form-control' type=text value='" + calEvent.travelAndTourId + "' disabled /><span class='input-group-btn'></span></div>");
+
+            form.append("<label>Travel Dates</label>");
+            form.append("<div class='input-group'><input class='form-control' type=text value='" + calEvent.travelDate + "' disabled /><span class='input-group-btn'></span></div>");
+
+            form.append("<label>Slots Booked</label>");
+            form.append("<div class='input-group'><input class='form-control' type=text value='" + calEvent.slotsBooked + "' disabled /><span class='input-group-btn'></span></div>");
+
+             form.append("<label>Status</label>");
+            form.append("<div class='input-group'><input class='form-control' type=text value='" + calEvent.travelAndTourStatus + "' disabled /><span class='input-group-btn'></span></div>");
+
+
+
             $this.$modal.modal({
                 backdrop: 'static'
             });
-    
-         
+            $this.$modal.find('.delete-event').show().end().find('.save-event').hide().end().find('.modal-body').empty().prepend(form).end().find('.delete-event').unbind('click').click(function () {
+                $this.$calendarObj.fullCalendar('removeEvents', function (ev) {
+                    return (ev._id == calEvent._id);
+                });
+                $this.$modal.modal('hide');
+            });
+            $this.$modal.find('form').on('submit', function () {
+                calEvent.title = form.find("input[type=text]").val();
+                $this.$calendarObj.fullCalendar('updateEvent', calEvent);
+                $this.$modal.modal('hide');
+                return false;
+            });
     },
-    
+    /* on select */
+    CalendarApp.prototype.onSelect = function (start, end, allDay) {
+        var $this = this;
+            $this.$modal.modal({
+                backdrop: 'static'
+            });
+            var form = $("<form></form>");
+            form.append("<div class='row'></div>");
+            form.find(".row")
+                .append("<div class='col-md-6'><div class='form-group'><label class='control-label'>Event Name</label><input class='form-control' placeholder='Insert Event Name' type='text' name='title'/></div></div>")
+                .append("<div class='col-md-6'><div class='form-group'><label class='control-label'>Category</label><select class='form-control' name='category'></select></div></div>")
+                .find("select[name='category']")
+                .append("<option value='bg-danger'>Danger</option>")
+                .append("<option value='bg-success'>Success</option>")
+                .append("<option value='bg-purple'>Purple</option>")
+                .append("<option value='bg-primary'>Primary</option>")
+                .append("<option value='bg-pink'>Pink</option>")
+                .append("<option value='bg-info'>Info</option>")
+                .append("<option value='bg-warning'>Warning</option></div></div>");
+            $this.$modal.find('.delete-event').hide().end().find('.save-event').show().end().find('.modal-body').empty().prepend(form).end().find('.save-event').unbind('click').click(function () {
+                form.submit();
+            });
+            $this.$modal.find('form').on('submit', function () {
+                var title = form.find("input[name='title']").val();
+                var beginning = form.find("input[name='beginning']").val();
+                var ending = form.find("input[name='ending']").val();
+                var categoryClass = form.find("select[name='category'] option:checked").val();
+                if (title !== null && title.length != 0) {
+                    $this.$calendarObj.fullCalendar('renderEvent', {
+                        title: title,
+                        start:start,
+                        end: end,
+                        allDay: false,
+                        className: categoryClass
+                    }, true);  
+                    $this.$modal.modal('hide');
+                }
+                else{
+                    alert('You have to give a title to your event');
+                }
+                return false;
+                
+            });
+            $this.$calendarObj.fullCalendar('unselect');
+    },
     CalendarApp.prototype.enableDrag = function() {
         //init events
         $(this.$event).each(function () {
@@ -182,6 +250,16 @@
 
             {   
 
+                travelAndTourStatus: '<?php echo $res1['travelAndTourStatus'] ?>',
+                travelAndTourId: '<?php echo $res1['travelAndTourId'] ?>',
+                travelDate: '<?php echo $res1['departureDate'] ?>' + " - " + '<?php echo $res1['returnDate']; ?>',
+                slotsBooked: '<?php 
+                                    $qry13 = mysqli_query($connection, "select COALESCE(sum(numberOfPaxBooked),0) as slotsTaken from booking_table where travelAndTourId = '" . $res1['travelAndTourId'] . "'");
+                                    $res13 = mysqli_fetch_assoc($qry13);
+
+                                    echo $res13['slotsTaken'];
+
+                                    ?>/<?php echo $res1['maxPax']; ?>',
                 packageId: '<?php echo $res1['packageId'] ?>',
                 title: '<?php echo $res1['packageName'] ?>',
                 start: '<?php echo $res1['departureDate'] ?>',
@@ -213,8 +291,9 @@
 
         var $this = this;
         $this.$calendarObj = $this.$calendar.fullCalendar({
- 
-    
+            slotDuration: '00:15:00', /* If we want to split day time each 15minutes */
+            minTime: '08:00:00',
+            maxTime: '19:00:00',  
             defaultView: 'month',  
             handleWindowResize: true,   
              
