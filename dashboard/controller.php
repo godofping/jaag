@@ -487,7 +487,7 @@ if (isset($_POST['from']) and $_POST['from'] == 'add-walk-in-customer') {
 	mysqli_query($connection, "insert into payment_transaction_table (bookingId,modeOfPaymentId, amount, dateOfPayment, transactionNumber, nameOfSender, paymentStatus,paymentType) values ('" . $bookingId . "','" . $_POST['modeOfPaymentId'] . "', '" . $_POST['amount'] . "', '" . date('Y-m-d') . "', '" . $_POST['transactionNumber'] . "', '" . $_POST['nameOfSender'] . "', 'Recieved','" . $_POST['paymentType'] . "')");
 
 
-	if ($_POST['paymentType'] == 'Outstanding Balance' or $_POST['paymentType'] == 'Full Payment') {
+	if ($_POST['paymentType'] == 'Outstanding Payment' or $_POST['paymentType'] == 'Full Payment') {
 		mysqli_query($connection, "update booking_table set bookingStatus = 'Booked' where bookingId = '" . $bookingId . "'");
 	}
 
@@ -503,13 +503,38 @@ if (isset($_POST['from']) and $_POST['from'] == 'add-walk-in-customer') {
 
     $target_file = "dashboard/" . $target_file;
 
+    if($_FILES['mediaLocation']['name'] == "") 
+	{
+	   $target_file = "dashboard/media/not-available.jpg";
+	}
+
 	mysqli_query($connection, "insert into media_table (mediaLocation, paymentTransactionId) values ('" . $target_file . "', '" . $paymentTransactionId . "')");
 
 	$mediaId = mysqli_insert_id($connection);
 
 
+	$thisismymessage = "Thank you for choosing JAAG. Your Booking ID: " . $bookingId . ".";
+				$ch = curl_init();
+		$parameters = array(
+		    'apikey' => $apikey, //Your API KEY
+		    'number' => $_POST['contactNumber'],
+		    'message' => $thisismymessage,
+		    'sendername' => 'SEMAPHORE'
+		);
+		curl_setopt( $ch, CURLOPT_URL,'http://api.semaphore.co/api/v4/messages' );
+		curl_setopt( $ch, CURLOPT_POST, 1 );
 
-	
+		//Send the parameters set above with the request
+		curl_setopt( $ch, CURLOPT_POSTFIELDS, http_build_query( $parameters ) );
+
+		// Receive response from server
+		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+		$output = curl_exec( $ch );
+		curl_close ($ch);
+
+		//Show the server response
+		echo $output;
+
 
 	$_SESSION['do'] = 'added';
 	header("Location: view-travel-and-tour.php?travelAndTourId=".$_POST['travelAndTourId']."");
@@ -535,5 +560,72 @@ if (isset($_POST['from']) and $_POST['from'] == 'attendance') {
 if (isset($_POST['from']) and $_POST['from'] == 'search-list-of-travelers') {
 	header("Location: list-of-travelers.php?travelAndTourId=".$_POST['travelAndTourId']."");
 }
+
+if (isset($_POST['from']) and $_POST['from'] == 'add-payment-on-admin') {
+
+
+
+	mysqli_query($connection, "insert into payment_transaction_table (bookingId,modeOfPaymentId, amount, dateOfPayment, transactionNumber, nameOfSender, paymentStatus,paymentType) values ('" . $_POST['bookingId'] . "','" . $_POST['modeOfPaymentId'] . "', '" . $_POST['amount'] . "', '" . date('Y-m-d') . "', '" . $_POST['transactionNumber'] . "', '" . $_POST['nameOfSender'] . "', 'Recieved','" . $_POST['paymentType'] . "')");
+
+	
+	$paymentTransactionId = mysqli_insert_id($connection);
+
+
+
+
+
+	if ($_POST['paymentType'] == 'Outstanding Payment' or $_POST['paymentType'] == 'Full Payment') {
+		mysqli_query($connection, "update booking_table set bookingStatus = 'Booked' where bookingId = '" . $_POST['bookingId'] . "'");
+	}
+
+
+
+
+
+	$target_dir = "media/";
+	$target_file = $target_dir . md5(date("Y-m-d H:i:s")) .basename($_FILES["mediaLocation"]["name"]);
+	$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+    move_uploaded_file($_FILES["mediaLocation"]["tmp_name"], $target_file);
+
+    $target_file = "dashboard/" . $target_file;
+
+    if($_FILES['mediaLocation']['name'] == "") 
+	{
+	   $target_file = "dashboard/media/not-available.jpg";
+	}
+
+	mysqli_query($connection, "insert into media_table (mediaLocation, paymentTransactionId) values ('" . $target_file . "', '" . $paymentTransactionId . "')");
+
+	$mediaId = mysqli_insert_id($connection);
+
+
+
+	$thisismymessage = "Thank you for choosing JAAG. Your Booking ID: " . $_POST['bookingId'] . " is now Booked.";
+				$ch = curl_init();
+		$parameters = array(
+		    'apikey' => $apikey, //Your API KEY
+		    'number' => $_POST['contactNumber'],
+		    'message' => $thisismymessage,
+		    'sendername' => 'SEMAPHORE'
+		);
+		curl_setopt( $ch, CURLOPT_URL,'http://api.semaphore.co/api/v4/messages' );
+		curl_setopt( $ch, CURLOPT_POST, 1 );
+
+		//Send the parameters set above with the request
+		curl_setopt( $ch, CURLOPT_POSTFIELDS, http_build_query( $parameters ) );
+
+		// Receive response from server
+		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+		$output = curl_exec( $ch );
+		curl_close ($ch);
+
+		//Show the server response
+		echo $output;
+
+
+	$_SESSION['do'] = 'added';
+	header("Location: view-travel-and-tour.php?travelAndTourId=".$_POST['travelAndTourId']."");
+}
+
 
 ?>
