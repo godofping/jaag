@@ -29,6 +29,16 @@ include("includes/header.php");
     <!-- ============================================================== -->
     <!-- Start Page Content -->
     <!-- ============================================================== -->
+    
+
+    <?php if (!isset($_GET['accountType'])): ?>
+        <a href="print/print-customer-information.php" target="blank"><button class="btn btn-info btn-sm mr5"  style="margin-bottom: 20px;">Print</button></a>
+    <?php endif ?>
+    <?php if (isset($_GET['accountType'])): ?>
+        <a href="print/print-customer-information.php?accountType=<?php echo $_GET['accountType'] ?>" target="blank"><button class="btn btn-info btn-sm mr5"  style="margin-bottom: 20px;">Print</button></a>
+    <?php endif ?>
+
+
     <div class="row">
         <div class="col-12">
             <div class="card">

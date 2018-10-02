@@ -13,7 +13,7 @@ include("includes/header.php");
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
                         <li class="breadcrumb-item">Reports</li>
-                        <li class="breadcrumb-item active">Unattended Customers</li>
+                        <li class="breadcrumb-item active"><a href="unattended-customers.php">Unattended Customers</a></li>
                     </ol>
                 </div>
 
@@ -28,6 +28,7 @@ include("includes/header.php");
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
+                <a href="print/print-unattended-customers.php" target="blank"><button class="btn btn-info btn-sm mr5"  style="margin-bottom: 20px;">Print</button></a>
                 <div class="row">
                     <div class="col-12">
                         <div class="card">

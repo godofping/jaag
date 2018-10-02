@@ -28,6 +28,9 @@ include("includes/header.php");
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
+                <?php if (isset($_GET['travelAndTourId'])): ?>
+                    <a href="print/print-list-of-travelers.php?travelAndTourId=<?php echo $_GET['travelAndTourId'] ?>" target="blank"><button class="btn btn-info btn-sm mr5"  style="margin-bottom: 20px;">Print</button></a>
+                <?php endif ?>
                 <div class="row">
                     <div class="col-12">
                         <div class="card">

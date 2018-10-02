@@ -28,6 +28,7 @@ include("includes/header.php");
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
+                <a href="print/print-bookings-schedules.php" target="blank"><button class="btn btn-info btn-sm mr5"  style="margin-bottom: 20px;">Print</button></a>
                 <div class="row">
                     <div class="col-12">
                         <div class="card">

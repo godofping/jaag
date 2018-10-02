@@ -310,7 +310,7 @@ if (isset($_POST['from']) and $_POST['from'] == 'send-payment') {
 
 
 	$_SESSION['do'] = 'added';
-	header("Location: send-payment.php?bookingId=".base64_encode($_POST['bookingStatus'])."");
+	header("Location: send-payment.php?bookingId=".base64_decode($_POST['bookingId'])."");
 }
 
 

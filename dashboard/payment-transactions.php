@@ -72,9 +72,7 @@ include("includes/header.php");
                                                     <a  target="_blank" href="../<?php echo $res1['mediaLocation'] ?>">view image</a>
                                                 </td>
                                                 <td><?php echo $res['paymentStatus']; ?></td>
-                                                <td><button type="button" class="btn btn-block btn-outline-warning" data-toggle="modal" data-target="#updateModal<?php echo $res['paymentTransactionId']; ?>" <?php if ($res['paymentStatus'] == 'Recieved'): ?>
-                                                    disabled
-                                                <?php endif ?>>Update</button></td>
+                                                <td><button type="button" class="btn btn-block btn-outline-warning" data-toggle="modal" data-target="#updateModal<?php echo $res['paymentTransactionId']; ?>">Update</button></td>
     
 
                                             </tr>
@@ -114,6 +112,7 @@ while ($res = mysqli_fetch_assoc($qry)) { ?>
                                 <select class="form-control" name="paymentStatus" required="">
                                    <!--  <option>Pending Confirmation</option> -->
                                     <option>Recieved</option>
+                                    <option>Refunded</option>
                                     <option>Wrong Payment Details</option>
                                 </select>
                             </div>
