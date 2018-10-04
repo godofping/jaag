@@ -16,23 +16,26 @@
                              <?php if (isset($_SESSION['profileId'])): ?>
 
                             <li class="megamenu submenu">
-                                <a href="javascript:void(0);" class="show-submenu-mega">Notications<i class="icon-down-open-mini"></i></a>
-                                <ul>
-                                    <?php
-                                    $qry = mysqli_query($connection, "select * from notification_view where profileId = '" . $_SESSION['profileId'] . "' order by notificationId DESC LIMIT 10");
+                                <a href="javascript:void(0);" class="show-submenu-mega">Notification<i class="icon-down-open-mini"></i></a>
+                                <div class="menu-wrapper">
+                                    <div class="col-md-12">
+                                       
+                                        <ul>
+                                            
+
+                                            <?php
+                                             $qry = mysqli_query($connection, "select * from notification_view");
 
                                             while ($res = mysqli_fetch_assoc($qry)) { ?>
-                                               <li>
-                                                    <a>
-                                                
-                                               
-                                                    <h7><?php echo $res['notificationMessage']; ?></h7> <span class="mail-desc"></span> <span class="time"> <br><small><?php echo $res['dateAndTime']; ?></small></span> 
-                                                </a>
-                                               </li>
+                                               <li><a><?php echo $res['notificationMessage']; ?></h7> <span class="mail-desc"></span> <span class="time"> <br><small><?php echo $res['dateAndTime']; ?></small></a></li>
                                            <?php  } ?>
-        
-                                </ul>
+                     
+                                        </ul>
+                                    </div>
+
+                                </div><!-- End menu-wrapper -->
                             </li>
+
 
                             <li class="submenu">
                                 <a href="javascript:void(0);" class="show-submenu">My Account<i class="icon-down-open-mini"></i></a>

@@ -37,7 +37,7 @@ if (isset($_POST['from']) and $_POST['from'] == 'register') {
 		    'apikey' => $apikey, //Your API KEY
 		    'number' => $_POST['contactNumber'],
 		    'message' => $thisismymessage,
-		    'sendername' => 'SEMAPHORE'
+		    'sendername' => 'JAAG'
 		);
 		curl_setopt( $ch, CURLOPT_URL,'http://api.semaphore.co/api/v4/messages' );
 		curl_setopt( $ch, CURLOPT_POST, 1 );
@@ -157,7 +157,7 @@ if (isset($_POST['from']) and $_POST['from'] == 'add-booking') {
 
 
 	while ($res = mysqli_fetch_assoc($qry)) {
-		mysqli_query($connection, "insert into notification_table (notificationMessage, profileId, isRead, dateAndTime) values ('New booking with the Booking ID: ". $bookingId . " ', '" . $res['profileId'] . "', '0', '" . date('Y-m-d H:i:s') . "') ");
+		mysqli_query($connection, "insert into notification_table (notificationMessage, profileId, dateAndTime) values ('New booking with the Booking ID: ". $bookingId . " ', '" . $res['profileId'] . "', '" . date('Y-m-d H:i:s') . "') ");
 
 		$thisismymessage = "New booking with the Booking ID: " . $bookingId."";
 		$ch = curl_init();
@@ -165,7 +165,7 @@ if (isset($_POST['from']) and $_POST['from'] == 'add-booking') {
 		    'apikey' => $apikey, //Your API KEY
 		    'number' => $res['contactNumber'],
 		    'message' => $thisismymessage,
-		    'sendername' => 'SEMAPHORE'
+		    'sendername' => 'JAAG'
 		);
 		curl_setopt( $ch, CURLOPT_URL,'http://api.semaphore.co/api/v4/messages' );
 		curl_setopt( $ch, CURLOPT_POST, 1 );
@@ -224,7 +224,7 @@ if (isset($_POST['from']) and $_POST['from'] == 'add-booking-online-customer') {
 	$qry = mysqli_query($connection, "select * from profile_view where accountType = 'Attendant' or accountType = 'Administrator'");
 
 	while ($res = mysqli_fetch_assoc($qry)) {
-		mysqli_query($connection, "insert into notification_table (notificationMessage, profileId, isRead, dateAndTime) values ('New Booking with the Booking ID: ". $bookingId . " ', '" . $res['profileId'] . "', '0', '" . date('Y-m-d H:i:s') . "') ");
+		mysqli_query($connection, "insert into notification_table (notificationMessage, profileId, dateAndTime) values ('New Booking with the Booking ID: ". $bookingId . " ', '" . $res['profileId'] . "', '" . date('Y-m-d H:i:s') . "') ");
 
 		$thisismymessage = "New booking with the Booking ID: " . $bookingId."";
 		$ch = curl_init();
@@ -232,7 +232,7 @@ if (isset($_POST['from']) and $_POST['from'] == 'add-booking-online-customer') {
 		    'apikey' => $apikey, //Your API KEY
 		    'number' => $res['contactNumber'],
 		    'message' => $thisismymessage,
-		    'sendername' => 'SEMAPHORE'
+		    'sendername' => 'JAAG'
 		);
 		curl_setopt( $ch, CURLOPT_URL,'http://api.semaphore.co/api/v4/messages' );
 		curl_setopt( $ch, CURLOPT_POST, 1 );
@@ -281,7 +281,7 @@ if (isset($_POST['from']) and $_POST['from'] == 'send-payment') {
 	$qry = mysqli_query($connection, "select * from profile_view where accountType = 'Attendant' or accountType = 'Administrator'");
 
 	while ($res = mysqli_fetch_assoc($qry)) {
-		mysqli_query($connection, "insert into notification_table (notificationMessage, profileId, isRead, dateAndTime) values ('New payment with the Payment ID: ". $paymentTransactionId . " ', '" . $res['profileId'] . "', '0', '" . date('Y-m-d H:i:s') . "') ");
+		mysqli_query($connection, "insert into notification_table (notificationMessage, profileId, dateAndTime) values ('New payment with the Payment ID: ". $paymentTransactionId . " ', '" . $res['profileId'] . "', '" . date('Y-m-d H:i:s') . "') ");
 
 		$thisismymessage = "New payment with the Payment ID: " . $paymentTransactionId."";
 		$ch = curl_init();
@@ -289,7 +289,7 @@ if (isset($_POST['from']) and $_POST['from'] == 'send-payment') {
 		    'apikey' => $apikey, //Your API KEY
 		    'number' => $res['contactNumber'],
 		    'message' => $thisismymessage,
-		    'sendername' => 'SEMAPHORE'
+		    'sendername' => 'JAAG'
 		);
 		curl_setopt( $ch, CURLOPT_URL,'http://api.semaphore.co/api/v4/messages' );
 		curl_setopt( $ch, CURLOPT_POST, 1 );
@@ -353,7 +353,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'resend-activation') {
 		    'apikey' => $apikey, //Your API KEY
 		    'number' => $res['contactNumber'],
 		    'message' => $thisismymessage,
-		    'sendername' => 'SEMAPHORE'
+		    'sendername' => 'JAAG'
 		);
 		curl_setopt( $ch, CURLOPT_URL,'http://api.semaphore.co/api/v4/messages' );
 		curl_setopt( $ch, CURLOPT_POST, 1 );
@@ -390,7 +390,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'test') {
 		    'apikey' => $apikey, //Your API KEY
 		    'number' => $res['contactNumber'],
 		    'message' => $thisismymessage,
-		    'sendername' => 'SEMAPHORE'
+		    'sendername' => 'JAAG'
 		);
 		curl_setopt( $ch, CURLOPT_URL,'http://api.semaphore.co/api/v4/messages' );
 		curl_setopt( $ch, CURLOPT_POST, 1 );
@@ -419,7 +419,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'cancel-booking') {
 
 
 	while ($res = mysqli_fetch_assoc($qry)) {
-		mysqli_query($connection, "insert into notification_table (notificationMessage, profileId, isRead, dateAndTime) values ('The booking with the Booking ID: ". base64_decode($_GET['bookingId']) . " is cancelled by the customer" . " ', '" . $res['profileId'] . "', '0', '" . date('Y-m-d H:i:s') . "') ");
+		mysqli_query($connection, "insert into notification_table (notificationMessage, profileId, dateAndTime) values ('The booking with the Booking ID: ". base64_decode($_GET['bookingId']) . " is cancelled by the customer" . " ', '" . $res['profileId'] . "', '" . date('Y-m-d H:i:s') . "') ");
 
 		$thisismymessage = "New booking with the Booking ID: " . base64_decode($_GET['bookingId']) ." is cancelled by the customer";
 		$ch = curl_init();
@@ -427,7 +427,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'cancel-booking') {
 		    'apikey' => $apikey, //Your API KEY
 		    'number' => $res['contactNumber'],
 		    'message' => $thisismymessage,
-		    'sendername' => 'SEMAPHORE'
+		    'sendername' => 'JAAG'
 		);
 		curl_setopt( $ch, CURLOPT_URL,'http://api.semaphore.co/api/v4/messages' );
 		curl_setopt( $ch, CURLOPT_POST, 1 );

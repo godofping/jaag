@@ -198,7 +198,9 @@ include("includes/header.php");
                 while ($res = mysqli_fetch_assoc($qry)) { ?>
                         <a>
                          <div class="mail-contnet">
-                                <h5><?php echo  $res['firstName'] . " " . $res['middleName'] . " " . $res['lastName'] . " (" . $res['accountType'] . ")"; ?> <button class="btn btn-circle btn-warning" data-toggle="modal" data-target="#deleteModal<?php echo $res['commentId'] ?>"><i class="mdi mdi-delete"></i></button> <button class="btn btn-circle btn-info" data-toggle="modal" data-target="#replyModal<?php echo $res['commentId'] ?>"><i class="mdi mdi-reply"></i></button></h5>
+                                <h5><?php echo  $res['firstName'] . " " . $res['middleName'] . " " . $res['lastName'] . " (" . $res['accountType'] . ")"; ?> <button class="btn btn-circle btn-warning" data-toggle="modal" data-target="#deleteModal<?php echo $res['commentId'] ?>"><i class="mdi mdi-delete"></i></button> <button <?php if (!is_null($res['respond'])): ?>
+                                    disabled
+                                <?php endif ?> class="btn btn-circle btn-info" data-toggle="modal" data-target="#replyModal<?php echo $res['commentId'] ?>"><i class="mdi mdi-reply"></i></button></h5>
                                 
                                 <span class="time">Date Posted: <?php echo $res['dateCommented']; ?></span>
                                 
@@ -429,7 +431,8 @@ include("includes/header.php");
                 <!-- other hidden inputs -->
                 <input type="text" name="from" value="add-reply" hidden="">
                 <input type="text" name="commentId" value="<?php echo $res['commentId']; ?>" hidden="">
-
+                <input type="text" name="profileId" value="<?php echo $res['profileId']; ?>" hidden="">
+                <input type="text" name="contactNumber" value="<?php echo $res['contactNumber']; ?>" hidden="">
                
 
             </div>
