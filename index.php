@@ -285,7 +285,7 @@ $res1 = mysqli_fetch_assoc($qry1);
                                             <th>Travel ID</th>
                                             <th>Travel Dates</th>
                                             <th>Slots Booked</th>
-                                            <th>Status</th>
+                                            <th>Tour Status</th>
                                             <th>Remark</th>
                                             <th>Action</th>
                                         
@@ -296,7 +296,7 @@ $res1 = mysqli_fetch_assoc($qry1);
                                         while ($res3 = mysqli_fetch_assoc($qry3)) { ?>
                                         <tr>
                                             <td><?php echo $res3['travelAndTourId']; ?></td>
-                                            <td><?php echo $res3['departureDate']; ?> - <?php echo $res3['returnDate']; ?></td>
+                                            <td><?php echo $res3['departureDate']; ?> to <?php echo $res3['returnDate']; ?></td>
                                         
                                             <td><?php 
                                     $qry13 = mysqli_query($connection, "select COALESCE(sum(numberOfPaxBooked),0) as slotsTaken from booking_table where travelAndTourId = '" . $res3['travelAndTourId'] . "'");
@@ -314,9 +314,18 @@ $res1 = mysqli_fetch_assoc($qry1);
                                                     if (isset($_SESSION['profileId'])) {
                                                         $qry6 = mysqli_query($connection, "SELECT * FROM booking_view WHERE profileId = '" . $_SESSION['profileId'] . "' AND (departureDate between '" . $res3['departureDate'] . "' and '" . $res3['returnDate'] . "' AND returnDate between '" . $res3['departureDate'] . "' and '" . $res3['returnDate'] . "')");
 
+                                                        $datedifference =  (strtotime($res3['departureDate']) - strtotime(date('Y-m-d'))) / 86400;
 
                                                         if (mysqli_num_rows($qry6) > 0) {
                                                             echo "Conflict Schedule";
+                                                        }
+                                                        elseif ($datedifference < 8) {
+
+                                                            echo "Booking is not available because departure date is now within 7 days.";
+                                                        }
+                                                        else
+                                                        {
+                                                            echo "You can book this.";
                                                         }
                                                     }
                                                 
@@ -330,7 +339,7 @@ $res1 = mysqli_fetch_assoc($qry1);
 <?php 
 
 if (isset($_SESSION['profileId'])) {
-    if ($res13['slotsTaken'] == $res3['maxPax'] or $res3['travelAndTourStatus'] != 'Available' or mysqli_num_rows($qry6) > 0) {?>
+    if ($res13['slotsTaken'] == $res3['maxPax'] or $res3['travelAndTourStatus'] != 'Available' or mysqli_num_rows($qry6) > 0 or $datedifference < 8) {?>
         <button disabled="" class="btn btn-info">Book</button>
 <?php }else{ ?>
         <a href="booking.php?travelAndTourId=<?php echo $res3['travelAndTourId'] ?>"><button class="btn btn-info">Book</button></a>

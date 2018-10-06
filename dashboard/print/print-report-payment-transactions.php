@@ -7,8 +7,29 @@ include("../includes/connection.php");
     <title>&nbsp;</title>
 </head>
 <body style="text-align: center; font-family: arial;" onload="window.print()">
+    <img src="../assets/images/logo-blue.png" height="80px">
+<h3>JAAG TRAVEL AND TOURS</h3>
 <h2>Payment Transactions</h2>
-    <table align="center" border="1px;">
+
+
+<br>
+                    <p  style="margin-top: -15px;"><?php
+                        $string = "";
+
+                        if (isset($_GET['month']) and !empty($_GET['packageId'])) {
+                            $qry13 = mysqli_query($connection, "select * from package_view where packageId = '" . $_GET['packageId'] . "'");
+                            $res13 = mysqli_fetch_assoc($qry13);
+                            echo "All payment transactions on " . date("F Y", strtotime($_GET['month'])) . " with the package name: " . $res13['packageName'];
+                        }
+                        else
+                        {
+                            echo "All payment transactions on " . date("F Y", strtotime($_GET['month'])) . "";
+                        }
+
+
+                        echo $string;
+                        ?></hp>
+    <table align="center" border="2px;">
               <thead>
                                 <tr>
                                     <th>ID</th>
@@ -28,7 +49,7 @@ include("../includes/connection.php");
                             </thead>
                             <tbody>
                                         <?php
-                                        $qry = mysqli_query($connection, "select * from payment_transaction_view");
+                                        $qry = mysqli_query($connection, "select * from payment_transaction_view where (departureDate like '%" . $_GET['month'] . "%' or returnDate like '%" . $_GET['month'] . "%')  and packageId like '%" . $_GET['packageId'] ."%'");
                                         while ($res = mysqli_fetch_assoc($qry)) { ?>
                                             <tr>
                                                 <td><?php echo $res['paymentTransactionId']; ?></td>

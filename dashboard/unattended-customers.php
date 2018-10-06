@@ -11,9 +11,8 @@ include("includes/header.php");
                 </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
                         <li class="breadcrumb-item">Reports</li>
-                        <li class="breadcrumb-item active"><a href="unattended-customers.php">Unattended Customers</a></li>
+                        <li class="breadcrumb-item active">Unattended Customers</li>
                     </ol>
                 </div>
 
@@ -28,17 +27,79 @@ include("includes/header.php");
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
-                <a href="print/print-unattended-customers.php" target="blank"><button class="btn btn-info btn-sm mr5"  style="margin-bottom: 20px;">Print</button></a>
+                <?php if (isset($_GET['travelAndTourId'])): ?>
+                    <a href="print/print-unattended-customers.php?travelAndTourId=<?php echo $_GET['travelAndTourId'] ?>" target="blank"><button class="btn btn-info btn-sm mr5"  style="margin-bottom: 20px;">Print</button></a>
+                <?php endif ?>
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                    <!-- <button class="btn btn-success m-t-20 waves-effect text-left" data-toggle="modal" data-target="#addModal">Add</button> -->
-                    <div class="table-responsive m-t-20">
+
+                    <form method="GET" action="unattended-customers.php">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Package Name</label>
+                                <select class="form-control" name="packageId" id="packageId" required="">
+                                    <option disabled="" selected="">Please select</option>
+                                    <?php $qry = mysqli_query($connection, "select * from package_view");
+                                    while ($res = mysqli_fetch_assoc($qry)) { ?>
+                                        <option value="<?php echo $res['packageId'] ?>"><?php echo $res['packageName']; ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+
+           
+                    <div id="travelAndTourDiv"></div>
+              
+          
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <button class="btn btn-success m-t-20 waves-effect text-left">Search</button>
+                        </div>
+                    </div>
+
+                    <?php 
+                    $string = "";
+                     if (isset($_GET['travelAndTourId']) and !empty($_GET['travelAndTourId'])) {
+                        $qry = mysqli_query($connection,"select * from booking_view where travelAndTourId = '" . $_GET['travelAndTourId'] . "' and isAttended = 2");
+                         $qry1 = mysqli_query($connection,"select * from booking_view where travelAndTourId = '" . $_GET['travelAndTourId'] . "' and isAttended = 2");
+
+
+                         $res1 = mysqli_fetch_assoc($qry1);
+
+                        $string = "List of travelers in the Package Name: " . $res1['packageName'] . " and with the travel dates " . $res1['departureDate'] . " to " . $res1['returnDate'] . " who did not attend";
+
+
+                    }
+                    else
+                    {
+                        if (isset($_GET['travelAndTourId'])) {
+                            $qry = mysqli_query($connection,"select * from booking_view where travelAndTourId = '" . $_GET['travelAndTourId'] . "' and isAttended = 2");
+                        $string = "No result.";
+                        }
+                    }
+                     ?>
+
+                     <br>
+                    <h4><?php echo $string; ?></h4>
+                        
+                        
+                    </form>
+
+                    <?php if (isset($_GET['travelAndTourId'])): ?>
+                        <div class="table-responsive m-t-20">
                         <table id="myTable" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>Name</th>
+                                    <th>Package Name</th>
+                                    <th>Travel Dates</th>
                                     <th>Number of Pax Booked</th>
                                     <th>Date Booked</th>
                                     <th>Booking Status</th>
@@ -48,11 +109,14 @@ include("includes/header.php");
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php $qry = mysqli_query($connection,"select * from booking_view where isAttended = 2");
+                            <?php 
+
                                     while ($res = mysqli_fetch_assoc($qry)) { ?>
                                 <tr>
                                     
                                     <td><?php echo $res['firstName'] . " " . $res['middleName'] . " " . $res['lastName']; ?></td>
+                                    <td><?php echo $res['packageName']; ?></td>
+                                    <td><?php echo $res['departureDate']; ?> to <?php echo $res['returnDate']; ?></td>
                                     <td><?php echo $res['numberOfPaxBooked']; ?></td>
                                     <td><?php echo $res['dateBooked']; ?></td>
                                     <td><?php echo $res['bookingStatus']; ?></td>
@@ -64,6 +128,7 @@ include("includes/header.php");
                             </tbody>
                         </table>
                     </div>
+                    <?php endif ?>
                 </div>
                         </div>
                     </div>
@@ -73,5 +138,27 @@ include("includes/header.php");
                 <!-- ============================================================== -->
                 
 
-<br><br><br>
+
 <?php include("includes/footer.php") ?>
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+
+ 
+});
+
+$('#packageId').change(function()
+{
+    var packageId = $('#packageId').val();
+
+    $.post('check.php',{packageId:packageId,from:"list-of-travelers"},
+    function(data)
+    {
+        $('#travelAndTourDiv').html(data);
+    });
+
+        
+});
+
+</script>

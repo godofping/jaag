@@ -11,9 +11,8 @@ include("includes/header.php");
     </div>
     <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="home.php">Home</a></li>
             <li class="breadcrumb-item">Bookings</li>
-            <li class="breadcrumb-item active"><a href="travel-and-tour.php">Travel and Tour</a></li>
+            <li class="breadcrumb-item active">Travel and Tour</li>
         </ol>
     </div>
 

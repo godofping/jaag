@@ -11,9 +11,8 @@ include("includes/header.php");
                 </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
                         <li class="breadcrumb-item">Reports</li>
-                        <li class="breadcrumb-item active"><a href="statistical-reports.php">Statistical Report</a></li>
+                        <li class="breadcrumb-item active">Statistical Report</li>
                     </ol>
                 </div>
 
@@ -58,18 +57,18 @@ $(function () {
     Morris.Area({
         element: 'morris-area-chart2',
         data: [{
-            period: '2015',
+            period: '2018-05',
             Bookings: 152000,
         },{
-            period: '2016',
+            period: '2018-06',
             Bookings: 230000,
         },
         {
-            period: '2017',
+            period: '2018-07',
             Bookings: 200000,
         },
         {
-            period: '2018',
+            period: '2018-08',
             Bookings: <?php $qry15 = mysqli_query($connection, "SELECT coalesce(sum(amount),0) as result FROM payment_transaction_view WHERE paymentStatus = 'Recieved'"); $res15 = mysqli_fetch_assoc($qry15); echo $res15['result']; ?>,
         }
 

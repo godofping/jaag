@@ -7,8 +7,10 @@ include("../includes/connection.php");
 	<title>&nbsp;</title>
 </head>
 <body style="text-align: center; font-family: arial;" onload="window.print()">
+        <img src="../assets/images/logo-blue.png" height="80px">
+<h3>JAAG TRAVEL AND TOURS</h3>
 <h2>Customer Information</h2>
-	<table align="center" border="1px;">
+	<table align="center" border="2px;">
               <thead>
                                 <tr>
                                     <th>ID</th>

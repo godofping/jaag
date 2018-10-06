@@ -11,9 +11,8 @@ include("includes/header.php");
                 </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="home.php">Home</a></li>
                         <li class="breadcrumb-item">Reports</li>
-                        <li class="breadcrumb-item active"><a href="list-of-travelers.php">List of Travelers</a></li>
+                        <li class="breadcrumb-item active">List of Travelers</li>
                     </ol>
                 </div>
 
@@ -36,7 +35,7 @@ include("includes/header.php");
                         <div class="card">
                             <div class="card-body">
 
-                    <form method="POST" action="controller.php">
+                    <form method="GET" action="list-of-travelers.php">
                 	<div class="row">
                 		<div class="col-md-4">
                 			<div class="form-group">
@@ -57,7 +56,7 @@ include("includes/header.php");
            
                 	<div id="travelAndTourDiv"></div>
               
-                	<input type="text" name="from" value="search-list-of-travelers" hidden="">
+                
 
             		<div class="row">
             			<div class="col-md-4">
@@ -68,7 +67,7 @@ include("includes/header.php");
             		<?php 
             		$string = "";
             		 if (isset($_GET['travelAndTourId']) and !empty($_GET['travelAndTourId'])) {
-                        $qry = mysqli_query($connection,"select * from booking_view where travelAndTourId = '" . $_GET['travelAndTourId'] . "'");
+                        $qry = mysqli_query($connection,"select * from booking_view where travelAndTourId = '" . $_GET['travelAndTourId'] . "' and isAttended = 1");
                          $qry1 = mysqli_query($connection,"select * from travel_and_tour_view where travelAndTourId = '" . $_GET['travelAndTourId'] . "'");
                          $res1 = mysqli_fetch_assoc($qry1);
 
@@ -79,7 +78,7 @@ include("includes/header.php");
                     else
                     {
                     	if (isset($_GET['travelAndTourId'])) {
-                    		$qry = mysqli_query($connection,"select * from booking_view where travelAndTourId = '" . $_GET['travelAndTourId'] . "'");
+                    		$qry = mysqli_query($connection,"select * from booking_view where travelAndTourId = '" . $_GET['travelAndTourId'] . "' and isAttended = 1");
                     	$string = "No result.";
                     	}
                     }
@@ -97,6 +96,8 @@ include("includes/header.php");
                             <thead>
                                 <tr>
                                     <th>Name</th>
+                                    <th>Package Name</th>
+                                    <th>Travel Dates</th>
                                     <th>Number of Pax Booked</th>
                                     <th>Date Booked</th>
                                     <th>Booking Status</th>
@@ -112,6 +113,8 @@ include("includes/header.php");
                                 <tr>
                                     
                                     <td><?php echo $res['firstName'] . " " . $res['middleName'] . " " . $res['lastName']; ?></td>
+                                    <td><?php echo $res['packageName']; ?></td>
+                                    <td><?php echo $res['departureDate']; ?> to <?php echo $res['returnDate']; ?></td>
                                     <td><?php echo $res['numberOfPaxBooked']; ?></td>
                                     <td><?php echo $res['dateBooked']; ?></td>
                                     <td><?php echo $res['bookingStatus']; ?></td>

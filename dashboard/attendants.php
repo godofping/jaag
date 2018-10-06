@@ -11,9 +11,8 @@ include("includes/header.php");
     </div>
     <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="home.php">Home</a></li>
             <li class="breadcrumb-item">Settings</li>
-            <li class="breadcrumb-item active"><a href="applicants.php">Attendants</a></li>
+            <li class="breadcrumb-item active">Attendants</li>
         </ol>
     </div>
 

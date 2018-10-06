@@ -141,7 +141,7 @@
 								<?php endif ?>
 
 								<div class="form-group">
-									<label>Payment Type</label>
+									<label>Payment Type <small style="color: red"> * required</small></label>
 									<select class="form-control" name="paymentType" id="paymentType" required="">
 										<?php if ($counter == 0): ?>
 											<option value="Down Payment">Down Payment</option>
@@ -158,7 +158,7 @@
 								</div>
 
 								<div class="form-group">
-									<label>Remittance</label>
+									<label>Remittance <small style="color: red"> * required</small></label>
 									<select class="form-control" name="modeOfPaymentId" id="modeOfPaymentId" required="">
 										<?php $qry = mysqli_query($connection, "select * from mode_of_payment_view where paymentMode = 'Bank Transfer' or paymentMode = 'Remittance'"); while ($res = mysqli_fetch_assoc($qry)) { ?>
 												<option value="<?php echo $res['modeOfPaymentId'] ?>"><?php echo $res['paymentMode'] . " - " . $res['nameOfRemittanceOrBank']; ?></option>
@@ -167,22 +167,22 @@
 								</div>
 
 								<div class="form-group">
-									<label>Amount</label>
+									<label>Amount <small style="color: red"> * required</small></label>
 									<input class="form-control" type="number" step="any" name="amount" required="">
 								</div>
 								
 								<div class="form-group">
-									<label>Sender</label>
+									<label>Sender <small style="color: red"> * required</small></label>
 									<input class="form-control" type="text" name="nameOfSender" required="">
 								</div>
 
 								<div class="form-group">
-									<label>Transaction Code</label>
+									<label>Transaction Code <small style="color: red"> * required</small></label>
 									<input class="form-control" type="text" name="transactionNumber" required="">
 								</div>
 
 								<div class="form-group">
-									<label>Proof Image</label>
+									<label>Proof Image <small style="color: red"> * required</small></label>
 									<input class="form-control" type="file" name="mediaLocation" required="">
 								</div>
 

@@ -24,7 +24,7 @@
                                             
 
                                             <?php
-                                             $qry = mysqli_query($connection, "select * from notification_view");
+                                             $qry = mysqli_query($connection, "select * from notification_view where profileId = '" . $_SESSION['profileId'] . "' order by notificationId DESC LIMIT 10");
 
                                             while ($res = mysqli_fetch_assoc($qry)) { ?>
                                                <li><a><?php echo $res['notificationMessage']; ?></h7> <span class="mail-desc"></span> <span class="time"> <br><small><?php echo $res['dateAndTime']; ?></small></a></li>

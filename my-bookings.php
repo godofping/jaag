@@ -80,9 +80,9 @@ if (!isset($_SESSION['profileId'])) {
 												<?php 
 												$datedifference =  (strtotime($res3['departureDate']) - strtotime(date('Y-m-d'))) / 86400;
 
-												if ($datedifference >= 7 and $res3['bookingStatus'] != 'Cancelled by the customer') { ?>
+												if ($datedifference > 7 and $res3['bookingStatus'] != 'Cancelled by the customer') { ?>
 													<a class="btn btn-danger" href="controller.php?from=cancel-booking&bookingId=<?php echo base64_encode($res3['bookingId']) ?>">Cancel Booking</a>
-												<?php } elseif($datedifference < 7 and $res3['bookingStatus'] != 'Cancelled by the customer') { ?>
+												<?php } elseif($datedifference < 8 and $res3['bookingStatus'] != 'Cancelled by the customer') { ?>
 													<button class="btn btn-danger" disabled="" data-toggle="tooltip" title="Cancellation is not available because the departure date is now less than 7 days.">Cancel Booking</button>
 
 												<?php } ?>

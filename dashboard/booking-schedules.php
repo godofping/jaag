@@ -10,9 +10,9 @@
     </div>
     <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="home.php">Home</a></li>
+    
             <li class="breadcrumb-item">Schedules</li>
-            <li class="breadcrumb-item active"><a href="booking-schedules.php">Booking Schedules</a></li>
+            <li class="breadcrumb-item active">Booking Schedules</li>
         </ol>
     </div>
 

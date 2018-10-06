@@ -4,11 +4,42 @@ include("../includes/connection.php");
 <!DOCTYPE html>
 <html>
 <head>
-	<title>&nbsp;</title>
+    <title>&nbsp;</title>
+
 </head>
 <body style="text-align: center; font-family: arial;" onload="window.print()">
+
+
+<img src="../assets/images/logo-blue.png" height="80px">
+<h3>JAAG TRAVEL AND TOURS</h3>
 <h2>Unattended Customers</h2>
-	<table align="center" border="1px;">
+
+
+                    <?php 
+                    $string = "";
+                     if (isset($_GET['travelAndTourId']) and !empty($_GET['travelAndTourId'])) {
+                        $qry = mysqli_query($connection,"select * from booking_view where travelAndTourId = '" . $_GET['travelAndTourId'] . "' and isAttended = 2");
+                         $qry1 = mysqli_query($connection,"select * from booking_view where travelAndTourId = '" . $_GET['travelAndTourId'] . "' and isAttended = 2");
+
+
+                         $res1 = mysqli_fetch_assoc($qry1);
+
+                        $string = "List of travelers in the Package Name: " . $res1['packageName'] . " and with the travel dates " . $res1['departureDate'] . " to " . $res1['returnDate'] . " who did not attend";
+
+
+                    }
+                    else
+                    {
+                        if (isset($_GET['travelAndTourId'])) {
+                            $qry = mysqli_query($connection,"select * from booking_view where travelAndTourId = '" . $_GET['travelAndTourId'] . "' and isAttended = 2");
+                        $string = "No result.";
+                        }
+                    }
+                     ?>
+
+                     <br>
+                    <p  style="margin-top: -15px;"><?php echo $string; ?></hp>
+    <table align="center" border="2px;">
               <thead>
                                 <tr>
                                     <th>Name</th>
@@ -21,7 +52,8 @@ include("../includes/connection.php");
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php $qry = mysqli_query($connection,"select * from booking_view where isAttended = 2");
+                            <?php 
+                       
                                     while ($res = mysqli_fetch_assoc($qry)) { ?>
                                 <tr>
                                     
