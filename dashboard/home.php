@@ -465,21 +465,23 @@ $(function () {
     // ============================================================== 
     Morris.Area({
         element: 'morris-area-chart2',
-        data: [{
-            period: '2015',
-            Bookings: 152000,
-        },{
-            period: '2016',
-            Bookings: 230000,
+        data: [
+
+       <?php for ($year=2018; $year <= 2022 ; $year++) { ?>
+
+         {
+            period: '<?php echo $year; ?>',
+            Bookings:  <?php 
+                $total = 0;
+                $qry16 = mysqli_query($connection, "select * from payment_transaction_view where YEAR(dateOfPayment) = '" . $year . "' and paymentStatus = 'Recieved'");
+                while ($res16 = mysqli_fetch_assoc($qry16)) {
+                    $total += $res16['amount'];
+                }
+                echo $total; ?>,
         },
-        {
-            period: '2017',
-            Bookings: 200000,
-        },
-        {
-            period: '2018',
-            Bookings: <?php $qry15 = mysqli_query($connection, "SELECT coalesce(sum(amount),0) as result FROM payment_transaction_view WHERE paymentStatus = 'Recieved'"); $res15 = mysqli_fetch_assoc($qry15); echo $res15['result']; ?>,
-        }
+        
+         
+       <?php } ?>
 
         ],
         xkey: 'period',
