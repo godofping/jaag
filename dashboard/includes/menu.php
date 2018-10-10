@@ -21,9 +21,11 @@
 
                         <li> <a class="has-arrow waves-effect " aria-expanded="false"><i class="mdi mdi-calendar-clock" style="color: black !important;"></i><span class="hide-menu" >Bookings</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="add-booking.php">Add Booking</a></li>
-                                <li><a href="travel-and-tour.php">Travel and Tour</a></li>
-                            
+
+                                <?php if ($_SESSION['accountType'] == 'Administrator'): ?>
+                                    <li><a href="add-booking.php">Add Booking</a></li>
+                                <?php endif ?>
+                                    <li><a href="travel-and-tour.php">Travel and Tour</a></li>
                             </ul>
                         </li>
 
@@ -49,7 +51,9 @@
                         </li>
                         <?php endif ?>
 
-                        <li> <a class="has-arrow waves-effect " aria-expanded="false"><i class="mdi mdi-library-books" style="color: black !important;"></i><span class="hide-menu">Reports</span></a>
+
+                        <?php if ($_SESSION['accountType'] == 'Administrator'): ?>
+                            <li> <a class="has-arrow waves-effect " aria-expanded="false"><i class="mdi mdi-library-books" style="color: black !important;"></i><span class="hide-menu">Reports</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="bookings-schedules.php">Booking Schedules</a></li>
                                 <li><a href="list-of-travelers.php">List of Travelers</a></li>
@@ -60,6 +64,8 @@
                                 <li><a href="statistical-reports.php">Statistical Report</a></li>
                             </ul>
                         </li>
+                            
+                        <?php endif ?>
 
                         <?php if ($_SESSION['accountType'] == 'Administrator'): ?>
                             <li> <a class="has-arrow waves-effect " aria-expanded="false"><i class="mdi mdi-settings" style="color: black !important;"></i><span class="hide-menu">Settings</span></a>
