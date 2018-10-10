@@ -34,21 +34,21 @@ include("includes/header.php");
                     
                     <div class="row">
                         <div class="col-md-4">
-                            <label>First Name <small style="color: red"> * required</small></label>
+                            <label style="color: black">First Name <small style="color: red"> * required</small></label>
                             <div class="form-group">
                                 <input type="text" class="form-control" id="firstName" name="firstName" required="" value="<?php echo $res['firstName'] ?>">
                             </div>
                             </div>
 
                         <div class="col-md-4">
-                            <label>Middle Name <small style="color: red"> * required</small></label>
+                            <label style="color: black">Middle Name <small style="color: red"> * required</small></label>
                             <div class="form-group">
                                 <input type="text" class="form-control" id="middleName" name="middleName" required="" value="<?php echo $res['middleName'] ?>">
                             </div>
                         </div>
 
                         <div class="col-md-4">
-                            <label>Last Name <small style="color: red"> * required</small></label>
+                            <label style="color: black">Last Name <small style="color: red"> * required</small></label>
                             <div class="form-group">
                                 <input type="text" class="form-control" id="lastName" name="lastName" required="" value="<?php echo $res['lastName'] ?>">
                             </div>
@@ -58,7 +58,7 @@ include("includes/header.php");
                     <div class="row">
 
                         <div class="col-md-4">
-                            <label>Province <small style="color: red"> * required</small></label>
+                            <label style="color: black">Province <small style="color: red"> * required</small></label>
                             <div class="form-group">
                                 <select class="form-control" name="province" id="province" required="" onchange="populateCity();populateBarangay();">
                                   <option selected="" value="<?php echo $res['province'] ?>" disabled><?php echo $res['province'] ?></option>
@@ -68,7 +68,7 @@ include("includes/header.php");
                         </div>
 
                         <div class="col-md-4">
-                            <label>City <small style="color: red"> * required</small></label>
+                            <label style="color: black">City <small style="color: red"> * required</small></label>
                             <div class="form-group">
                                 <select class="form-control" name="city" id="city" required="" onchange="populateBarangay()">
                                   <option selected="" value="<?php echo $res['city'] ?>" ><?php echo $res['city'] ?></option>
@@ -77,7 +77,7 @@ include("includes/header.php");
                         </div>
 
                         <div class="col-md-4">
-                            <label>Barangay <small style="color: red"> * required</small></label>
+                            <label style="color: black">Barangay <small style="color: red"> * required</small></label>
                             <div class="form-group">
                                 <select class="form-control" name="barangay" id="barangay" required="">
                                   <option selected="" value="<?php echo $res['barangay'] ?>"><?php echo $res['barangay'] ?></option>
@@ -90,21 +90,21 @@ include("includes/header.php");
                     <div class="row">
 
                         <div class="col-md-4">
-                            <label>Street <small style="color: red"> (optional)</small></label>
+                            <label style="color: black">Street <small style="color: red"> (optional)</small></label>
                             <div class="form-group">
                                 <input type="text" class="form-control" id="street" name="street" value="<?php echo $res['street'] ?>">
                             </div>
                         </div>
 
                         <div class="col-md-4">
-                            <label>Building Number <small style="color: red"> (optional)</small></label>
+                            <label style="color: black">Building Number <small style="color: red"> (optional)</small></label>
                             <div class="form-group">
                                 <input type="text" class="form-control" id="street_number" name="buildingNumber" value="<?php echo $res['buildingNumber'] ?>">
                             </div>
                         </div>
 
                         <div class="col-md-4">
-                            <label>Contact Number <small style="color: red"> * required</small></label>
+                           <label style="color: black">Contact Number <small style="color: red"> * required</small></label>
                             <div class="form-group">
                                 <input type="text" class="form-control" id="contactNumber1" name="contactNumber" required="" value="<?php echo $res['contactNumber'] ?>" maxlength="11" minlength='11' placeholder="09xxxxxxxxxxx">
                                 <small id="contactNumberResult" class="form-control-feedback"> </small>
