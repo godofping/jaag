@@ -86,6 +86,8 @@ if (!isset($_SESSION['profileId'])) {
 													<button class="btn btn-danger" disabled="" data-toggle="tooltip" title="Cancellation is not available because the departure date is now less than 7 days.">Cancel Booking</button>
 
 												<?php } ?>
+												<br><br>
+												<a class="btn btn-success" href="dashboard/print/print-reciept.php?bookingId=<?php echo base64_encode($res3['bookingId']) ?>&from=customer" target="_blank">Print Booking Summary</a> 
 
 												
 

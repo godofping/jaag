@@ -9,6 +9,9 @@ include("../includes/connection.php");
 </head>
 <body style="text-align: center; font-family: arial;" onload="window.print()">
 
+<?php if (isset($_GET['from'])): ?>
+<?php $_GET['bookingId'] = base64_decode($_GET['bookingId']); ?>
+<?php endif ?>
 
 <img src="../assets/images/logo-blue.png" height="80px">
 <h3>JAAG TRAVEL AND TOURS</h3>
@@ -36,6 +39,7 @@ $res = mysqli_fetch_assoc($qry);
 <br>
 <span style="float: left"><?php echo $res['contactNumber']; ?></span>
 </p>
+
 
 
 <div style="text-align: left; margin-top: 60px;">
