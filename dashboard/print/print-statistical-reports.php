@@ -1,69 +1,32 @@
-<?php
-include("includes/connection.php");
-include("includes/header.php");
+<?php 
+include("../includes/connection.php");
  ?>
-            <!-- ============================================================== -->
-            <!-- Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <div class="row page-titles">
-                <div class="col-md-5 align-self-center">
-                    <h3 class="text-themecolor">Statistical Report</h3>
-                </div>
-                <div class="col-md-7 align-self-center">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                        <li class="breadcrumb-item">Reports</li>
-                        <li class="breadcrumb-item active"><a href="statistical-reports.php">Statistical Report</a></li>
-                    </ol>
-                </div>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>&nbsp;</title>
+    <link href="../assets/plugins/morrisjs/morris.css" rel="stylesheet">
+     <!-- Bootstrap Core CSS -->
 
-            </div>
-            <!-- ============================================================== -->
-            <!-- End Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
-            <div class="container-fluid">
-                <!-- ============================================================== -->
-                <!-- Start Page Content -->
-                <!-- ============================================================== -->
-
-                <?php if (isset($_GET['frequency']) and isset($_GET['packageId'])): ?>
-                
-                <?php if ($_GET['frequency'] == 'weekly'): ?>
-                    <a href="print/print-statistical-reports.php?frequency=<?php echo $_GET['frequency'] ?>&packageId=<?php echo $_GET['packageId'] ?>&week=<?php echo $_GET['week'] ?>" target="blank"><button class="btn btn-info btn-sm mr5"  style="margin-bottom: 20px;">Print</button></a> 
-                <?php endif ?>
-
-                <?php if ($_GET['frequency'] == 'monthly'): ?>
-                    <a href="print/print-statistical-reports.php?frequency=<?php echo $_GET['frequency'] ?>&packageId=<?php echo $_GET['packageId'] ?>&year=<?php echo $GET['year'] ?>" target="blank"><button class="btn btn-info btn-sm mr5"  style="margin-bottom: 20px;">Print</button></a> 
-                <?php endif ?>
-
-                <?php if ($_GET['frequency'] == 'yearly'): ?>
-                    <a href="print/print-statistical-reports.php?frequency=<?php echo $_GET['frequency'] ?>&packageId=<?php echo $_GET['packageId'] ?>" target="blank"><button class="btn btn-info btn-sm mr5"  style="margin-bottom: 20px;">Print</button></a> 
-                <?php endif ?>
+    <!--This page css - Morris CSS -->
+    <link href="../assets/plugins/morrisjs/morris.css" rel="stylesheet">
+    <!-- Custom CSS -->
+   
 
 
-                <?php endif ?>
 
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
+</head>
+<body style="text-align: center; font-family: arial;" onload="window.print()">
 
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <button class="btn btn-info" data-toggle="modal" data-target="#weeklyModal">Weekly</button>
-                                    <button class="btn btn-info" data-toggle="modal" data-target="#monthlyModal">Monthly</button>
-                                    <button class="btn btn-info" data-toggle="modal" data-target="#yearlyModal">Yearly</button>
-                                </div>
-                            </div>
 
-                
+<img src="../assets/images/logo-blue.png" height="115px">
+<h3 style="font-size: 25px;">JAAG TRAVEL AND TOURS</h3>
+<h2 style="font-size: 35px;">Statistical Report</h2>
 
-                <?php if (isset($_GET['frequency']) and isset($_GET['packageId'])): ?>
-                        <br>
-                        <h4><?php
+
+
+                     <br>
+                    <p  style="margin-top: -15px; font-size: 25px;"><?php
                         $string = "";
 
                      
@@ -97,17 +60,12 @@ include("includes/header.php");
 
 
                         echo $string;
-                        ?></h4>
-                     
+                        ?></p>
+
                         <div id="morris-bar-chart" style="height: 405px;"></div>
-                        <br>
 
-
-
-                        <div class="table-responsive m-t-20">
-                        <table class="table">
-
-                                       <?php if ($_GET['frequency']=='weekly'): ?>
+    <table align="center" border="2px;" style="margin-top: 50px; font-size: 25px;">
+             <?php if ($_GET['frequency']=='weekly'): ?>
                                            <thead>
                                                 <tr>
                                                     <th>Day</th>
@@ -129,7 +87,7 @@ include("includes/header.php");
                                         ?>
                                         <tr>
                                         <td><?php echo $dow_text; ?> (<?php echo date('Y-m-d', strtotime($year."W".$weekNumber.$day)); ?>)</td>
-                                        <td><?php 
+                                        <td>₱<?php 
                                         
                                             $total = 0;
                                             $qry16 = mysqli_query($connection, "SELECT *, WEEK(dateOfPayment)+1 AS weekOfPayment, DAYOFWEEK(dateOfPayment)-1 AS dayOfWeekOfPayment FROM payment_transaction_view where YEAR(dateOfPayment) = '" . $year . "' and paymentStatus = 'Recieved' and packageId = '" . $_GET['packageId'] . "'");
@@ -138,7 +96,7 @@ include("includes/header.php");
                                                     $total += $res16['amount'];
                                                 }
                                             }
-                                            echo "₱" . number_format($total, 2); ?></td>
+                                            echo number_format($total, 2); ?></td>
                                         <td><?php 
                                         
                                             $total = 0;
@@ -166,13 +124,13 @@ include("includes/header.php");
                                                 for ($month=1; $month <= 12 ; $month++) { ?>
                                                     <tr>
                                                         <td><?php echo date("F", strtotime($_GET['year']."-".$month)); ?> <?php echo $_GET['year']; ?></td>
-                                                    <td><?php 
+                                                    <td>₱<?php 
                                                         $total = 0;
                                                         $qry16 = mysqli_query($connection, "select * from payment_transaction_view where MONTH(dateOfPayment) = '" . $month . "' AND YEAR(dateOfPayment) = '" . $_GET['year'] . "' and paymentStatus = 'Recieved' and packageId = '" . $_GET['packageId'] . "'");
                                                         while ($res16 = mysqli_fetch_assoc($qry16)) {
                                                             $total += $res16['amount'];
                                                         }
-                                                        echo "₱" . number_format($total, 2); ?></td>
+                                                        echo  number_format($total, 2); ?></td>
                                                     <td><?php 
                                                         $total = 0;
                                                         $qry16 = mysqli_query($connection, "select * from payment_transaction_view where MONTH(dateOfPayment) = '" . $month . "' AND YEAR(dateOfPayment) = '" . $_GET['year'] . "' and paymentStatus = 'Recieved' and packageId = '" . $_GET['packageId'] . "'");
@@ -197,13 +155,13 @@ include("includes/header.php");
                                             for ($year=2018; $year <= 2022 ; $year++) { ?>
                                                 <tr>
                                                 <td><?php echo $year; ?></td>
-                                                <td><?php 
+                                                <td>₱<?php 
                                                     $total = 0;
                                                     $qry16 = mysqli_query($connection, "select * from payment_transaction_view where YEAR(dateOfPayment) = '" . $year . "' and paymentStatus = 'Recieved' and packageId = '" . $_GET['packageId'] . "'");
                                                     while ($res16 = mysqli_fetch_assoc($qry16)) {
                                                         $total += $res16['amount'];
                                                     }
-                                                    echo "₱" . number_format($total, 2); ?>
+                                                    echo number_format($total, 2); ?>
                                                         
                                                 </td>
                                                 <td><?php 
@@ -219,189 +177,25 @@ include("includes/header.php");
                                             <?php } ?>
                                        <?php endif ?>
                             </tbody>
-                        </table>
-                        </div>
+            </table>
+
+<!-- ============================================================== -->
+    <script src="../assets/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
 
 
-                    </div>
-                    <?php endif ?>
-                                
-                            </div>
-                        </div>
-                    </div>
-             
-                <!-- ============================================================== -->
-                <!-- End PAge Content -->
-                <!-- ============================================================== -->
 
-<!-- modal content -->
-<div class="modal fade" id="weeklyModal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="myLargeModalLabel">Weekly</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            </div>
-            <div class="modal-body">
-                <form method="GET">
+    <!-- ============================================================== -->
+    <!-- This page plugins -->
+    <!-- ============================================================== -->
+    <!--Morris JavaScript -->
+    <script src="../assets/plugins/raphael/raphael-min.js"></script>
+    <script src="../assets/plugins/morrisjs/morris.js"></script>
 
-                <div class="row">
-
-                    <div class="col-md-12">
-                        <label>Package Name</label>
-                        <div class="form-group">
-                            <select class="form-control" name="packageId" required="">
-                         
-                                <?php
-                                $qry = mysqli_query($connection,"select * from package_view");
-                                while ($res = mysqli_fetch_assoc($qry)) { ?>
-                                    <option value="<?php echo $res['packageId'] ?>"><?php echo $res['packageName']; ?></option>
-                                <?php } ?>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="col-md-12">
-                        <label>Month and Year</label>
-                        <div class="form-group">
-                            <input class="form-control" type="week" name="week" required="">
-                        </div>
-                    </div>
-
-                </div>
-
-                     
-
-
-                <!-- other hidden inputs -->
-                <input type="text" name="frequency" value="weekly" hidden="">
-
-
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-success waves-effect text-left">Submit</button>
-                <button type="button" class="btn btn-danger waves-effect text-left" data-dismiss="modal">Close</button>
-            </div>
-            </form>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-
-<!-- modal content -->
-<div class="modal fade" id="monthlyModal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="myLargeModalLabel">Monthly</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            </div>
-            <div class="modal-body">
-                <form method="GET">
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <label>Package Name</label>
-                        <div class="form-group">
-                            <select class="form-control" name="packageId">
-                         
-                                <?php
-                                $qry = mysqli_query($connection,"select * from package_view");
-                                while ($res = mysqli_fetch_assoc($qry)) { ?>
-                                    <option value="<?php echo $res['packageId'] ?>"><?php echo $res['packageName']; ?></option>
-                                <?php } ?>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <label>Year</label>
-                        <div class="form-group">
-                            <select class="form-control" name="year">
-                         
-                                <?php
-
-                                for ($year=2018; $year <= 2022 ; $year++) { ?>
-                                 ?>
-                                    <option value="<?php echo $year; ?>"><?php echo $year; ?></option>
-                                <?php } ?>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                     
-
-
-                <!-- other hidden inputs -->
-                <input type="text" name="frequency" value="monthly" hidden="">
-
-
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-success waves-effect text-left">Submit</button>
-                <button type="button" class="btn btn-danger waves-effect text-left" data-dismiss="modal">Close</button>
-            </div>
-            </form>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-
-<!-- modal content -->
-<div class="modal fade" id="yearlyModal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="myLargeModalLabel">Yearly</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            </div>
-            <div class="modal-body">
-                <form method="GET">
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <label>Package Name</label>
-                        <div class="form-group">
-                            <select class="form-control" name="packageId">
-                         
-                                <?php
-                                $qry = mysqli_query($connection,"select * from package_view");
-                                while ($res = mysqli_fetch_assoc($qry)) { ?>
-                                    <option value="<?php echo $res['packageId'] ?>"><?php echo $res['packageName']; ?></option>
-                                <?php } ?>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                
-                <!-- other hidden inputs -->
-                <input type="text" name="frequency" value="yearly" hidden="">
-
-
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-success waves-effect text-left">Submit</button>
-                <button type="button" class="btn btn-danger waves-effect text-left" data-dismiss="modal">Close</button>
-            </div>
-            </form>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-                
-
-
-<?php include("includes/footer.php") ?>
+    <!-- ============================================================== -->
+    <!-- Style switcher -->
+    <!-- ============================================================== -->
+    <script src="../assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
 
 <script type="text/javascript">
 
@@ -551,3 +345,7 @@ $(function () {
 
 
 </script>
+
+
+</body>
+</html>

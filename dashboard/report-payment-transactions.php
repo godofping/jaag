@@ -143,7 +143,7 @@ include("includes/header.php");
                                         <?php } ?>
                             </tbody>
                         </table>
-                    </div>
+                        </div>
                     <?php endif ?>
                 </div>
                         </div>
