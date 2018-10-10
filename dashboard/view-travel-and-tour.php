@@ -109,6 +109,7 @@ include("includes/header.php");
                                         <?php endif ?>>Add Payment</button>
                                         <button type="button" class="btn btn-block btn-outline-danger" data-toggle="modal" data-target="#viewPaymentsModal<?php echo $res['bookingId'] ?>">View Payments</button>
                                         <button type="button" class="btn btn-block btn-outline-warning" data-toggle="modal" data-target="#attendanceModal<?php echo $res['bookingId'] ?>">Attendance</button>
+                                        <a href="print/print-reciept.php?bookingId=<?php echo $res['bookingId'] ?>" target="_blank"><button style="margin-top: 7px;" type="button" class="btn btn-block btn-outline-info">PRINT BOOKING SUMMARY</button></a>
 
                                     </td>
                                 </tr>
@@ -604,7 +605,55 @@ while ($res = mysqli_fetch_assoc($qry)) { ?>
     </div>
     <!-- /.modal-dialog -->
 </div>
+<!-- /.modal -->
+
+<!-- modal content -->
+<div class="modal fade" id="recieptModal<?php echo $res['bookingId'] ?>" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myLargeModalLabel">View</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+            <h4 class="card-title">Reciept</h4>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>First Name</th>
+                                                <th>Last Name</th>
+                                                <th>Username</th>
+                                                <th>Role</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Deshmukh</td>
+                                                <td>Prohaska</td>
+                                                <td>@Genelia</td>
+                                                <td><span class="label label-danger">admin</span> </td>
+                                            </tr>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success waves-effect text-left">Submit</button>
+                <button type="button" class="btn btn-danger waves-effect text-left" data-dismiss="modal">Close</button>
+            </div>
+          
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
 <!-- /.modal --> 
+
 <?php } ?>
 
 

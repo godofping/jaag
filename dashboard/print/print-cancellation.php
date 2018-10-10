@@ -39,7 +39,7 @@ include("../includes/connection.php");
                      ?>
 
                      <br>
-                    <p  style="margin-top: -15px;"><?php echo $string; ?></hp>
+                    <p  style="margin-top: -15px;"><?php echo $string; ?></p>
     <table align="center" border="2px;">
              <thead>
                                 <tr>

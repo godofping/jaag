@@ -28,7 +28,7 @@ include("../includes/connection.php");
 
 
                         echo $string;
-                        ?></hp>
+                        ?></p>
     <table align="center" border="2px;">
               <thead>
                                 <tr>
