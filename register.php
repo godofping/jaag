@@ -203,6 +203,12 @@ function pushData()
     var contactNumber = document.getElementById("contactNumber1").value;
     var userName = document.getElementById("userName1").value;
 
+    var province = document.getElementById("province").value;
+    var city = document.getElementById("city").value;
+    var barangay = document.getElementById("barangay").value;
+
+
+
     var userNameResult = document.getElementById('userNameResult').innerText;
     var contactNumberResult = document.getElementById('contactNumberResult').innerText;
 
@@ -224,6 +230,21 @@ function pushData()
     if (passWord.length == 0) {
         error += "Please enter password. \n";
     }
+
+    if (province.length == 0) {
+        error += "Please select province. \n";
+    }
+
+
+if (city.length == 0) {
+        error += "Please select city. \n";
+    }
+
+
+if (barangay.length == 0) {
+        error += "Please select barangay. \n";
+    }
+
 
     if (userName.length != 0 && userNameResult != "Username is available") {
         error += "Please change username. \n";
