@@ -38,7 +38,7 @@ include("includes/header.php");
                                         
                                     
                                 <?php
-                                             $qry = mysqli_query($connection, "select * from notification_view where profileId = '" . $_SESSION['profileId'] . "' order by notificationId DESC LIMIT 10");
+                                             $qry = mysqli_query($connection, "select * from notification_view where profileId = '" . $_SESSION['profileId'] . "' order by notificationId DESC");
 
 
 
