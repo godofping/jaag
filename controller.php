@@ -379,7 +379,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'resend-activation') {
 
 if (isset($_GET['from']) and $_GET['from'] == 'test') {
 
-	$qry = mysqli_query($connection, "select * from booking_view where bookingStatus = 'Reserved - Pending Down Payment'");
+	$qry = mysqli_query($connection, "select * from booking_view where bookingStatus = 'Reserved - Pending Down Payment' and bookingStatus = 'Reserve'");
 	
 	while ($res = mysqli_fetch_assoc($qry)) {
 		$datedifference =  (strtotime($res['departureDate']) - strtotime(date('Y-m-d'))) / 86400;
@@ -390,6 +390,42 @@ if (isset($_GET['from']) and $_GET['from'] == 'test') {
 			mysqli_query($connection, "insert into notification_table (notificationMessage, profileId, dateAndTime) values ('Your booking with the Booking ID: ". $res['bookingId'] ." is cancelled by the system due to unpaid down payment." . " ', '" . $res['profileId'] . "', '" . date('Y-m-d H:i:s') . "') ");
 
 			$thisismymessage = "Your booking with the Booking ID: " . $res['bookingId'] ." is cancelled by the system due to unpaid down payment.";
+			$ch = curl_init();
+			$parameters = array(
+			    'apikey' => $apikey, //Your API KEY
+			    'number' => $res['contactNumber'],
+			    'message' => $thisismymessage,
+			    'sendername' => 'JAAG'
+			);
+			curl_setopt( $ch, CURLOPT_URL,'http://api.semaphore.co/api/v4/messages' );
+			curl_setopt( $ch, CURLOPT_POST, 1 );
+
+			//Send the parameters set above with the request
+			curl_setopt( $ch, CURLOPT_POSTFIELDS, http_build_query( $parameters ) );
+
+			// Receive response from server
+			curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+			$output = curl_exec( $ch );
+			curl_close ($ch);
+
+			//Show the server response
+			echo $output;
+
+
+		}
+
+
+		$qry = mysqli_query($connection, "select * from booking_view where bookingStatus = 'Booked'");
+	
+	while ($res = mysqli_fetch_assoc($qry)) {
+		$datedifference =  (strtotime($res['departureDate']) - strtotime(date('Y-m-d'))) / 86400;
+		if ($datedifference < 2) {
+		
+
+
+			mysqli_query($connection, "insert into notification_table (notificationMessage, profileId, dateAndTime) values ('Your booking with the Booking ID: ". $res['bookingId'] ." is supposed to travel tommorrow." . " ', '" . $res['profileId'] . "', '" . date('Y-m-d H:i:s') . "') ");
+
+			$thisismymessage = "Your booking with the Booking ID: " . $res['bookingId'] ." is supposed to travel tommorrow.";
 			$ch = curl_init();
 			$parameters = array(
 			    'apikey' => $apikey, //Your API KEY
