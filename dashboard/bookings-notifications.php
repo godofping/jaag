@@ -38,7 +38,7 @@ include("includes/header.php");
                 <div class="card-body">
                     <h2>New Bookings</h2>
                     <div class="table-responsive m-t-20">
-                        <table id="myTable" class="table table-bordered table-striped">
+                        <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                 	<th>Booking ID</th>
