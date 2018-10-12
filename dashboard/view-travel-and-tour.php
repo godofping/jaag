@@ -136,7 +136,7 @@ include("includes/header.php");
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="controller.php" enctype="multipart/form-data">
+                <form method="POST" action="controller.php" enctype="multipart/form-data" id="form">
                     <div class="row">
                         <div class="col-md-4">
                             <label>First Name <small style="color: red"> * required</small></label>
@@ -245,7 +245,7 @@ include("includes/header.php");
                         <div class="col-md-4">
                             <label>Payment Type <small style="color: red"> * required</small></label>
                             <div class="form-group">
-                                <select class="form-control" name="paymentType" required="">
+                                <select class="form-control" name="paymentType" id="paymentType" required="">
                                     <option>Down Payment</option>
                                     <option>Full Payment</option>
                                 </select>
@@ -269,7 +269,7 @@ include("includes/header.php");
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Amount <small style="color: red"> * required</small></label>
-                                <input class="form-control" type="number" step="any" name="amount" required="">
+                                <input class="form-control" type="number" step="any" name="amount" id="amount" required="">
                             </div>
                         </div>
 
@@ -312,7 +312,7 @@ include("includes/header.php");
 
             </div>
             <div class="modal-footer">
-                <button class="btn btn-success waves-effect text-left" onclick="pushData()">Submit</button>
+                <button type="button" class="btn btn-success waves-effect text-left" onclick="pushData()">Submit</button>
                 <button type="button" class="btn btn-danger waves-effect text-left" data-dismiss="modal">Close</button>
             </div>
             </form>
@@ -507,7 +507,7 @@ while ($res = mysqli_fetch_assoc($qry)) { ?>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Amount <small style="color: red"> * required</small></label>
-                                <input class="form-control" type="number" step="any" name="amount" required="">
+                                <input class="form-control" type="number" step="any" name="amount" id="amount" required="">
                             </div>
                         </div>
 
@@ -607,52 +607,7 @@ while ($res = mysqli_fetch_assoc($qry)) { ?>
 </div>
 <!-- /.modal -->
 
-<!-- modal content -->
-<div class="modal fade" id="recieptModal<?php echo $res['bookingId'] ?>" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="myLargeModalLabel">View</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            </div>
-            <div class="modal-body">
-            <h4 class="card-title">Reciept</h4>
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
-                                                <th>Username</th>
-                                                <th>Role</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Deshmukh</td>
-                                                <td>Prohaska</td>
-                                                <td>@Genelia</td>
-                                                <td><span class="label label-danger">admin</span> </td>
-                                            </tr>
-                                            
-                                        </tbody>
-                                    </table>
-                                </div>
 
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-success waves-effect text-left">Submit</button>
-                <button type="button" class="btn btn-danger waves-effect text-left" data-dismiss="modal">Close</button>
-            </div>
-          
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal --> 
 
 <?php } ?>
 
@@ -665,14 +620,72 @@ while ($res = mysqli_fetch_assoc($qry)) { ?>
 
 function pushData()
 {
+
+    var error = "";
+
     document.getElementById("province1").value = $("#province option:selected").text();
     document.getElementById("city1").value = $("#city option:selected").text();
 
-    var form = document.getElementById("form");
+    var firstName = document.getElementById("firstName").value;
+    var middleName = document.getElementById("middleName").value;
+    var lastName = document.getElementById("lastName").value;
 
-    document.getElementById("submitButton").addEventListener("click", function () {
-    form.submit();
-    });
+    var contactNumber = document.getElementById("contactNumber").value;
+ 
+    var province = document.getElementById("province").value;
+    var city = document.getElementById("city").value;
+    var barangay = document.getElementById("barangay").value;
+
+
+    var amount = document.getElementById("amount").value;
+
+
+
+
+
+    if (firstName.length == 0) {
+        error += "Please enter first name. \n";
+    }
+    if (middleName.length == 0) {
+        error += "Please enter middle name. \n";
+    }
+    if (lastName.length == 0) {
+        error += "Please enter last name. \n";
+    }
+
+    if (province.length == 0) {
+        error += "Please select province. \n";
+    }
+    if (city.length == 0) {
+        error += "Please select city. \n";
+    }
+    if (barangay.length == 0) {
+        error += "Please select barangay. \n";
+    }
+    if (amount.length == 0) {
+        error += "Please enter amount. \n";
+    }
+
+
+
+    if (!middleName.match(/^[a-zA-Z]+$/)){
+        error += "Please change middle name. Only characters in alphabet is allowed. \n";
+    }
+
+    if (!lastName.match(/^[a-zA-Z]+$/)){
+        error += "Please change last name. Only characters in alphabet is allowed.  \n";
+    }
+
+    if (error.length == 0) {
+        document.getElementById("form").submit();
+    }
+    else
+    {
+        window.alert(error);
+    }
+
+    
+    
 }
 
 var $select = $('[name=province]');
@@ -748,17 +761,6 @@ function calculate()
         document.getElementById("totalPriceTobePaid").textContent = '‎Customer have to pay ₱' + (paxNumber * <?php echo $res15['price']; ?>).toFixed(2) + " for Full Payment and ₱" + (paxNumber * <?php echo $res15['price'] / 2; ?>).toFixed(2) + " for Down Payment.";
 }
 
-function pushData()
-{
-    document.getElementById("province1").value = $("#province option:selected").text();
-    document.getElementById("city1").value = $("#city option:selected").text();
-
-    var form = document.getElementById("form");
-
-    document.getElementById("submitButton").addEventListener("click", function () {
-    form.submit();
-    });
-}
 
 // populateProvince();
 // populateCity();

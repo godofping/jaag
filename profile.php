@@ -175,7 +175,7 @@ if (!isset($_SESSION['profileId'])) {
 		                <input type="text" name="city1" id="city1" hidden="">
 
 							<hr>
-							<button type="submit" name="submitform" class="btn_1 green" onclick="pushData()">Update Profile</button>
+							<button type="button" class="btn btn-success waves-effect" name="submitform" id="submitButton" onclick="pushData()">Submit</button>
 					</section>
 					<!-- End section 4 -->
 				</form>
@@ -191,52 +191,69 @@ if (!isset($_SESSION['profileId'])) {
 
 <script type="text/javascript">
 
-$(document).ready(function(){
-
-
-
-    var contactNumber = $('#contactNumber1').val();
-
-
-    $.post('check.php',{contactNumber:contactNumber,from:"contactNumberProfile"},
-    function(data)
-    {
-        $('#contactNumberResult').html(data);
-    });
-
- 
-});
-
-
-$('#contactNumber1').keyup(function()
-{
-    var contactNumber = $('#contactNumber1').val();
-
-
-        $.post('check.php',{contactNumber:contactNumber,from:"contactNumberProfile"},
-        function(data)
-        {
-            $('#contactNumberResult').html(data);
-        });
-
-        
-});
-
-
-
-
 function pushData()
 {
 
-
+    var error = "";
 
     document.getElementById("province1").value = $("#province option:selected").text();
     document.getElementById("city1").value = $("#city option:selected").text();
 
+    var firstName = document.getElementById("firstName").value;
+    var middleName = document.getElementById("middleName").value;
+    var lastName = document.getElementById("lastName").value;
+
+    var contactNumber = document.getElementById("contactNumber1").value;
+ 
+    var province = document.getElementById("province").value;
+    var city = document.getElementById("city").value;
+    var barangay = document.getElementById("barangay").value;
+
+    var contactNumberResult = document.getElementById('contactNumberResult').innerText;
+
+    if (firstName.length == 0) {
+        error += "Please enter first name. \n";
+    }
+    if (middleName.length == 0) {
+        error += "Please enter middle name. \n";
+    }
+    if (lastName.length == 0) {
+        error += "Please enter last name. \n";
+    }
+
+
+
+    if (province.length == 0) {
+        error += "Please select province. \n";
+    }
+    if (city.length == 0) {
+        error += "Please select city. \n";
+    }
+    if (barangay.length == 0) {
+        error += "Please select barangay. \n";
+    }
+
+
+    if (!middleName.match(/^[a-zA-Z]+$/)){
+        error += "Please change middle name. Only characters in alphabet is allowed. \n";
+    }
+
+    if (!lastName.match(/^[a-zA-Z]+$/)){
+        error += "Please change last name. Only characters in alphabet is allowed.  \n";
+    }
+
+    if (error.length == 0) {
+        document.getElementById("form").submit();
+    }
+    else
+    {
+        window.alert(error);
+    }
 
     
     
 }
+
 
 
 populateProvince();
@@ -293,6 +310,8 @@ function populateBarangay() {
 
   });
 }
+
+
 
 
 

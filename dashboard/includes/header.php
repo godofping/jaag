@@ -134,14 +134,18 @@
 
 
                                             while ($res = mysqli_fetch_assoc($qry)) { ?>
-                                                <a href="<?php if (strpos($res['notificationMessage'], 'New payment with the Payment ID:') === 0): ?>
-                                                    payment-transactions.php
+                                                <a style="background-color: <?php if ($res['isRead'] == 0): ?>
+                                                    
+                                                <?php endif ?><?php if ($res['isRead'] == 1): ?>
+                                                    black
+                                                <?php endif ?>;" href="<?php if (strpos($res['notificationMessage'], 'New payment with the Payment ID:') === 0): ?>
+                                                    controller.php?from=payment-transactions&notificationId=<?php echo $res['notificationId'] ?>
                                                 <?php elseif (strpos($res['notificationMessage'], 'New Booking with the Booking ID:') === 0): ?>
-                                                    bookings-notifications.php
+                                                    controller.php?from=bookings-notifications&notificationId=<?php echo $res['notificationId'] ?>
                                                 <?php endif ?>">
                                                 
                                                     <div class="mail-contnet">
-                                                    <h5><?php echo $res['notificationMessage']; ?></h5> <span class="mail-desc"></span> <span class="time"><?php echo $res['dateAndTime']; ?></span> </div>
+                                                    <h5><?php echo $res['notificationMessage']; ?></h5> <span class="mail-desc"></span> <span class="time" style="color: white;"><?php echo $res['dateAndTime']; ?></span> </div>
                                                 </a>
                                            <?php  } ?>
                                         </div>

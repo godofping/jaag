@@ -127,7 +127,7 @@ include("includes/header.php");
 
                     <div class="row float-right">
                         
-                         <button type="submit" class="btn btn-success waves-effect" name="submitform" id="submitButton" onclick="pushData()">Submit</button>
+                         <button type="button" class="btn btn-success waves-effect" name="submitform" id="submitButton" onclick="pushData()">Submit</button>
                     </div>
 
                 </form>
@@ -171,8 +171,6 @@ $('#contactNumber1').keyup(function()
         {
             $('#contactNumberResult').html(data);
         });
-
-        
 });
 
 
@@ -205,6 +203,13 @@ function pushData()
         error += "Please enter contact number. \n";
     }
 
+    if (!middleName.match(/^[a-zA-Z]+$/)){
+        error += "Please change middle name. Only characters in alphabet is allowed. \n";
+    }
+
+    if (!lastName.match(/^[a-zA-Z]+$/)){
+        error += "Please change last name. Only characters in alphabet is allowed.  \n";
+    }
 
 
     if (contactNumber.length != 0 && (contactNumberResult == "Incorrect format" || contactNumberResult == "Contact number is already taken")) {

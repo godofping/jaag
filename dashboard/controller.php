@@ -660,4 +660,14 @@ if (isset($_POST['from']) and $_POST['from'] == 'add-payment-on-admin') {
 }
 
 
+if (isset($_GET['from']) and $_GET['from'] == 'payment-transactions') {
+	mysqli_query($connection, "update notification_table set isRead = 1 where notificationId = '" . $_GET['notificationId'] . "'");
+	header("Location: payment-transactions.php");
+}
+
+if (isset($_GET['from']) and $_GET['from'] == 'bookings-notifications') {
+	mysqli_query($connection, "update notification_table set isRead = 1 where notificationId = '" . $_GET['notificationId'] . "'");
+	header("Location: bookings-notifications.php");
+}
+
 ?>

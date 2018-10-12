@@ -173,7 +173,7 @@ $res1 = mysqli_fetch_assoc($qry1);
                                                         }
                                                         else
                                                         {
-                                                        	echo "You can book this.";
+                                                        	echo "You can book this if there is no conflict schedules or there is an available slots.";
                                                         }
                                                     }
                                                 

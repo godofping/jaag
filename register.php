@@ -234,24 +234,25 @@ function pushData()
     if (province.length == 0) {
         error += "Please select province. \n";
     }
-
-
-if (city.length == 0) {
+    if (city.length == 0) {
         error += "Please select city. \n";
     }
-
-
-if (barangay.length == 0) {
+    if (barangay.length == 0) {
         error += "Please select barangay. \n";
     }
-
-
     if (userName.length != 0 && userNameResult != "Username is available") {
         error += "Please change username. \n";
     }
-
     if (contactNumber.length != 0 && contactNumberResult != "Contact number is available") {
         error += "Please change contact number. \n";
+    }
+
+    if (!middleName.match(/^[a-zA-Z]+$/)){
+        error += "Please change middle name. Only characters in alphabet is allowed. \n";
+    }
+
+    if (!lastName.match(/^[a-zA-Z]+$/)){
+        error += "Please change last name. Only characters in alphabet is allowed.  \n";
     }
 
     if (error.length == 0) {
