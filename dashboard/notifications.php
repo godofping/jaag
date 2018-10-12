@@ -32,21 +32,39 @@ include("includes/header.php");
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
+
+                                <table class="table">
+                                    <tbody>
+                                        
+                                    
                                 <?php
                                              $qry = mysqli_query($connection, "select * from notification_view where profileId = '" . $_SESSION['profileId'] . "' order by notificationId DESC LIMIT 10");
 
 
 
                                             while ($res = mysqli_fetch_assoc($qry)) { ?>
+                                                <tr>
+                                            <td>
+                                                <a href="<?php if (strpos($res['notificationMessage'], 'New payment with the Payment ID:') === 0): ?>
+                                                    payment-transactions.php
+                                                <?php elseif (strpos($res['notificationMessage'], 'New Booking with the Booking ID:') === 0): ?>
+                                                    bookings-notifications.php
+                                                <?php endif ?>">
+                                                    <div class="mail-contnet">
+                                                    <h5><?php echo $res['notificationMessage']; ?></h5> <span class="mail-desc"></span> <span class="time"><small><?php echo $res['dateAndTime']; ?></small></span>
+                                                </div>
+
+                                                </a>
+                                            </td>
+                                        </tr>
                                                 <a>
                                                 
-                                                    <div class="mail-contnet">
-                                                    <h5><?php echo $res['notificationMessage']; ?></h5> <span class="mail-desc"></span> <span class="time"><small><?php echo $res['dateAndTime']; ?></small></span> </div>
+                                                    
                                                 </a>
                                            <?php  } ?>
+                                           </tbody>
 
-
-
+                                </table>
 
                                 
                             </div>

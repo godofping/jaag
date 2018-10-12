@@ -5,11 +5,17 @@ include("../includes/connection.php");
 <html>
 <head>
     <title>&nbsp;</title>
-
+<style type="text/css" media="print">
+    @page 
+    {
+        size: auto;   /* auto is the initial value */
+        margin: 0mm;  /* this affects the margin in the printer settings */
+    }
+</style>
 </head>
 <body style="text-align: center; font-family: arial;" onload="window.print()">
 
-
+<br><br>
 <img src="../assets/images/logo-blue.png" height="80px">
 <h3>JAAG TRAVEL AND TOURS</h3>
 <h2>Cancellation</h2>

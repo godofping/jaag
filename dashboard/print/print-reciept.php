@@ -5,7 +5,13 @@ include("../includes/connection.php");
 <html>
 <head>
     <title>&nbsp;</title>
-
+<style type="text/css" media="print">
+    @page 
+    {
+        size: auto;   /* auto is the initial value */
+        margin: 0mm;  /* this affects the margin in the printer settings */
+    }
+</style>
 </head>
 <body style="text-align: center; font-family: arial;" onload="window.print()">
 
@@ -14,6 +20,7 @@ include("../includes/connection.php");
 <?php endif ?>
 
 <img src="../assets/images/logo-blue.png" height="80px">
+<br><br>
 <h3>JAAG TRAVEL AND TOURS</h3>
 <h4>BLK. 4, LOT 28, YELLOW VILLAGE, NEW ISABELA <br> TACURONG CITY, SULTAN KUDARAT 9800</h4>
 <h5>CONTACT #: 0997-260-9952    <br>  

@@ -134,7 +134,11 @@
 
 
                                             while ($res = mysqli_fetch_assoc($qry)) { ?>
-                                                <a>
+                                                <a href="<?php if (strpos($res['notificationMessage'], 'New payment with the Payment ID:') === 0): ?>
+                                                    payment-transactions.php
+                                                <?php elseif (strpos($res['notificationMessage'], 'New Booking with the Booking ID:') === 0): ?>
+                                                    bookings-notifications.php
+                                                <?php endif ?>">
                                                 
                                                     <div class="mail-contnet">
                                                     <h5><?php echo $res['notificationMessage']; ?></h5> <span class="mail-desc"></span> <span class="time"><?php echo $res['dateAndTime']; ?></span> </div>

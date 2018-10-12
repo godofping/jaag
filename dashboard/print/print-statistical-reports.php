@@ -11,13 +11,20 @@ include("../includes/connection.php");
     <!--This page css - Morris CSS -->
     <link href="../assets/plugins/morrisjs/morris.css" rel="stylesheet">
     <!-- Custom CSS -->
-   
+   <style type="text/css" media="print">
+    @page 
+    {
+        size: auto;   /* auto is the initial value */
+        margin: 0mm;  /* this affects the margin in the printer settings */
+    }
+    
+</style>
 
 
 
 </head>
 <body style="text-align: center; font-family: arial;" onload="window.print()">
-
+<br><br>
 
 <img src="../assets/images/logo-blue.png" height="115px">
 <h3 style="font-size: 25px;">JAAG TRAVEL AND TOURS</h3>
