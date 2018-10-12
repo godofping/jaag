@@ -122,17 +122,39 @@
                                     <td class="thick-line"></td>
     								<td class="thick-line"></td>
     								<td class="thick-line"></td>
-    								<td class="thick-line text-center"><strong>Subtotal</strong></td>
-    								<td class="thick-line text-right">₱<?php echo number_format($res['price'] * $res['numberOfPaxBooked'],2); ?></td>
+    								<td class="thick-line text-center"><strong>Total</strong></td>
+    								<td class="thick-line text-right">₱<?php $total = $res['price'] * $res['numberOfPaxBooked']; echo number_format($total, 2); ?></h3></td>
     							</tr>
     					
     							<tr>
     								<td class="no-line"></td>
                                     <td class="no-line"></td>
     								<td class="no-line"></td>
-    								<td class="no-line text-center"><strong>Total</strong></td>
-    								<td class="no-line text-right">₱<?php echo number_format($res['price'] * $res['numberOfPaxBooked'],2); ?></td>
+    								<td class="no-line text-center"><strong>Amount Paid</strong></td>
+    								<td class="no-line text-right">₱<?php 
+                                    $qry1 = mysqli_query($connection, "select sum(amount) as amountPaid from payment_transaction_view where bookingId = '" . base64_decode($_GET['bookingId']) . "' and paymentStatus = 'Recieved'");
+        $res1 = mysqli_fetch_assoc($qry1);
+
+                                    echo number_format($res1['amountPaid'],2); 
+
+
+
+
+
+
+                                    ?></td>
     							</tr>
+
+                                <tr>
+                                    <td class="no-line"></td>
+                                    <td class="no-line"></td>
+                                    <td class="no-line"></td>
+                                    <td class="no-line text-center"><strong>Balance</strong></td>
+                                    <td class="no-line text-right">₱<?php echo number_format($total - $res1['amountPaid'],2); ?></td>
+                                </tr>
+
+
+
     						</tbody>
     					</table>
     				</div>

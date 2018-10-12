@@ -50,7 +50,7 @@ $res = mysqli_fetch_assoc($qry);
     <h4>Number of pax booked: <?php echo $res['numberOfPaxBooked']; ?></h4>
 
     <h3>Total: ₱<?php $total = $res['price'] * $res['numberOfPaxBooked']; echo number_format($total, 2); ?></h3>
-    <?php $qry1 = mysqli_query($connection, "select sum(amount) as amountPaid from payment_transaction_view where bookingId = '" . $res['bookingId'] . "'");
+    <?php $qry1 = mysqli_query($connection, "select sum(amount) as amountPaid from payment_transaction_view where bookingId = '" . $res['bookingId'] . "' and paymentStatus = 'Recieved'");
         $res1 = mysqli_fetch_assoc($qry1);
      ?>
     <h3>Amount Paid: ₱<?php echo number_format($res1['amountPaid'],2); ?></h3>
