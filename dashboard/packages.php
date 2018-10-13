@@ -49,7 +49,7 @@ include("includes/header.php");
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php $qry = mysqli_query($connection,"select * from package_view");
+                            <?php $qry = mysqli_query($connection,"select * from package_view where isDeleted = 0");
                                     while ($res = mysqli_fetch_assoc($qry)) { ?>
                                 <tr>
                                     <td><?php echo $res['packageId']; ?></td>
@@ -69,7 +69,7 @@ include("includes/header.php");
                          
                                     <td>
                                         <button type="button" class="btn btn-block btn-outline-warning" data-toggle="modal" data-target="#updateModal<?php echo $res['packageId']; ?>">Update</button>
-                                        <button type="button" class="btn btn-block btn-outline-danger" data-toggle="modal" data-target="#deleteModal<?php echo $res['packageId']; ?>">Delete</button>
+                                    
                                     </td>
                                 </tr>
                             <?php } ?>

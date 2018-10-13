@@ -419,7 +419,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'test') {
 	
 	while ($res = mysqli_fetch_assoc($qry)) {
 		$datedifference =  (strtotime($res['departureDate']) - strtotime(date('Y-m-d'))) / 86400;
-		if ($datedifference < 2) {
+		if ($datedifference = 1) {
 		
 
 
