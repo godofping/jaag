@@ -49,7 +49,7 @@ include("includes/header.php");
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php $qry = mysqli_query($connection,"select * from package_view where isDeleted = 0");
+                            <?php $qry = mysqli_query($connection,"select * from package_view");
                                     while ($res = mysqli_fetch_assoc($qry)) { ?>
                                 <tr>
                                     <td><?php echo $res['packageId']; ?></td>
