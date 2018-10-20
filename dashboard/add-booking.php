@@ -57,7 +57,7 @@ include("includes/header.php");
                                 <div class="col-md-6">
                                     <label>Number of Pax</label>
                                     <div class="form-group">
-                                        <input type="int" max="999" min="1" class="form-control" id="maxPax" name="maxPax" required="">
+                                        <input type="number" min="15" max="999" class="form-control" id="maxPax" name="maxPax" required="">
                                     </div>
                                 </div>
                             </div>

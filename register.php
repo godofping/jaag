@@ -1,4 +1,4 @@
-<?php include("dashboard/includes/connection.php");include("includes/header.php"); ?>
+    <?php include("dashboard/includes/connection.php");include("includes/header.php"); ?>
 
 <main>
 <section id="hero" class="login">
@@ -247,11 +247,11 @@ function pushData()
         error += "Please change contact number. \n";
     }
 
-    if (!middleName.match(/^[a-zA-Z]+$/)){
+    if (!middleName.match(/^[a-zA-Z ]+$/)){
         error += "Please change middle name. Only characters in alphabet is allowed. \n";
     }
 
-    if (!lastName.match(/^[a-zA-Z]+$/)){
+    if (!lastName.match(/^[a-zA-Z ]+$/)){
         error += "Please change last name. Only characters in alphabet is allowed.  \n";
     }
 

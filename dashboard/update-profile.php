@@ -203,11 +203,11 @@ function pushData()
         error += "Please enter contact number. \n";
     }
 
-    if (!middleName.match(/^[a-zA-Z]+$/)){
+    if (!middleName.match(/^[a-zA-Z ]+$/)){
         error += "Please change middle name. Only characters in alphabet is allowed. \n";
     }
 
-    if (!lastName.match(/^[a-zA-Z]+$/)){
+    if (!lastName.match(/^[a-zA-Z ]+$/)){
         error += "Please change last name. Only characters in alphabet is allowed.  \n";
     }
 

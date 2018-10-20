@@ -144,7 +144,13 @@
         buttonClasses: ['btn', 'btn-sm'],
         applyClass: 'btn-danger',
         cancelClass: 'btn-inverse',
-        minDate : new Date(),
+        <?php 
+        if (!isset($iamhere)) {
+            ?>
+minDate : new Date(),
+            <?php
+        }
+        ?>
         format: 'YYYY/MM/DD'
     });
     $('.input-daterange-timepicker').daterangepicker({

@@ -1,6 +1,7 @@
 <?php
 include("includes/connection.php");
 include("includes/header.php");
+$iamhere = 1;
  ?>
             <!-- ============================================================== -->
             <!-- Bread crumb and right sidebar toggle -->
@@ -27,8 +28,17 @@ include("includes/header.php");
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
-                <?php if (isset($_GET['month']) and isset($_GET['packageId'])): ?>
-                <a href="print/print-bookings-schedules.php?month=<?php echo $_GET['month'] ?>&packageId=<?php echo $_GET['packageId'] ?>" target="blank"><button class="btn btn-info btn-sm mr5"  style="margin-bottom: 20px;">Print</button></a> 
+
+                <?php 
+
+                $dates = explode('- ', $_GET['daterange']);
+                $date1 = date("Y-m-d", strtotime($dates[0]));
+                $date2 = date("Y-m-d", strtotime($dates[1]));
+                ?>
+
+
+                <?php if (isset($_GET['daterange']) and isset($_GET['packageId'])): ?>
+                <a href="print/print-bookings-schedules.php?daterange=<?php echo $_GET['daterange'] ?>&packageId=<?php echo $_GET['packageId'] ?>" target="blank"><button class="btn btn-info btn-sm mr5"  style="margin-bottom: 20px;">Print</button></a> 
                 <?php endif ?>
                 
 
@@ -40,9 +50,9 @@ include("includes/header.php");
 
                     <div class="row">
                         <div class="col-md-4">
-                            <label>Month</label>
+                            <label>Date Range</label>
                             <div class="form-group">
-                                <input class="form-control" type="month" name="month"  value="<?php echo date('Y-m') ?>">
+                                <input class="form-control input-daterange-datepicker" type="text" name="daterange" required="">
                             </div>
                         </div>
                     </div>
@@ -72,19 +82,20 @@ include("includes/header.php");
 
                 </form>
 
-                    <?php if (isset($_GET['month']) and isset($_GET['packageId'])): ?>
+                    <?php if (isset($_GET['daterange']) and isset($_GET['packageId'])): ?>
                         <br>
-                        <h4><?php
+                        <h4>
+                        <?php
                         $string = "";
 
-                        if (isset($_GET['month']) and !empty($_GET['packageId'])) {
+                        if (isset($_GET['daterange']) and !empty($_GET['packageId'])) {
                             $qry13 = mysqli_query($connection, "select * from package_view where packageId = '" . $_GET['packageId'] . "'");
                             $res13 = mysqli_fetch_assoc($qry13);
-                            echo "All booking Schedules on " . date("F Y", strtotime($_GET['month'])) . " with the package name: " . $res13['packageName'];
+                            $string =  "All booking Schedules from " . date("F Y", strtotime($date1)) . " to ". date("F Y", strtotime($date2)) ." with the package name: " . $res13['packageName'] ."";
                         }
                         else
                         {
-                            echo "All booking Schedules on " . date("F Y", strtotime($_GET['month'])) . "";
+                            $string =  "All booking Schedules from " . date("F d Y", strtotime($date1)) . " to " . date("F d Y", strtotime($date2))."";
                         }
 
 
@@ -105,7 +116,18 @@ include("includes/header.php");
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php $qry = mysqli_query($connection,"select * from travel_and_tour_view where (departureDate like '%" . $_GET['month'] . "%' or returnDate like '%" . $_GET['month'] . "%')  and packageId like '%" . $_GET['packageId'] ."%'");
+                            <?php 
+
+
+                                if (empty($_GET['packageId'])) {
+                                    $qry = mysqli_query($connection,"select * from travel_and_tour_view where departureDate between '" . $date1 . "' and '" . $date2 . "' AND returnDate between '" . $date1 . "' and '" . $date2 . "' ");
+
+                                }
+                                else
+                                {
+                                    $qry = mysqli_query($connection,"select * from travel_and_tour_view where  packageId like '%" . $_GET['packageId'] ."%' AND (departureDate between '" . $date1 . "' and '" . $date2 . "' AND returnDate between '" . $date1 . "' and '" . $date2 . "') ");
+
+                                }
 
                   
 
