@@ -64,7 +64,7 @@ include("includes/header.php");
                 <?php if (isset($_GET['frequency']) and isset($_GET['packageId'])): ?>
                         <br>
                         <h4><?php
-                        $string = "";
+                     
 
                      
                             if ($_GET['frequency'] == 'weekly') {
@@ -101,7 +101,7 @@ include("includes/header.php");
                         
 
 
-                        echo $string;
+                 
                         ?></h4>
                      
                  
@@ -121,6 +121,7 @@ include("includes/header.php");
                                     <th>Date Booked</th>
                                     <th>Booking Status</th>
                                     <th>Customer Type</th>
+                                    <th>Attendance</th>
                              
                                
                                 </tr>
@@ -140,6 +141,13 @@ include("includes/header.php");
                                     <td><?php echo $res['dateBooked']; ?></td>
                                     <td><?php echo $res['bookingStatus']; ?></td>
                                     <td><?php echo $res['accountType']; ?></td>
+                                    <td><?php if ($res['isAttended'] == '0') {
+                                        echo "TBA";
+                                    }elseif ($res['isAttended']=='1') {
+                                        echo "Present";
+                                    }elseif ($res['isAttended']=='2') {
+                                        echo "Absent";
+                                    } ?></td>
                          
                           
                                 </tr>
@@ -156,6 +164,7 @@ include("includes/header.php");
                                     <th>Date Booked</th>
                                     <th>Booking Status</th>
                                     <th>Customer Type</th>
+                                    <th>Attendance</th>
                              
                                
                                 </tr>
@@ -176,6 +185,13 @@ include("includes/header.php");
                                     <td><?php echo $res['dateBooked']; ?></td>
                                     <td><?php echo $res['bookingStatus']; ?></td>
                                     <td><?php echo $res['accountType']; ?></td>
+                                    <td><?php if ($res['isAttended'] == '0') {
+                                        echo "TBA";
+                                    }elseif ($res['isAttended']=='1') {
+                                        echo "Present";
+                                    }elseif ($res['isAttended']=='2') {
+                                        echo "Absent";
+                                    } ?></td>
                          
                           
                                 </tr>
@@ -192,6 +208,7 @@ include("includes/header.php");
                                     <th>Date Booked</th>
                                     <th>Booking Status</th>
                                     <th>Customer Type</th>
+                                    <th>Attendance</th>
                              
                                
                                 </tr>
@@ -212,6 +229,13 @@ include("includes/header.php");
                                     <td><?php echo $res['dateBooked']; ?></td>
                                     <td><?php echo $res['bookingStatus']; ?></td>
                                     <td><?php echo $res['accountType']; ?></td>
+                                    <td><?php if ($res['isAttended'] == '0') {
+                                        echo "TBA";
+                                    }elseif ($res['isAttended']=='1') {
+                                        echo "Present";
+                                    }elseif ($res['isAttended']=='2') {
+                                        echo "Absent";
+                                    } ?></td>
                          
                           
                                 </tr>

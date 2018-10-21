@@ -74,6 +74,7 @@ include("../includes/connection.php");
                                     <th>Date Booked</th>
                                     <th>Booking Status</th>
                                     <th>Customer Type</th>
+                                    <th>Attendance</th>
                              
                                
                                 </tr>
@@ -93,6 +94,13 @@ include("../includes/connection.php");
                                     <td><?php echo $res['dateBooked']; ?></td>
                                     <td><?php echo $res['bookingStatus']; ?></td>
                                     <td><?php echo $res['accountType']; ?></td>
+                                    <td><?php if ($res['isAttended'] == '0') {
+                                        echo "TBA";
+                                    }elseif ($res['isAttended']=='1') {
+                                        echo "Present";
+                                    }elseif ($res['isAttended']=='2') {
+                                        echo "Absent";
+                                    } ?></td>
                          
                           
                                 </tr>
@@ -109,6 +117,7 @@ include("../includes/connection.php");
                                     <th>Date Booked</th>
                                     <th>Booking Status</th>
                                     <th>Customer Type</th>
+                                    <th>Attendance</th>
                              
                                
                                 </tr>
@@ -129,6 +138,13 @@ include("../includes/connection.php");
                                     <td><?php echo $res['dateBooked']; ?></td>
                                     <td><?php echo $res['bookingStatus']; ?></td>
                                     <td><?php echo $res['accountType']; ?></td>
+                                    <td><?php if ($res['isAttended'] == '0') {
+                                        echo "TBA";
+                                    }elseif ($res['isAttended']=='1') {
+                                        echo "Present";
+                                    }elseif ($res['isAttended']=='2') {
+                                        echo "Absent";
+                                    } ?></td>
                          
                           
                                 </tr>
@@ -145,6 +161,7 @@ include("../includes/connection.php");
                                     <th>Date Booked</th>
                                     <th>Booking Status</th>
                                     <th>Customer Type</th>
+                                    <th>Attendance</th>
                              
                                
                                 </tr>
@@ -165,6 +182,13 @@ include("../includes/connection.php");
                                     <td><?php echo $res['dateBooked']; ?></td>
                                     <td><?php echo $res['bookingStatus']; ?></td>
                                     <td><?php echo $res['accountType']; ?></td>
+                                    <td><?php if ($res['isAttended'] == '0') {
+                                        echo "TBA";
+                                    }elseif ($res['isAttended']=='1') {
+                                        echo "Present";
+                                    }elseif ($res['isAttended']=='2') {
+                                        echo "Absent";
+                                    } ?></td>
                          
                           
                                 </tr>
