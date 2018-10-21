@@ -99,7 +99,8 @@ include("includes/header.php");
                         echo $string;
                         ?></h4>
                      
-                        <div id="morris-bar-chart" style="height: 405px;"></div>
+                 
+                        <div id="morris-area-chart2" style="height: 405px;"></div>
                         <br>
 
 
@@ -410,11 +411,12 @@ $(function () {
 
 <?php if (isset($_GET['frequency']) and $_GET['frequency'] == 'weekly') { ?>
 
-    // Morris bar chart
-    Morris.Bar({
-        element: 'morris-bar-chart',
-        data: [
-            <?php  $last_sunday = strtotime('last Sunday');
+
+    //start area
+    Morris.Area({
+        element: 'morris-area-chart2',
+        data: [  <?php  
+            $last_sunday = strtotime('last Sunday');
         
         for ($day=1; $day <= 7 ; $day++) { 
             $dow_numeric = $day;
@@ -425,8 +427,9 @@ $(function () {
             $dow_text = date('l', strtotime('+'.$dow_numeric.' day', $last_sunday));
 
             ?>
-{
-            y: '<?php echo $dow_text; ?>',
+        
+            {
+            period: '<?php echo date('Y-m-d', strtotime($year."W".$weekNumber.$day)); ?>',
             a: '<?php 
             
                 $total = 0;
@@ -450,30 +453,36 @@ $(function () {
             },<?php } ?>
 
         ],
-        xkey: 'y',
+        xkey: 'period',
         ykeys: ['a','b'],
         labels: ['Income', 'Number of customers'],
-        barColors:['#55ce63', '#1a76d8'],
+        pointSize: 0,
+        fillOpacity: 0.4,
+        pointStrokeColors:['#55ce63', '#1a76d8'],
+        behaveLikeLine: true,
+        gridLineColor: 'rgba(120, 130, 140, 0.13)',
+        lineWidth: 0,
+        smooth: true,
         hideHover: 'auto',
-        gridLineColor: '#eef0f2',
+        lineColors: ['#ccff33', '#01c0c8'],
         resize: true
+        
     });
+    //end area
 
 
 <?php } ?>
 
 <?php if (isset($_GET['frequency']) and $_GET['frequency'] == 'monthly') { ?>
 
-    // Morris bar chart
-    Morris.Bar({
-        element: 'morris-bar-chart',
-        data: [
-
-        <?php 
+    //start area
+    Morris.Area({
+        element: 'morris-area-chart2',
+        data: [  <?php 
         for ($month=1; $month <= 12 ; $month++) { ?>
             
             {
-            y: '<?php echo date("F", strtotime($_GET['year']."-".$month)); ?>',
+            period: '<?php echo $_GET['year']."-".$month; ?>',
             a: <?php 
                 $total = 0;
                 $qry16 = mysqli_query($connection, "select * from payment_transaction_view where MONTH(dateOfPayment) = '" . $month . "' AND YEAR(dateOfPayment) = '" . $_GET['year'] . "' and paymentStatus = 'Recieved' and packageId = '" . $_GET['packageId'] . "'");
@@ -493,14 +502,22 @@ $(function () {
         <?php } ?>
 
         ],
-        xkey: 'y',
+        xkey: 'period',
         ykeys: ['a','b'],
         labels: ['Income', 'Number of customers'],
-        barColors:['#55ce63', '#1a76d8'],
+        pointSize: 0,
+        fillOpacity: 0.4,
+        pointStrokeColors:['#55ce63', '#1a76d8'],
+        behaveLikeLine: true,
+        gridLineColor: 'rgba(120, 130, 140, 0.13)',
+        lineWidth: 0,
+        smooth: true,
         hideHover: 'auto',
-        gridLineColor: '#eef0f2',
+        lineColors: ['#ccff33', '#01c0c8'],
         resize: true
+        
     });
+    //end area
 
 
 
@@ -508,16 +525,15 @@ $(function () {
 
 <?php if (isset($_GET['frequency']) and $_GET['frequency'] == 'yearly') { ?>
 
-    // Morris bar chart
-    Morris.Bar({
-        element: 'morris-bar-chart',
-        data: [
 
-        <?php 
+    //start area
+    Morris.Area({
+        element: 'morris-area-chart2',
+        data: [  <?php 
         for ($year=2018; $year <= 2022 ; $year++) { ?>
             
             {
-            y: '<?php echo $year; ?>',
+            period: '<?php echo $year; ?>',
             a: <?php 
                 $total = 0;
                 $qry16 = mysqli_query($connection, "select * from payment_transaction_view where YEAR(dateOfPayment) = '" . $year . "' and paymentStatus = 'Recieved' and packageId = '" . $_GET['packageId'] . "'");
@@ -537,14 +553,27 @@ $(function () {
         <?php } ?>
 
         ],
-        xkey: 'y',
+        xkey: 'period',
         ykeys: ['a','b'],
         labels: ['Income', 'Number of customers'],
-        barColors:['#55ce63', '#1a76d8'],
+        pointSize: 0,
+        fillOpacity: 0.4,
+        pointStrokeColors:['#55ce63', '#1a76d8'],
+        behaveLikeLine: true,
+        gridLineColor: 'rgba(120, 130, 140, 0.13)',
+        lineWidth: 0,
+        smooth: true,
         hideHover: 'auto',
-        gridLineColor: '#eef0f2',
+        lineColors: ['#ccff33', '#01c0c8'],
         resize: true
+        
     });
+    //end area
+
+
+
+
+
 <?php } ?>
 
 });

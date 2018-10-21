@@ -21,20 +21,27 @@ include("../includes/connection.php");
 <h2>Booking Schedules</h2>
 
 <?php 
+
+$dates = explode('- ', $_GET['daterange']);
+$date1 = date("Y-m-d", strtotime($dates[0]));
+$date2 = date("Y-m-d", strtotime($dates[1]));
+
 $string = "";
 
-    if (isset($_GET['month']) and !empty($_GET['packageId'])) {
+
+
+    if (isset($_GET['daterange']) and !empty($_GET['packageId'])) {
         $qry13 = mysqli_query($connection, "select * from package_view where packageId = '" . $_GET['packageId'] . "'");
         $res13 = mysqli_fetch_assoc($qry13);
-        echo "All booking Schedules on " . date("F Y", strtotime($_GET['month'])) . " with the package name: " . $res13['packageName'];
+        $string =  "All booking Schedules from " . date("F Y", strtotime($date1)) . " to ". date("F Y", strtotime($date2)) ." with the package name: " . $res13['packageName'] ."";
     }
     else
     {
-        echo "All booking Schedules on " . date("F Y", strtotime($_GET['month'])) . "";
+        $string =  "All booking Schedules from " . date("F d Y", strtotime($date1)) . " to " . date("F d Y", strtotime($date2))."";
     }
 
 
-    echo $string;
+
  ?>
 
 <br>
@@ -53,7 +60,17 @@ $string = "";
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php $qry = mysqli_query($connection,"select * from travel_and_tour_view where (departureDate like '%" . $_GET['month'] . "%' or returnDate like '%" . $_GET['month'] . "%')  and packageId like '%" . $_GET['packageId'] ."%'");
+                            <?php
+
+                             if (empty($_GET['packageId'])) {
+                                    $qry = mysqli_query($connection,"select * from travel_and_tour_view where departureDate between '" . $date1 . "' and '" . $date2 . "' AND returnDate between '" . $date1 . "' and '" . $date2 . "' ");
+
+                                }
+                                else
+                                {
+                                    $qry = mysqli_query($connection,"select * from travel_and_tour_view where  packageId like '%" . $_GET['packageId'] ."%' AND (departureDate between '" . $date1 . "' and '" . $date2 . "' AND returnDate between '" . $date1 . "' and '" . $date2 . "') ");
+
+                                }
 
                   
 

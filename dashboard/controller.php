@@ -52,7 +52,7 @@ if (isset($_POST['from']) and $_POST['from'] == 'add-attendant') {
 	mysqli_query($connection, "insert into address_table (buildingNumber, street, barangay, city, province) values ('" . mysqli_escape_string($connection, $_POST['buildingNumber']) . "', '" . mysqli_escape_string($connection, $_POST['street']) . "', '" . $_POST['barangay'] . "', '" . $_POST['city1'] . "', '" . $_POST['province1'] . "')");
 	$addressId = mysqli_insert_id($connection);
 
-	mysqli_query($connection, "insert into profile_table (firstName, middleName, lastName, contactNumber, addressId, accountTypeId, userName, passWord) values ('" . mysqli_escape_string($connection, $_POST['firstName']) . "', '" . mysqli_escape_string($connection, $_POST['middleName']) . "', '" . mysqli_escape_string($connection, $_POST['lastName']) . "', '" . mysqli_escape_string($connection, $_POST['contactNumber']) . "', '" . $addressId . "', 5, '" . $userName . "', '" . md5($fourCharacters) . "')");
+	mysqli_query($connection, "insert into profile_table (firstName, middleName, lastName, contactNumber, addressId, accountTypeId, userName, passWord, isActivated) values ('" . mysqli_escape_string($connection, $_POST['firstName']) . "', '" . mysqli_escape_string($connection, $_POST['middleName']) . "', '" . mysqli_escape_string($connection, $_POST['lastName']) . "', '" . mysqli_escape_string($connection, $_POST['contactNumber']) . "', '" . $addressId . "', 5, '" . $userName . "', '" . md5($fourCharacters) . "','1')");
 
 	$_SESSION['do'] = 'added';
 	header("Location: attendants.php");

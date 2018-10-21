@@ -29,15 +29,13 @@ $iamhere = 1;
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
 
-                <?php 
+              
 
-                $dates = explode('- ', $_GET['daterange']);
+                <?php if (isset($_GET['daterange']) and isset($_GET['packageId'])): 
+                   $dates = explode('- ', $_GET['daterange']);
                 $date1 = date("Y-m-d", strtotime($dates[0]));
                 $date2 = date("Y-m-d", strtotime($dates[1]));
                 ?>
-
-
-                <?php if (isset($_GET['daterange']) and isset($_GET['packageId'])): ?>
                 <a href="print/print-bookings-schedules.php?daterange=<?php echo $_GET['daterange'] ?>&packageId=<?php echo $_GET['packageId'] ?>" target="blank"><button class="btn btn-info btn-sm mr5"  style="margin-bottom: 20px;">Print</button></a> 
                 <?php endif ?>
                 

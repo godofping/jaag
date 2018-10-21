@@ -38,6 +38,7 @@ include("includes/header.php");
                                     <th>ID</th>
                                     <th>Travel and Tour ID</th>
                                     <th>Booking ID</th>
+                                    <th>Package Name</th>
                                     <th>Payment Type</th>
                                     <th>Amount Sent</th>
                                     <th>Date Sent</th>
@@ -58,6 +59,7 @@ include("includes/header.php");
                                                 <td><?php echo $res['paymentTransactionId']; ?></td>
                                                 <td><?php echo $res['travelAndTourId']; ?></td>
                                                 <td><?php echo $res['bookingId']; ?></td>
+                                                <td><?php echo $res['packageName']; ?></td>
                                                 <td><?php echo $res['paymentType']; ?></td>
                                                 <td>₱<?php echo number_format($res['amount'],2); ?></td>
                                                 <td><?php echo $res['dateOfPayment']; ?></td>
