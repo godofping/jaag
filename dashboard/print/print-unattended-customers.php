@@ -21,34 +21,55 @@ include("../includes/connection.php");
 <h2>Unattended Customers</h2>
 
 
-                    <?php 
-                    $string = "";
-                     if (isset($_GET['travelAndTourId']) and !empty($_GET['travelAndTourId'])) {
-                        $qry = mysqli_query($connection,"select * from booking_view where travelAndTourId = '" . $_GET['travelAndTourId'] . "' and isAttended = 2");
-                         $qry1 = mysqli_query($connection,"select * from booking_view where travelAndTourId = '" . $_GET['travelAndTourId'] . "' and isAttended = 2");
-
-
-                         $res1 = mysqli_fetch_assoc($qry1);
-
-                        $string = "List of travelers in the Package Name: " . $res1['packageName'] . " and with the travel dates " . $res1['departureDate'] . " to " . $res1['returnDate'] . " who did not attend";
-
-
-                    }
-                    else
-                    {
-                        if (isset($_GET['travelAndTourId'])) {
-                            $qry = mysqli_query($connection,"select * from booking_view where travelAndTourId = '" . $_GET['travelAndTourId'] . "' and isAttended = 2");
-                        $string = "No result.";
-                        }
-                    }
-                     ?>
 
                      <br>
-                    <p  style="margin-top: -15px;"><?php echo $string; ?></p>
+                    <p  style="margin-top: -15px;"><?php
+                        $string = "";
+
+                     
+                            if ($_GET['frequency'] == 'weekly') {
+
+                                $week = explode('-', $_GET['week']);
+                                $year = $week[0];
+                                $weekNumber = substr($week[1],1);
+
+                                $qry13 = mysqli_query($connection, "select * from package_view where packageId = '" . $_GET['packageId'] . "'");
+                                $res13 = mysqli_fetch_assoc($qry13);
+
+                                echo "Week ". $weekNumber ." of " . $year ." unattended customers list in the package name: " . $res13['packageName'];
+                            }
+
+                            if ($_GET['frequency'] == 'monthly') {
+                                $yearmonth = explode('-', $_GET['monthly']);
+
+                                $year = $yearmonth[0];
+                                $month = $yearmonth[1];
+
+                                $qry13 = mysqli_query($connection, "select * from package_view where packageId = '" . $_GET['packageId'] . "'");
+                                $res13 = mysqli_fetch_assoc($qry13);
+
+                                echo  date("F", strtotime($_GET['monthly'])) . " " . $year . " unattended customers list in the package name: " . $res13['packageName'];
+                            }
+
+                            if ($_GET['frequency'] == 'yearly') {
+                                $qry13 = mysqli_query($connection, "select * from package_view where packageId = '" . $_GET['packageId'] . "'");
+                                $res13 = mysqli_fetch_assoc($qry13);
+
+                                echo "Year " . $_GET['year'] . " unattended customers list in the package name: " . $res13['packageName'];
+                            }
+                  
+                        
+
+
+                        echo $string;
+                        ?></p>
     <table align="center" border="2px;">
-              <thead>
+              <?php if ($_GET['frequency']=='weekly'): ?>
+                            <thead>
                                 <tr>
                                     <th>Name</th>
+                                    <th>Package Name</th>
+                                    <th>Travel Dates</th>
                                     <th>Number of Pax Booked</th>
                                     <th>Date Booked</th>
                                     <th>Booking Status</th>
@@ -58,12 +79,16 @@ include("../includes/connection.php");
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php 
-                       
-                                    while ($res = mysqli_fetch_assoc($qry)) { ?>
+                            <?php   
+                                    $qry3 = mysqli_query($connection, "SELECT * FROM booking_view where YEAR(dateBooked) = '" . $year . "' and isAttended = '2' and packageId = '" . $_GET['packageId'] . "' and WEEK(dateBooked) = '" . ($weekNumber-1) . "'");
+
+                              
+                                    while ($res = mysqli_fetch_assoc($qry3)) { ?>
                                 <tr>
                                     
                                     <td><?php echo $res['firstName'] . " " . $res['middleName'] . " " . $res['lastName']; ?></td>
+                                    <td><?php echo $res['packageName']; ?></td>
+                                    <td><?php echo $res['departureDate']; ?> to <?php echo $res['returnDate']; ?></td>
                                     <td><?php echo $res['numberOfPaxBooked']; ?></td>
                                     <td><?php echo $res['dateBooked']; ?></td>
                                     <td><?php echo $res['bookingStatus']; ?></td>
@@ -71,8 +96,81 @@ include("../includes/connection.php");
                          
                           
                                 </tr>
-                            <?php } ?>
-                            </tbody>
+                                        <?php } ?>
+                            <?php endif ?>
+
+                            <?php if ($_GET['frequency']=='monthly'): ?>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Package Name</th>
+                                    <th>Travel Dates</th>
+                                    <th>Number of Pax Booked</th>
+                                    <th>Date Booked</th>
+                                    <th>Booking Status</th>
+                                    <th>Customer Type</th>
+                             
+                               
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php   
+
+                                    $qry3 = mysqli_query($connection, "SELECT * FROM booking_view where YEAR(dateBooked) = '" . $year . "' and isAttended = '2' and packageId = '" . $_GET['packageId'] . "' and MONTH(dateBooked) = '" . $month . "'");
+
+                              
+                                    while ($res = mysqli_fetch_assoc($qry3)) { ?>
+                                <tr>
+                                    
+                                    <td><?php echo $res['firstName'] . " " . $res['middleName'] . " " . $res['lastName']; ?></td>
+                                    <td><?php echo $res['packageName']; ?></td>
+                                    <td><?php echo $res['departureDate']; ?> to <?php echo $res['returnDate']; ?></td>
+                                    <td><?php echo $res['numberOfPaxBooked']; ?></td>
+                                    <td><?php echo $res['dateBooked']; ?></td>
+                                    <td><?php echo $res['bookingStatus']; ?></td>
+                                    <td><?php echo $res['accountType']; ?></td>
+                         
+                          
+                                </tr>
+                                        <?php } ?>
+                            <?php endif ?>
+
+                            <?php if ($_GET['frequency']=='yearly'): ?>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Package Name</th>
+                                    <th>Travel Dates</th>
+                                    <th>Number of Pax Booked</th>
+                                    <th>Date Booked</th>
+                                    <th>Booking Status</th>
+                                    <th>Customer Type</th>
+                             
+                               
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php   
+
+                                    $qry3 = mysqli_query($connection, "SELECT * FROM booking_view where YEAR(dateBooked) = '" . $_GET['year'] . "' and isAttended = '2' and packageId = '" . $_GET['packageId'] . "'");
+
+                              
+                                    while ($res = mysqli_fetch_assoc($qry3)) { ?>
+                                <tr>
+                                    
+                                    <td><?php echo $res['firstName'] . " " . $res['middleName'] . " " . $res['lastName']; ?></td>
+                                    <td><?php echo $res['packageName']; ?></td>
+                                    <td><?php echo $res['departureDate']; ?> to <?php echo $res['returnDate']; ?></td>
+                                    <td><?php echo $res['numberOfPaxBooked']; ?></td>
+                                    <td><?php echo $res['dateBooked']; ?></td>
+                                    <td><?php echo $res['bookingStatus']; ?></td>
+                                    <td><?php echo $res['accountType']; ?></td>
+                         
+                          
+                                </tr>
+                                        <?php } ?>
+                            <?php endif ?>
+                        </tbody>
             </table>
 
 
