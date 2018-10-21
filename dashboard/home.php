@@ -467,7 +467,7 @@ $(function () {
         element: 'morris-area-chart2',
         data: [
 
-       <?php for ($year=2018; $year <= 2022 ; $year++) { ?>
+       <?php for ($year=2017; $year <= 2022 ; $year++) { ?>
 
          {
             period: '<?php echo $year; ?>',

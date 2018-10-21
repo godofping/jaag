@@ -32,15 +32,15 @@ include("includes/header.php");
                 <?php if (isset($_GET['frequency']) and isset($_GET['packageId'])): ?>
                 
                 <?php if ($_GET['frequency'] == 'weekly'): ?>
-                    <a href="print/print-list-of-travelers.php?frequency=<?php echo $_GET['frequency'] ?>&packageId=<?php echo $_GET['packageId'] ?>&week=<?php echo $_GET['week'] ?>" target="blank"><button class="btn btn-info btn-sm mr5"  style="margin-bottom: 20px;">Print</button></a> 
+                    <a href="print/print-report-payment-transactions.php?frequency=<?php echo $_GET['frequency'] ?>&packageId=<?php echo $_GET['packageId'] ?>&week=<?php echo $_GET['week'] ?>" target="blank"><button class="btn btn-info btn-sm mr5"  style="margin-bottom: 20px;">Print</button></a> 
                 <?php endif ?>
 
                 <?php if ($_GET['frequency'] == 'monthly'): ?>
-                    <a href="print/print-list-of-travelers.php?frequency=<?php echo $_GET['frequency'] ?>&packageId=<?php echo $_GET['packageId'] ?>&monthly=<?php echo $_GET['monthly'] ?>" target="blank"><button class="btn btn-info btn-sm mr5"  style="margin-bottom: 20px;">Print</button></a> 
+                    <a href="print/print-report-payment-transactions.php?frequency=<?php echo $_GET['frequency'] ?>&packageId=<?php echo $_GET['packageId'] ?>&monthly=<?php echo $_GET['monthly'] ?>" target="blank"><button class="btn btn-info btn-sm mr5"  style="margin-bottom: 20px;">Print</button></a> 
                 <?php endif ?>
 
                 <?php if ($_GET['frequency'] == 'yearly'): ?>
-                    <a href="print/print-list-of-travelers.php?frequency=<?php echo $_GET['frequency'] ?>&packageId=<?php echo $_GET['packageId'] ?>&year=<?php echo $_GET['year'] ?>" target="blank"><button class="btn btn-info btn-sm mr5"  style="margin-bottom: 20px;">Print</button></a> 
+                    <a href="print/print-report-payment-transactions.php?frequency=<?php echo $_GET['frequency'] ?>&packageId=<?php echo $_GET['packageId'] ?>&year=<?php echo $_GET['year'] ?>" target="blank"><button class="btn btn-info btn-sm mr5"  style="margin-bottom: 20px;">Print</button></a> 
                 <?php endif ?>
 
 
@@ -135,7 +135,6 @@ include("includes/header.php");
                             <?php   
                                     $qry3 = mysqli_query($connection, "SELECT * FROM payment_transaction_view where YEAR(dateOfPayment) = '" . $year . "' and packageId = '" . $_GET['packageId'] . "' and WEEK(dateBooked) = '" . ($weekNumber-1) . "'");
 
-                              
                                     while ($res = mysqli_fetch_assoc($qry3)) { ?>
                                 <tr>
                                                 <td><?php echo $res['paymentTransactionId']; ?></td>
@@ -196,7 +195,7 @@ include("includes/header.php");
                             <tbody>
                             <?php   
 
-                                    $qry3 = mysqli_query($connection, "SELECT * FROM booking_view where YEAR(dateBooked) = '" . $year . "' and packageId = '" . $_GET['packageId'] . "' and MONTH(dateBooked) = '" . $month . "'");
+                                    $qry3 = mysqli_query($connection, "SELECT * FROM payment_transaction_view where YEAR(dateOfPayment) = '" . $year . "' and packageId = '" . $_GET['packageId'] . "' and MONTH(dateOfPayment) = '" . $month . "'");
 
                               
                                     while ($res = mysqli_fetch_assoc($qry3)) { ?>
@@ -250,7 +249,7 @@ include("includes/header.php");
                             <tbody>
                             <?php   
 
-                                    $qry3 = mysqli_query($connection, "SELECT * FROM booking_view where YEAR(dateBooked) = '" . $_GET['year'] . "' and packageId = '" . $_GET['packageId'] . "'");
+                                    $qry3 = mysqli_query($connection, "SELECT * FROM payment_transaction_view where YEAR(dateOfPayment) = '" . $_GET['year'] . "' and packageId = '" . $_GET['packageId'] . "'");
 
                               
                                     while ($res = mysqli_fetch_assoc($qry3)) { ?>
@@ -443,7 +442,7 @@ include("includes/header.php");
                         <div class="form-group">
                             <select class="form-control" name="year">
                                 <?php 
-                                    for ($year=2018; $year <= 2022 ; $year++)  { ?>
+                                    for ($year=2017; $year <= 2022 ; $year++)  { ?>
                                         <option><?php echo $year; ?></option>
                                 <?php }  ?>
                             </select>

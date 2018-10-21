@@ -195,7 +195,7 @@ include("includes/header.php");
                                             </thead>
                                             <tbody>
                                                <?php 
-                                            for ($year=2018; $year <= 2022 ; $year++) { ?>
+                                            for ($year=2017; $year <= 2022 ; $year++) { ?>
                                                 <tr>
                                                 <td><?php echo $year; ?></td>
                                                 <td><?php 
@@ -326,7 +326,7 @@ include("includes/header.php");
                          
                                 <?php
 
-                                for ($year=2018; $year <= 2022 ; $year++) { ?>
+                                for ($year=2017; $year <= 2022 ; $year++) { ?>
                                  ?>
                                     <option value="<?php echo $year; ?>"><?php echo $year; ?></option>
                                 <?php } ?>
@@ -530,7 +530,7 @@ $(function () {
     Morris.Area({
         element: 'morris-area-chart2',
         data: [  <?php 
-        for ($year=2018; $year <= 2022 ; $year++) { ?>
+        for ($year=2017; $year <= 2022 ; $year++) { ?>
             
             {
             period: '<?php echo $year; ?>',
