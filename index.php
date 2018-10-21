@@ -1,4 +1,6 @@
-<?php include("dashboard/includes/connection.php");include("includes/header.php"); ?>
+<?php 
+include("dashboard/includes/connection.php");
+include("includes/header.php"); ?>
     <main>
         <div id="rev_slider_54_1_wrapper" class="rev_slider_wrapper fullwidthbanner-container" data-alias="notgeneric1" data-source="gallery" style="margin:0px auto;background:transparent;padding:0px;margin-top:0px;margin-bottom:0px;">
             <!-- START REVOLUTION SLIDER 5.4.1 fullwidth mode -->
