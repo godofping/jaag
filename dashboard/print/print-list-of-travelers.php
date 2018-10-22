@@ -25,8 +25,16 @@ include("../includes/connection.php");
                      <br>
                     <p  style="margin-top: -15px;"><?php
                
+                            if ($_GET['frequency'] == 'daily') {
 
-                     
+                          
+
+                                $qry13 = mysqli_query($connection, "select * from package_view where packageId = '" . $_GET['packageId'] . "'");
+                                $res13 = mysqli_fetch_assoc($qry13);
+
+                                echo "Day ". $_GET['day'] . " customers list in the package name: " . $res13['packageName'];
+                            }
+                        
                             if ($_GET['frequency'] == 'weekly') {
 
                                 $week = explode('-', $_GET['week']);
@@ -63,6 +71,50 @@ include("../includes/connection.php");
 
                         ?></p>
     <table align="center" border="2px;">
+        <?php if ($_GET['frequency']=='daily'): ?>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Tour ID</th>
+                                    <th>Package Name</th>
+                                    <th>Travel Dates</th>
+                                    <th>Number of Pax Booked</th>
+                                    <th>Date Booked</th>
+                                    <th>Booking Status</th>
+                                    <th>Customer Type</th>
+                                    <th>Attendance</th>
+                             
+                               
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php   
+                                    $qry3 = mysqli_query($connection, "SELECT * FROM booking_view where packageId = '" . $_GET['packageId'] . "' and dateBooked = '" . $_GET['day'] . "' ");
+                                    
+
+                              
+                                    while ($res = mysqli_fetch_assoc($qry3)) { ?>
+                                <tr>
+                                    
+                                    <td><?php echo $res['firstName'] . " " . $res['middleName'] . " " . $res['lastName']; ?></td>
+                                    <td><?php echo $res['travelAndTourId']; ?></td>
+                                    <td><?php echo $res['packageName']; ?></td>
+                                    <td><?php echo $res['departureDate']; ?> to <?php echo $res['returnDate']; ?></td>
+                                    <td><?php echo $res['numberOfPaxBooked']; ?></td>
+                                    <td><?php echo $res['dateBooked']; ?></td>
+                                    <td><?php echo $res['bookingStatus']; ?></td>
+                                    <td><?php echo $res['accountType']; ?></td>
+                                    <td><?php if ($res['isAttended'] == '0') {
+                                        echo "TBA";
+                                    }elseif ($res['isAttended']=='1') {
+                                        echo "Present";
+                                    }elseif ($res['isAttended']=='2') {
+                                        echo "Absent";
+                                    } ?></td>
+                          
+                                </tr>
+                                        <?php } ?>
+                            <?php endif ?>
               <?php if ($_GET['frequency']=='weekly'): ?>
                             <thead>
                                 <tr>
