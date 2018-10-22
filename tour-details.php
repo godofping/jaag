@@ -156,31 +156,51 @@ $res1 = mysqli_fetch_assoc($qry1);
                                             <td><?php echo $res3['travelAndTourStatus']; ?></td>
                                             
                                             <td>
-                                                <?php 
+                                               <?php 
 
 
-                                                    if ($res3['travelAndTourStatus'] == 'Finished') {
+                                                    if (isset($_SESSION['profileId'])) {
+
+                                                        if ($res3['travelAndTourStatus'] == 'Finished' or $res3['travelAndTourStatus'] == 'Cancelled due to weather' or $res3['travelAndTourStatus'] == 'Cancelled due to unsufficient pax') {
                                                         echo "This is not available.";
-                                                    }
-                                                    else
-                                                    {
-                                                    	if (isset($_SESSION['profileId'])) {
-                                                        $qry6 = mysqli_query($connection, "SELECT * FROM booking_view WHERE profileId = '" . $_SESSION['profileId'] . "' AND (departureDate between '" . $res3['departureDate'] . "' and '" . $res3['returnDate'] . "' AND returnDate between '" . $res3['departureDate'] . "' and '" . $res3['returnDate'] . "')");
-
-                                                        $datedifference =  (strtotime($res3['departureDate']) - strtotime(date('Y-m-d'))) / 86400;
-
-                                                        if (mysqli_num_rows($qry6) > 0) {
-                                                            echo "Conflict Schedule";
-                                                        }
-														elseif ($datedifference < 8) {
-
-                                                        	echo "Booking is not available because departure date is now within 7 days.";
                                                         }
                                                         else
                                                         {
-                                                        	echo "You can book this if there is no conflict schedules or there is an available slots.";
+                                                            $qry6 = mysqli_query($connection, "SELECT * FROM booking_view WHERE profileId = '" . $_SESSION['profileId'] . "' AND (departureDate between '" . $res3['departureDate'] . "' and '" . $res3['returnDate'] . "' AND returnDate between '" . $res3['departureDate'] . "' and '" . $res3['returnDate'] . "')");
+
+                                                            $datedifference =  (strtotime($res3['departureDate']) - strtotime(date('Y-m-d'))) / 86400;
+
+                                                            if (mysqli_num_rows($qry6) > 0) {
+                                                                echo "Conflict Schedule";
+                                                            }
+                                                            elseif ($datedifference < 8) {
+
+                                                                echo "Booking is not available because departure date is now within 7 days.";
+                                                            }
+                                                            else
+                                                            {
+                                                                echo "You can book this.";
+                                                            }
                                                         }
+                                                        
                                                     }
+                                                    else
+                                                    {
+                                                            $datedifference =  (strtotime($res3['departureDate']) - strtotime(date('Y-m-d'))) / 86400;
+
+                                                            
+
+                                                            if ($res3['travelAndTourStatus'] == 'Fully Booked' or $res3['travelAndTourStatus'] == 'Finished' or $res3['travelAndTourStatus'] == 'Cancelled due to weather' or $res3['travelAndTourStatus'] == 'Cancelled due to unsufficient pax') {
+                                                                echo "Booking is not available.";
+                                                            }
+                                                            elseif ($datedifference < 8) {
+
+                                                                echo "Booking is not available because departure date is now within 7 days.";
+                                                            }
+                                                            else
+                                                            {
+                                                                echo "You can book this.";
+                                                            }
                                                     }
                                                 
 
@@ -203,7 +223,7 @@ if (isset($_SESSION['profileId'])) {
 }
 else
 {
-	if ($res13['slotsTaken'] == $res3['maxPax'] or $res3['travelAndTourStatus'] != 'Available') {?>
+	if ($res13['slotsTaken'] == $res3['maxPax'] or $res3['travelAndTourStatus'] != 'Available' or $datedifference < 8) {?>
 		<button disabled="" class="btn btn-info">Book</button>
 <?php }else{?>
 		<a href="controller.php?packageId=<?php echo $res['packageId'] ?>&from=tour-packages-login-first"><button class="btn btn-info">Book</button></a>
