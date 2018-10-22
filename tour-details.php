@@ -159,7 +159,12 @@ $res1 = mysqli_fetch_assoc($qry1);
                                                 <?php 
 
 
-                                                    if (isset($_SESSION['profileId'])) {
+                                                    if ($res3['travelAndTourStatus'] == 'Finished') {
+                                                        echo "This is not available.";
+                                                    }
+                                                    else
+                                                    {
+                                                    	if (isset($_SESSION['profileId'])) {
                                                         $qry6 = mysqli_query($connection, "SELECT * FROM booking_view WHERE profileId = '" . $_SESSION['profileId'] . "' AND (departureDate between '" . $res3['departureDate'] . "' and '" . $res3['returnDate'] . "' AND returnDate between '" . $res3['departureDate'] . "' and '" . $res3['returnDate'] . "')");
 
                                                         $datedifference =  (strtotime($res3['departureDate']) - strtotime(date('Y-m-d'))) / 86400;
@@ -175,6 +180,7 @@ $res1 = mysqli_fetch_assoc($qry1);
                                                         {
                                                         	echo "You can book this if there is no conflict schedules or there is an available slots.";
                                                         }
+                                                    }
                                                     }
                                                 
 
