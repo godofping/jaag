@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v8.53 
-MySQL - 5.5.5-10.1.35-MariaDB : Database - jaag_db
+MySQL - 5.5.5-10.1.34-MariaDB : Database - jaag_db
 *********************************************************************
 */
 
@@ -28,11 +28,7 @@ CREATE TABLE `account_type_table` (
 
 /*Data for the table `account_type_table` */
 
-LOCK TABLES `account_type_table` WRITE;
-
 insert  into `account_type_table`(`accountTypeId`,`accountType`) values (1,'Administrator'),(3,'Walk-in Customer'),(4,'Online Customer'),(5,'Attendant');
-
-UNLOCK TABLES;
 
 /*Table structure for table `address_table` */
 
@@ -46,15 +42,11 @@ CREATE TABLE `address_table` (
   `street` varchar(60) DEFAULT NULL,
   `buildingNumber` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`addressId`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
 
 /*Data for the table `address_table` */
 
-LOCK TABLES `address_table` WRITE;
-
-insert  into `address_table`(`addressId`,`province`,`city`,`barangay`,`street`,`buildingNumber`) values (1,'Region 10: MISAMIS OCCIDENTAL','BONIFACIO','Bag-ong Anonang','Malvar Street','65'),(2,'Region 02: BATANES','BASCO (Capital)','Ihubok I (Kaychanarianan)','Lapu- lapu Street','44'),(3,'Region 14: KALINGA','PASIL','Dalupa','Di Makita Street','99'),(4,'1298','129804','Ar-arusip','asd','22'),(5,'','','New Panay','Barangay Road','65'),(6,'Region 12: SULTAN KUDARAT','ESPERANZA','Poblacion','Barangay Road','65'),(7,'Region 12: SULTAN KUDARAT','ISULAN (Capital)','Kalawag I (Pob.)','National Road','56'),(8,'Region 12: SULTAN KUDARAT','CITY OF TACURONG','New Isabela','Barangay Road',''),(9,'Region 12: SULTAN KUDARAT','CITY OF TACURONG','New Isabela','Barangay Road',''),(10,'Region 12: SULTAN KUDARAT','CITY OF TACURONG','New Isabela','Barangay Road',''),(11,'Region 12: SULTAN KUDARAT','CITY OF TACURONG','New Isabela','Barangay Road',''),(12,'Region 12: SULTAN KUDARAT','CITY OF TACURONG','New Isabela','Barangay Road',''),(13,'','','New Isabela','Barangay Road','65'),(14,'','','Adams (Pob.)','123','123'),(15,'','','Adams (Pob.)','12','312'),(16,'','','San Pablo','123','123'),(17,'','','Adams (Pob.)','',''),(18,'','','Adams (Pob.)','',''),(19,'','','Cullalabo Del Sur','1231','23123123'),(20,'','','Adams (Pob.)','',''),(21,'','','Adams (Pob.)','',''),(22,'','','Adams (Pob.)','',''),(23,'Region 02: CAGAYAN','ABULUG','Dana-Ili','123','123'),(24,'Region 01: ILOCOS SUR','ALILEM','Alilem Daya (Pob.)','',''),(25,'Region 12: SULTAN KUDARAT','CITY OF TACURONG','New Lagao','',''),(26,'Region 02: BATANES','BASCO (Capital)','Ihubok II (Kayvaluganan)','',''),(27,'Region 01: PANGASINAN','AGNO','Allabon','asd','asd'),(28,'Region 01: LA UNION','AGOO','Ambitacay','123','123'),(29,'Region 01: LA UNION','AGOO','Ambitacay','123','123');
-
-UNLOCK TABLES;
+insert  into `address_table`(`addressId`,`province`,`city`,`barangay`,`street`,`buildingNumber`) values (1,'Region 12: SULTAN KUDARAT','CITY OF TACURONG','New Isabela','Malvar Street','65'),(2,'Region 02: BATANES','BASCO (Capital)','Ihubok I (Kaychanarianan)','Lapu- lapu Street','44'),(3,'Region 14: KALINGA','PASIL','Dalupa','Di Makita Street','99'),(12,'Region 12: SULTAN KUDARAT','CITY OF TACURONG','New Isabela','Barangay Road',''),(31,'Region 12: SULTAN KUDARAT','CITY OF TACURONG','San Pablo','',''),(32,'Region 01: ILOCOS NORTE','ADAMS','Adams (Pob.)','',''),(33,'Region 01: LA UNION','AGOO','Ambitacay','',''),(34,'Region 02: ISABELA','ALICIA','Amistad','',''),(35,'Region 02: ISABELA','ALICIA','Amistad','',''),(36,'Region 12: COTABATO (NORTH COTABATO)','ALAMADA','Guiling','',''),(37,'Region 12: SULTAN KUDARAT','BAGUMBAYAN','Kapaya','',''),(38,'Region 02: ISABELA','ALICIA','Amistad','',''),(39,'Region 03: BULACAN','ANGAT','Encanto','','');
 
 /*Table structure for table `booking_table` */
 
@@ -74,15 +66,11 @@ CREATE TABLE `booking_table` (
   KEY `FK_booking_table123` (`profileId`),
   CONSTRAINT `FK_booking_table123` FOREIGN KEY (`profileId`) REFERENCES `profile_table` (`profileId`),
   CONSTRAINT `FK_booking_table2` FOREIGN KEY (`travelAndTourId`) REFERENCES `travel_and_tour_table` (`travelAndTourId`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
 
 /*Data for the table `booking_table` */
 
-LOCK TABLES `booking_table` WRITE;
-
-insert  into `booking_table`(`bookingId`,`profileId`,`travelAndTourId`,`bookingStatus`,`dateBooked`,`numberOfPaxBooked`,`isAttended`) values (22,3,6,'Booked','2018-10-01',7,0),(26,27,6,'Booked','2018-10-02',4,0);
-
-UNLOCK TABLES;
+insert  into `booking_table`(`bookingId`,`profileId`,`travelAndTourId`,`bookingStatus`,`dateBooked`,`numberOfPaxBooked`,`isAttended`) values (32,30,11,'Booked','2017-01-01',15,0),(33,31,15,'Booked','2017-10-22',5,1),(34,32,15,'Booked','2017-10-22',5,1),(35,33,15,'Booked','2017-10-22',5,2),(36,34,9,'Booked','2018-10-22',3,2),(37,35,9,'Booked','2018-10-22',4,1),(38,36,9,'Booked','2018-10-22',5,1),(39,37,9,'Booked','2018-10-22',8,0);
 
 /*Table structure for table `comment_table` */
 
@@ -97,15 +85,9 @@ CREATE TABLE `comment_table` (
   PRIMARY KEY (`commentId`),
   KEY `FK_comment_table` (`profileId`),
   CONSTRAINT `FK_comment_table` FOREIGN KEY (`profileId`) REFERENCES `profile_table` (`profileId`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 /*Data for the table `comment_table` */
-
-LOCK TABLES `comment_table` WRITE;
-
-insert  into `comment_table`(`commentId`,`commentInfo`,`profileId`,`dateCommented`,`respond`) values (11,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nec metus ipsum. Quisque non tristique justo. Integer eu quam id lectus blandit condimentum. Donec bibendum vitae magna et ornare. Suspendisse vestibulum nibh at semper placerat. Nullam ut tristique elit. Proin sit amet nulla erat. Curabitur hendrerit neque vel suscipit bibendum. Donec ut arcu a dolor interdum imperdiet eget ac magna. Aenean quis ullamcorper mauris, at vulputate justo. Sed porttitor, massa eget placerat suscipit, tortor felis imperdiet turpis, commodo placerat quam tortor sed neque. Nullam dictum tempor purus in aliquam.',3,'2018-09-27','ganun ba'),(12,'aasd',3,'2018-09-27',NULL);
-
-UNLOCK TABLES;
 
 /*Table structure for table `destination_table` */
 
@@ -120,15 +102,11 @@ CREATE TABLE `destination_table` (
   KEY `FK_destination_table2` (`packageId`),
   CONSTRAINT `FK_destination_table` FOREIGN KEY (`placeId`) REFERENCES `place_table` (`placeId`) ON DELETE SET NULL,
   CONSTRAINT `FK_destination_table2` FOREIGN KEY (`packageId`) REFERENCES `package_table` (`packageId`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
 
 /*Data for the table `destination_table` */
 
-LOCK TABLES `destination_table` WRITE;
-
-insert  into `destination_table`(`destinationId`,`placeId`,`packageId`) values (8,21,6),(9,16,5),(10,20,4),(11,12,3),(12,7,2),(13,2,1);
-
-UNLOCK TABLES;
+insert  into `destination_table`(`destinationId`,`placeId`,`packageId`) values (20,1,8),(21,7,8),(22,2,9),(23,4,10),(24,9,11),(25,10,11),(26,12,12);
 
 /*Table structure for table `media_table` */
 
@@ -147,15 +125,11 @@ CREATE TABLE `media_table` (
   CONSTRAINT `FK_media_table` FOREIGN KEY (`packageId`) REFERENCES `package_table` (`packageId`),
   CONSTRAINT `FK_media_table1` FOREIGN KEY (`paymentTransactionId`) REFERENCES `payment_transaction_table` (`paymentTransactionId`) ON DELETE SET NULL,
   CONSTRAINT `FK_media_table3` FOREIGN KEY (`postingId`) REFERENCES `posting_table` (`postingId`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=107 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=150 DEFAULT CHARSET=latin1;
 
 /*Data for the table `media_table` */
 
-LOCK TABLES `media_table` WRITE;
-
-insert  into `media_table`(`mediaId`,`mediaLocation`,`postingId`,`packageId`,`paymentTransactionId`) values (13,'media/386b81e31014a480f5abbd1089bf9037Enchanted-River-11.jpg',NULL,1,NULL),(14,'media/701b6c51d4017ef032663d897a9e8a62Riv.jpg',NULL,1,NULL),(15,'media/c6e70a1aa3d236578cce76a1cd13e8a7siargao-surigao-province.jpg',NULL,1,NULL),(16,'media/b03b8ae8b280f584dff61c824b945deeSurigao-del-Sur-Bogac-Spring.png',NULL,1,NULL),(17,'media/56235fc53b155738b0c5d0c74586eaf34.jpg',NULL,2,NULL),(18,'media/c238cf07380d960ae2947a7d47084f4c1200px-View_on_the_half_way_to_Kayangan_Lake_-_panoramio.jpg',NULL,2,NULL),(19,'media/6e119d089cbe9ce20d03be211e0b65a5beautiful-view-mountain-ranges-philippines-islands-mountain-views-100246883.jpg',NULL,2,NULL),(20,'media/811b17ea6018bca792208b6d4fd76f6abudahernel3.jpg',NULL,2,NULL),(21,'media/d42a6f5aec09508c4da0a9d97db7af74Hills View Mountain Villa Davao Room Rates (4).jpg',NULL,2,NULL),(22,'media/e2f7d6c45e52e80292c6b389feddf643HillsView03.gif',NULL,2,NULL),(23,'media/66d8e8eec57ea38f704158e87962a77emaxresdefault (1).jpg',NULL,2,NULL),(24,'media/1c4ae11ed4985ce67c1f881cf36768d6maxresdefault.jpg',NULL,2,NULL),(25,'media/45aae00794e4e00a752185308f06c6baoverview-3.jpg',NULL,2,NULL),(26,'media/881f50f9f1480f61d6f8e1d62f6a10edcamiguin.jpg',NULL,3,NULL),(27,'media/9944625c38dd9564cee4f4d4758a6598download (2).jpg',NULL,3,NULL),(28,'media/01c8d67a383a7f13c37e494a2ef700eemantigue-island-camiguin-travelanyway.jpg',NULL,3,NULL),(29,'media/aa422dcdca51b1b8a4be3bb3a5b23dfc5410599211_1a0492737b_b.jpg',NULL,6,NULL),(30,'media/cdf126124bcc287d773a748530c3fa2adownload.jpg',NULL,6,NULL),(31,'media/c921c468f478c7b74a8b6b1eb531b195entrance-to-sohoton-cove-inside-view.jpg',NULL,6,NULL),(32,'media/7cf357ccce1e943f00ea7083502b70eeimages.jpg',NULL,6,NULL),(33,'media/19f1839da3dcb0664a72d9581329a27csohoton-cave-opening.jpg',NULL,6,NULL),(34,'media/885c5df2035b79416ed05d74e32f891458963_1.jpg',NULL,5,NULL),(35,'media/88b4668706946f83d81005975288421fBarangan-Magsaysay-Dinagat-Islands.jpg',NULL,5,NULL),(36,'media/c7a9fef3e9912e8121b614ff77eab601Basilisa-Beach-Dinagat-Islands.jpg',NULL,5,NULL),(37,'media/1e648ce8b40c56f9d735feaca67c8c20IMG_8011982432648.jpeg',NULL,5,NULL),(38,'media/fbcb11a71758588a4a5104ca4348fc65Isla-Aga-Dinagat-Islands.jpg',NULL,5,NULL),(39,'media/e6878b58199b13e284eec10f1dbed005Sohoton-National-Park-Bucas-Grande-Surigao-del-Norte.jpg',NULL,5,NULL),(40,'media/0b378294054d4eec0ff20c3d1a31e5e1download.jpg',NULL,4,NULL),(41,'media/064c7e7b2733935a2173113b4ed286a7Footpath to Hikong Alo  Seven Falls Lake Sebu.jpg',NULL,4,NULL),(42,'media/144c126e13645866c09ce3c4067a0987images.jpg',NULL,4,NULL),(48,'media/ad24047ee1df064e4fa1012c656cbba6download.jpg',4,NULL,NULL),(50,'media/2f5781128a1dfc6a7ba7adef13571d66download (2).jpg',6,NULL,NULL),(65,'media/aff61842fe81a9602c9f8653f106ab2cWindows-10-1709-Fall-Creators-Update-with-Intune-Update-Rings2.jpg',10,NULL,NULL),(74,'dashboard/media/c9bc7c23d25eaf9dac9785a1bc96e4b342332479_325008914915271_8107766354871844864_n.jpg',NULL,NULL,1),(78,'dashboard/media/not-available.jpg',NULL,NULL,5),(98,'dashboard/media/not-available.jpg',NULL,NULL,NULL),(99,'dashboard/media/not-available.jpg',NULL,NULL,NULL),(100,'dashboard/media/not-available.jpg',NULL,NULL,NULL),(101,'dashboard/media/not-available.jpg',NULL,NULL,NULL),(102,'dashboard/media/95de323ad7990589861ece35d7d04d19admin_top - Copy - Copy.jpg',NULL,NULL,NULL),(103,'dashboard/media/d9f37abe47905d993e3f35e0f5b2e978admin_top - Copy - Copy.jpg',NULL,NULL,NULL),(104,'dashboard/media/not-available.jpg',NULL,NULL,NULL),(105,'dashboard/media/not-available.jpg',NULL,NULL,NULL),(106,'dashboard/media/not-available.jpg',NULL,NULL,41);
-
-UNLOCK TABLES;
+insert  into `media_table`(`mediaId`,`mediaLocation`,`postingId`,`packageId`,`paymentTransactionId`) values (125,'media/4864a56c889b106194f87532303ab9e54.jpg',NULL,7,NULL),(126,'media/989606f1b46a0156e12b8e9fe89a1b18maxresdefault.jpg',NULL,7,NULL),(127,'media/8fc4b63f643ab07da7bef0e4ab61dbeamaxresdefault (1).jpg',NULL,7,NULL),(128,'media/c38725263403ee3f9143e3a1d57a3fd3Hills View Mountain Villa Davao Room Rates (4).jpg',NULL,7,NULL),(129,'media/d4a2d5c74a9da7d25b566bfd571b9237maxresdefault.jpg',NULL,8,NULL),(130,'media/a6e4127a8a29767d8223c867d447c967HillsView03.gif',NULL,8,NULL),(131,'media/d805190621f28e52d9cd25ba52f19f05Upside-Down-Museum.jpg',NULL,8,NULL),(132,'media/ac1afddfd77facd49a1fde048ff156ff1.jpg',NULL,8,NULL),(133,'media/44a3d0f95209a650bb43214921cc5bacRiv.jpg',NULL,9,NULL),(134,'media/789e7994255d606a838efeabc45ac2bbSurigao-del-Sur-Bogac-Spring.png',NULL,9,NULL),(136,'media/8af5419f967f1958552addc741cdd946talikudislandhead.png',NULL,10,NULL),(137,'media/609051fb7b15d69193b279a19e6ac27bIsla-Reta-Beach-Featured-620x330.jpg',NULL,10,NULL),(138,'media/7c2cf43d60b39b28b96ed818956b2a0dasikasik7.jpg',NULL,11,NULL),(139,'media/1092a128d4b1d829f41bc34d511844aeimages.jpg',NULL,11,NULL),(140,'media/801cf590b7a27c24d6d887d94fa2dcb2camiguin.jpg',NULL,12,NULL),(141,'media/2d2c8b1f8ea94136819f2681a30872f4mantigue-island-camiguin-travelanyway.jpg',NULL,12,NULL);
 
 /*Table structure for table `mode_of_payment_table` */
 
@@ -170,11 +144,7 @@ CREATE TABLE `mode_of_payment_table` (
 
 /*Data for the table `mode_of_payment_table` */
 
-LOCK TABLES `mode_of_payment_table` WRITE;
-
-insert  into `mode_of_payment_table`(`modeOfPaymentId`,`paymentMode`,`nameOfRemittanceOrBank`) values (4,'Bank Transfer','BDO'),(5,'Bank Transfer','DBP'),(6,'Bank Transfer','Metro Bank'),(7,'Bank Transfer','EastWest'),(8,'Bank Transfer','BPI'),(9,'Bank Transfer','Union Bank'),(10,'Bank Transfer','China Bank'),(11,'Bank Transfer','PNB'),(12,'Bank Transfer','RCBC'),(13,'Bank Transfer','Security Bank'),(14,'Remittance','Palawan Express Pera Padala'),(15,'Remittance','Cebuana Lhuillier Pera Padala'),(16,'Remittance','Western Union Sulit Padala and Overseas Money Transfer'),(17,'Remittance','M Lhuillier Kwarta Padala'),(18,'Remittance','LBC Instant Peso Padala'),(19,'Remittance','TrueMoney Money Padala'),(20,'Remittance','RD Pawnshop Cash Padala'),(21,'Remittance','Smart Money'),(22,'Remittance','Globe Gcash'),(23,'In House',NULL);
-
-UNLOCK TABLES;
+insert  into `mode_of_payment_table`(`modeOfPaymentId`,`paymentMode`,`nameOfRemittanceOrBank`) values (4,'Bank Remittance','BDO'),(5,'Bank Remittance','DBP'),(6,'Bank Remittance','Metro Bank'),(7,'Bank Remittance','EastWest'),(8,'Bank Remittance','BPI'),(9,'Bank Remittance','Union Bank'),(10,'Bank Remittance','China Bank'),(11,'Bank Remittance','PNB'),(12,'Bank Remittance','RCBC'),(13,'Bank Remittance','Security Bank'),(14,'Remittance','Palawan Express Pera Padala'),(15,'Remittance','Cebuana Lhuillier Pera Padala'),(16,'Remittance','Western Union Sulit Padala and Overseas Money Transfer'),(17,'Remittance','M Lhuillier Kwarta Padala'),(18,'Remittance','LBC Instant Peso Padala'),(19,'Remittance','TrueMoney Money Padala'),(20,'Remittance','RD Pawnshop Cash Padala'),(21,'Remittance','Smart Money'),(22,'Remittance','Globe Gcash'),(23,'In House',NULL);
 
 /*Table structure for table `notification_table` */
 
@@ -185,16 +155,15 @@ CREATE TABLE `notification_table` (
   `notificationMessage` text,
   `profileId` int(6) DEFAULT NULL,
   `dateAndTime` datetime DEFAULT NULL,
+  `isRead` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`notificationId`),
   KEY `FK_notification_table` (`profileId`),
   CONSTRAINT `FK_notification_table` FOREIGN KEY (`profileId`) REFERENCES `profile_table` (`profileId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=latin1;
 
 /*Data for the table `notification_table` */
 
-LOCK TABLES `notification_table` WRITE;
-
-UNLOCK TABLES;
+insert  into `notification_table`(`notificationId`,`notificationMessage`,`profileId`,`dateAndTime`,`isRead`) values (23,'The Travel and Tour ID: 11 is Finished',30,'2018-10-22 10:12:09',0),(24,'The Travel and Tour ID: 15 is Finished',31,'2018-10-22 10:25:09',0),(25,'The Travel and Tour ID: 15 is Finished',32,'2018-10-22 10:25:10',0),(26,'The Travel and Tour ID: 15 is Finished',33,'2018-10-22 10:25:10',0),(27,'The Travel and Tour ID: 9 is Finished',34,'2018-10-22 10:41:39',0),(28,'The Travel and Tour ID: 9 is Finished',35,'2018-10-22 10:41:40',0),(29,'The Travel and Tour ID: 9 is Finished',36,'2018-10-22 10:41:40',0),(30,'The Travel and Tour ID: 9 is Finished',37,'2018-10-22 10:41:40',0),(31,'The Travel and Tour ID: 9 is Fully Booked',34,'2018-10-22 10:43:34',0),(32,'The Travel and Tour ID: 9 is Fully Booked',35,'2018-10-22 10:43:37',0),(33,'The Travel and Tour ID: 9 is Fully Booked',36,'2018-10-22 10:43:37',0),(34,'The Travel and Tour ID: 9 is Fully Booked',37,'2018-10-22 10:43:38',0),(35,'The Travel and Tour ID: 9 is Fully Booked',34,'2018-10-22 10:43:38',0),(36,'The Travel and Tour ID: 9 is Fully Booked',35,'2018-10-22 10:43:38',0),(37,'The Travel and Tour ID: 9 is Fully Booked',36,'2018-10-22 10:43:39',0),(38,'The Travel and Tour ID: 9 is Fully Booked',37,'2018-10-22 10:43:39',0);
 
 /*Table structure for table `package_table` */
 
@@ -209,15 +178,11 @@ CREATE TABLE `package_table` (
   `price` double DEFAULT NULL,
   PRIMARY KEY (`packageId`),
   KEY `FK_package_table1` (`price`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 /*Data for the table `package_table` */
 
-LOCK TABLES `package_table` WRITE;
-
-insert  into `package_table`(`packageId`,`packageName`,`packageDetails`,`inclusion`,`exclusion`,`price`) values (1,'Surigao Tour','Details....','TRANSPORTATIONS','MEALS',799),(2,'Buda Tour','Bla bla bla...','TRANSPORATIONS','MEALS',699),(3,'Camiguin Island Tour','Bla bla bla bla','TRANSPORTATION','MEALS',1499),(4,'Lake Sebu Tour','none','TRANSPORTATION','MEALS, TICKETS',1399),(5,'Dinagat Tour','...','TRANSPORATIONS','MEALS',999),(6,'Sohoton Tour','....','TRANSPORATIONS','MEALS',1999);
-
-UNLOCK TABLES;
+insert  into `package_table`(`packageId`,`packageName`,`packageDetails`,`inclusion`,`exclusion`,`price`) values (7,'Buda Tour','Its a day tour and A beautiful view of BUDA that you cant forget.','Transportation','Meals',700),(8,'Buda + Upside down Museum Tour','A day tour with a 2n1 travel destination.','Transportation','Meals, Entrances',800),(9,'Surigao Tour','A Travel and tour with split adventures.','Transportation','Meals, entrances',1299),(10,'Talicud Island Tour','Beaches that you will love at first sight.','Transportation','Meals, Entrances',1399),(11,'Asik-Asik Falls Tour','Lets explore Asik-asik falls','Transportation, Tour guide','Meals, Entrances',1399),(12,'Camiguin Tour','Lets explore the beauty of Camiguin Island.','Transaportation, Tour guide','Meals, ',1569);
 
 /*Table structure for table `payment_transaction_table` */
 
@@ -239,15 +204,11 @@ CREATE TABLE `payment_transaction_table` (
   KEY `FK_payment_transaction_table123123` (`bookingId`),
   CONSTRAINT `FK_payment_transaction_table123123` FOREIGN KEY (`bookingId`) REFERENCES `booking_table` (`bookingId`),
   CONSTRAINT `FK_payment_transaction_table123344` FOREIGN KEY (`modeOfPaymentId`) REFERENCES `mode_of_payment_table` (`modeOfPaymentId`) ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=latin1;
 
 /*Data for the table `payment_transaction_table` */
 
-LOCK TABLES `payment_transaction_table` WRITE;
-
-insert  into `payment_transaction_table`(`paymentTransactionId`,`modeOfPaymentId`,`amount`,`dateOfPayment`,`transactionNumber`,`nameOfSender`,`paymentStatus`,`bookingId`,`paymentType`) values (1,7,5593,'2018-10-02','asd','asd','Recieved',22,'Full Payment'),(5,23,1598,'2018-10-02','','','Recieved',26,'Down Payment'),(41,4,1598,'2018-10-02','','','Recieved',26,'Outstanding Payment');
-
-UNLOCK TABLES;
+insert  into `payment_transaction_table`(`paymentTransactionId`,`modeOfPaymentId`,`amount`,`dateOfPayment`,`transactionNumber`,`nameOfSender`,`paymentStatus`,`bookingId`,`paymentType`) values (44,23,9742.5,'2017-10-01','','','Recieved',32,'Full Payment'),(45,23,4000,'2017-10-22','','','Recieved',33,'Full Payment'),(46,23,4000,'2017-10-22','','','Recieved',34,'Full Payment'),(47,23,4000,'2017-10-22','','','Recieved',35,'Full Payment'),(48,23,2400,'2018-10-22','','','Recieved',36,'Full Payment'),(49,23,3200,'2018-10-22','','','Recieved',37,'Full Payment'),(50,23,4000,'2018-10-22','','','Recieved',38,'Full Payment'),(51,23,6400,'2018-10-22','','','Recieved',39,'Full Payment');
 
 /*Table structure for table `place_table` */
 
@@ -263,11 +224,7 @@ CREATE TABLE `place_table` (
 
 /*Data for the table `place_table` */
 
-LOCK TABLES `place_table` WRITE;
-
 insert  into `place_table`(`placeId`,`placeName`,`latitude`,`longitude`) values (1,'Davao City','7.18958','125.450342'),(2,'Surigao City','9.757262','125.513613'),(3,'Siargao City','9.848018','126.047856'),(4,'Talicud Island','6.929346','125.702456'),(5,'Sitio Maupot','7.106885','125.147730'),(6,'Lake Agco','7.017518','125.223099'),(7,'Buda','7.519009','125.237682'),(8,'Britania','8.700732','126.207376'),(9,'Alameda','8.733700','126.202191'),(10,'Asik asik','7.561677','124.535513'),(11,'Bohol','9.657822','123.850521'),(12,'Camiguin Island','9.175038','124.729034'),(13,'Dapitan','8.625101','123.392629'),(14,'Dakak','8.695429','123.393344'),(15,'Gloria Fantasy Tour','8.647023','123.417672'),(16,'Dinagat','10.121927','125.587540'),(17,'Garden of Tour','14.562977','120.989999'),(18,'Up-side Down Museum','14.554531','120.987396'),(19,'New Israel','6.920208','125.189145'),(20,'Lake Sebu','6.243647','124.552497'),(21,'Sohoton','9.600213','125.916649'),(22,'Talikud','6.929611','125.702675');
-
-UNLOCK TABLES;
 
 /*Table structure for table `posting_table` */
 
@@ -284,12 +241,6 @@ CREATE TABLE `posting_table` (
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 /*Data for the table `posting_table` */
-
-LOCK TABLES `posting_table` WRITE;
-
-insert  into `posting_table`(`postingId`,`postingDescription`,`datePosted`,`profileId`) values (4,'watch out','2018-09-07',2),(6,'Announcement bla bla bla','2018-09-07',2),(10,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nec metus ipsum. Quisque non tristique justo. Integer eu quam id lectus blandit condimentum. Donec bibendum vitae magna et ornare. Suspendisse vestibulum nibh at semper placerat. Nullam ut tristique elit. Proin sit amet nulla erat. Curabitur hendrerit neque vel suscipit bibendum. Donec ut arcu a dolor interdum imperdiet eget ac magna. Aenean quis ullamcorper mauris, at vulputate justo. Sed porttitor, massa eget placerat suscipit, tortor felis imperdiet turpis, commodo placerat quam tortor sed neque. Nullam dictum tempor purus in aliquam.','2018-09-27',2);
-
-UNLOCK TABLES;
 
 /*Table structure for table `profile_table` */
 
@@ -312,15 +263,11 @@ CREATE TABLE `profile_table` (
   KEY `FK_profile_table1` (`addressId`),
   CONSTRAINT `FK_profile_table` FOREIGN KEY (`accountTypeId`) REFERENCES `account_type_table` (`accountTypeId`),
   CONSTRAINT `FK_profile_table1` FOREIGN KEY (`addressId`) REFERENCES `address_table` (`addressId`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
 
 /*Data for the table `profile_table` */
 
-LOCK TABLES `profile_table` WRITE;
-
-insert  into `profile_table`(`profileId`,`firstName`,`middleName`,`lastName`,`contactNumber`,`addressId`,`accountTypeId`,`userName`,`passWord`,`isDeleted`,`isActivated`) values (2,'1','Malinao','Aguacito','09754363944',1,1,'admin','21232f297a57a5a743894a0e4a801fc3',0,1),(3,'Alberto','Ranga','Madula','09754363944',2,4,'customer','91ec1f9324753048c0096d036a694f86',0,1),(4,'Mariella','Gumela','Vettan','09368545152',3,4,'customer1','91ec1f9324753048c0096d036a694f86',0,1),(13,'Daniel','Benson','DeVera','09754363944',12,5,'daniel2620','8bd39eae38511daad6152e84545e504d',0,1),(23,'Lester','Jan','Castillo','09754363944',25,4,'lester','21426b290d975ec5d264c38031da8fac',0,1),(24,'Jasper','Quison','Acevedo','09754363944',26,3,NULL,NULL,0,0),(25,'asdasd','asda','sdasd','09754363944',27,3,NULL,NULL,0,0),(26,'1231','231','23123','09754363944',28,3,NULL,NULL,0,0),(27,'123','123','1231231','09754363944',29,3,NULL,NULL,0,0);
-
-UNLOCK TABLES;
+insert  into `profile_table`(`profileId`,`firstName`,`middleName`,`lastName`,`contactNumber`,`addressId`,`accountTypeId`,`userName`,`passWord`,`isDeleted`,`isActivated`) values (2,'Arra Mae','Pablo','Agusan','09057640585',1,1,'admin','21232f297a57a5a743894a0e4a801fc3',0,1),(3,'Alberto','Ranga','Madula','09754363944',2,4,'customer','91ec1f9324753048c0096d036a694f86',0,1),(4,'Mariella','Gumela','Vettan','09368545152',3,4,'customer1','91ec1f9324753048c0096d036a694f86',0,1),(13,'Daniel','Benson','DeVera','09754363944',12,5,'daniel2620','8bd39eae38511daad6152e84545e504d',0,1),(29,'John','Dela Vega','Dela Cruz','09778877109',31,4,'customer2','5ce4d191fd14ac85a1469fb8c29b7a7b',0,1),(30,'Ana','Lego','Cruz','09279864136',32,3,NULL,NULL,0,0),(31,'Mean','Median','Mode','09279864136',33,3,NULL,NULL,0,0),(32,'Rhea','Mae','Gopez','',34,3,NULL,NULL,0,0),(33,'San','Min','Soo','09279864136',35,3,NULL,NULL,0,0),(34,'Mae','Lopez','Go','',36,3,NULL,NULL,0,0),(35,'Jeffrey','Mer','Bantillo','',37,3,NULL,NULL,0,0),(36,'Eladio','hdhs','Damandaman','',38,3,NULL,NULL,0,0),(37,'Ben','Merici','Benido','',39,3,NULL,NULL,0,0);
 
 /*Table structure for table `travel_and_tour_table` */
 
@@ -336,15 +283,11 @@ CREATE TABLE `travel_and_tour_table` (
   PRIMARY KEY (`travelAndTourId`),
   KEY `FK_travel_and_tour_table` (`packageId`),
   CONSTRAINT `FK_travel_and_tour_table` FOREIGN KEY (`packageId`) REFERENCES `package_table` (`packageId`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 /*Data for the table `travel_and_tour_table` */
 
-LOCK TABLES `travel_and_tour_table` WRITE;
-
-insert  into `travel_and_tour_table`(`travelAndTourId`,`packageId`,`departureDate`,`returnDate`,`maxPax`,`travelAndTourStatus`) values (6,1,'2018-10-08','2018-10-10',14,'Available'),(7,1,'2018-10-18','2018-10-20',14,'Available');
-
-UNLOCK TABLES;
+insert  into `travel_and_tour_table`(`travelAndTourId`,`packageId`,`departureDate`,`returnDate`,`maxPax`,`travelAndTourStatus`) values (8,7,'2018-11-12','2018-11-12',15,'Available'),(9,8,'2018-10-26','2018-10-26',20,'Fully Booked'),(10,8,'2018-11-21','2018-11-21',45,'Available'),(11,9,'2017-10-22','2017-10-24',15,'Finished'),(12,8,'2018-10-25','2018-10-27',15,'Available'),(13,11,'2018-11-13','2018-11-15',20,'Available'),(14,11,'2018-11-07','2018-11-09',30,'Available'),(15,8,'2017-01-11','2017-01-11',15,'Finished'),(16,11,'2018-12-28','2018-12-28',15,'Available'),(17,12,'2017-01-10','2017-01-13',50,'Available'),(18,10,'2017-02-05','2017-02-08',20,'Available');
 
 /*Table structure for table `booking_view` */
 
@@ -451,6 +394,7 @@ DROP TABLE IF EXISTS `notification_view`;
  `notificationMessage` text ,
  `profileId` int(6) ,
  `dateAndTime` datetime ,
+ `isRead` tinyint(1) ,
  `firstName` varchar(60) ,
  `middleName` varchar(60) ,
  `lastName` varchar(60) ,
@@ -682,7 +626,7 @@ DROP TABLE IF EXISTS `travel_and_tour_view`;
 /*!50001 DROP TABLE IF EXISTS `notification_view` */;
 /*!50001 DROP VIEW IF EXISTS `notification_view` */;
 
-/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `notification_view` AS select `notification_table`.`notificationId` AS `notificationId`,`notification_table`.`notificationMessage` AS `notificationMessage`,`notification_table`.`profileId` AS `profileId`,`notification_table`.`dateAndTime` AS `dateAndTime`,`profile_table`.`firstName` AS `firstName`,`profile_table`.`middleName` AS `middleName`,`profile_table`.`lastName` AS `lastName`,`profile_table`.`contactNumber` AS `contactNumber`,`profile_table`.`accountTypeId` AS `accountTypeId`,`account_type_table`.`accountType` AS `accountType` from ((`notification_table` join `profile_table` on((`notification_table`.`profileId` = `profile_table`.`profileId`))) join `account_type_table` on((`profile_table`.`accountTypeId` = `account_type_table`.`accountTypeId`))) */;
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `notification_view` AS select `notification_table`.`notificationId` AS `notificationId`,`notification_table`.`notificationMessage` AS `notificationMessage`,`notification_table`.`profileId` AS `profileId`,`notification_table`.`dateAndTime` AS `dateAndTime`,`notification_table`.`isRead` AS `isRead`,`profile_table`.`firstName` AS `firstName`,`profile_table`.`middleName` AS `middleName`,`profile_table`.`lastName` AS `lastName`,`profile_table`.`contactNumber` AS `contactNumber`,`profile_table`.`accountTypeId` AS `accountTypeId`,`account_type_table`.`accountType` AS `accountType` from ((`notification_table` join `profile_table` on((`notification_table`.`profileId` = `profile_table`.`profileId`))) join `account_type_table` on((`profile_table`.`accountTypeId` = `account_type_table`.`accountTypeId`))) */;
 
 /*View structure for view package_media_view */
 
