@@ -39,26 +39,48 @@ File: scss
   background: #00acc1;
 }
 
-.topbar .navbar-header {
-  background: #ffffff;
+.topbar .top-navbar .navbar-header .navbar-brand .dark-logo {
+  display: none;
 }
 
 .topbar .top-navbar .navbar-header .navbar-brand .light-logo {
-  display: none;
+  display: inline-block;
   color: rgba(255, 255, 255, 0.8);
 }
 
 .topbar .navbar-light .navbar-nav .nav-item > a.nav-link {
-  color: #ffffff !important;
+  color: rgba(255, 255, 255, 0.8) !important;
 }
 
 .topbar .navbar-light .navbar-nav .nav-item > a.nav-link:hover, .topbar .navbar-light .navbar-nav .nav-item > a.nav-link:focus {
-  color: rgba(255, 255, 255, 0.8) !important;
+  color: #ffffff !important;
+}
+
+.topbar .navbar-header {
+  background: #272c33;
+}
+
+.logo-center .topbar .navbar-header {
+  background: transparent;
+  box-shadow: none;
+}
+
+.logo-center .topbar .top-navbar .navbar-header .navbar-brand .dark-logo {
+  display: none;
+}
+
+.logo-center .topbar .top-navbar .navbar-header .navbar-brand .light-logo {
+  display: inline-block;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 /*******************
 /*General Elements
 *******************/
+a {
+  color: #00acc1;
+}
+
 a.link:hover, a.link:focus {
   color: #00acc1 !important;
 }
@@ -126,6 +148,32 @@ a.link:hover, a.link:focus {
 /*******************
 /*sidebar navigation
 *******************/
+.card-no-border .left-sidebar, .card-no-border .sidebar-nav {
+  background: #272c33;
+}
+
+.mini-sidebar .sidebar-nav {
+  background: transparent;
+}
+
+@media (min-width: 768px) {
+  .mini-sidebar .sidebar-nav #sidebarnav > li > ul {
+    background: #181c22;
+  }
+}
+
+.sidebar-nav {
+  background: #272c33;
+}
+
+.user-profile .profile-text a {
+  color: #798699 !important;
+}
+
+.card-no-border .sidebar-footer {
+  background: #181c22;
+}
+
 .label-themecolor {
   background: #00acc1;
 }
@@ -145,4 +193,8 @@ a.link:hover, a.link:focus {
 
 .sidebar-nav ul li a.active i, .sidebar-nav ul li a:hover i {
   color: #00acc1;
+}
+
+.sidebar-nav ul li.nav-small-cap {
+  color: #798699;
 }

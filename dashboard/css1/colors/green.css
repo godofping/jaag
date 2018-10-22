@@ -86,7 +86,7 @@ a.link:hover, a.link:focus {
 }
 
 .text-themecolor {
-  color: #00acc1 !important;
+  color: #black !important;
 }
 
 .profile-tab li a.nav-link.active,
@@ -145,4 +145,9 @@ a.link:hover, a.link:focus {
 
 .sidebar-nav ul li a.active i, .sidebar-nav ul li a:hover i {
   color: #00acc1;
+}
+
+
+.page-titles .breadcrumb {
+  color: black !important;
 }

@@ -61,11 +61,7 @@
     <link href="css/style.css" rel="stylesheet">
     <link href="css/colors/green.css" id="theme" rel="stylesheet">
 
-    <style type="text/css">
-        .form-control{
-            color: white;
-        }
-    </style>
+
     
 </head>
 
