@@ -294,7 +294,7 @@ $res1 = mysqli_fetch_assoc($qry1);
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $qry3 = mysqli_query($connection, "select * from travel_and_tour_view where packageId = '" . $res['packageId'] . "'");
+                                        <?php $qry3 = mysqli_query($connection, "select * from travel_and_tour_view where packageId = '" . $res['packageId'] . "' and travelAndTourStatus = 'Available'");
                                         while ($res3 = mysqli_fetch_assoc($qry3)) { ?>
                                         <tr>
                                             <td><?php echo $res3['travelAndTourId']; ?></td>

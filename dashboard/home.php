@@ -489,13 +489,13 @@ $(function () {
         labels: ['Bookings Income'],
         pointSize: 0,
         fillOpacity: 0.4,
-        pointStrokeColors:['#b4becb', '#01c0c8'],
+        pointStrokeColors:['#000', '#01c0c8'],
         behaveLikeLine: true,
         gridLineColor: 'rgba(120, 130, 140, 0.13)',
         lineWidth: 0,
         smooth: true,
         hideHover: 'auto',
-        lineColors: ['#b4becb', '#01c0c8'],
+        lineColors: ['#000', '#01c0c8'],
         resize: true
         
     });

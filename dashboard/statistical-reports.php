@@ -458,13 +458,13 @@ $(function () {
         labels: ['Income', 'Number of customers'],
         pointSize: 0,
         fillOpacity: 0.4,
-        pointStrokeColors:['#55ce63', '#1a76d8'],
+        pointStrokeColors:['#000', '#1a76d8'],
         behaveLikeLine: true,
         gridLineColor: 'rgba(120, 130, 140, 0.13)',
         lineWidth: 0,
         smooth: true,
         hideHover: 'auto',
-        lineColors: ['#ccff33', '#01c0c8'],
+        lineColors: ['#000', '#01c0c8'],
         resize: true
         
     });
@@ -507,13 +507,13 @@ $(function () {
         labels: ['Income', 'Number of customers'],
         pointSize: 0,
         fillOpacity: 0.4,
-        pointStrokeColors:['#55ce63', '#1a76d8'],
+        pointStrokeColors:['#000', '#1a76d8'],
         behaveLikeLine: true,
         gridLineColor: 'rgba(120, 130, 140, 0.13)',
         lineWidth: 0,
         smooth: true,
         hideHover: 'auto',
-        lineColors: ['#ccff33', '#01c0c8'],
+        lineColors: ['#000', '#01c0c8'],
         resize: true
         
     });
@@ -558,13 +558,13 @@ $(function () {
         labels: ['Income', 'Number of customers'],
         pointSize: 0,
         fillOpacity: 0.4,
-        pointStrokeColors:['#55ce63', '#1a76d8'],
+        pointStrokeColors:['#000', '#1a76d8'],
         behaveLikeLine: true,
         gridLineColor: 'rgba(120, 130, 140, 0.13)',
         lineWidth: 0,
         smooth: true,
         hideHover: 'auto',
-        lineColors: ['#ccff33', '#01c0c8'],
+        lineColors: ['#000', '#01c0c8'],
         resize: true
         
     });
